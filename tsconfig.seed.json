@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "paths": { "@/*": ["./*"] }
+  },
+  "include": ["lib/seed.ts", "lib/models/**/*.ts", "lib/mongodb.ts"]
+}
