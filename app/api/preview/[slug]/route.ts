@@ -21,7 +21,7 @@ export async function GET(
           headers: {
             'Content-Type': 'text/html',
             'X-Frame-Options': 'SAMEORIGIN',
-            'Cache-Control': 'public, max-age=3600',
+            'Cache-Control': 'no-store, must-revalidate',
           },
         })
       }
@@ -35,7 +35,7 @@ export async function GET(
       headers: {
         'Content-Type': 'text/html',
         'X-Frame-Options': 'SAMEORIGIN',
-        'Cache-Control': 'public, max-age=3600',
+        'Cache-Control': 'no-store, must-revalidate',
       },
     })
   } catch (err) {
@@ -45,7 +45,7 @@ export async function GET(
         headers: {
           'Content-Type': 'text/html',
           'X-Frame-Options': 'SAMEORIGIN',
-          'Cache-Control': 'public, max-age=3600',
+          'Cache-Control': 'no-store, must-revalidate',
         },
       })
     }

@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import { Search, Sun, Moon } from 'lucide-react'
 
 // Categories supported by backend filter: filter.category
@@ -16,6 +16,8 @@ const CATEGORY_KEYS = new Set([
   'cursor',
   'modals',
   'shaders',
+  'robot',
+  'shades',
 ])
 
 // Tags supported by backend filter: filter.tag
@@ -33,7 +35,7 @@ function getFilterKeyFromSidebarSlug(slug: string): FilterKey {
   if (TAG_KEYS.has(slug)) return { kind: 'tag', value: slug }
 
   // UI-only items that should behave like "All"
-  if (slug === 'all-shade' || slug === 'all-animation') return { kind: 'all' }
+  if (slug === 'all-animation') return { kind: 'all' }
 
   return { kind: 'all' }
 }
@@ -52,26 +54,17 @@ const CATEGORIES = [
   {
     label: 'Categories',
     items: [
-      { name: 'Three.js', slug: 'threejs' },
-      { name: 'CSS / GSAP', slug: 'css' },
-      { name: 'Canvas / WebGL', slug: 'canvas' },
-      { name: 'Backgrounds', slug: 'backgrounds' },
-      { name: 'Text Effects', slug: 'text-effects' },
-      { name: 'Loaders', slug: 'loaders' },
-      { name: 'Cursor', slug: 'cursor' },
-      { name: 'Shaders', slug: 'shaders' },
-    ],
-  },
-  {
-    label: 'UI Components',
-    items: [
-      // Map these to supported category/tag filters so clicks always work.
-      { name: 'Navbar', slug: 'navbars' },
-      { name: 'Footer Robot', slug: 'footers' },
-      // Shade/Animation labels don't map 1:1; route them to "All"
-      // Keep slugs unique to avoid React key collisions.
-      { name: 'Shade', slug: 'all-shade' },
       { name: 'Animation', slug: 'all-animation' },
+      { name: 'Backgrounds', slug: 'backgrounds' },
+      { name: 'Buttons', slug: 'buttons' },
+      { name: 'Cards', slug: 'cards' },
+      { name: 'Cursor', slug: 'cursor' },
+      { name: 'Footer', slug: 'footers' },
+      { name: 'Heroes', slug: 'heroes' },
+      { name: 'Loaders', slug: 'loaders' },
+      { name: 'Navbar', slug: 'navbars' },
+      { name: 'Shaders', slug: 'shaders' },
+      { name: 'Text Effects', slug: 'text-effects' },
     ],
   },
 ]
@@ -82,6 +75,10 @@ export default function Sidebar() {
 
   const router = useRouter()
   const searchParams = useSearchParams()
+  const pathname = usePathname()
+
+  if (pathname === '/') return null
+
 
   const activeCategory = searchParams.get('category') || ''
   const activeTag = searchParams.get('tag') || ''

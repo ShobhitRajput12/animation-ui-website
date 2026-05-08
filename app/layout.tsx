@@ -3,6 +3,7 @@ import { Syne, DM_Mono } from 'next/font/google'
 import { Suspense } from 'react'
 import './globals.css'
 import Sidebar from '@/components/ui/Sidebar'
+import HeroBackground from '@/components/ui/HeroBackground'
 
 const syne = Syne({
   subsets: ['latin'],
@@ -25,12 +26,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="dark">
       <body className={`${syne.variable} ${dmMono.variable} font-sans
-        bg-bg-primary text-white overflow-hidden h-screen`}>
-        <div className="flex h-screen">
+        bg-transparent text-white overflow-hidden h-screen`}>
+        <HeroBackground />
+        <div className="flex h-screen relative z-10">
           <Suspense fallback={null}>
             <Sidebar />
           </Suspense>
-          <main className="flex-1 overflow-hidden flex flex-col">
+          <main className="flex-1 overflow-hidden flex flex-col bg-transparent">
             {children}
           </main>
         </div>

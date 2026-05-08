@@ -25,9 +25,13 @@ export async function GET(req: NextRequest) {
       .sort({ createdAt: -1 })
       .lean()
 
+    console.log(`API: Found ${animations.length} animations in DB`)
+
     if (animations.length > 0) {
       return NextResponse.json({ success: true, data: animations })
     }
+
+    console.log('API: DB empty, falling back to SAMPLE_ANIMATIONS')
 
     // If DB is empty, still show something usable in the UI.
     const filtered = SAMPLE_ANIMATIONS
@@ -40,6 +44,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ success: true, data: filtered })
   } catch (err) {
+    console.error('API Error:', err)
     // Fallback to local samples when DB is unreachable.
     try {
       const { searchParams } = new URL(req.url)

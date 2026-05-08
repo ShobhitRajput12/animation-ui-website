@@ -83,7 +83,408 @@ body{width:100%;height:100vh;overflow:hidden;background:#050510}
 • Works as position:absolute overlay
 • Zero JavaScript required`,
   },
+  {
+    slug: 'aurora-background-flow',
+    title: 'Aurora Background Flow',
+    category: 'backgrounds',
+    tag: 'css',
+    description: 'Organic flowing aurora with animated blobs and color blending.',
+    featured: true,
+    previewCode: `<!DOCTYPE html><html><head><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:100%;height:100vh;overflow:hidden;background:#050510}
+.aurora{position:absolute;inset:0;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:0.6}
+.b1{width:200%;height:200%;background:radial-gradient(circle,#7c5cfc 0%,transparent 60%);animation:a1 8s ease-in-out infinite}
+.b2{width:160%;height:160%;background:radial-gradient(circle,#22d3ee 0%,transparent 60%);animation:a2 10s ease-in-out infinite}
+.b3{width:180%;height:180%;background:radial-gradient(circle,#4ade80 0%,transparent 60%);animation:a3 12s ease-in-out infinite}
+@keyframes a1{0%,100%{transform:translate(-20%,-20%) scale(1.2) rotate(0deg)}50%{transform:translate(10%,10%) scale(0.9) rotate(180deg)}}
+@keyframes a2{0%,100%{transform:translate(20%,20%) scale(0.9)}50%{transform:translate(-10%,-5%) scale(1.3) rotate(-120deg)}}
+@keyframes a3{0%,100%{transform:translate(0%,30%) scale(1.1)}50%{transform:translate(-20%,-10%) scale(0.8)}}
+.label{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.8);font-family:sans-serif;font-size:14px;font-weight:600;letter-spacing:2px}
+</style></head><body>
+<div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="label">AURORA BACKGROUND</div>
+</body></html>`,
+    code: `/* Aurora Background — pure CSS */
+.aurora-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #050510;
+}
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.6;
+}
+.aurora-blob-1 {
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, #7c5cfc 0%, transparent 60%);
+  animation: aurora1 8s ease-in-out infinite;
+}
+.aurora-blob-2 {
+  width: 160%; height: 160%;
+  background: radial-gradient(circle, #22d3ee 0%, transparent 60%);
+  animation: aurora2 10s ease-in-out infinite;
+}
+.aurora-blob-3 {
+  width: 180%; height: 180%;
+  background: radial-gradient(circle, #4ade80 0%, transparent 60%);
+  animation: aurora3 12s ease-in-out infinite;
+}
+@keyframes aurora1 {
+  0%, 100% { transform: translate(-20%, -20%) scale(1.2) rotate(0deg); }
+  50%       { transform: translate(10%, 10%) scale(0.9) rotate(180deg); }
+}
+@keyframes aurora2 {
+  0%, 100% { transform: translate(20%, 20%) scale(0.9); }
+  50%       { transform: translate(-10%, -5%) scale(1.3) rotate(-120deg); }
+}
+@keyframes aurora3 {
+  0%, 100% { transform: translate(0%, 30%) scale(1.1); }
+  50%       { transform: translate(-20%, -10%) scale(0.8); }
+}`,
+    prompt: `Create a pure CSS Aurora Background:
+• Dark base: #050510
+• 3 large radial-gradient blobs: purple #7c5cfc, cyan #22d3ee, green #4ade80
+• Each blob 150–200% of container size
+• blur(60px) filter for soft glow
+• Independent keyframe animations at 8s, 10s, 12s
+• translate + scale + rotate for organic movement
+• Works as position:absolute overlay
+• Zero JavaScript required`,
+  },
 
+  {
+    slug: 'particle-vortex-ring',
+    title: 'Particle Vortex Ring',
+    category: 'backgrounds',
+    tag: 'threejs',
+    description: 'Futuristic Three.js particle vortex ring with glowing orbits and smooth rotation.',
+    featured: true,
+    previewCode: `<!DOCTYPE html><html><head><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#020205;overflow:hidden;margin:0}
+canvas{display:block}
+.label{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.7);font-family:sans-serif;font-size:12px;font-weight:600;letter-spacing:4px;pointer-events:none}
+</style></head><body>
+<div class="label">PARTICLE VORTEX</div>
+<script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }</script>
+<script type="module">
+import * as THREE from 'three';
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+document.body.appendChild(renderer.domElement);
+const count = 3000;
+const geo = new THREE.BufferGeometry();
+const pos = new Float32Array(count * 3);
+const col = new Float32Array(count * 3);
+const data = [];
+const c1 = new THREE.Color('#7c5cfc');
+const c2 = new THREE.Color('#22d3ee');
+for(let i=0; i<count; i++) {
+  const angle = Math.random() * Math.PI * 2;
+  const radius = 2.5 + Math.random() * 0.8;
+  const tilt = (Math.random() - 0.5) * 0.5;
+  data.push({ angle, radius, speed: 0.005 + Math.random() * 0.01, tilt });
+  const x = Math.cos(angle) * radius;
+  const y = tilt;
+  const z = Math.sin(angle) * radius;
+  pos.set([x, y, z], i * 3);
+  const mix = Math.random();
+  const color = mix > 0.5 ? c1 : c2;
+  col.set([color.r, color.g, color.b], i * 3);
+}
+geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+const mat = new THREE.PointsMaterial({ size: 0.03, vertexColors: true, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending });
+const points = new THREE.Points(geo, mat);
+scene.add(points);
+camera.position.z = 6;
+camera.position.y = 2;
+camera.lookAt(0,0,0);
+function animate() {
+  requestAnimationFrame(animate);
+  const p = points.geometry.attributes.position.array;
+  for(let i=0; i<count; i++) {
+    const d = data[i];
+    d.angle += d.speed;
+    p[i*3] = Math.cos(d.angle) * d.radius;
+    p[i*3+2] = Math.sin(d.angle) * d.radius;
+    p[i*3+1] = d.tilt + Math.sin(d.angle * 2) * 0.2;
+  }
+  points.geometry.attributes.position.needsUpdate = true;
+  points.rotation.y += 0.002;
+  renderer.render(scene, camera);
+}
+animate();
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script></body></html>`,
+    code: `/* Particle Vortex Ring — Three.js */
+const particleCount = 3000;
+const geometry = new THREE.BufferGeometry();
+const positions = new Float32Array(particleCount * 3);
+const colors = new Float32Array(particleCount * 3);
+
+for(let i = 0; i < particleCount; i++) {
+  const angle = Math.random() * Math.PI * 2;
+  const radius = 2.5 + Math.random() * 0.8;
+  positions.set([Math.cos(angle)*radius, (Math.random()-0.5)*0.5, Math.sin(angle)*radius], i*3);
+  const color = Math.random() > 0.5 ? '#7c5cfc' : '#22d3ee';
+  const c = new THREE.Color(color);
+  colors.set([c.r, c.g, c.b], i * 3);
+}
+
+geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+const material = new THREE.PointsMaterial({ size: 0.03, vertexColors: true, blending: THREE.AdditiveBlending, transparent: true });
+const vortex = new THREE.Points(geometry, material);
+scene.add(vortex);`,
+    prompt: `Build a Three.js Particle Vortex Ring:
+• 3000+ particles using BufferGeometry and Points
+• Torus/Ring formation with internal orbital motion
+• Colors: neon purple (#7c5cfc) and cyan (#22d3ee)
+• Additive blending for glowing light effect
+• Animated positions using trig functions (sin/cos)
+• Perspective camera with slight tilt
+• Performance optimized for 60fps
+• Dark futuristic atmosphere`,
+  },
+  {
+    slug: '3d-particle-vortex-ring',
+    title: '3D Particle Vortex Ring',
+    category: 'backgrounds',
+    tag: 'threejs',
+    description: 'Futuristic rotating 3D neon vortex ring made with glowing particles and floating geometric fragments.',
+    featured: true,
+    previewCode: `<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{
+        width:100%;
+        height:100vh;
+        overflow:hidden;
+        background:#050510;
+      }
+      canvas{
+        display:block;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js';
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 18;
+      const renderer = new THREE.WebGLRenderer({ antialias:true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      document.body.appendChild(renderer.domElement);
+      const particleCount = 4000;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      for(let i=0;i<particleCount;i++){
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 5 + Math.sin(angle * 6) * 1.2;
+        const spread = (Math.random() - 0.5) * 1.5;
+        positions[i * 3] = Math.cos(angle) * radius + spread;
+        positions[i * 3 + 1] = Math.sin(angle) * radius + spread;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 4;
+      }
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions,3));
+      const material = new THREE.PointsMaterial({
+        color:'#7c5cfc',
+        size:0.08,
+        transparent:true,
+        opacity:0.9,
+        blending:THREE.AdditiveBlending,
+        depthWrite:false
+      });
+      const particles = new THREE.Points(geometry, material);
+      scene.add(particles);
+      const fragmentGeometry = new THREE.IcosahedronGeometry(0.15,0);
+      const fragmentMaterial = new THREE.MeshBasicMaterial({ color:'#22d3ee', wireframe:true });
+      const fragments = [];
+      for(let i=0;i<60;i++){
+        const mesh = new THREE.Mesh(fragmentGeometry, fragmentMaterial);
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 6 + Math.random() * 3;
+        mesh.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius, (Math.random() - 0.5) * 6);
+        mesh.rotation.x = Math.random() * Math.PI;
+        mesh.rotation.y = Math.random() * Math.PI;
+        scene.add(mesh);
+        fragments.push(mesh);
+      }
+      const ambient = new THREE.AmbientLight('#ffffff', 1.5);
+      scene.add(ambient);
+      function animate(){
+        requestAnimationFrame(animate);
+        particles.rotation.z += 0.002;
+        particles.rotation.x += 0.001;
+        fragments.forEach((mesh,index)=>{
+          mesh.rotation.x += 0.01;
+          mesh.rotation.y += 0.01;
+          mesh.position.z = Math.sin(Date.now() * 0.001 + index) * 2;
+        });
+        renderer.render(scene,camera);
+      }
+      animate();
+      window.addEventListener('resize',()=>{
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>`,
+    code: `/* 3D Particle Vortex Ring — Three.js */
+body{
+  margin:0;
+  overflow:hidden;
+  background:#050510;
+}
+canvas{
+  display:block;
+}`,
+    prompt: `Create a futuristic 3D particle vortex ring using Three.js:
+- Dark sci-fi background: #050510
+- Circular neon vortex made from thousands of glowing particles
+- Particle colors: purple: #7c5cfc, cyan: #22d3ee, green accents: #4ade80
+- Rotating torus/vortex motion
+- Floating geometric fragments orbiting around vortex
+- Additive blending glow effect
+- Smooth camera perspective
+- Continuous slow rotation animation
+- Responsive fullscreen canvas
+- Use: THREE.Points, BufferGeometry, PointsMaterial, Icosahedron fragments
+- Visual style: futuristic, cyberpunk, holographic, neon energy portal
+- Zero UI elements
+- Only animated 3D background`,
+  },
+  {
+    slug: 'neon-flow-lines-background',
+    title: 'Neon Flow Lines Background',
+    category: 'backgrounds',
+    tag: 'webgl',
+    description: 'Dark futuristic animated background with glowing neon flow lines and smooth organic motion.',
+    featured: true,
+    previewCode: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Neon Flow Lines</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:100%;height:100vh;overflow:hidden;background:#050818;font-family:sans-serif}
+.wrap{position:relative;width:100%;height:100%}
+.base{position:absolute;inset:0;background:radial-gradient(900px 500px at 20% 10%, rgba(124,92,252,0.18), transparent 60%),radial-gradient(700px 400px at 80% 20%, rgba(34,211,238,0.14), transparent 58%),radial-gradient(900px 700px at 50% 90%, rgba(99,102,241,0.10), transparent 60%),linear-gradient(180deg, #030513 0%, #050818 60%, #030513 100%)}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.label{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.8);font-size:13px;font-weight:600;letter-spacing:3px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="base"></div>
+  <canvas id="c"></canvas>
+  <div class="label">NEON FLOW LINES</div>
+</div>
+<script>
+(() => {
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  let w = 0; let h = 0; let dpr = 1;
+  const colors = ['rgba(124,92,252,0.95)','rgba(34,211,238,0.95)','rgba(255,255,255,0.85)','rgba(99,102,241,0.90)'];
+  function resize(){
+    dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    w = canvas.clientWidth; h = canvas.clientHeight;
+    canvas.width = Math.floor(w * dpr); canvas.height = Math.floor(h * dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  const lines = Array.from({ length: 26 }, (_, i) => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    len: 80 + Math.random() * 140,
+    speed: 0.2 + Math.random() * 0.55,
+    t: Math.random() * 10,
+    amp: 10 + Math.random() * 30,
+    freq: 0.004 + Math.random() * 0.007,
+    rot: Math.random() * Math.PI * 2,
+    color: colors[i % colors.length],
+    width: 0.6 + Math.random() * 1.2
+  }));
+  function drift(n, t){ return (Math.sin(t * n) * 0.5 + Math.cos(t * 0.37 * n) * 0.5); }
+  function animate(){
+    ctx.clearRect(0,0,w,h);
+    ctx.globalCompositeOperation = 'lighter';
+    for(const L of lines){
+      L.t += 0.9 * L.speed;
+      L.x += drift(0.9, L.t) * 0.4;
+      L.y += drift(1.3, L.t) * 0.35;
+      if(L.x < -100) L.x = w + 100;
+      if(L.x > w + 100) L.x = -100;
+      if(L.y < -100) L.y = h + 100;
+      if(L.y > h + 100) L.y = -100;
+      const angle = L.rot + drift(0.7, L.t) * 0.7;
+      const dx = Math.cos(angle); const dy = Math.sin(angle);
+      const x0 = L.x; const y0 = L.y;
+      const steps = 10;
+      ctx.beginPath();
+      for(let s = 0; s <= steps; s++){
+        const p = s / steps;
+        const along = L.len * p;
+        const px = x0 + dx * along + Math.sin((L.t + p * 10) * (L.freq * 1000)) * L.amp * (1 - p) + Math.cos((L.t + p * 7) * (L.freq * 1000)) * (L.amp * 0.35);
+        const py = y0 + dy * along + Math.cos((L.t + p * 11) * (L.freq * 1000)) * L.amp * (1 - p) + Math.sin((L.t + p * 5) * (L.freq * 1000)) * (L.amp * 0.25);
+        if(s === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.strokeStyle = L.color;
+      ctx.lineWidth = L.width + 1.8;
+      ctx.shadowBlur = 18; ctx.shadowColor = L.color;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+      ctx.lineWidth = Math.max(0.6, L.width);
+      ctx.strokeStyle = L.color;
+      ctx.stroke();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+</script>
+</body>
+</html>`,
+    code: `/* Neon Flow Lines Background */
+.neon-flow-container{position:absolute;inset:0;overflow:hidden;background:#050818}
+.neon-flow-base{position:absolute;inset:0;background:radial-gradient(900px 500px at 20% 10%, rgba(124,92,252,0.18), transparent 60%),radial-gradient(700px 400px at 80% 20%, rgba(34,211,238,0.14), transparent 58%),radial-gradient(900px 700px at 50% 90%, rgba(99,102,241,0.10), transparent 60%),linear-gradient(180deg, #030513 0%, #050818 60%, #030513 100%)}
+#neon-flow-canvas{position:absolute;inset:0;width:100%;height:100%}`,
+    prompt: `Create a fullscreen futuristic neon flow background using WebGL or Canvas:
+• Deep navy and black layered gradient backdrop
+• Thin glowing neon lines with flowing scribble motion
+• Colors: purple #7c5cfc, cyan #22d3ee, white, indigo
+• Organic curve movement with smooth animation
+• Soft glow using shadow blur and additive blending
+• Abstract cyberpunk atmosphere
+• Fullscreen responsive canvas overlay
+• Performance friendly (~20–30 animated lines)
+• Smooth cinematic motion with fluid line distortion`,
+  },
   {
     slug: 'particle-wave',
     title: 'Particle Wave',
@@ -1111,6 +1512,886 @@ export default function SpotlightCursor() {
 • useState for mouse position, useEffect for event listener
 • Cleanup on unmount
 • Add to layout so it works on all pages`,
+  },
+  {
+    slug: 'torus-system',
+    title: 'Torus System',
+    category: 'loaders',
+    tag: 'threejs',
+    description: 'Glowing toroidal surface with animated meridians + parallels, floating rings, sparkles, and a HUD overlay showing simulation status.',
+    featured: true,
+    previewCode: `<!DOCTYPE html><html><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Torus System</title><style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:100%;height:100vh;overflow:hidden;background:#020408;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+  .wrap{position:relative;width:100%;height:100%}
+  canvas{display:block;width:100%;height:100%}
+  .hud{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:32px}
+  .row{display:flex;justify-content:space-between;align-items:flex-start}
+  .row2{display:flex;justify-content:space-between;align-items:flex-end}
+  .title{color:rgba(255,255,255,.9);font-size:24px;font-weight:200;letter-spacing:2px;text-transform:uppercase}
+  .divider{height:2px;width:48px;background:rgba(251,191,36,.35)}
+  .status{color:rgba(255,255,255,.4);font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:1px;text-transform:uppercase}
+  .card{max-width:320px}
+  .desc{color:rgba(255,255,255,.6);font-size:14px;font-weight:300;line-height:1.5}
+  .pulse{width:32px;height:32px;border-radius:999px;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+  .dot{width:6px;height:6px;border-radius:999px;background:rgb(251 191 36);animation:pulse 1s ease-in-out infinite}
+  .bar{flex:1;height:1px;background:rgba(255,255,255,.1);align-self:center}
+  .diamond{width:48px;height:48px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transform:rotate(45deg)}
+  .diamond i{width:24px;height:24px;border:1px solid rgba(251,191,36,.3);display:block;transform:rotate(-45deg)}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.4);opacity:1}}
+</style></head><body>
+  <div class="wrap">
+    <canvas></canvas>
+    <div class="hud">
+      <div class="row">
+        <div>
+          <div class="title">Torus System</div>
+          <div class="divider"></div>
+        </div>
+        <div class="status">Simulation.v4 // Active</div>
+      </div>
+      <div class="row2">
+        <div class="card">
+          <div class="desc">Parametric visualization of a toroidal surface with glowing meridians and parallel fields.</div>
+          <div style="display:flex;gap:16px;margin-top:16px;align-items:center">
+            <div class="pulse"><div class="dot"></div></div>
+            <div class="bar"></div>
+          </div>
+        </div>
+        <div class="diamond"><i></i></div>
+      </div>
+    </div>
+    <script type="module">
+      import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+      const canvas = document.querySelector('canvas');
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x020408, 0.05);
+      const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 2, 10);
+      const group = new THREE.Group();
+      scene.add(group);
+      const torusGeo = new THREE.TorusGeometry(3, 1, 32, 100);
+      const meridianMat = new THREE.LineBasicMaterial({ color: 0xfbbf24, transparent: true, opacity: 0.5 });
+      const parallelMat = new THREE.LineBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.3 });
+      const torus = new THREE.Mesh(torusGeo, new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.1 }));
+      group.add(torus);
+      const wireframe = new THREE.WireframeGeometry(torusGeo);
+      const lines = new THREE.LineSegments(wireframe);
+      lines.material = parallelMat;
+      group.add(lines);
+      const starCount = 400;
+      const starGeo = new THREE.BufferGeometry();
+      const starPos = new Float32Array(starCount * 3);
+      for(let i=0; i<starCount*3; i++) starPos[i] = (Math.random()-0.5)*50;
+      starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+      const starMat = new THREE.PointsMaterial({ size: 0.05, color: 0xffffff, transparent: true, opacity: 0.8 });
+      const stars = new THREE.Points(starGeo, starMat);
+      scene.add(stars);
+      function animate() {
+        requestAnimationFrame(animate);
+        group.rotation.y += 0.005;
+        group.rotation.x += 0.002;
+        stars.rotation.y -= 0.0005;
+        renderer.render(scene, camera);
+      }
+      animate();
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </div>
+</body></html>`,
+    code: `// Torus System (React + Three) — conceptual summary for catalog
+// - Canvas background + fog (#020408)
+// - PerspectiveCamera + OrbitControls (autoRotate)
+// - Stars + Float
+// - TorusGeometric: meridian + parallel lines using parametric points
+// - Center glow sphere + point lights
+// - Postprocessing: Bloom + Noise + Vignette
+// - HUD overlay: absolute inset-0, pointer-events-none, text + status + decorative elements`,
+    prompt: `Create “Torus System” UI overlay + 3D torus visualization:
+• Background: #020408 with fog and vignette
+• Torus geometry: parametric toroidal surface lines
+  - Meridians (vertical rings) in warm amber (#ffcc66)
+  - Parallels (horizontal rings) in cyan (#66ccff)
+• Add subtle inner glow mesh on torus core
+• Add floating outer rings (thin torus geometries) with varying opacity
+• Add Stars + Sparkles and Bloom/Noise postprocessing
+• Animated motion: continuous rotation of torus and ring group
+• HUD overlay (pointer-events-none):
+  - Top-left title: “Torus System” + amber divider
+  - Top-right status: “Simulation.v4 // Active”
+  - Bottom-left description + pulse indicator
+  - Bottom-right diamond/border accent
+• Must be responsive (full screen) and visually readable on dark background`,
+  },
+  {
+    slug: 'glass-shade',
+    title: 'Glassmorphism Shade',
+    category: 'shaders',
+    tag: 'css',
+    description: 'Soft frosted glass effect with colorful background bleed.',
+    featured: true,
+    previewCode: `<!DOCTYPE html><html><head><style>
+  body{background:linear-gradient(45deg, #0f172a, #1e1b4b);height:100vh;display:flex;align-items:center;justify-content:center;margin:0}
+  .blob{position:absolute;width:300px;height:300px;background:#7c5cfc;border-radius:50%;filter:blur(80px);animation:move 10s infinite alternate}
+  @keyframes move{from{transform:translate(-50px, -50px)}to{transform:translate(50px, 50px)}}
+  .glass{position:relative;width:400px;height:250px;background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;display:flex;align-items:center;justify-content:center;color:white;font-family:sans-serif;font-size:24px;font-weight:700}
+</style></head><body>
+  <div class="blob"></div>
+  <div class="glass">Frosted Glass</div>
+</body></html>`,
+    code: `.glass { backdrop-filter: blur(20px); background: rgba(255,255,255,0.05); }`,
+    prompt: `Create a glassmorphism shade with a moving background blob.`,
+  },
+  {
+    "slug": "particle-sphere-3d",
+    "title": "3D Particle Sphere with Orbiting Rings",
+    "category": "backgrounds",
+    "tag": "threejs",
+    "description": "A 3D particle sphere with colorful gradient and orbiting particle rings using Three.js shaders.",
+    "featured": true,
+    "previewCode": "<!DOCTYPE html><html><head><style>*{margin:0;padding:0;box-sizing:border-box}body{width:100%;height:100vh;overflow:hidden;background:#000}</style><script type=\"importmap\">{\"imports\":{\"three\":\"https://unpkg.com/three@0.160.0/build/three.module.js\"}}</script></head><body><div id=\"container\"></div><script type=\"module\">import * as THREE from 'three';const container=document.getElementById('container');const scene=new THREE.Scene();scene.background=new THREE.Color(0x000000);const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,2000);camera.position.z=500;const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setSize(window.innerWidth,window.innerHeight);renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));container.appendChild(renderer.domElement);const SPHERE_COUNT=12000;const RADIUS=160;const spherePositions=new Float32Array(SPHERE_COUNT*3);const sphereColors=new Float32Array(SPHERE_COUNT*3);const sphereSizes=new Float32Array(SPHERE_COUNT);const goldenAngle=Math.PI*(3-Math.sqrt(5));for(let i=0;i<SPHERE_COUNT;i++){const y=1-(i/(SPHERE_COUNT-1))*2;const theta=goldenAngle*i;const phi=Math.acos(y);spherePositions[i*3]=RADIUS*Math.sin(phi)*Math.cos(theta);spherePositions[i*3+1]=RADIUS*Math.cos(phi);spherePositions[i*3+2]=RADIUS*Math.sin(phi)*Math.sin(theta);const t=phi/Math.PI;const hue=0.5+t*0.22;const color=new THREE.Color().setHSL(hue,0.9,0.55);sphereColors[i*3]=color.r;sphereColors[i*3+1]=color.g;sphereColors[i*3+2]=color.b;sphereSizes[i]=1.5+Math.random()*1.5}const sphereGeometry=new THREE.BufferGeometry();sphereGeometry.setAttribute('position',new THREE.BufferAttribute(spherePositions,3));sphereGeometry.setAttribute('color',new THREE.BufferAttribute(sphereColors,3));sphereGeometry.setAttribute('size',new THREE.BufferAttribute(sphereSizes,1));const sphereMaterial=new THREE.ShaderMaterial({uniforms:{uTime:{value:0}},vertexShader:'attribute float size;attribute vec3 color;varying vec3 vColor;varying float vAlpha;uniform float uTime;void main(){vColor=color;vec4 mvPosition=modelViewMatrix*vec4(position,1.0);float depthAlpha=smoothstep(-200.0,200.0,mvPosition.z);vAlpha=0.3+depthAlpha*0.7;gl_PointSize=size*(400.0/-mvPosition.z);gl_Position=projectionMatrix*mvPosition;}',fragmentShader:'varying vec3 vColor;varying float vAlpha;void main(){float dist=length(gl_PointCoord-vec2(0.5));if(dist>0.5)discard;float alpha=smoothstep(0.5,0.0,dist)*vAlpha;gl_FragColor=vec4(vColor,alpha);}',transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});const sphereMesh=new THREE.Points(sphereGeometry,sphereMaterial);scene.add(sphereMesh);const ringParticlesPerRing=[2500,3000,3500];const ringMeshes=[];for(let r=0;r<3;r++){const count=ringParticlesPerRing[r];const ringRadius=RADIUS*(1.4+r*0.35);const positions=new Float32Array(count*3);const colors=new Float32Array(count*3);const sizes=new Float32Array(count);for(let i=0;i<count;i++){const angle=(i/count)*Math.PI*2;positions[i*3]=ringRadius*Math.cos(angle);positions[i*3+1]=ringRadius*Math.sin(angle);positions[i*3+2]=0;const hue=(0.33+r*0.08+(i/count)*0.1)%1.0;const color=new THREE.Color().setHSL(hue,0.8,0.55);colors[i*3]=color.r;colors[i*3+1]=color.g;colors[i*3+2]=color.b;sizes[i]=1.2+Math.random()*1.2}const ringGeometry=new THREE.BufferGeometry();ringGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3));ringGeometry.setAttribute('color',new THREE.BufferAttribute(colors,3));ringGeometry.setAttribute('size',new THREE.BufferAttribute(sizes,1));const ringMaterial=new THREE.ShaderMaterial({uniforms:{uTime:{value:0}},vertexShader:'attribute float size;attribute vec3 color;varying vec3 vColor;varying float vAlpha;uniform float uTime;void main(){vColor=color;vec4 mvPosition=modelViewMatrix*vec4(position,1.0);float depthAlpha=smoothstep(-300.0,300.0,mvPosition.z);vAlpha=0.4+depthAlpha*0.6;gl_PointSize=size*(400.0/-mvPosition.z);gl_Position=projectionMatrix*mvPosition;}',fragmentShader:'varying vec3 vColor;varying float vAlpha;void main(){float dist=length(gl_PointCoord-vec2(0.5));if(dist>0.5)discard;float alpha=smoothstep(0.5,0.0,dist)*vAlpha;gl_FragColor=vec4(vColor,alpha);}',transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});const ringMesh=new THREE.Points(ringGeometry,ringMaterial);ringMesh.rotation.x=Math.sin(r*1.2)*0.6;ringMesh.rotation.z=Math.cos(r*0.8)*0.3;scene.add(ringMesh);ringMeshes.push(ringMesh)}const glowGeometry=new THREE.SphereGeometry(RADIUS*0.9,32,32);const glowMaterial=new THREE.ShaderMaterial({uniforms:{uColor1:{value:new THREE.Color(0xff66cc)},uColor2:{value:new THREE.Color(0x66ccff)}},vertexShader:'varying vec3 vNormal;varying vec3 vPosition;void main(){vNormal=normalize(normalMatrix*normal);vPosition=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',fragmentShader:'uniform vec3 uColor1;uniform vec3 uColor2;varying vec3 vNormal;varying vec3 vPosition;void main(){float intensity=pow(0.6-dot(vNormal,vec3(0,0,1.0)),2.0);float t=(vPosition.y+160.0)/320.0;vec3 color=mix(uColor2,uColor1,t);gl_FragColor=vec4(color,intensity*0.15);}',transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,side:THREE.BackSide});const glowMesh=new THREE.Mesh(glowGeometry,glowMaterial);scene.add(glowMesh);let time=0;const animate=()=>{time+=0.01;sphereMesh.rotation.y=time*0.3;sphereMesh.rotation.x=Math.sin(time*0.15)*0.3;sphereMesh.rotation.z=Math.sin(time*0.1)*0.15;ringMeshes.forEach((ring,i)=>{ring.rotation.y=time*(0.2+i*0.05);ring.rotation.x=Math.sin(time*0.3+i)*0.5});sphereMaterial.uniforms.uTime.value=time;ringMeshes.forEach(ring=>{ring.material.uniforms.uTime.value=time});renderer.render(scene,camera);requestAnimationFrame(animate)};animate();window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)});</script></body></html>",
+    "code": "import React, { useEffect, useRef } from 'react';\nimport * as THREE from 'three';\n\nexport default function ParticleSphereThree() {\n  const containerRef = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const container = containerRef.current;\n    if (!container) return;\n\n    const scene = new THREE.Scene();\n    scene.background = new THREE.Color(0x000000);\n\n    const camera = new THREE.PerspectiveCamera(\n      60, window.innerWidth / window.innerHeight, 0.1, 2000\n    );\n    camera.position.z = 500;\n\n    const renderer = new THREE.WebGLRenderer({ antialias: true });\n    renderer.setSize(window.innerWidth, window.innerHeight);\n    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));\n    container.appendChild(renderer.domElement);\n\n    // --- Sphere Particles ---\n    const SPHERE_COUNT = 12000;\n    const RADIUS = 160;\n    const spherePositions = new Float32Array(SPHERE_COUNT * 3);\n    const sphereColors = new Float32Array(SPHERE_COUNT * 3);\n    const sphereSizes = new Float32Array(SPHERE_COUNT);\n\n    const goldenAngle = Math.PI * (3 - Math.sqrt(5));\n    for (let i = 0; i < SPHERE_COUNT; i++) {\n      const y = 1 - (i / (SPHERE_COUNT - 1)) * 2;\n      const theta = goldenAngle * i;\n      const phi = Math.acos(y);\n\n      spherePositions[i * 3] = RADIUS * Math.sin(phi) * Math.cos(theta);\n      spherePositions[i * 3 + 1] = RADIUS * Math.cos(phi);\n      spherePositions[i * 3 + 2] = RADIUS * Math.sin(phi) * Math.sin(theta);\n\n      const t = phi / Math.PI;\n      const hue = 0.5 + t * 0.22;\n      const color = new THREE.Color().setHSL(hue, 0.9, 0.55);\n      sphereColors[i * 3] = color.r;\n      sphereColors[i * 3 + 1] = color.g;\n      sphereColors[i * 3 + 2] = color.b;\n      sphereSizes[i] = 1.5 + Math.random() * 1.5;\n    }\n\n    const sphereGeometry = new THREE.BufferGeometry();\n    sphereGeometry.setAttribute('position', new THREE.BufferAttribute(spherePositions, 3));\n    sphereGeometry.setAttribute('color', new THREE.BufferAttribute(sphereColors, 3));\n    sphereGeometry.setAttribute('size', new THREE.BufferAttribute(sphereSizes, 1));\n\n    const sphereMaterial = new THREE.ShaderMaterial({\n      uniforms: { uTime: { value: 0 } },\n      vertexShader: `\n        attribute float size;\n        attribute vec3 color;\n        varying vec3 vColor;\n        varying float vAlpha;\n        uniform float uTime;\n        void main() {\n          vColor = color;\n          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);\n          float depthAlpha = smoothstep(-200.0, 200.0, mvPosition.z);\n          vAlpha = 0.3 + depthAlpha * 0.7;\n          gl_PointSize = size * (400.0 / -mvPosition.z);\n          gl_Position = projectionMatrix * mvPosition;\n        }\n      `,\n      fragmentShader: `\n        varying vec3 vColor;\n        varying float vAlpha;\n        void main() {\n          float dist = length(gl_PointCoord - vec2(0.5));\n          if (dist > 0.5) discard;\n          float alpha = smoothstep(0.5, 0.0, dist) * vAlpha;\n          gl_FragColor = vec4(vColor, alpha);\n        }\n      `,\n      transparent: true,\n      depthWrite: false,\n      blending: THREE.AdditiveBlending,\n    });\n\n    const sphereMesh = new THREE.Points(sphereGeometry, sphereMaterial);\n    scene.add(sphereMesh);\n\n    // --- Ring Particles ---\n    const ringParticlesPerRing = [2500, 3000, 3500];\n    const ringMeshes: THREE.Points[] = [];\n\n    for (let r = 0; r < 3; r++) {\n      const count = ringParticlesPerRing[r];\n      const ringRadius = RADIUS * (1.4 + r * 0.35);\n      const positions = new Float32Array(count * 3);\n      const colors = new Float32Array(count * 3);\n      const sizes = new Float32Array(count);\n\n      for (let i = 0; i < count; i++) {\n        const angle = (i / count) * Math.PI * 2;\n        positions[i * 3] = ringRadius * Math.cos(angle);\n        positions[i * 3 + 1] = ringRadius * Math.sin(angle);\n        positions[i * 3 + 2] = 0;\n\n        const hue = (0.33 + r * 0.08 + (i / count) * 0.1) % 1.0;\n        const color = new THREE.Color().setHSL(hue, 0.8, 0.55);\n        colors[i * 3] = color.r;\n        colors[i * 3 + 1] = color.g;\n        colors[i * 3 + 2] = color.b;\n        sizes[i] = 1.2 + Math.random() * 1.2;\n      }\n\n      const ringGeometry = new THREE.BufferGeometry();\n      ringGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));\n      ringGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));\n      ringGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));\n\n      const ringMaterial = new THREE.ShaderMaterial({\n        uniforms: { uTime: { value: 0 } },\n        vertexShader: `...`,\n        fragmentShader: `...`,\n        transparent: true,\n        depthWrite: false,\n        blending: THREE.AdditiveBlending,\n      });\n\n      const ringMesh = new THREE.Points(ringGeometry, ringMaterial);\n      ringMesh.rotation.x = Math.sin(r * 1.2) * 0.6;\n      ringMesh.rotation.z = Math.cos(r * 0.8) * 0.3;\n      scene.add(ringMesh);\n      ringMeshes.push(ringMesh);\n    }\n\n    // --- Glow Sphere ---\n    const glowGeometry = new THREE.SphereGeometry(RADIUS * 0.9, 32, 32);\n    const glowMaterial = new THREE.ShaderMaterial({\n      uniforms: {\n        uColor1: { value: new THREE.Color(0xff66cc) },\n        uColor2: { value: new THREE.Color(0x66ccff) },\n      },\n      vertexShader: `...`,\n      fragmentShader: `...`,\n      transparent: true,\n      depthWrite: false,\n      blending: THREE.AdditiveBlending,\n      side: THREE.BackSide,\n    });\n    scene.add(new THREE.Mesh(glowGeometry, glowMaterial));\n\n    // --- Animation ---\n    let time = 0;\n    const animate = () => {\n      time += 0.01;\n      sphereMesh.rotation.y = time * 0.3;\n      sphereMesh.rotation.x = Math.sin(time * 0.15) * 0.3;\n      sphereMesh.rotation.z = Math.sin(time * 0.1) * 0.15;\n      ringMeshes.forEach((ring, i) => {\n        ring.rotation.y = time * (0.2 + i * 0.05);\n        ring.rotation.x = Math.sin(time * 0.3 + i) * 0.5;\n      });\n      sphereMaterial.uniforms.uTime.value = time;\n      renderer.render(scene, camera);\n      requestAnimationFrame(animate);\n    };\n    animate();\n\n    window.addEventListener('resize', () => {\n      camera.aspect = window.innerWidth / window.innerHeight;\n      camera.updateProjectionMatrix();\n      renderer.setSize(window.innerWidth, window.innerHeight);\n    });\n\n    return () => {\n      renderer.dispose();\n      container.removeChild(renderer.domElement);\n    };\n  }, []);\n\n  return <div ref={containerRef} className=\"w-full h-screen bg-black\" />;\n}",
+    "prompt": "Create a 3D particle sphere visualization with Three.js:\n• Black background (#000000)\n• Central sphere with 12,000 particles arranged in Fibonacci sphere pattern\n• Color gradient from cyan/blue (bottom) to magenta/pink (top)\n• 3 orbiting particle rings with green/yellow/orange colors\n• Custom ShaderMaterial with depth-based alpha and additive blending\n• Soft inner glow sphere with gradient shader\n• Multi-axis rotation (X, Y, Z) for realistic 3D tumbling\n• Responsive to window resize\n• Smooth 60fps animation"
+  },
+  {
+    slug: 'neon-vortex-trails',
+    title: 'Neon Vortex Light Trails',
+    category: 'backgrounds',
+    tag: 'threejs',
+    description: 'A 3D cinematic vortex of glowing green light trails with particle motion and depth of field.',
+    featured: true,
+    previewCode: `<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { margin: 0; background: #000; overflow: hidden; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const mainCurve = new THREE.CatmullRomCurve3([
+            new THREE.Vector3(-10, 0, 10),
+            new THREE.Vector3(0, 5, 0),
+            new THREE.Vector3(10, 0, -10),
+            new THREE.Vector3(0, -5, -5),
+            new THREE.Vector3(-10, 0, 10)
+        ]);
+        mainCurve.closed = true;
+
+        const group = new THREE.Group();
+        const numLines = 150;
+        
+        for (let i = 0; i < numLines; i++) {
+            const radius = 0.5 + Math.random() * 2;
+            const angleOffset = Math.random() * Math.PI * 2;
+            const points = mainCurve.getPoints(100).map(p => {
+                return new THREE.Vector3(
+                    p.x + Math.cos(angleOffset) * radius,
+                    p.y + Math.sin(angleOffset) * radius,
+                    p.z + (Math.random() - 0.5) * 0.5
+                );
+            });
+            
+            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+            const material = new THREE.LineBasicMaterial({ 
+                color: 0x4ade80, 
+                transparent: true, 
+                opacity: Math.random() * 0.5 + 0.2 
+            });
+            const line = new THREE.Line(geometry, material);
+            group.add(line);
+        }
+
+        scene.add(group);
+        camera.position.z = 15;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            group.rotation.y += 0.002;
+            group.rotation.z += 0.001;
+            renderer.render(scene, camera);
+        }
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        animate();
+    </script>
+</body>
+</html>`,
+    code: `// Three.js Neon Vortex Implementation
+const setupVortex = () => {
+  const points = [];
+  const count = 200;
+  const radius = 5;
+  
+  // Create circular path with noise
+  for (let i = 0; i < count; i++) {
+    const angle = (i / count) * Math.PI * 2;
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle * 2) * 2; // Figure-8 tilt
+    const z = Math.sin(angle) * radius;
+    points.push(new THREE.Vector3(x, y, z));
+  }
+  
+  const curve = new THREE.CatmullRomCurve3(points);
+  const group = new THREE.Group();
+  
+  // Generate multiple strands
+  for (let j = 0; j < 100; j++) {
+    const offset = new THREE.Vector3(
+      (Math.random() - 0.5) * 2,
+      (Math.random() - 0.5) * 2,
+      (Math.random() - 0.5) * 2
+    );
+    
+    const strandPoints = curve.getPoints(100).map(p => p.clone().add(offset));
+    const geo = new THREE.BufferGeometry().setFromPoints(strandPoints);
+    const mat = new THREE.LineBasicMaterial({
+      color: new THREE.Color(0.2, 1.0, 0.4),
+      transparent: true,
+      opacity: Math.random()
+    });
+    
+    group.add(new THREE.Line(geo, mat));
+  }
+  return group;
+};`,
+    prompt: `Create a 3D Three.js visualization of neon green light trails: 
+  • High-density glowing fiber optic strands (100+ lines)
+  • Flowing in a vortex/toroidal spiral shape
+  • Colors: Vibrant green (#4ade80) and lime (#a8ff78)
+  • Use additive blending for glow effect
+  • Add a rotating camera with slight tilt
+  • Implementation should use BufferGeometry and LineBasicMaterial for performance
+  • Dark background #000000 with subtle bloom/post-processing feel`
+  },
+  {
+    slug: 'purple-galaxy-nebula',
+    title: 'Purple Galaxy Nebula',
+    category: 'backgrounds',
+    tag: 'threejs',
+    description: '3D animated spiral galaxy with 150K particles, glowing core, background stars, mouse parallax, and custom glowing cursor.',
+    featured: true,
+    previewCode: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:100%;height:100vh;overflow:hidden;background:#000}
+canvas{display:block}
+</style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,2000);
+camera.position.z=500;
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth,innerHeight);
+renderer.setClearColor(0x000000,1);
+document.body.appendChild(renderer.domElement);
+const count=80000;
+const geo=new THREE.BufferGeometry();
+const pos=new Float32Array(count*3);
+const col=new Float32Array(count*3);
+const c1=new THREE.Color(0x9d00ff),c2=new THREE.Color(0xe0aaff),c3=new THREE.Color(0x7b2cbf);
+for(let i=0;i<count;i++){
+  const i3=i*3,arm=i%4,armA=(arm/4)*Math.PI*2;
+  const r=Math.random()*400+20,spiral=armA+r*0.015;
+  const spread=30+r*0.15;
+  pos[i3]=Math.cos(spiral)*r+(Math.random()-0.5)*spread;
+  pos[i3+1]=Math.sin(spiral)*r+(Math.random()-0.5)*spread;
+  pos[i3+2]=(Math.random()-0.5)*spread*0.5;
+  const mix=Math.random();
+  let R=mix<0.33?c1.r:mix<0.66?c2.r:c3.r;
+  let G=mix<0.33?c1.g:mix<0.66?c2.g:c3.g;
+  let B=mix<0.33?c1.b:mix<0.66?c2.b:c3.b;
+  const bright=Math.max(0.3,1-Math.sqrt(pos[i3]**2+pos[i3+1]**2)/300);
+  col[i3]=R*bright;col[i3+1]=G*bright;col[i3+2]=B*bright;
+}
+geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+geo.setAttribute('color',new THREE.BufferAttribute(col,3));
+const mat=new THREE.PointsMaterial({size:2,vertexColors:true,transparent:true,opacity:0.8,blending:THREE.AdditiveBlending,depthWrite:false});
+const particles=new THREE.Points(geo,mat);
+scene.add(particles);
+const starsGeo=new THREE.BufferGeometry();
+const starsPos=new Float32Array(10000*3);
+for(let i=0;i<10000;i++){
+  const i3=i*3,theta=Math.random()*Math.PI*2,phi=Math.acos(2*Math.random()-1),r=600+Math.random()*800;
+  starsPos[i3]=r*Math.sin(phi)*Math.cos(theta);
+  starsPos[i3+1]=r*Math.sin(phi)*Math.sin(theta);
+  starsPos[i3+2]=r*Math.cos(phi);
+}
+starsGeo.setAttribute('position',new THREE.BufferAttribute(starsPos,3));
+const starsMat=new THREE.PointsMaterial({size:1.5,color:0x6644aa,transparent:true,opacity:0.6,blending:THREE.AdditiveBlending,depthWrite:false});
+const stars=new THREE.Points(starsGeo,starsMat);
+scene.add(stars);
+let mx=0,my=0,trx=0,try_=0;
+addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth)*2-1;my=(e.clientY/innerHeight)*2-1});
+function animate(){
+  const t=performance.now()*0.001;
+  const arr=geo.attributes.position.array;
+  for(let i=0;i<count;i++){
+    const i3=i*3,x=arr[i3],y=arr[i3+1];
+    const a=Math.atan2(y,x),r=Math.sqrt(x*x+y*y);
+    const s=0.0003+(1/(r+10))*0.002;
+    arr[i3]=Math.cos(a+s)*r;
+    arr[i3+1]=Math.sin(a+s)*r;
+    arr[i3+2]+=Math.sin(t*0.5+i*0.01)*0.02;
+  }
+  geo.attributes.position.needsUpdate=true;
+  particles.rotation.z=t*0.02;
+  trx=my*0.3;try_=mx*0.3;
+  particles.rotation.x+=(trx-particles.rotation.x)*0.02;
+  particles.rotation.y+=(try_-particles.rotation.y)*0.02;
+  stars.rotation.y=t*0.005;
+  renderer.render(scene,camera);
+  requestAnimationFrame(animate);
+}
+animate();
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+</script>
+</body>
+</html>`,
+    code: `/* Purple Galaxy Nebula — Three.js */
+import * as THREE from 'three';
+export function createGalaxy(container: HTMLElement) {
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 2000);
+  camera.position.z = 500;
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setClearColor(0x000000, 1);
+  container.appendChild(renderer.domElement);
+  const particleCount = 150000;
+  const geometry = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount * 3);
+  const colors = new Float32Array(particleCount * 3);
+  const color1 = new THREE.Color(0x9d00ff);
+  const color2 = new THREE.Color(0xe0aaff);
+  const color3 = new THREE.Color(0x7b2cbf);
+  for (let i = 0; i < particleCount; i++) {
+    const i3 = i * 3;
+    const armCount = 4;
+    const armIndex = i % armCount;
+    const armAngle = (armIndex / armCount) * Math.PI * 2;
+    const radius = Math.random() * 400 + 20;
+    const spiralAngle = armAngle + radius * 0.015;
+    const spread = 30 + radius * 0.15;
+    positions[i3] = Math.cos(spiralAngle) * radius + (Math.random() - 0.5) * spread;
+    positions[i3 + 1] = Math.sin(spiralAngle) * radius + (Math.random() - 0.5) * spread;
+    positions[i3 + 2] = (Math.random() - 0.5) * spread * 0.5;
+    const colorMix = Math.random();
+    let r = colorMix < 0.33 ? color1.r : colorMix < 0.66 ? color2.r : color3.r;
+    let g = colorMix < 0.33 ? color1.g : colorMix < 0.66 ? color2.g : color3.g;
+    let b = colorMix < 0.33 ? color1.b : colorMix < 0.66 ? color2.b : color3.b;
+    const dist = Math.sqrt(positions[i3] ** 2 + positions[i3 + 1] ** 2);
+    const brightness = Math.max(0.3, 1 - dist / 300);
+    colors[i3] = r * brightness;
+    colors[i3 + 1] = g * brightness;
+    colors[i3 + 2] = b * brightness;
+  }
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  const material = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 }, uPixelRatio: { value: Math.min(devicePixelRatio, 2) } },
+    vertexShader: \`
+      varying vec3 vColor;
+      uniform float uPixelRatio;
+      void main() {
+        vColor = color;
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = (2.0 + size) * uPixelRatio * (300.0 / -mvPosition.z);
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    \`,
+    fragmentShader: \`
+      varying vec3 vColor;
+      void main() {
+        float dist = length(gl_PointCoord - vec2(0.5));
+        if (dist > 0.5) discard;
+        float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
+        alpha = pow(alpha, 1.5);
+        gl_FragColor = vec4(vColor, alpha);
+      }
+    \`,
+    transparent: true,
+    vertexColors: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
+  const particles = new THREE.Points(geometry, material);
+  scene.add(particles);
+  // Core + Stars + Animation loop...
+  return { scene, camera, renderer, particles };
+}\`,
+    prompt: \`Create a 3D Purple Galaxy Nebula with Three.js:
+  • 150,000 particles in a 4-arm spiral galaxy formation
+  • Color palette: deep purple #9d00ff, light lavender #e0aaff, violet #7b2cbf
+  • Brighter particles near the center, dimmer at edges
+  • Continuous orbital rotation with varying speeds by radius
+  • 20,000 background stars for depth
+  • Glowing central core with white/pink particles
+  • Custom glowing purple cursor with dot + pulsing ring
+  • Mouse parallax — galaxy tilts toward cursor
+  • Custom shaders with additive blending for soft glow
+  • Smooth cursor follow with lag for fluid feel`,
+  },
+  {
+    slug: 'dynamic-3d-dna-helix',
+    title: 'Interactive 3D DNA Helix Particle System',
+    category: 'animations',
+    tag: 'threejs',
+    description: 'An interactive 3D particle system that forms a DNA helix, with mouse-guided morphing and dynamic color controls.',
+    featured: true,
+    previewCode: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D DNA Helix</title>
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; background-color: black; font-family: 'Courier New', Courier, monospace; color: white; user-select: none; }
+        #canvas-container { width: 100vw; height: 100vh; position: relative; }
+        
+        .ui-element { position: absolute; background: rgba(10, 10, 20, 0.6); border: 1px solid rgba(50, 50, 70, 0.4); border-radius: 8px; backdrop-filter: blur(5px); }
+        
+        #top-info { top: 20px; left: 50%; transform: translateX(-50%); padding: 10px 20px; text-align: center; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        
+        #bottom-controls { bottom: 20px; left: 50%; transform: translateX(-50%); padding: 15px 25px; display: flex; flex-direction: column; align-items: center; gap: 15px; box-shadow: 0 -4px 15px rgba(0,0,0,0.5); }
+        
+        #change-shape-btn { padding: 10px 20px; background: rgba(30, 80, 150, 0.8); border: 1px solid #3366cc; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.2s ease; font-size: 12px; }
+        #change-shape-btn:hover { background: rgba(50, 100, 180, 0.9); box-shadow: 0 0 10px rgba(100, 150, 250, 0.6); }
+        
+        #color-picker { display: flex; gap: 12px; }
+        .color-dot { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s ease; box-shadow: 0 0 5px rgba(255,255,255,0.2); }
+        .color-dot:hover { transform: scale(1.15); box-shadow: 0 0 10px rgba(255,255,255,0.4); }
+        .color-dot.active { border-color: white; box-shadow: 0 0 12px rgba(255,255,255,0.7); }
+        
+        #orange { background-color: #ff9933; }
+        #purple { background-color: #9933ff; }
+        #green { background-color: #33cc33; }
+        #multi { background: linear-gradient(135deg, #ff9933 0%, #33cc33 50%, #9933ff 100%); }
+
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        </div>
+
+    <div id="top-info" class="ui-element">
+        Shape: <span id="current-shape-text">DNA Helix</span> (Click to morph)
+    </div>
+
+    <div id="bottom-controls" class="ui-element">
+        <div id="change-shape-btn">Change Shape</div>
+        <div id="color-picker">
+            <div id="orange" class="color-dot" data-color="#ff9933"></div>
+            <div id="purple" class="color-dot" data-color="#9933ff"></div>
+            <div id="green" class="color-dot" data-color="#33cc33"></div>
+            <div id="multi" class="color-dot active" data-color="multi"></div>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/examples/jsm/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+          }
+        }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+        import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+        import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+        import { CopyShader } from 'three/examples/jsm/shaders/CopyShader.js';
+
+        // Scene Setup
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 20;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // Particle System Setup
+        const particleCount = 2500;
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+        const targetPositions = new Float32Array(particleCount * 3);
+        const baseColors = new Float32Array(particleCount * 3);
+        const initialStates = new Float32Array(particleCount);
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        
+        const material = new THREE.PointsMaterial({
+            size: 0.1,
+            vertexColors: true,
+            blending: THREE.AdditiveBlending,
+            depthTest: false,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const points = new THREE.Points(geometry, material);
+        scene.add(points);
+
+        // Particle Shape Definitions
+        function createHelixPositions() {
+            const pos = new Float32Array(particleCount * 3);
+            const cols = new Float32Array(particleCount * 3);
+            const initial = new Float32Array(particleCount);
+            const numTurns = 6;
+            const radius = 5;
+            const height = 15;
+            const separation = 2; // Distance between strands
+
+            for (let i = 0; i < particleCount; i++) {
+                const strand = i < particleCount / 2 ? 1 : -1;
+                const idx = i % (particleCount / 2);
+                const t = idx / (particleCount / 2); // 0 to 1
+
+                const angle = t * Math.PI * 2 * numTurns;
+                const h = (t - 0.5) * height;
+
+                // Position
+                pos[i * 3 + 0] = (radius + strand * separation / 2) * Math.cos(angle);
+                pos[i * 3 + 1] = h;
+                pos[i * 3 + 2] = (radius + strand * separation / 2) * Math.sin(angle);
+                
+                // Colors - initial multi-color from image
+                let col;
+                if (strand === 1) {
+                    col = new THREE.Color().setHSL(0.5, 0.8, 0.7); // Light Blue
+                } else {
+                    col = new THREE.Color().setHSL(0.3, 0.8, 0.7); // Light Green
+                }
+                cols[i * 3 + 0] = col.r;
+                cols[i * 3 + 1] = col.g;
+                cols[i * 3 + 2] = col.b;
+
+                // Add random initial noise
+                pos[i * 3 + 0] += (Math.random() - 0.5) * 0.2;
+                pos[i * 3 + 1] += (Math.random() - 0.5) * 0.2;
+                pos[i * 3 + 2] += (Math.random() - 0.5) * 0.2;
+
+                // Initial positions can be random
+                positions[i * 3 + 0] = (Math.random() - 0.5) * 50;
+                positions[i * 3 + 1] = (Math.random() - 0.5) * 50;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 50;
+
+                colors[i * 3 + 0] = cols[i * 3 + 0];
+                colors[i * 3 + 1] = cols[i * 3 + 1];
+                colors[i * 3 + 2] = cols[i * 3 + 2];
+            }
+            targetPositions.set(pos);
+            baseColors.set(cols);
+        }
+
+        function setParticleTarget(shape) {
+            const height = 15;
+            const radius = 5;
+            const multiColor = document.querySelector('.color-dot.active').id === 'multi';
+
+            for (let i = 0; i < particleCount; i++) {
+                const idx = i % (particleCount / 2);
+                const t = idx / (particleCount / 2);
+                const strand = i < particleCount / 2 ? 1 : -1;
+                const h = (t - 0.5) * height;
+
+                let tx, ty, tz;
+                let t_col;
+
+                switch(shape) {
+                    case 'DNA Helix':
+                        const numTurns = 6;
+                        const separation = 2;
+                        const angle = t * Math.PI * 2 * numTurns;
+                        tx = (radius + strand * separation / 2) * Math.cos(angle);
+                        ty = h;
+                        tz = (radius + strand * separation / 2) * Math.sin(angle);
+                        break;
+                    case 'Double Helix Wave':
+                        const numWaves = 4;
+                        const waveAngle = t * Math.PI * 2 * numWaves;
+                        const strandOffset = strand * 1.5;
+                        tx = radius * Math.cos(waveAngle);
+                        ty = h;
+                        tz = radius * Math.sin(waveAngle) + strandOffset;
+                        break;
+                    case 'Particle Voids':
+                        // Disperse particles to the sphere edges with noise
+                        const sph_radius = 15;
+                        tx = (Math.random() - 0.5) * sph_radius * 2;
+                        ty = (Math.random() - 0.5) * sph_radius * 2;
+                        tz = (Math.random() - 0.5) * sph_radius * 2;
+                        // But slightly gravitate to a void pattern
+                        break;
+                }
+
+                // Add dynamic noise to target
+                targetPositions[i * 3 + 0] = tx + (Math.random() - 0.5) * 0.1;
+                targetPositions[i * 3 + 1] = ty + (Math.random() - 0.5) * 0.1;
+                targetPositions[i * 3 + 2] = tz + (Math.random() - 0.5) * 0.1;
+
+                if (multiColor) {
+                    // Update multi-color base on shape strands if needed
+                    // For now, use the initial base colors
+                    t_col = new THREE.Color(baseColors[i*3], baseColors[i*3+1], baseColors[i*3+2]);
+                    colors[i * 3 + 0] = t_col.r;
+                    colors[i * 3 + 1] = t_col.g;
+                    colors[i * 3 + 2] = t_col.b;
+                }
+            }
+            geometry.attributes.position.needsUpdate = true;
+            geometry.attributes.color.needsUpdate = true;
+        }
+
+        // Initialize shape
+        createHelixPositions();
+        setParticleTarget('DNA Helix');
+
+        // Post-processing: Bloom for glow
+        const renderPass = new RenderPass(scene, camera);
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.0, 0.4, 0.85);
+        bloomPass.threshold = 0.3;
+        bloomPass.strength = 1.2;
+        bloomPass.radius = 0.5;
+
+        const composer = new EffectComposer(renderer);
+        composer.addPass(renderPass);
+        composer.addPass(bloomPass);
+
+        // Animation and Mouse Interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        const lerpFactor = 0.05; // Position lerping
+        const colorLerpFactor = 0.02; // Color lerping
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = -(event.clientY / window.innerHeight - 0.5) * 2;
+        });
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const time = clock.getElapsedTime();
+
+            // Lerp points to targets and add dynamic motion
+            const positions = geometry.attributes.position.array;
+            const colorsAttr = geometry.attributes.color.array;
+
+            for (let i = 0; i < particleCount; i++) {
+                // Lerp position to target
+                positions[i * 3 + 0] += (targetPositions[i * 3 + 0] - positions[i * 3 + 0]) * lerpFactor;
+                positions[i * 3 + 1] += (targetPositions[i * 3 + 1] - positions[i * 3 + 1]) * lerpFactor;
+                positions[i * 3 + 2] += (targetPositions[i * 3 + 2] - positions[i * 3 + 2]) * lerpFactor;
+
+                // Dynamic point motion (wiggling)
+                positions[i * 3 + 0] += Math.sin(time + i * 0.1) * 0.01;
+                positions[i * 3 + 1] += Math.cos(time + i * 0.1) * 0.01;
+                positions[i * 3 + 2] += Math.sin(time + i * 0.1) * 0.01;
+
+                // Dynamic color fading/cycling (slight)
+                const currentShape = document.getElementById('current-shape-text').innerText;
+                if (currentShape === 'DNA Helix') {
+                    // Slight brightness oscillation for glow effect
+                    const brightness = 0.7 + 0.1 * Math.sin(time * 2 + i * 0.05);
+                    colorsAttr[i * 3 + 0] = baseColors[i * 3 + 0] * brightness;
+                    colorsAttr[i * 3 + 1] = baseColors[i * 3 + 1] * brightness;
+                    colorsAttr[i * 3 + 2] = baseColors[i * 3 + 2] * brightness;
+                }
+            }
+            geometry.attributes.position.needsUpdate = true;
+            geometry.attributes.color.needsUpdate = true;
+
+            // Rotation and Mouse Follow for overall structure
+            points.rotation.y = time * 0.2 + mouseX * 0.3; // Rotate and follow x-mouse
+            points.rotation.x = mouseY * 0.2; // Tilt with y-mouse
+
+            // Render with post-processing
+            composer.render();
+        }
+
+        animate();
+
+        // UI Interactions
+        const shapes = ['DNA Helix', 'Double Helix Wave', 'Particle Voids'];
+        let currentShapeIndex = 0;
+        const changeShapeBtn = document.getElementById('change-shape-btn');
+        const topInfoText = document.getElementById('current-shape-text');
+
+        changeShapeBtn.addEventListener('click', () => {
+            currentShapeIndex = (currentShapeIndex + 1) % shapes.length;
+            const newShape = shapes[currentShapeIndex];
+            topInfoText.innerText = newShape;
+            setParticleTarget(newShape);
+        });
+
+        // Click on info panel to morph too
+        document.getElementById('top-info').addEventListener('click', () => {
+            changeShapeBtn.click();
+        });
+
+        const colorDots = document.querySelectorAll('.color-dot');
+        colorDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                colorDots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+                
+                const colorCode = dot.getAttribute('data-color');
+                const multiColor = colorCode === 'multi';
+
+                for (let i = 0; i < particleCount; i++) {
+                    const strand = i < particleCount / 2 ? 1 : -1;
+                    const idx = i % (particleCount / 2);
+                    const t = idx / (particleCount / 2);
+
+                    let newColor;
+                    if (multiColor) {
+                        // Blend between Blue and Green based on strand
+                        if (strand === 1) {
+                            newColor = new THREE.Color().setHSL(0.5, 0.8, 0.7); // Light Blue
+                        } else {
+                            newColor = new THREE.Color().setHSL(0.3, 0.8, 0.7); // Light Green
+                        }
+                    } else {
+                        // Single color - slightly vary per strand for depth
+                        const base_col = new THREE.Color(colorCode);
+                        const hsl = {};
+                        base_col.getHSL(hsl);
+                        hsl.l *= (0.9 + 0.2 * Math.random());
+                        newColor = new THREE.Color().setHSL(hsl.h, hsl.s, hsl.l);
+                    }
+                    baseColors[i * 3 + 0] = newColor.r;
+                    baseColors[i * 3 + 1] = newColor.g;
+                    baseColors[i * 3 + 2] = newColor.b;
+                }
+                geometry.attributes.color.needsUpdate = true;
+            });
+        });
+
+        // Window Resize Handling
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+            bloomPass.setSize(window.innerWidth, window.innerHeight);
+        });
+
+    </script>
+</body>
+</html>
+`,
+    code: `
+// Three.js Interactive DNA Helix Particle System
+// Based on image data and requirements
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 20;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// Particle Geometry
+const particleCount = 2500;
+const geometry = new THREE.BufferGeometry();
+const positions = new Float32Array(particleCount * 3);
+const colors = new Float32Array(particleCount * 3);
+// ... initialize positions/colors for helix ...
+
+geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+// Particle Material (additive and glowing)
+const material = new THREE.PointsMaterial({
+    size: 0.1,
+    vertexColors: true,
+    blending: THREE.AdditiveBlending,
+    transparent: true,
+    opacity: 0.8
+});
+
+const points = new THREE.Points(geometry, material);
+scene.add(points);
+
+// Target positions for morphing
+const targetPositions = new Float32Array(particleCount * 3);
+// ... function to set targets based on 'DNA Helix', 'Double Helix Wave', etc. ...
+
+// UI Elements (CSS/HTML)
+// ... Create top-info and bottom-controls panels with blur/opacity ...
+// ... Add color picker dots with active states ...
+
+// Post-processing for bloom
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.2, 0.4, 0.85);
+composer.addPass(bloomPass);
+
+// Animation Loop
+let mouseX = 0, mouseY = 0;
+document.addEventListener('mousemove', e => { 
+    mouseX = (e.clientX/window.innerWidth - 0.5) * 2;
+    mouseY = -(e.clientY/window.innerHeight - 0.5) * 2;
+});
+
+const clock = new THREE.Clock();
+function animate() {
+    requestAnimationFrame(animate);
+    const time = clock.getElapsedTime();
+    
+    const positionsAttr = geometry.attributes.position.array;
+    for (let i = 0; i < particleCount; i++) {
+        // Lerp positions towards targets (morphing)
+        // Add time-based wiggling per particle
+        // ...
+    }
+    geometry.attributes.position.needsUpdate = true;
+    
+    points.rotation.y = time * 0.2 + mouseX * 0.3; // Rotate & follow mouse
+    points.rotation.x = mouseY * 0.2; // Tilt with mouse
+    
+    composer.render();
+}
+animate();
+
+// Event Listeners for UI
+// Change Shape, Color dots, etc.
+`,
+    prompt: `Replicate a complex interactive UI: A glowing, 3D particle system forming a DNA helix on a dark, star-field-like background. Include all UI elements precisely: A translucent top information panel stating 'Shape: DNA Helix (Click to morph)'. A translucent bottom controls panel with a 'Change Shape' button and four distinct, glowing color selection dots (Orange, Purple, Green, and a multi-color gradient dot, where multi is active). Add sophisticated motion and animation: particles should have independent time-based 'wiggling' for a living feel. The overall DNA structure should rotate slowly and tilt in 3D, and this rotation should gently follow the mouse cursor's movement. Mouse hover on color dots must have a scaling effect, and hover over the central DNA structure itself should subtly increase the particle density or 'life'. Clicking 'Change Shape' or the info panel must trigger a particle-by-particle morphing animation to different forms (e.g., a double wave or voids) while the text updates. The selected color dot must have a distinct 'active' border and glow. Color changes must dynamically update the particle colors, keeping the multi-color option as the complex Blue/Green gradient from the image. Post-processing bloom effects must make everything glow intensely. The code should be Three.js based, requiring zero external resources other than Three.js core and key post-processing passes.`,
   },
 ]
 

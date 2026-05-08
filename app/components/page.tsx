@@ -37,6 +37,7 @@ async function getAnimations(params: PageProps['searchParams']) {
       .lean()
 
     const normalized = JSON.parse(JSON.stringify(data))
+    console.log(`ComponentsPage: Found ${normalized.length} animations in DB`)
     if (Array.isArray(normalized) && normalized.length > 0) return normalized
 
     return SAMPLE_ANIMATIONS
