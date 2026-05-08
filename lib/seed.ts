@@ -1942,8 +1942,8 @@ export function createGalaxy(container: HTMLElement) {
   scene.add(particles);
   // Core + Stars + Animation loop...
   return { scene, camera, renderer, particles };
-}\`,
-    prompt: \`Create a 3D Purple Galaxy Nebula with Three.js:
+} `,
+    prompt: `Create a 3D Purple Galaxy Nebula with Three.js:
   • 150,000 particles in a 4-arm spiral galaxy formation
   • Color palette: deep purple #9d00ff, light lavender #e0aaff, violet #7b2cbf
   • Brighter particles near the center, dimmer at edges
