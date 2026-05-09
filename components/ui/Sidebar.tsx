@@ -18,6 +18,7 @@ const CATEGORY_KEYS = new Set([
   'shaders',
   'robot',
   'shades',
+  '3d-visualizations',
 ])
 
 // Tags supported by backend filter: filter.tag
@@ -54,6 +55,8 @@ const CATEGORIES = [
   {
     label: 'Categories',
     items: [
+      { name: '3D Visualization', slug: '3d-visualizations' },
+      { name: '3D Animation', slug: 'threejs' },
       { name: 'Animation', slug: 'all-animation' },
       { name: 'Backgrounds', slug: 'backgrounds' },
       { name: 'Buttons', slug: 'buttons' },
