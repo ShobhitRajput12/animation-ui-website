@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/mongodb'
 import Animation from '@/lib/models/Animation'
 import { SAMPLE_ANIMATIONS } from '@/lib/sampleAnimations'
+import { ALL_COMPONENTS_DATA } from '@/lib/data-aggregator'
+
+export const dynamic = 'force-dynamic'
 
 // GET /api/preview/[slug] — returns raw HTML for iframe
 export async function GET(
@@ -15,7 +18,9 @@ export async function GET(
       .lean() as { previewCode: string } | null
 
     if (!anim) {
-      const sample = SAMPLE_ANIMATIONS.find(a => a.slug === params.slug)
+      const localData = ALL_COMPONENTS_DATA.find(a => a.slug === params.slug)
+      const sample = localData || SAMPLE_ANIMATIONS.find(a => a.slug === params.slug)
+      
       if (sample) {
         return new NextResponse(sample.previewCode, {
           headers: {
@@ -39,7 +44,8 @@ export async function GET(
       },
     })
   } catch (err) {
-    const sample = SAMPLE_ANIMATIONS.find(a => a.slug === params.slug)
+    const localData = ALL_COMPONENTS_DATA.find(a => a.slug === params.slug)
+    const sample = localData || SAMPLE_ANIMATIONS.find(a => a.slug === params.slug)
     if (sample) {
       return new NextResponse(sample.previewCode, {
         headers: {

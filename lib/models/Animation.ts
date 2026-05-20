@@ -15,8 +15,9 @@ export interface IAnimation extends Document {
   createdAt: Date
 }
 
-const AnimationSchema = new Schema<IAnimation>(
+const AnimationSchema = new Schema<any>(
   {
+    _id:         { type: String },
     slug:        { type: String, required: true, unique: true },
     title:       { type: String, required: true },
     category:    { type: String, required: true },

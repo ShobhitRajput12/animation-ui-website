@@ -1,8 +1,9 @@
-import { connectDB } from '@/lib/mongodb'
-import Animation from '@/lib/models/Animation'
 import ComponentsGrid from '@/components/ui/ComponentsGrid'
 import Navbar from '@/components/ui/Navbar'
-import { SAMPLE_ANIMATIONS } from '@/lib/sampleAnimations'
+
+import { ALL_COMPONENTS_DATA } from '@/lib/data-aggregator'
+
+const ALL_DATA = ALL_COMPONENTS_DATA
 
 interface PageProps {
   searchParams: {
@@ -13,8 +14,8 @@ interface PageProps {
   }
 }
 
-async function getAnimations(params: PageProps['searchParams']) {
-  const filterLocal = (a: typeof SAMPLE_ANIMATIONS[number]) => {
+function getAnimations(params: PageProps['searchParams']) {
+  const filterLocal = (a: any) => {
     if (params.category && a.category !== params.category) return false
     if (params.tag && a.tag !== params.tag) return false
     if (params.featured && !a.featured) return false
@@ -22,43 +23,21 @@ async function getAnimations(params: PageProps['searchParams']) {
     return true
   }
 
-  try {
-    await connectDB()
-    const filter: Record<string, unknown> = {}
-
-    if (params.category) filter.category = params.category
-    if (params.tag)      filter.tag = params.tag
-    if (params.featured) filter.featured = true
-    if (params.search)   filter.title = { $regex: params.search, $options: 'i' }
-
-    const data = await Animation.find(filter)
-      .select('-previewCode -code -prompt')
-      .sort({ createdAt: -1 })
-      .lean()
-
-    const normalized = JSON.parse(JSON.stringify(data))
-    console.log(`ComponentsPage: Found ${normalized.length} animations in DB`)
-    if (Array.isArray(normalized) && normalized.length > 0) return normalized
-
-    return SAMPLE_ANIMATIONS
-      .filter(filterLocal)
-      .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
-      .map(({ previewCode, code, prompt, ...rest }) => rest)
-  } catch {
-    return SAMPLE_ANIMATIONS
-      .filter(filterLocal)
-      .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
-      .map(({ previewCode, code, prompt, ...rest }) => rest)
-  }
+  return ALL_DATA
+    .filter(filterLocal)
+    .sort((a: any, b: any) => (a.createdAt < b.createdAt ? 1 : -1))
+    .map(({ previewCode, code, prompt, ...rest }: any) => rest)
 }
 
-export default async function ComponentsPage({ searchParams }: PageProps) {
-  const animations = await getAnimations(searchParams)
+export default function ComponentsPage({ searchParams }: PageProps) {
+  const animations = getAnimations(searchParams)
 
   const title = searchParams.search
     ? `Results for "${searchParams.search}"`
     : searchParams.category
-      ? searchParams.category.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+      ? searchParams.category === 'robot'
+        ? '3D Robot'
+        : searchParams.category.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())
       : 'All Components'
 
   return (
@@ -69,8 +48,7 @@ export default async function ComponentsPage({ searchParams }: PageProps) {
 
       <div className="p-6">
         {animations.length === 0 ? (
-          <div className="flex flex-col items-center justify-center
-            h-64 text-white/20 text-sm">
+          <div className="flex flex-col items-center justify-center h-64 text-white/20 text-sm">
             <div className="text-4xl mb-4">◌</div>
             <div>No animations yet in this category.</div>
             <div className="text-xs mt-1">Add some via the seed file!</div>
@@ -94,12 +72,7 @@ function FilterChips({ active }: { active?: string }) {
           <a
             key={t}
             href={slug ? `?tag=${slug}` : '/components'}
-            className={`text-xs px-3 py-1.5 rounded-lg font-medium
-              transition-colors border
-              ${isActive
-                ? 'bg-purple-600 border-purple-600 text-white'
-                : 'bg-white/[0.04] border-white/[0.07] text-white/40 hover:text-white hover:border-white/20'
-              }`}
+            className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-colors border ${isActive ? 'bg-purple-600 border-purple-600 text-white' : 'bg-white/[0.04] border-white/[0.07] text-white/40 hover:text-white hover:border-white/20'}`}
           >
             {t}
           </a>
