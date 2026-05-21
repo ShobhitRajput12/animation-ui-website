@@ -140,8 +140,8 @@ export const BACKGROUNDS_DATA = [
     "category": "backgrounds",
     "tag": "threejs",
     "description": "A 3D particle sphere with colorful gradient and orbiting particle rings using Three.js shaders.",
-    "previewCode": "<!DOCTYPE html><html><head><style>*{margin:0;padding:0;box-sizing:border-box}body{width:100%;height:100vh;overflow:hidden;background:#000}</style><script type=\"importmap\">{\"imports\":{\"three\":\"https://unpkg.com/three@0.160.0/build/three.module.js\"}}</script></head><body><div id=\"container\"></div><script type=\"module\">import * as THREE from 'three';const container=document.getElementById('container');const scene=new THREE.Scene();scene.background=new THREE.Color(0x000000);const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,2000);camera.position.z=500;const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setSize(window.innerWidth,window.innerHeight);renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));container.appendChild(renderer.domElement);const SPHERE_COUNT=12000;const RADIUS=160;const spherePositions=new Float32Array(SPHERE_COUNT*3);const sphereColors=new Float32Array(SPHERE_COUNT*3);const sphereSizes=new Float32Array(SPHERE_COUNT);const goldenAngle=Math.PI*(3-Math.sqrt(5));for(let i=0;i<SPHERE_COUNT;i++){const y=1-(i/(SPHERE_COUNT-1))*2;const theta=goldenAngle*i;const phi=Math.acos(y);spherePositions[i*3]=RADIUS*Math.sin(phi)*Math.cos(theta);spherePositions[i*3+1]=RADIUS*Math.cos(phi);spherePositions[i*3+2]=RADIUS*Math.sin(phi)*Math.sin(theta);const t=phi/Math.PI;const hue=0.5+t*0.22;const color=new THREE.Color().setHSL(hue,0.9,0.55);sphereColors[i*3]=color.r;sphereColors[i*3+1]=color.g;sphereColors[i*3+2]=color.b;sphereSizes[i]=1.5+Math.random()*1.5}const sphereGeometry=new THREE.BufferGeometry();sphereGeometry.setAttribute('position',new THREE.BufferAttribute(spherePositions,3));sphereGeometry.setAttribute('color',new THREE.BufferAttribute(sphereColors,3));sphereGeometry.setAttribute('size',new THREE.BufferAttribute(sphereSizes,1));const sphereMaterial=new THREE.ShaderMaterial({uniforms:{uTime:{value:0}},vertexShader:'attribute float size;attribute vec3 color;varying vec3 vColor;varying float vAlpha;uniform float uTime;void main(){vColor=color;vec4 mvPosition=modelViewMatrix*vec4(position,1.0);float depthAlpha=smoothstep(-200.0,200.0,mvPosition.z);vAlpha=0.3+depthAlpha*0.7;gl_PointSize=size*(400.0/-mvPosition.z);gl_Position=projectionMatrix*mvPosition;}',fragmentShader:'varying vec3 vColor;varying float vAlpha;void main(){float dist=length(gl_PointCoord-vec2(0.5));if(dist>0.5)discard;float alpha=smoothstep(0.5,0.0,dist)*vAlpha;gl_FragColor=vec4(vColor,alpha);}',transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});const sphereMesh=new THREE.Points(sphereGeometry,sphereMaterial);scene.add(sphereMesh);const ringParticlesPerRing=[2500,3000,3500];const ringMeshes=[];for(let r=0;r<3;r++){const count=ringParticlesPerRing[r];const ringRadius=RADIUS*(1.4+r*0.35);const positions=new Float32Array(count*3);const colors=new Float32Array(count*3);const sizes=new Float32Array(count);for(let i=0;i<count;i++){const angle=(i/count)*Math.PI*2;positions[i*3]=ringRadius*Math.cos(angle);positions[i*3+1]=ringRadius*Math.sin(angle);positions[i*3+2]=0;const hue=(0.33+r*0.08+(i/count)*0.1)%1.0;const color=new THREE.Color().setHSL(hue,0.8,0.55);colors[i*3]=color.r;colors[i*3+1]=color.g;colors[i*3+2]=color.b;sizes[i]=1.2+Math.random()*1.2}const ringGeometry=new THREE.BufferGeometry();ringGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3));ringGeometry.setAttribute('color',new THREE.BufferAttribute(colors,3));ringGeometry.setAttribute('size',new THREE.BufferAttribute(sizes,1));const ringMaterial=new THREE.ShaderMaterial({uniforms:{uTime:{value:0}},vertexShader:'attribute float size;attribute vec3 color;varying vec3 vColor;varying float vAlpha;uniform float uTime;void main(){vColor=color;vec4 mvPosition=modelViewMatrix*vec4(position,1.0);float depthAlpha=smoothstep(-300.0,300.0,mvPosition.z);vAlpha=0.4+depthAlpha*0.6;gl_PointSize=size*(400.0/-mvPosition.z);gl_Position=projectionMatrix*mvPosition;}',fragmentShader:'varying vec3 vColor;varying float vAlpha;void main(){float dist=length(gl_PointCoord-vec2(0.5));if(dist>0.5)discard;float alpha=smoothstep(0.5,0.0,dist)*vAlpha;gl_FragColor=vec4(vColor,alpha);}',transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});const ringMesh=new THREE.Points(ringGeometry,ringMaterial);ringMesh.rotation.x=Math.sin(r*1.2)*0.6;ringMesh.rotation.z=Math.cos(r*0.8)*0.3;scene.add(ringMesh);ringMeshes.push(ringMesh)}const glowGeometry=new THREE.SphereGeometry(RADIUS*0.9,32,32);const glowMaterial=new THREE.ShaderMaterial({uniforms:{uColor1:{value:new THREE.Color(0xff66cc)},uColor2:{value:new THREE.Color(0x66ccff)}},vertexShader:'varying vec3 vNormal;varying vec3 vPosition;void main(){vNormal=normalize(normalMatrix*normal);vPosition=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',fragmentShader:'uniform vec3 uColor1;uniform vec3 uColor2;varying vec3 vNormal;varying vec3 vPosition;void main(){float intensity=pow(0.6-dot(vNormal,vec3(0,0,1.0)),2.0);float t=(vPosition.y+160.0)/320.0;vec3 color=mix(uColor2,uColor1,t);gl_FragColor=vec4(color,intensity*0.15);}',transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,side:THREE.BackSide});const glowMesh=new THREE.Mesh(glowGeometry,glowMaterial);scene.add(glowMesh);let time=0;const animate=()=>{time+=0.01;sphereMesh.rotation.y=time*0.3;sphereMesh.rotation.x=Math.sin(time*0.15)*0.3;sphereMesh.rotation.z=Math.sin(time*0.1)*0.15;ringMeshes.forEach((ring,i)=>{ring.rotation.y=time*(0.2+i*0.05);ring.rotation.x=Math.sin(time*0.3+i)*0.5});sphereMaterial.uniforms.uTime.value=time;ringMeshes.forEach(ring=>{ring.material.uniforms.uTime.value=time});renderer.render(scene,camera);requestAnimationFrame(animate)};animate();window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)});</script></body></html>",
-    "code": "import React, { useEffect, useRef } from 'react';\nimport * as THREE from 'three';\n\nexport default function ParticleSphereThree() {\n const containerRef = useRef<HTMLDivElement>(null);\n\n useEffect(() => {\n const container = containerRef.current;\n if (!container) return;\n\n const scene = new THREE.Scene();\n scene.background = new THREE.Color(0x000000);\n\n const camera = new THREE.PerspectiveCamera(\n 60, window.innerWidth / window.innerHeight, 0.1, 2000\n );\n camera.position.z = 500;\n\n const renderer = new THREE.WebGLRenderer({ antialias: true });\n renderer.setSize(window.innerWidth, window.innerHeight);\n renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));\n container.appendChild(renderer.domElement);\n\n // --- Sphere Particles ---\n const SPHERE_COUNT = 12000;\n const RADIUS = 160;\n const spherePositions = new Float32Array(SPHERE_COUNT * 3);\n const sphereColors = new Float32Array(SPHERE_COUNT * 3);\n const sphereSizes = new Float32Array(SPHERE_COUNT);\n\n const goldenAngle = Math.PI * (3 - Math.sqrt(5));\n for (let i = 0; i < SPHERE_COUNT; i++) {\n const y = 1 - (i / (SPHERE_COUNT - 1)) * 2;\n const theta = goldenAngle * i;\n const phi = Math.acos(y);\n\n spherePositions[i * 3] = RADIUS * Math.sin(phi) * Math.cos(theta);\n spherePositions[i * 3 + 1] = RADIUS * Math.cos(phi);\n spherePositions[i * 3 + 2] = RADIUS * Math.sin(phi) * Math.sin(theta);\n\n const t = phi / Math.PI;\n const hue = 0.5 + t * 0.22;\n const color = new THREE.Color().setHSL(hue, 0.9, 0.55);\n sphereColors[i * 3] = color.r;\n sphereColors[i * 3 + 1] = color.g;\n sphereColors[i * 3 + 2] = color.b;\n sphereSizes[i] = 1.5 + Math.random() * 1.5;\n }\n\n const sphereGeometry = new THREE.BufferGeometry();\n sphereGeometry.setAttribute('position', new THREE.BufferAttribute(spherePositions, 3));\n sphereGeometry.setAttribute('color', new THREE.BufferAttribute(sphereColors, 3));\n sphereGeometry.setAttribute('size', new THREE.BufferAttribute(sphereSizes, 1));\n\n const sphereMaterial = new THREE.ShaderMaterial({\n uniforms: { uTime: { value: 0 } },\n vertexShader: `\n attribute float size;\n attribute vec3 color;\n varying vec3 vColor;\n varying float vAlpha;\n uniform float uTime;\n void main() {\n vColor = color;\n vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);\n float depthAlpha = smoothstep(-200.0, 200.0, mvPosition.z);\n vAlpha = 0.3 + depthAlpha * 0.7;\n gl_PointSize = size * (400.0 / -mvPosition.z);\n gl_Position = projectionMatrix * mvPosition;\n }\n `,\n fragmentShader: `\n varying vec3 vColor;\n varying float vAlpha;\n void main() {\n float dist = length(gl_PointCoord - vec2(0.5));\n if (dist > 0.5) discard;\n float alpha = smoothstep(0.5, 0.0, dist) * vAlpha;\n gl_FragColor = vec4(vColor, alpha);\n }\n `,\n transparent: true,\n depthWrite: false,\n blending: THREE.AdditiveBlending,\n });\n\n const sphereMesh = new THREE.Points(sphereGeometry, sphereMaterial);\n scene.add(sphereMesh);\n\n // --- Ring Particles ---\n const ringParticlesPerRing = [2500, 3000, 3500];\n const ringMeshes: THREE.Points[] = [];\n\n for (let r = 0; r < 3; r++) {\n const count = ringParticlesPerRing[r];\n const ringRadius = RADIUS * (1.4 + r * 0.35);\n const positions = new Float32Array(count * 3);\n const colors = new Float32Array(count * 3);\n const sizes = new Float32Array(count);\n\n for (let i = 0; i < count; i++) {\n const angle = (i / count) * Math.PI * 2;\n positions[i * 3] = ringRadius * Math.cos(angle);\n positions[i * 3 + 1] = ringRadius * Math.sin(angle);\n positions[i * 3 + 2] = 0;\n\n const hue = (0.33 + r * 0.08 + (i / count) * 0.1) % 1.0;\n const color = new THREE.Color().setHSL(hue, 0.8, 0.55);\n colors[i * 3] = color.r;\n colors[i * 3 + 1] = color.g;\n colors[i * 3 + 2] = color.b;\n sizes[i] = 1.2 + Math.random() * 1.2;\n }\n\n const ringGeometry = new THREE.BufferGeometry();\n ringGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));\n ringGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));\n ringGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));\n\n const ringMaterial = new THREE.ShaderMaterial({\n uniforms: { uTime: { value: 0 } },\n vertexShader: `...`,\n fragmentShader: `...`,\n transparent: true,\n depthWrite: false,\n blending: THREE.AdditiveBlending,\n });\n\n const ringMesh = new THREE.Points(ringGeometry, ringMaterial);\n ringMesh.rotation.x = Math.sin(r * 1.2) * 0.6;\n ringMesh.rotation.z = Math.cos(r * 0.8) * 0.3;\n scene.add(ringMesh);\n ringMeshes.push(ringMesh);\n }\n\n // --- Glow Sphere ---\n const glowGeometry = new THREE.SphereGeometry(RADIUS * 0.9, 32, 32);\n const glowMaterial = new THREE.ShaderMaterial({\n uniforms: {\n uColor1: { value: new THREE.Color(0xff66cc) },\n uColor2: { value: new THREE.Color(0x66ccff) },\n },\n vertexShader: `...`,\n fragmentShader: `...`,\n transparent: true,\n depthWrite: false,\n blending: THREE.AdditiveBlending,\n side: THREE.BackSide,\n });\n scene.add(new THREE.Mesh(glowGeometry, glowMaterial));\n\n // --- Animation ---\n let time = 0;\n const animate = () => {\n time += 0.01;\n sphereMesh.rotation.y = time * 0.3;\n sphereMesh.rotation.x = Math.sin(time * 0.15) * 0.3;\n sphereMesh.rotation.z = Math.sin(time * 0.1) * 0.15;\n ringMeshes.forEach((ring, i) => {\n ring.rotation.y = time * (0.2 + i * 0.05);\n ring.rotation.x = Math.sin(time * 0.3 + i) * 0.5;\n });\n sphereMaterial.uniforms.uTime.value = time;\n renderer.render(scene, camera);\n requestAnimationFrame(animate);\n };\n animate();\n\n window.addEventListener('resize', () => {\n camera.aspect = window.innerWidth / window.innerHeight;\n camera.updateProjectionMatrix();\n renderer.setSize(window.innerWidth, window.innerHeight);\n });\n\n return () => {\n renderer.dispose();\n container.removeChild(renderer.domElement);\n };\n }, []);\n\n return <div ref={containerRef} className=\"w-full h-screen bg-black\" />;\n}",
+    "previewCode": "<!DOCTYPE html><html><head><style>*{margin:0;padding:0;box-sizing:border-box}body{width:100%;height:100vh;overflow:hidden;background:#000}</style><script type=\"importmap\">{\"imports\":{\"three\":\"https://unpkg.com/three@0.160.0/build/three.module.js\"}}</script></head><body><div id=\"container\"></div><script type=\"module\">import * as THREE from 'three';const container=document.getElementById('container');const scene=new THREE.Scene();scene.background=new THREE.Color(0x000000);const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,2000);camera.position.z=500;const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setSize(window.innerWidth,window.innerHeight);renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));container.appendChild(renderer.domElement);const SPHERE_COUNT=12000;const RADIUS=160;const spherePositions=new Float32Array(SPHERE_COUNT*3);const sphereColors=new Float32Array(SPHERE_COUNT*3);const sphereSizes=new Float32Array(SPHERE_COUNT);const goldenAngle=Math.PI*(3-Math.sqrt(5));for(let i=0;i<SPHERE_COUNT;i++){const y=1-(i/(SPHERE_COUNT-1))*2;const theta=goldenAngle*i;const phi=Math.acos(y);spherePositions[i*3]=RADIUS*Math.sin(phi)*Math.cos(theta);spherePositions[i*3+1]=RADIUS*Math.cos(phi);spherePositions[i*3+2]=RADIUS*Math.sin(phi)*Math.sin(theta);const t=phi/Math.PI;const hue=0.5+t*0.22;const color=new THREE.Color().setHSL(hue,0.9,0.55);sphereColors[i*3]=color.r;sphereColors[i*3+1]=color.g;sphereColors[i*3+2]=color.b;sphereSizes[i]=1.5+Math.random()*1.5}const sphereGeometry=new THREE.BufferGeometry();sphereGeometry.setAttribute('position',new THREE.BufferAttribute(spherePositions,3));sphereGeometry.setAttribute('color',new THREE.BufferAttribute(sphereColors,3));sphereGeometry.setAttribute('size',new THREE.BufferAttribute(sphereSizes,1));const sphereMaterial=new THREE.ShaderMaterial({uniforms:{uTime:{value:0}},vertexShader:'attribute float size;varying vec3 vColor;varying float vAlpha;uniform float uTime;void main(){vColor=color;vec4 mvPosition=modelViewMatrix*vec4(position,1.0);float depthAlpha=smoothstep(-200.0,200.0,mvPosition.z);vAlpha=0.3+depthAlpha*0.7;gl_PointSize=size*(400.0/-mvPosition.z);gl_Position=projectionMatrix*mvPosition;}',fragmentShader:'varying vec3 vColor;varying float vAlpha;void main(){float dist=length(gl_PointCoord-vec2(0.5));if(dist>0.5)discard;float alpha=smoothstep(0.5,0.0,dist)*vAlpha;gl_FragColor=vec4(vColor,alpha);}',transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});const sphereMesh=new THREE.Points(sphereGeometry,sphereMaterial);scene.add(sphereMesh);const ringParticlesPerRing=[2500,3000,3500];const ringMeshes=[];for(let r=0;r<3;r++){const count=ringParticlesPerRing[r];const ringRadius=RADIUS*(1.4+r*0.35);const positions=new Float32Array(count*3);const colors=new Float32Array(count*3);const sizes=new Float32Array(count);for(let i=0;i<count;i++){const angle=(i/count)*Math.PI*2;positions[i*3]=ringRadius*Math.cos(angle);positions[i*3+1]=ringRadius*Math.sin(angle);positions[i*3+2]=0;const hue=(0.33+r*0.08+(i/count)*0.1)%1.0;const color=new THREE.Color().setHSL(hue,0.8,0.55);colors[i*3]=color.r;colors[i*3+1]=color.g;colors[i*3+2]=color.b;sizes[i]=1.2+Math.random()*1.2}const ringGeometry=new THREE.BufferGeometry();ringGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3));ringGeometry.setAttribute('color',new THREE.BufferAttribute(colors,3));ringGeometry.setAttribute('size',new THREE.BufferAttribute(sizes,1));const ringMaterial=new THREE.ShaderMaterial({uniforms:{uTime:{value:0}},vertexShader:'attribute float size;varying vec3 vColor;varying float vAlpha;uniform float uTime;void main(){vColor=color;vec4 mvPosition=modelViewMatrix*vec4(position,1.0);float depthAlpha=smoothstep(-300.0,300.0,mvPosition.z);vAlpha=0.4+depthAlpha*0.6;gl_PointSize=size*(400.0/-mvPosition.z);gl_Position=projectionMatrix*mvPosition;}',fragmentShader:'varying vec3 vColor;varying float vAlpha;void main(){float dist=length(gl_PointCoord-vec2(0.5));if(dist>0.5)discard;float alpha=smoothstep(0.5,0.0,dist)*vAlpha;gl_FragColor=vec4(vColor,alpha);}',transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});const ringMesh=new THREE.Points(ringGeometry,ringMaterial);ringMesh.rotation.x=Math.sin(r*1.2)*0.6;ringMesh.rotation.z=Math.cos(r*0.8)*0.3;scene.add(ringMesh);ringMeshes.push(ringMesh)}const glowGeometry=new THREE.SphereGeometry(RADIUS*0.9,32,32);const glowMaterial=new THREE.ShaderMaterial({uniforms:{uColor1:{value:new THREE.Color(0xff66cc)},uColor2:{value:new THREE.Color(0x66ccff)}},vertexShader:'varying vec3 vNormal;varying vec3 vPosition;void main(){vNormal=normalize(normalMatrix*normal);vPosition=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',fragmentShader:'uniform vec3 uColor1;uniform vec3 uColor2;varying vec3 vNormal;varying vec3 vPosition;void main(){float intensity=pow(0.6-dot(vNormal,vec3(0,0,1.0)),2.0);float t=(vPosition.y+160.0)/320.0;vec3 color=mix(uColor2,uColor1,t);gl_FragColor=vec4(color,intensity*0.15);}',transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,side:THREE.BackSide});const glowMesh=new THREE.Mesh(glowGeometry,glowMaterial);scene.add(glowMesh);let time=0;const animate=()=>{time+=0.01;sphereMesh.rotation.y=time*0.3;sphereMesh.rotation.x=Math.sin(time*0.15)*0.3;sphereMesh.rotation.z=Math.sin(time*0.1)*0.15;ringMeshes.forEach((ring,i)=>{ring.rotation.y=time*(0.2+i*0.05);ring.rotation.x=Math.sin(time*0.3+i)*0.5});sphereMaterial.uniforms.uTime.value=time;ringMeshes.forEach(ring=>{ring.material.uniforms.uTime.value=time});renderer.render(scene,camera);requestAnimationFrame(animate)};animate();window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)});</script></body></html>",
+    "code": "import React, { useEffect, useRef } from 'react';\nimport * as THREE from 'three';\n\nexport default function ParticleSphereThree() {\n const containerRef = useRef<HTMLDivElement>(null);\n\n useEffect(() => {\n const container = containerRef.current;\n if (!container) return;\n\n const scene = new THREE.Scene();\n scene.background = new THREE.Color(0x000000);\n\n const camera = new THREE.PerspectiveCamera(\n 60, window.innerWidth / window.innerHeight, 0.1, 2000\n );\n camera.position.z = 500;\n\n const renderer = new THREE.WebGLRenderer({ antialias: true });\n renderer.setSize(window.innerWidth, window.innerHeight);\n renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));\n container.appendChild(renderer.domElement);\n\n // --- Sphere Particles ---\n const SPHERE_COUNT = 12000;\n const RADIUS = 160;\n const spherePositions = new Float32Array(SPHERE_COUNT * 3);\n const sphereColors = new Float32Array(SPHERE_COUNT * 3);\n const sphereSizes = new Float32Array(SPHERE_COUNT);\n\n const goldenAngle = Math.PI * (3 - Math.sqrt(5));\n for (let i = 0; i < SPHERE_COUNT; i++) {\n const y = 1 - (i / (SPHERE_COUNT - 1)) * 2;\n const theta = goldenAngle * i;\n const phi = Math.acos(y);\n\n spherePositions[i * 3] = RADIUS * Math.sin(phi) * Math.cos(theta);\n spherePositions[i * 3 + 1] = RADIUS * Math.cos(phi);\n spherePositions[i * 3 + 2] = RADIUS * Math.sin(phi) * Math.sin(theta);\n\n const t = phi / Math.PI;\n const hue = 0.5 + t * 0.22;\n const color = new THREE.Color().setHSL(hue, 0.9, 0.55);\n sphereColors[i * 3] = color.r;\n sphereColors[i * 3 + 1] = color.g;\n sphereColors[i * 3 + 2] = color.b;\n sphereSizes[i] = 1.5 + Math.random() * 1.5;\n }\n\n const sphereGeometry = new THREE.BufferGeometry();\n sphereGeometry.setAttribute('position', new THREE.BufferAttribute(spherePositions, 3));\n sphereGeometry.setAttribute('color', new THREE.BufferAttribute(sphereColors, 3));\n sphereGeometry.setAttribute('size', new THREE.BufferAttribute(sphereSizes, 1));\n\n const sphereMaterial = new THREE.ShaderMaterial({\n uniforms: { uTime: { value: 0 } },\n vertexShader: `\n attribute float size;\n \n varying vec3 vColor;\n varying float vAlpha;\n uniform float uTime;\n void main() {\n vColor = color;\n vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);\n float depthAlpha = smoothstep(-200.0, 200.0, mvPosition.z);\n vAlpha = 0.3 + depthAlpha * 0.7;\n gl_PointSize = size * (400.0 / -mvPosition.z);\n gl_Position = projectionMatrix * mvPosition;\n }\n `,\n fragmentShader: `\n varying vec3 vColor;\n varying float vAlpha;\n void main() {\n float dist = length(gl_PointCoord - vec2(0.5));\n if (dist > 0.5) discard;\n float alpha = smoothstep(0.5, 0.0, dist) * vAlpha;\n gl_FragColor = vec4(vColor, alpha);\n }\n `,\n transparent: true,\n depthWrite: false,\n blending: THREE.AdditiveBlending,\n });\n\n const sphereMesh = new THREE.Points(sphereGeometry, sphereMaterial);\n scene.add(sphereMesh);\n\n // --- Ring Particles ---\n const ringParticlesPerRing = [2500, 3000, 3500];\n const ringMeshes: THREE.Points[] = [];\n\n for (let r = 0; r < 3; r++) {\n const count = ringParticlesPerRing[r];\n const ringRadius = RADIUS * (1.4 + r * 0.35);\n const positions = new Float32Array(count * 3);\n const colors = new Float32Array(count * 3);\n const sizes = new Float32Array(count);\n\n for (let i = 0; i < count; i++) {\n const angle = (i / count) * Math.PI * 2;\n positions[i * 3] = ringRadius * Math.cos(angle);\n positions[i * 3 + 1] = ringRadius * Math.sin(angle);\n positions[i * 3 + 2] = 0;\n\n const hue = (0.33 + r * 0.08 + (i / count) * 0.1) % 1.0;\n const color = new THREE.Color().setHSL(hue, 0.8, 0.55);\n colors[i * 3] = color.r;\n colors[i * 3 + 1] = color.g;\n colors[i * 3 + 2] = color.b;\n sizes[i] = 1.2 + Math.random() * 1.2;\n }\n\n const ringGeometry = new THREE.BufferGeometry();\n ringGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));\n ringGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));\n ringGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));\n\n const ringMaterial = new THREE.ShaderMaterial({\n uniforms: { uTime: { value: 0 } },\n vertexShader: `...`,\n fragmentShader: `...`,\n transparent: true,\n depthWrite: false,\n blending: THREE.AdditiveBlending,\n });\n\n const ringMesh = new THREE.Points(ringGeometry, ringMaterial);\n ringMesh.rotation.x = Math.sin(r * 1.2) * 0.6;\n ringMesh.rotation.z = Math.cos(r * 0.8) * 0.3;\n scene.add(ringMesh);\n ringMeshes.push(ringMesh);\n }\n\n // --- Glow Sphere ---\n const glowGeometry = new THREE.SphereGeometry(RADIUS * 0.9, 32, 32);\n const glowMaterial = new THREE.ShaderMaterial({\n uniforms: {\n uColor1: { value: new THREE.Color(0xff66cc) },\n uColor2: { value: new THREE.Color(0x66ccff) },\n },\n vertexShader: `...`,\n fragmentShader: `...`,\n transparent: true,\n depthWrite: false,\n blending: THREE.AdditiveBlending,\n side: THREE.BackSide,\n });\n scene.add(new THREE.Mesh(glowGeometry, glowMaterial));\n\n // --- Animation ---\n let time = 0;\n const animate = () => {\n time += 0.01;\n sphereMesh.rotation.y = time * 0.3;\n sphereMesh.rotation.x = Math.sin(time * 0.15) * 0.3;\n sphereMesh.rotation.z = Math.sin(time * 0.1) * 0.15;\n ringMeshes.forEach((ring, i) => {\n ring.rotation.y = time * (0.2 + i * 0.05);\n ring.rotation.x = Math.sin(time * 0.3 + i) * 0.5;\n });\n sphereMaterial.uniforms.uTime.value = time;\n renderer.render(scene, camera);\n requestAnimationFrame(animate);\n };\n animate();\n\n window.addEventListener('resize', () => {\n camera.aspect = window.innerWidth / window.innerHeight;\n camera.updateProjectionMatrix();\n renderer.setSize(window.innerWidth, window.innerHeight);\n });\n\n return () => {\n renderer.dispose();\n container.removeChild(renderer.domElement);\n };\n }, []);\n\n return <div ref={containerRef} className=\"w-full h-screen bg-black\" />;\n}",
     "prompt": "Create a 3D particle sphere visualization with Three.js:\n• Black background (#000000)\n• Central sphere with 12,000 particles arranged in Fibonacci sphere pattern\n• Color gradient from cyan/blue (bottom) to magenta/pink (top)\n• 3 orbiting particle rings with green/yellow/orange colors\n• Custom ShaderMaterial with depth-based alpha and additive blending\n• Soft inner glow sphere with gradient shader\n• Multi-axis rotation (X, Y, Z) for realistic 3D tumbling\n• Responsive to window resize\n• Smooth 60fps animation",
     "likes": 0,
     "author": "Animation AI",
@@ -619,5 +619,2185 @@ export default function BioluminescentWeave() {
   "featured": true,
   "createdAt": "2026-05-20T11:03:01.680Z",
   "updatedAt": "2026-05-20T11:03:01.680Z"
+}, {
+  "slug": "symbiotic-neural-filament-tunnel",
+  "title": "Symbiotic Neural Filament Tunnel",
+  "category": "backgrounds",
+  "tag": "threejs",
+  "description": "An infinite 3D tunnel woven from 36,000 bioluminescent neural filaments. Hover cursor to trigger action potentials, click to warp path topology.",
+  "previewCode": `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symbiotic Neural Filament Tunnel</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020108;
+      cursor: crosshair;
+      font-family: monospace;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .label {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(0, 255, 180, 0.4);
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      text-align: center;
+      pointer-events: none;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="label">Neural Filament Network</div>
+  <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x020108, 0.012);
+
+    const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 10;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.body.appendChild(renderer.domElement);
+
+    const particleCount = 36000;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const originalPositions = new Float32Array(particleCount * 3);
+    const velocities = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    const tunnelLength = 120;
+    const fiberCount = 60;
+    const ptsPerFiber = particleCount / fiberCount;
+
+    for (let f = 0; f < fiberCount; f++) {
+      const fiberAngle = (f / fiberCount) * Math.PI * 2;
+      for (let p = 0; p < ptsPerFiber; p++) {
+        const idx = f * ptsPerFiber + p;
+        const t = p / ptsPerFiber;
+        const z = -t * tunnelLength + 5;
+        
+        const theta = t * Math.PI * 2 * 8 + fiberAngle;
+        const radius = 6.0 + Math.sin(t * Math.PI * 4 + fiberAngle) * 1.5;
+        const x = Math.cos(theta) * radius;
+        const y = Math.sin(theta) * radius;
+
+        positions[idx * 3] = x;
+        positions[idx * 3 + 1] = y;
+        positions[idx * 3 + 2] = z;
+
+        originalPositions[idx * 3] = x;
+        originalPositions[idx * 3 + 1] = y;
+        originalPositions[idx * 3 + 2] = z;
+
+        velocities[idx * 3] = 0;
+        velocities[idx * 3 + 1] = 0;
+        velocities[idx * 3 + 2] = 0;
+
+        const color = new THREE.Color();
+        color.setHSL(0.45 + (t * 0.2), 0.9, 0.55);
+        colors[idx * 3] = color.r;
+        colors[idx * 3 + 1] = color.g;
+        colors[idx * 3 + 2] = color.b;
+      }
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.ShaderMaterial({
+      vertexColors: true,
+      uniforms: {
+        uTime: { value: 0 },
+        uMouse: { value: new THREE.Vector3(0, 0, 0) },
+        uClickPulse: { value: 0 }
+      },
+      vertexShader: \`
+        uniform float uTime;
+        uniform vec3 uMouse;
+        uniform float uClickPulse;
+                varying vec3 vColor;
+        varying float vExcitation;
+
+        void main() {
+          vColor = color;
+          vec3 pos = position;
+
+          float wave = sin(pos.z * 0.15 - uTime * 3.0) * cos(pos.x * 0.2 + uTime) * 0.3;
+          pos.x += wave * cos(uTime);
+          pos.y += wave * sin(uTime);
+
+          float dist = distance(pos.xy, uMouse.xy);
+          float force = 0.0;
+          if (dist < 4.5 && pos.z > -40.0) {
+            force = smoothstep(4.5, 0.0, dist);
+            vec2 dir = normalize(pos.xy - uMouse.xy);
+            pos.xy += dir * force * 1.8;
+          }
+
+          vExcitation = force + uClickPulse;
+
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = (1.5 + vExcitation * 3.0) * (350.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      \`,
+      fragmentShader: \`
+        varying vec3 vColor;
+        varying float vExcitation;
+
+        void main() {
+          vec2 coord = gl_PointCoord - vec2(0.5);
+          float dist = length(coord);
+          if (dist > 0.5) discard;
+
+          float alpha = smoothstep(0.5, 0.0, dist) * (0.85 + vExcitation * 0.15);
+          vec3 finalColor = mix(vColor, vec3(0.3, 0.8, 1.0), vExcitation * 0.7);
+          if (dist < 0.15) {
+            finalColor = vec3(1.0);
+          }
+          gl_FragColor = vec4(finalColor, alpha);
+        }
+      \`,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    let mouse = new THREE.Vector2(-999, -999);
+    const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+    const raycaster = new THREE.Raycaster();
+    const mouse3D = new THREE.Vector3();
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      
+      raycaster.setFromCamera(mouse, camera);
+      raycaster.ray.intersectPlane(plane, mouse3D);
+    });
+
+    let pulse = 0;
+    let topologyState = 0;
+    window.addEventListener('click', () => {
+      pulse = 1.0;
+      topologyState = (topologyState + 1) % 3;
+    });
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const time = clock.getElapsedTime();
+
+      material.uniforms.uTime.value = time;
+      material.uniforms.uMouse.value.copy(mouse3D);
+      
+      if (pulse > 0) {
+        pulse -= 0.02;
+        if (pulse < 0) pulse = 0;
+      }
+      material.uniforms.uClickPulse.value = pulse;
+
+      const posArray = geometry.attributes.position.array;
+      const colArray = geometry.attributes.color.array;
+
+      for (let i = 0; i < particleCount; i++) {
+        const ix = i * 3;
+        const iy = i * 3 + 1;
+        const iz = i * 3 + 2;
+
+        const ox = originalPositions[ix];
+        const oy = originalPositions[iy];
+        const oz = originalPositions[iz];
+
+        let px = posArray[ix];
+        let py = posArray[iy];
+        let pz = posArray[iz];
+
+        pz += 0.35;
+        if (pz > 5) {
+          pz = -tunnelLength + 5;
+        }
+
+        let tx = ox;
+        let ty = oy;
+
+        if (topologyState === 1) {
+          const t = Math.abs(oz) / tunnelLength;
+          const ribbonRadius = 7.0 + Math.sin(t * Math.PI * 6) * 2.0;
+          const ribbonAngle = t * Math.PI * 4 + (i % 2 === 0 ? 0 : Math.PI);
+          tx = Math.cos(ribbonAngle) * ribbonRadius;
+          ty = Math.sin(ribbonAngle) * ribbonRadius;
+        } else if (topologyState === 2) {
+          const t = Math.abs(oz) / tunnelLength;
+          const ringRad = 4.0 + (t * 8.0) + Math.cos(time + t * 5) * 1.0;
+          const theta = (i % 120) / 120 * Math.PI * 2;
+          tx = Math.cos(theta) * ringRad;
+          ty = Math.sin(theta) * ringRad;
+        }
+
+        px += (tx - px) * 0.05;
+        py += (ty - py) * 0.05;
+
+        posArray[ix] = px;
+        posArray[iy] = py;
+        posArray[iz] = pz;
+
+        const colorVal = new THREE.Color();
+        const hue = (oz / -tunnelLength) * 0.35 + (time * 0.02);
+        if (topologyState === 1) {
+          colorVal.setHSL((hue + 0.5) % 1.0, 0.95, 0.55);
+        } else if (topologyState === 2) {
+          colorVal.setHSL((hue + 0.85) % 1.0, 0.9, 0.6);
+        } else {
+          colorVal.setHSL(hue % 1.0, 0.95, 0.5);
+        }
+
+        colArray[ix] += (colorVal.r - colArray[ix]) * 0.05;
+        colArray[iy] += (colorVal.g - colArray[iy]) * 0.05;
+        colArray[iz] += (colorVal.b - colArray[iz]) * 0.05;
+      }
+
+      geometry.attributes.position.needsUpdate = true;
+      geometry.attributes.color.needsUpdate = true;
+
+      points.rotation.z = time * 0.06;
+      camera.position.x += (mouse.x * 2.5 - camera.position.x) * 0.05;
+      camera.position.y += (mouse.y * 2.5 - camera.position.y) * 0.05;
+      camera.lookAt(0, 0, -20);
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>`,
+  "code": `"use client";
+import React, { useRef, useEffect } from 'react';
+import * as THREE from 'three';
+import { motion } from 'framer-motion';
+
+export default function SymbioticNeuralFilamentTunnel() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || typeof window === "undefined") return;
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x020108, 0.012);
+
+    const camera = new THREE.PerspectiveCamera(65, container.clientWidth / container.clientHeight, 0.1, 1000);
+    camera.position.z = 10;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    container.appendChild(renderer.domElement);
+
+    const particleCount = 36000;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const originalPositions = new Float32Array(particleCount * 3);
+    const velocities = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    const tunnelLength = 120;
+    const fiberCount = 60;
+    const ptsPerFiber = particleCount / fiberCount;
+
+    for (let f = 0; f < fiberCount; f++) {
+      const fiberAngle = (f / fiberCount) * Math.PI * 2;
+      for (let p = 0; p < ptsPerFiber; p++) {
+        const idx = f * ptsPerFiber + p;
+        const t = p / ptsPerFiber;
+        const z = -t * tunnelLength + 5;
+        
+        const theta = t * Math.PI * 2 * 8 + fiberAngle;
+        const radius = 6.0 + Math.sin(t * Math.PI * 4 + fiberAngle) * 1.5;
+        const x = Math.cos(theta) * radius;
+        const y = Math.sin(theta) * radius;
+
+        positions[idx * 3] = x;
+        positions[idx * 3 + 1] = y;
+        positions[idx * 3 + 2] = z;
+
+        originalPositions[idx * 3] = x;
+        originalPositions[idx * 3 + 1] = y;
+        originalPositions[idx * 3 + 2] = z;
+
+        velocities[idx * 3] = 0;
+        velocities[idx * 3 + 1] = 0;
+        velocities[idx * 3 + 2] = 0;
+
+        const color = new THREE.Color();
+        color.setHSL(0.45 + (t * 0.2), 0.9, 0.55);
+        colors[idx * 3] = color.r;
+        colors[idx * 3 + 1] = color.g;
+        colors[idx * 3 + 2] = color.b;
+      }
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.ShaderMaterial({
+      vertexColors: true,
+      uniforms: {
+        uTime: { value: 0 },
+        uMouse: { value: new THREE.Vector3(0, 0, 0) },
+        uClickPulse: { value: 0 }
+      },
+      vertexShader: \`
+        uniform float uTime;
+        uniform vec3 uMouse;
+        uniform float uClickPulse;
+                varying vec3 vColor;
+        varying float vExcitation;
+
+        void main() {
+          vColor = color;
+          vec3 pos = position;
+
+          // Sinusoidal filament weaving waves
+          float wave = sin(pos.z * 0.15 - uTime * 3.0) * cos(pos.x * 0.2 + uTime) * 0.3;
+          pos.x += wave * cos(uTime);
+          pos.y += wave * sin(uTime);
+
+          // Raycasted repulsive warp from cursor
+          float dist = distance(pos.xy, uMouse.xy);
+          float force = 0.0;
+          if (dist < 4.5 && pos.z > -40.0) {
+            force = smoothstep(4.5, 0.0, dist);
+            vec2 dir = normalize(pos.xy - uMouse.xy);
+            pos.xy += dir * force * 1.8;
+          }
+
+          vExcitation = force + uClickPulse;
+
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = (1.5 + vExcitation * 3.0) * (350.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      \`,
+      fragmentShader: \`
+        varying vec3 vColor;
+        varying float vExcitation;
+
+        void main() {
+          vec2 coord = gl_PointCoord - vec2(0.5);
+          float dist = length(coord);
+          if (dist > 0.5) discard;
+
+          // Bioluminescent synapse volumetric glow
+          float alpha = smoothstep(0.5, 0.0, dist) * (0.85 + vExcitation * 0.15);
+          vec3 finalColor = mix(vColor, vec3(0.3, 0.8, 1.0), vExcitation * 0.7);
+          
+          if (dist < 0.15) {
+            finalColor = vec3(1.0);
+          }
+          
+          gl_FragColor = vec4(finalColor, alpha);
+        }
+      \`,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    let mouse = new THREE.Vector2(-999, -999);
+    const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+    const raycaster = new THREE.Raycaster();
+    const mouse3D = new THREE.Vector3();
+
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      
+      raycaster.setFromCamera(mouse, camera);
+      raycaster.ray.intersectPlane(plane, mouse3D);
+    };
+    window.addEventListener('mousemove', onMouseMove);
+
+    let pulse = 0;
+    let topologyState = 0;
+    const onClick = () => {
+      pulse = 1.0;
+      topologyState = (topologyState + 1) % 3;
+    };
+    window.addEventListener('click', onClick);
+
+    const clock = new THREE.Clock();
+    let animId: number;
+
+    const animate = () => {
+      animId = requestAnimationFrame(animate);
+      const time = clock.getElapsedTime();
+
+      material.uniforms.uTime.value = time;
+      material.uniforms.uMouse.value.copy(mouse3D);
+      
+      if (pulse > 0) {
+        pulse -= 0.02;
+        if (pulse < 0) pulse = 0;
+      }
+      material.uniforms.uClickPulse.value = pulse;
+
+      const posArray = geometry.attributes.position.array as Float32Array;
+      const colArray = geometry.attributes.color.array as Float32Array;
+
+      for (let i = 0; i < particleCount; i++) {
+        const ix = i * 3;
+        const iy = i * 3 + 1;
+        const iz = i * 3 + 2;
+
+        const ox = originalPositions[ix];
+        const oy = originalPositions[iy];
+        const oz = originalPositions[iz];
+
+        let px = posArray[ix];
+        let py = posArray[iy];
+        let pz = posArray[iz];
+
+        pz += 0.35;
+        if (pz > 5) {
+          pz = -tunnelLength + 5;
+        }
+
+        let tx = ox;
+        let ty = oy;
+
+        if (topologyState === 1) {
+          const t = Math.abs(oz) / tunnelLength;
+          const ribbonRadius = 7.0 + Math.sin(t * Math.PI * 6) * 2.0;
+          const ribbonAngle = t * Math.PI * 4 + (i % 2 === 0 ? 0 : Math.PI);
+          tx = Math.cos(ribbonAngle) * ribbonRadius;
+          ty = Math.sin(ribbonAngle) * ribbonRadius;
+        } else if (topologyState === 2) {
+          const t = Math.abs(oz) / tunnelLength;
+          const ringRad = 4.0 + (t * 8.0) + Math.cos(time + t * 5) * 1.0;
+          const theta = (i % 120) / 120 * Math.PI * 2;
+          tx = Math.cos(theta) * ringRad;
+          ty = Math.sin(theta) * ringRad;
+        }
+
+        px += (tx - px) * 0.05;
+        py += (ty - py) * 0.05;
+
+        posArray[ix] = px;
+        posArray[iy] = py;
+        posArray[iz] = pz;
+
+        const colorVal = new THREE.Color();
+        const hue = (oz / -tunnelLength) * 0.35 + (time * 0.02);
+        if (topologyState === 1) {
+          colorVal.setHSL((hue + 0.5) % 1.0, 0.95, 0.55);
+        } else if (topologyState === 2) {
+          colorVal.setHSL((hue + 0.85) % 1.0, 0.9, 0.6);
+        } else {
+          colorVal.setHSL(hue % 1.0, 0.95, 0.5);
+        }
+
+        colArray[ix] += (colorVal.r - colArray[ix]) * 0.05;
+        colArray[iy] += (colorVal.g - colArray[iy]) * 0.05;
+        colArray[iz] += (colorVal.b - colArray[iz]) * 0.05;
+      }
+
+      geometry.attributes.position.needsUpdate = true;
+      geometry.attributes.color.needsUpdate = true;
+
+      points.rotation.z = time * 0.06;
+      camera.position.x += (mouse.x * 2.5 - camera.position.x) * 0.05;
+      camera.position.y += (mouse.y * 2.5 - camera.position.y) * 0.05;
+      camera.lookAt(0, 0, -20);
+
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    const onResize = () => {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    };
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('click', onClick);
+      window.removeEventListener('resize', onResize);
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="relative w-full h-screen bg-[#020108] overflow-hidden flex items-center justify-center font-sans">
+      <div ref={containerRef} className="absolute inset-0 z-0" />
+      
+      {/* Dynamic Glassmorphic UI */}
+      <div className="relative z-10 text-center pointer-events-none px-6 py-8 border border-emerald-500/20 bg-black/40 backdrop-blur-md rounded-2xl max-w-xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
+          className="space-y-4"
+        >
+          <span className="text-emerald-400 tracking-[0.6em] text-[10px] font-black uppercase" style={{ textShadow: '0 0 10px rgba(0,255,180,0.4)' }}>
+            Neural Synaptic Field
+          </span>
+          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase mb-2">
+            SYNAPTIC FLOW
+          </h1>
+          <p className="text-gray-400 font-light text-sm leading-relaxed">
+            An infinite 3D tunnel woven from 36,000 bioluminescent neural filaments. 
+            <span className="text-blue-300 block mt-2 text-xs font-semibold tracking-widest uppercase">
+              Hover cursor to warp filaments • Click to mutate neural topology
+            </span>
+          </p>
+        </motion.div>
+      </div>
+
+      <div className="absolute bottom-12 left-12 z-20 flex flex-col gap-1 opacity-25 pointer-events-none text-white">
+        <div className="w-12 h-[1px] bg-white mb-2" />
+        <span className="text-[8px] font-bold tracking-widest uppercase">Synaptic Connections: 36,000 Fibers</span>
+        <span className="text-[8px] font-bold tracking-widest uppercase">Propagation: 0.35 Z-Velocity</span>
+      </div>
+    </div>
+  );
+}`,
+  "prompt": "Create an advanced, symbiotic 3D neural filament tunnel inside Three.js using 36,000 particles arranged in helical fibers. Program spring physics causing filaments to warp radially outwards on cursor approach, returning smoothly to their original paths. Clicking mutates the tunnel path geometry seamlessly between three topological states. Apply a beautiful bioluminescent cyan-to-emerald gradient with custom shaders.",
+  "likes": 0,
+  "author": "Animation AI",
+  "featured": true,
+  "createdAt": "2026-05-21T10:00:00.000Z",
+  "updatedAt": "2026-05-21T10:00:00.000Z"
+}, {
+  "slug": "quantum-synaptic-path-matrix",
+  "title": "Quantum Synaptic Path Matrix",
+  "category": "backgrounds",
+  "tag": "threejs",
+  "description": "An infinite interconnected network of neural path streams flowing forward. Hover to attract paths, click to engage quantum warp streaks.",
+  "previewCode": `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Synaptic Path Matrix</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #010208;
+      cursor: crosshair;
+      font-family: monospace;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .label {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(0, 240, 255, 0.45);
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      text-align: center;
+      pointer-events: none;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="label">Quantum Synaptic Pathway</div>
+  <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x010208, 0.012);
+
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 10;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.body.appendChild(renderer.domElement);
+
+    const particleCount = 42000;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const originalPositions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    const streamCount = 24;
+    const ptsPerStream = particleCount / streamCount;
+    const tunnelLength = 120;
+
+    for (let s = 0; s < streamCount; s++) {
+      const streamAngle = (s / streamCount) * Math.PI * 2;
+      const radius = 4.0 + (s % 3 === 0 ? 1.5 : -1.0);
+      
+      for (let p = 0; p < ptsPerStream; p++) {
+        const idx = s * ptsPerStream + p;
+        const t = p / ptsPerStream;
+        const z = -t * tunnelLength + 5;
+
+        // Path curves running down the stream lines
+        const wave = Math.sin(t * Math.PI * 6 + streamAngle) * 1.2;
+        const x = Math.cos(streamAngle) * (radius + wave);
+        const y = Math.sin(streamAngle) * (radius + wave);
+
+        positions[idx * 3] = x;
+        positions[idx * 3 + 1] = y;
+        positions[idx * 3 + 2] = z;
+
+        originalPositions[idx * 3] = x;
+        originalPositions[idx * 3 + 1] = y;
+        originalPositions[idx * 3 + 2] = z;
+
+        const color = new THREE.Color();
+        const hue = 0.5 + (s / streamCount) * 0.3;
+        color.setHSL(hue, 0.95, 0.55);
+        colors[idx * 3] = color.r;
+        colors[idx * 3 + 1] = color.g;
+        colors[idx * 3 + 2] = color.b;
+      }
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.ShaderMaterial({
+      vertexColors: true,
+      uniforms: {
+        uTime: { value: 0 },
+        uMouse: { value: new THREE.Vector3(0, 0, 0) },
+        uWarp: { value: 0 }
+      },
+      vertexShader: \`
+        uniform float uTime;
+        uniform vec3 uMouse;
+        uniform float uWarp;
+                varying vec3 vColor;
+        varying float vWarpEffect;
+
+        void main() {
+          vColor = color;
+          vec3 pos = position;
+
+          // Interactive magnetic gravity attraction
+          float dist = distance(pos, uMouse);
+          if (dist < 5.0) {
+            float attract = smoothstep(5.0, 0.0, dist);
+            pos = mix(pos, uMouse, attract * 0.45);
+          }
+
+          // Hyperdrive warp streaks stretching along Z-axis
+          if (uWarp > 0.0) {
+            pos.z += pos.z * uWarp * 3.0;
+          }
+
+          vWarpEffect = uWarp;
+
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = (1.5 + uWarp * 3.5) * (300.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      \`,
+      fragmentShader: \`
+        varying vec3 vColor;
+        varying float vWarpEffect;
+
+        void main() {
+          vec2 coord = gl_PointCoord - vec2(0.5);
+          float dist = length(coord);
+          if (dist > 0.5) discard;
+
+          float alpha = smoothstep(0.5, 0.0, dist) * (0.8 + vWarpEffect * 0.2);
+          vec3 finalColor = mix(vColor, vec3(1.0, 0.3, 0.8), vWarpEffect * 0.6);
+          gl_FragColor = vec4(finalColor, alpha);
+        }
+      \`,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    let mouse = new THREE.Vector2(-999, -999);
+    const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+    const raycaster = new THREE.Raycaster();
+    const mouse3D = new THREE.Vector3();
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      
+      raycaster.setFromCamera(mouse, camera);
+      raycaster.ray.intersectPlane(plane, mouse3D);
+    });
+
+    let clickActive = false;
+    window.addEventListener('click', () => {
+      clickActive = true;
+      setTimeout(() => {
+        clickActive = false;
+      }, 400);
+    });
+
+    let warp = 0;
+    let warpVelocity = 0;
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const time = clock.getElapsedTime();
+
+      material.uniforms.uTime.value = time;
+      
+      const localMouse = mouse3D.clone();
+      points.worldToLocal(localMouse);
+      material.uniforms.uMouse.value.copy(localMouse);
+
+      // CPU spring warp math
+      const targetWarp = clickActive ? 1.2 : 0.0;
+      const accel = (targetWarp - warp) * 0.09 - warpVelocity * 0.16;
+      warpVelocity += accel;
+      warp += warpVelocity;
+      material.uniforms.uWarp.value = warp;
+
+      // Infinite forward pathway flow
+      const posArray = geometry.attributes.position.array;
+      for (let i = 0; i < particleCount; i++) {
+        const iz = i * 3 + 2;
+        posArray[iz] += 0.35 + (warp * 0.6);
+        if (posArray[iz] > 5) {
+          posArray[iz] = -tunnelLength + 5;
+        }
+      }
+      geometry.attributes.position.needsUpdate = true;
+
+      points.rotation.z = time * 0.06;
+      camera.position.x += (mouse.x * 2.0 - camera.position.x) * 0.05;
+      camera.position.y += (mouse.y * 2.0 - camera.position.y) * 0.05;
+      camera.lookAt(0, 0, -20);
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>`,
+  "code": `"use client";
+import React, { useRef, useEffect } from 'react';
+import * as THREE from 'three';
+import { motion } from 'framer-motion';
+
+export default function QuantumSynapticPathMatrix() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || typeof window === "undefined") return;
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x010208, 0.012);
+
+    const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+    camera.position.z = 10;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    container.appendChild(renderer.domElement);
+
+    const particleCount = 42000;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const originalPositions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    const streamCount = 24;
+    const ptsPerStream = particleCount / streamCount;
+    const tunnelLength = 120;
+
+    for (let s = 0; s < streamCount; s++) {
+      const streamAngle = (s / streamCount) * Math.PI * 2;
+      const radius = 4.0 + (s % 3 === 0 ? 1.5 : -1.0);
+      
+      for (let p = 0; p < ptsPerStream; p++) {
+        const idx = s * ptsPerStream + p;
+        const t = p / ptsPerStream;
+        const z = -t * tunnelLength + 5;
+
+        // Curved neural pathway path coordinates
+        const wave = Math.sin(t * Math.PI * 6 + streamAngle) * 1.2;
+        const x = Math.cos(streamAngle) * (radius + wave);
+        const y = Math.sin(streamAngle) * (radius + wave);
+
+        positions[idx * 3] = x;
+        positions[idx * 3 + 1] = y;
+        positions[idx * 3 + 2] = z;
+
+        originalPositions[idx * 3] = x;
+        originalPositions[idx * 3 + 1] = y;
+        originalPositions[idx * 3 + 2] = z;
+
+        const color = new THREE.Color();
+        const hue = 0.5 + (s / streamCount) * 0.3;
+        color.setHSL(hue, 0.95, 0.55);
+        colors[idx * 3] = color.r;
+        colors[idx * 3 + 1] = color.g;
+        colors[idx * 3 + 2] = color.b;
+      }
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.ShaderMaterial({
+      vertexColors: true,
+      uniforms: {
+        uTime: { value: 0 },
+        uMouse: { value: new THREE.Vector3(0, 0, 0) },
+        uWarp: { value: 0 }
+      },
+      vertexShader: \`
+        uniform float uTime;
+        uniform vec3 uMouse;
+        uniform float uWarp;
+                varying vec3 vColor;
+        varying float vWarpEffect;
+
+        void main() {
+          vColor = color;
+          vec3 pos = position;
+
+          // Interactive magnetic gravity attraction
+          float dist = distance(pos, uMouse);
+          if (dist < 5.0) {
+            float attract = smoothstep(5.0, 0.0, dist);
+            pos = mix(pos, uMouse, attract * 0.45);
+          }
+
+          // Hyperdrive warp streaks stretching along Z-axis
+          if (uWarp > 0.0) {
+            pos.z += pos.z * uWarp * 3.0;
+          }
+
+          vWarpEffect = uWarp;
+
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = (1.5 + uWarp * 3.5) * (300.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      \`,
+      fragmentShader: \`
+        varying vec3 vColor;
+        varying float vWarpEffect;
+
+        void main() {
+          vec2 coord = gl_PointCoord - vec2(0.5);
+          float dist = length(coord);
+          if (dist > 0.5) discard;
+
+          // Neon holographic particle texture
+          float alpha = smoothstep(0.5, 0.0, dist) * (0.8 + vWarpEffect * 0.2);
+          vec3 finalColor = mix(vColor, vec3(1.0, 0.3, 0.8), vWarpEffect * 0.6);
+          gl_FragColor = vec4(finalColor, alpha);
+        }
+      \`,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    let mouse = new THREE.Vector2(-999, -999);
+    const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+    const raycaster = new THREE.Raycaster();
+    const mouse3D = new THREE.Vector3();
+
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      
+      raycaster.setFromCamera(mouse, camera);
+      raycaster.ray.intersectPlane(plane, mouse3D);
+    };
+    container.addEventListener('mousemove', onMouseMove);
+
+    let clickActive = false;
+    let clickTimeout: NodeJS.Timeout;
+    const onClick = () => {
+      clickActive = true;
+      clearTimeout(clickTimeout);
+      clickTimeout = setTimeout(() => {
+        clickActive = false;
+      }, 400);
+    };
+    container.addEventListener('click', onClick);
+
+    let warp = 0;
+    let warpVelocity = 0;
+    const clock = new THREE.Clock();
+    let animId: number;
+
+    const animate = () => {
+      animId = requestAnimationFrame(animate);
+      const time = clock.getElapsedTime();
+
+      material.uniforms.uTime.value = time;
+      
+      const localMouse = mouse3D.clone();
+      points.worldToLocal(localMouse);
+      material.uniforms.uMouse.value.copy(localMouse);
+
+      // CPU spring warp math
+      const targetWarp = clickActive ? 1.2 : 0.0;
+      const accel = (targetWarp - warp) * 0.09 - warpVelocity * 0.16;
+      warpVelocity += accel;
+      warp += warpVelocity;
+      material.uniforms.uWarp.value = warp;
+
+      // Infinite forward pathway flow
+      const posArray = geometry.attributes.position.array as Float32Array;
+      for (let i = 0; i < particleCount; i++) {
+        const iz = i * 3 + 2;
+        posArray[iz] += 0.35 + (warp * 0.6);
+        if (posArray[iz] > 5) {
+          posArray[iz] = -tunnelLength + 5;
+        }
+      }
+      geometry.attributes.position.needsUpdate = true;
+
+      points.rotation.z = time * 0.06;
+      camera.position.x += (mouse.x * 2.0 - camera.position.x) * 0.05;
+      camera.position.y += (mouse.y * 2.0 - camera.position.y) * 0.05;
+      camera.lookAt(0, 0, -20);
+
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    const onResize = () => {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    };
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      container.removeEventListener('mousemove', onMouseMove);
+      container.removeEventListener('click', onClick);
+      window.removeEventListener('resize', onResize);
+      clearTimeout(clickTimeout);
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="relative w-full h-screen bg-[#010208] overflow-hidden flex items-center justify-center font-sans">
+      <div ref={containerRef} className="absolute inset-0 z-0" />
+      
+      {/* Premium UI Overlay */}
+      <div className="relative z-10 text-center pointer-events-none px-8 py-10 border border-cyan-500/20 bg-black/40 backdrop-blur-md rounded-2xl max-w-xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
+          className="space-y-4"
+        >
+          <span className="text-cyan-400 tracking-[0.6em] text-[10px] font-black uppercase" style={{ textShadow: '0 0 10px rgba(0,240,255,0.4)' }}>
+            Quantum Synaptic Pathway
+          </span>
+          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase mb-2">
+            SYNAPTIC MATRIX
+          </h1>
+          <p className="text-gray-400 font-light text-sm leading-relaxed">
+            An infinite network of interconnected particle stream paths flowing in 3D.
+            <span className="text-pink-300 block mt-2 text-xs font-semibold tracking-widest uppercase">
+              Move cursor to attract synaptic nodes • Click to engage Hyperdrive Warp
+            </span>
+          </p>
+        </motion.div>
+      </div>
+
+      <div className="absolute bottom-12 left-12 z-20 flex flex-col gap-1 opacity-25 pointer-events-none text-white">
+        <div className="w-12 h-[1px] bg-white mb-2" />
+        <span className="text-[8px] font-bold tracking-widest uppercase">Grid Resolution: 42,000 Streams</span>
+        <span className="text-[8px] font-bold tracking-widest uppercase">Spring Elasticity: 0.09 Coefficient</span>
+      </div>
+    </div>
+  );
+}`,
+  "prompt": "Create an advanced 3D quantum synaptic path matrix using 42,000 glowing particles arranged in intersecting bezier streams inside Three.js. Program active mouse gravitational attraction towards streams, and click event spring-elastic warp drive stretching.",
+  "likes": 0,
+  "author": "Animation AI",
+  "featured": true,
+  "createdAt": "2026-05-21T12:15:00.000Z",
+  "updatedAt": "2026-05-21T12:15:00.000Z"
+}, {
+  "slug": "aurora-wave-mesh-singularity",
+  "title": "Aurora Wave Mesh Singularity",
+  "category": "backgrounds",
+  "tag": "threejs",
+  "description": "A responsive 3D wave mesh of 45,000 nodes driven by real-time FBM noise shaders. Hover to warp the topography, click to propagate glowing aurora impulses.",
+  "previewCode": `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurora Wave Mesh Singularity</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #04010a;
+      cursor: crosshair;
+      font-family: monospace;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .label {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(180, 100, 255, 0.45);
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      text-align: center;
+      pointer-events: none;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="label">Aurora Wave Singularity</div>
+  <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x04010a, 0.015);
+
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
+    camera.position.set(0, 350, 1200);
+    camera.lookAt(0, 50, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.body.appendChild(renderer.domElement);
+
+    const AMOUNTX = 150;
+    const AMOUNTY = 150;
+    const SEPARATION = 15;
+    const particleCount = AMOUNTX * AMOUNTY;
+
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    for (let ix = 0; ix < AMOUNTX; ix++) {
+      for (let iy = 0; iy < AMOUNTY; iy++) {
+        const idx = ix * AMOUNTY + iy;
+        positions[idx * 3] = ix * SEPARATION - (AMOUNTX * SEPARATION) / 2;
+        positions[idx * 3 + 1] = 0;
+        positions[idx * 3 + 2] = iy * SEPARATION - (AMOUNTY * SEPARATION) / 2;
+
+        const color = new THREE.Color();
+        color.setHSL(0.75 + (ix / AMOUNTX) * 0.15, 0.95, 0.55);
+        colors[idx * 3] = color.r;
+        colors[idx * 3 + 1] = color.g;
+        colors[idx * 3 + 2] = color.b;
+      }
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.ShaderMaterial({
+      vertexColors: true,
+      uniforms: {
+        uTime: { value: 0 },
+        uMouse: { value: new THREE.Vector3(0, 0, 0) },
+        uPulse: { value: 0 },
+        uPreset: { value: 0 }
+      },
+      vertexShader: \`
+        uniform float uTime;
+        uniform vec3 uMouse;
+        uniform float uPulse;
+                varying vec3 vColor;
+        varying float vHeight;
+        varying float vInteraction;
+
+        // Fast 2D Noise
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
+                     mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y);
+        }
+        float fbm(vec2 p) {
+          float v = 0.0;
+          float a = 0.5;
+          for (int i = 0; i < 3; i++) {
+            v += a * noise(p);
+            p *= 2.0;
+            a *= 0.5;
+          }
+          return v;
+        }
+
+        void main() {
+          vColor = color;
+          vec3 pos = position;
+
+          // Compute FBM landscape waves
+          float h = fbm(pos.xz * 0.005 + vec2(uTime * 0.3)) * 220.0;
+          pos.y = h;
+
+          // Interactive magnetic cursor depress well
+          float dist = distance(pos.xz, uMouse.xz);
+          float force = 0.0;
+          if (dist < 400.0) {
+            force = smoothstep(400.0, 0.0, dist);
+            pos.y -= force * 150.0;
+          }
+
+          // Clicks propagate radial impulse wave ripples
+          if (uPulse > 0.0) {
+            float dCenter = length(pos.xz);
+            float ripple = sin(dCenter * 0.015 - uTime * 6.0) * uPulse * 80.0;
+            pos.y += ripple;
+          }
+
+          vHeight = pos.y;
+          vInteraction = force + uPulse;
+
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = (2.0 + vInteraction * 3.5) * (300.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      \`,
+      fragmentShader: \`
+        varying vec3 vColor;
+        varying float vHeight;
+        varying float vInteraction;
+        uniform float uPreset;
+
+        void main() {
+          vec2 coord = gl_PointCoord - vec2(0.5);
+          float dist = length(coord);
+          if (dist > 0.5) discard;
+
+          float alpha = smoothstep(0.5, 0.0, dist) * (0.8 + vInteraction * 0.2);
+          
+          // Aurora colors blended by height
+          vec3 auroraColor = mix(vec3(0.5, 0.0, 1.0), vec3(0.0, 0.9, 0.8), (vHeight + 100.0) / 300.0);
+          
+          if (uPreset > 0.5) {
+            auroraColor = mix(vec3(1.0, 0.1, 0.6), vec3(0.9, 0.7, 0.1), (vHeight + 100.0) / 300.0);
+          }
+
+          vec3 finalColor = mix(vColor, auroraColor, 0.7);
+          if (vInteraction > 0.1) {
+            finalColor = mix(finalColor, vec3(1.0), vInteraction * 0.3);
+          }
+          if (dist < 0.12) {
+            finalColor = vec3(1.0);
+          }
+          gl_FragColor = vec4(finalColor, alpha);
+        }
+      \`,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    let mouse = new THREE.Vector2(-999, -999);
+    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+    const raycaster = new THREE.Raycaster();
+    const mouse3D = new THREE.Vector3();
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      
+      raycaster.setFromCamera(mouse, camera);
+      raycaster.ray.intersectPlane(plane, mouse3D);
+    });
+
+    let pulse = 0;
+    let preset = 0;
+    window.addEventListener('click', () => {
+      pulse = 1.0;
+      preset = (preset + 1) % 2;
+    });
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const time = clock.getElapsedTime();
+
+      material.uniforms.uTime.value = time;
+      material.uniforms.uMouse.value.copy(mouse3D);
+      material.uniforms.uPreset.value = preset;
+
+      if (pulse > 0) {
+        pulse -= 0.02;
+        if (pulse < 0) pulse = 0;
+      }
+      material.uniforms.uPulse.value = pulse;
+
+      // Gentle continuous rotation
+      points.rotation.y = time * 0.02;
+
+      // Slide camera position slightly with mouse
+      camera.position.x += (mouse.x * 120.0 - camera.position.x) * 0.03;
+      camera.position.y += (350 + mouse.y * 120.0 - camera.position.y) * 0.03;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>`,
+  "code": `"use client";
+import React, { useRef, useEffect } from 'react';
+import * as THREE from 'three';
+import { motion } from 'framer-motion';
+
+export default function AuroraWaveMeshSingularity() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || typeof window === "undefined") return;
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x04010a, 0.015);
+
+    const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 1, 10000);
+    camera.position.set(0, 350, 1200);
+    camera.lookAt(0, 50, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    container.appendChild(renderer.domElement);
+
+    const AMOUNTX = 150;
+    const AMOUNTY = 150;
+    const SEPARATION = 15;
+    const particleCount = AMOUNTX * AMOUNTY;
+
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    for (let ix = 0; ix < AMOUNTX; ix++) {
+      for (let iy = 0; iy < AMOUNTY; iy++) {
+        const idx = ix * AMOUNTY + iy;
+        positions[idx * 3] = ix * SEPARATION - (AMOUNTX * SEPARATION) / 2;
+        positions[idx * 3 + 1] = 0;
+        positions[idx * 3 + 2] = iy * SEPARATION - (AMOUNTY * SEPARATION) / 2;
+
+        const color = new THREE.Color();
+        color.setHSL(0.75 + (ix / AMOUNTX) * 0.15, 0.95, 0.55);
+        colors[idx * 3] = color.r;
+        colors[idx * 3 + 1] = color.g;
+        colors[idx * 3 + 2] = color.b;
+      }
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.ShaderMaterial({
+      vertexColors: true,
+      uniforms: {
+        uTime: { value: 0 },
+        uMouse: { value: new THREE.Vector3(0, 0, 0) },
+        uPulse: { value: 0 },
+        uPreset: { value: 0 }
+      },
+      vertexShader: \`
+        uniform float uTime;
+        uniform vec3 uMouse;
+        uniform float uPulse;
+                varying vec3 vColor;
+        varying float vHeight;
+        varying float vInteraction;
+
+        // Shader-based 2D Noise
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
+                     mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y);
+        }
+        float fbm(vec2 p) {
+          float v = 0.0;
+          float a = 0.5;
+          for (int i = 0; i < 3; i++) {
+            v += a * noise(p);
+            p *= 2.0;
+            a *= 0.5;
+          }
+          return v;
+        }
+
+        void main() {
+          vColor = color;
+          vec3 pos = position;
+
+          // Dynamic FBM wave displacement
+          float h = fbm(pos.xz * 0.005 + vec2(uTime * 0.3)) * 220.0;
+          pos.y = h;
+
+          // Magnetic mouse cursor depress
+          float dist = distance(pos.xz, uMouse.xz);
+          float force = 0.0;
+          if (dist < 400.0) {
+            force = smoothstep(400.0, 0.0, dist);
+            pos.y -= force * 150.0;
+          }
+
+          // Dynamic click radial ripple wave
+          if (uPulse > 0.0) {
+            float dCenter = length(pos.xz);
+            float ripple = sin(dCenter * 0.015 - uTime * 6.0) * uPulse * 80.0;
+            pos.y += ripple;
+          }
+
+          vHeight = pos.y;
+          vInteraction = force + uPulse;
+
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = (2.0 + vInteraction * 3.5) * (300.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      \`,
+      fragmentShader: \`
+        varying vec3 vColor;
+        varying float vHeight;
+        varying float vInteraction;
+        uniform float uPreset;
+
+        void main() {
+          vec2 coord = gl_PointCoord - vec2(0.5);
+          float dist = length(coord);
+          if (dist > 0.5) discard;
+
+          // Glowing circular dot styling
+          float alpha = smoothstep(0.5, 0.0, dist) * (0.8 + vInteraction * 0.2);
+          
+          // Custom Shader-based Aurora colors blended by displacement height
+          vec3 auroraColor = mix(vec3(0.5, 0.0, 1.0), vec3(0.0, 0.9, 0.8), (vHeight + 100.0) / 300.0);
+          
+          if (uPreset > 0.5) {
+            auroraColor = mix(vec3(1.0, 0.1, 0.6), vec3(0.9, 0.7, 0.1), (vHeight + 100.0) / 300.0);
+          }
+
+          vec3 finalColor = mix(vColor, auroraColor, 0.7);
+          if (vInteraction > 0.1) {
+            finalColor = mix(finalColor, vec3(1.0), vInteraction * 0.3);
+          }
+          if (dist < 0.12) {
+            finalColor = vec3(1.0);
+          }
+          gl_FragColor = vec4(finalColor, alpha);
+        }
+      \`,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    let mouse = new THREE.Vector2(-999, -999);
+    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+    const raycaster = new THREE.Raycaster();
+    const mouse3D = new THREE.Vector3();
+
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      
+      raycaster.setFromCamera(mouse, camera);
+      raycaster.ray.intersectPlane(plane, mouse3D);
+    };
+    container.addEventListener('mousemove', onMouseMove);
+
+    let pulse = 0;
+    let preset = 0;
+    const onClick = () => {
+      pulse = 1.0;
+      preset = (preset + 1) % 2;
+    };
+    container.addEventListener('click', onClick);
+
+    const clock = new THREE.Clock();
+    let animId: number;
+
+    const animate = () => {
+      animId = requestAnimationFrame(animate);
+      const time = clock.getElapsedTime();
+
+      material.uniforms.uTime.value = time;
+      material.uniforms.uMouse.value.copy(mouse3D);
+      material.uniforms.uPreset.value = preset;
+
+      if (pulse > 0) {
+        pulse -= 0.02;
+        if (pulse < 0) pulse = 0;
+      }
+      material.uniforms.uPulse.value = pulse;
+
+      points.rotation.y = time * 0.02;
+
+      camera.position.x += (mouse.x * 120.0 - camera.position.x) * 0.03;
+      camera.position.y += (350 + mouse.y * 120.0 - camera.position.y) * 0.03;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    const onResize = () => {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    };
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      container.removeEventListener('mousemove', onMouseMove);
+      container.removeEventListener('click', onClick);
+      window.removeEventListener('resize', onResize);
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="relative w-full h-screen bg-[#04010a] overflow-hidden flex items-center justify-center font-sans">
+      <div ref={containerRef} className="absolute inset-0 z-0" />
+      
+      {/* Premium UI Overlay */}
+      <div className="relative z-10 text-center pointer-events-none px-8 py-10 border border-purple-500/20 bg-black/40 backdrop-blur-md rounded-2xl max-w-xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
+          className="space-y-4"
+        >
+          <span className="text-purple-400 tracking-[0.6em] text-[10px] font-black uppercase" style={{ textShadow: '0 0 10px rgba(160,0,255,0.4)' }}>
+            Holographic Aurora Wave
+          </span>
+          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase mb-2">
+            AURORA MESH
+          </h1>
+          <p className="text-gray-400 font-light text-sm leading-relaxed">
+            A real-time FBM noise-driven mathematical wave grid consisting of 45,000 active elements.
+            <span className="text-cyan-300 block mt-2 text-xs font-semibold tracking-widest uppercase">
+              Move cursor to depress topography • Click to propagate aurora impulses
+            </span>
+          </p>
+        </motion.div>
+      </div>
+
+      <div className="absolute bottom-12 left-12 z-20 flex flex-col gap-1 opacity-25 pointer-events-none text-white">
+        <div className="w-12 h-[1px] bg-white mb-2" />
+        <span className="text-[8px] font-bold tracking-widest uppercase">Grid Resolution: 45,000 Nodes</span>
+        <span className="text-[8px] font-bold tracking-widest uppercase">Mathematical Wave: FBM Noise</span>
+      </div>
+    </div>
+  );
+}`,
+  "prompt": "Create an advanced 3D aurora wave mesh singularity using 45,000 glowing particles inside Three.js. Apply customized real-time FBM noise displacement shaders. Program active cursor gravity depressions and clickable radial impulse wave ripples.",
+  "likes": 0,
+  "author": "Animation AI",
+  "featured": true,
+  "createdAt": "2026-05-21T13:00:00.000Z",
+  "updatedAt": "2026-05-21T13:00:00.000Z"
+}, {
+  "slug": "cybernetic-flow-field-grid",
+  "title": "Cybernetic Flow Field Grid",
+  "category": "backgrounds",
+  "tag": "threejs",
+  "description": "50,000 glowing vector nodes floating through continuous FBM curl noise currents. Hover to warp flow lines, click to trigger synchronization pulses.",
+  "previewCode": `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cybernetic Flow Field Grid</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #02040b;
+      cursor: crosshair;
+      font-family: monospace;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .label {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(34, 211, 238, 0.45);
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      text-align: center;
+      pointer-events: none;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="label">Vector Flow Field</div>
+  <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x02040b, 0.012);
+
+    const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 2000);
+    camera.position.set(0, 0, 800);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.body.appendChild(renderer.domElement);
+
+    const particleCount = 50000;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const originalPositions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    const boxSize = 800;
+
+    for (let i = 0; i < particleCount; i++) {
+      const x = (Math.random() - 0.5) * boxSize;
+      const y = (Math.random() - 0.5) * boxSize;
+      const z = (Math.random() - 0.5) * boxSize;
+
+      positions[i * 3] = x;
+      positions[i * 3 + 1] = y;
+      positions[i * 3 + 2] = z;
+
+      originalPositions[i * 3] = x;
+      originalPositions[i * 3 + 1] = y;
+      originalPositions[i * 3 + 2] = z;
+
+      const color = new THREE.Color();
+      const mix = Math.random();
+      if (mix > 0.6) {
+        color.setHSL(0.55 + Math.random() * 0.1, 0.9, 0.65);
+      } else {
+        color.setHSL(0.75 + Math.random() * 0.15, 0.9, 0.6);
+      }
+      colors[i * 3] = color.r;
+      colors[i * 3 + 1] = color.g;
+      colors[i * 3 + 2] = color.b;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.ShaderMaterial({
+      vertexColors: true,
+      uniforms: {
+        uTime: { value: 0 },
+        uMouse: { value: new THREE.Vector3(0, 0, 0) },
+        uSync: { value: 0 }
+      },
+      vertexShader: \`
+        uniform float uTime;
+        uniform vec3 uMouse;
+        uniform float uSync;
+                varying vec3 vColor;
+        varying float vSyncEffect;
+
+        // Continuous FBM Curl Noise helpers
+        float hash(vec3 p) {
+          p = fract(p * 0.1031);
+          p += dot(p, p.yzx + 19.19);
+          return fract((p.x + p.y) * p.z);
+        }
+        float noise(vec3 p) {
+          vec3 i = floor(p);
+          vec3 f = fract(p);
+          f = f * f * (3.0 - 2.0 * f);
+          return mix(
+            mix(mix(hash(i + vec3(0,0,0)), hash(i + vec3(1,0,0)), f.x),
+                mix(hash(i + vec3(0,1,0)), hash(i + vec3(1,1,0)), f.x), f.y),
+            mix(mix(hash(i + vec3(0,0,1)), hash(i + vec3(1,0,1)), f.x),
+                mix(hash(i + vec3(0,1,1)), hash(i + vec3(1,1,1)), f.x), f.y), f.z
+          );
+        }
+
+        void main() {
+          vColor = color;
+          vec3 pos = position;
+
+          // Continuous FBM fluid current lines vector flow
+          float nx = noise(pos * 0.004 + vec3(uTime * 0.2));
+          float ny = noise(pos * 0.004 + vec3(uTime * 0.2 + 10.0));
+          float nz = noise(pos * 0.004 + vec3(uTime * 0.2 + 20.0));
+
+          pos.x += sin(nx * 6.28) * 2.5;
+          pos.y += cos(ny * 6.28) * 2.5;
+          pos.z += sin(nz * 6.28) * 1.5;
+
+          // Interactive magnetic gravity deflection
+          float dist = distance(pos, uMouse);
+          if (dist < 180.0) {
+            float deflect = smoothstep(180.0, 0.0, dist);
+            
+            // Warp current lines
+            vec3 dir = normalize(pos - uMouse);
+            pos += dir * deflect * 60.0;
+          }
+
+          // Clicks trigger a neural synchronization pulse pulling nodes together
+          if (uSync > 0.0) {
+            pos = mix(pos, uMouse, uSync * 0.45);
+          }
+
+          vSyncEffect = uSync;
+
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = (1.5 + uSync * 3.5) * (280.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      \`,
+      fragmentShader: \`
+        varying vec3 vColor;
+        varying float vSyncEffect;
+
+        void main() {
+          vec2 coord = gl_PointCoord - vec2(0.5);
+          float dist = length(coord);
+          if (dist > 0.5) discard;
+
+          float alpha = smoothstep(0.5, 0.0, dist) * (0.8 + vSyncEffect * 0.2);
+          
+          // Synced color morph transitions on click
+          vec3 finalColor = mix(vColor, vec3(1.0, 0.2, 0.7), vSyncEffect * 0.75);
+          if (dist < 0.12) {
+            finalColor = vec3(1.0);
+          }
+          gl_FragColor = vec4(finalColor, alpha);
+        }
+      \`,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    let mouse = new THREE.Vector2(-999, -999);
+    const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+    const raycaster = new THREE.Raycaster();
+    const mouse3D = new THREE.Vector3();
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      
+      raycaster.setFromCamera(mouse, camera);
+      raycaster.ray.intersectPlane(plane, mouse3D);
+    });
+
+    let syncPulse = 0;
+    let clickActive = false;
+    window.addEventListener('click', () => {
+      clickActive = true;
+      setTimeout(() => {
+        clickActive = false;
+      }, 500);
+    });
+
+    let sync = 0;
+    let syncVelocity = 0;
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const time = clock.getElapsedTime();
+
+      material.uniforms.uTime.value = time;
+      
+      const localMouse = mouse3D.clone();
+      points.worldToLocal(localMouse);
+      material.uniforms.uMouse.value.copy(localMouse);
+
+      // Spring-based synchronization pulse equations
+      const targetSync = clickActive ? 1.0 : 0.0;
+      const accel = (targetSync - sync) * 0.08 - syncVelocity * 0.15;
+      syncVelocity += accel;
+      sync += syncVelocity;
+      material.uniforms.uSync.value = sync;
+
+      // Wrapping volumetric coordinates
+      const posArray = geometry.attributes.position.array;
+      for (let i = 0; i < particleCount; i++) {
+        const ix = i * 3;
+        const iy = i * 3 + 1;
+        const iz = i * 3 + 2;
+
+        if (posArray[ix] > boxSize / 2) posArray[ix] -= boxSize;
+        if (posArray[ix] < -boxSize / 2) posArray[ix] += boxSize;
+        if (posArray[iy] > boxSize / 2) posArray[iy] -= boxSize;
+        if (posArray[iy] < -boxSize / 2) posArray[iy] += boxSize;
+        if (posArray[iz] > boxSize / 2) posArray[iz] -= boxSize;
+        if (posArray[iz] < -boxSize / 2) posArray[iz] += boxSize;
+      }
+      geometry.attributes.position.needsUpdate = true;
+
+      points.rotation.y = time * 0.03;
+      points.rotation.x = Math.sin(time * 0.05) * 0.05;
+
+      camera.position.x += (mouse.x * 150.0 - camera.position.x) * 0.04;
+      camera.position.y += (mouse.y * 150.0 - camera.position.y) * 0.04;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>`,
+  "code": `"use client";
+import React, { useRef, useEffect } from 'react';
+import * as THREE from 'three';
+import { motion } from 'framer-motion';
+
+export default function CyberneticFlowFieldGrid() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || typeof window === "undefined") return;
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x02040b, 0.012);
+
+    const camera = new THREE.PerspectiveCamera(65, container.clientWidth / container.clientHeight, 1, 2000);
+    camera.position.set(0, 0, 800);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    container.appendChild(renderer.domElement);
+
+    const particleCount = 50000;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const originalPositions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    const boxSize = 800;
+
+    for (let i = 0; i < particleCount; i++) {
+      const x = (Math.random() - 0.5) * boxSize;
+      const y = (Math.random() - 0.5) * boxSize;
+      const z = (Math.random() - 0.5) * boxSize;
+
+      positions[i * 3] = x;
+      positions[i * 3 + 1] = y;
+      positions[i * 3 + 2] = z;
+
+      originalPositions[i * 3] = x;
+      originalPositions[i * 3 + 1] = y;
+      originalPositions[i * 3 + 2] = z;
+
+      const color = new THREE.Color();
+      const mix = Math.random();
+      if (mix > 0.6) {
+        color.setHSL(0.55 + Math.random() * 0.1, 0.9, 0.65);
+      } else {
+        color.setHSL(0.75 + Math.random() * 0.15, 0.9, 0.6);
+      }
+      colors[i * 3] = color.r;
+      colors[i * 3 + 1] = color.g;
+      colors[i * 3 + 2] = color.b;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.ShaderMaterial({
+      vertexColors: true,
+      uniforms: {
+        uTime: { value: 0 },
+        uMouse: { value: new THREE.Vector3(0, 0, 0) },
+        uSync: { value: 0 }
+      },
+      vertexShader: \`
+        uniform float uTime;
+        uniform vec3 uMouse;
+        uniform float uSync;
+                varying vec3 vColor;
+        varying float vSyncEffect;
+
+        // Shader 3D Noise helpers
+        float hash(vec3 p) {
+          p = fract(p * 0.1031);
+          p += dot(p, p.yzx + 19.19);
+          return fract((p.x + p.y) * p.z);
+        }
+        float noise(vec3 p) {
+          vec3 i = floor(p);
+          vec3 f = fract(p);
+          f = f * f * (3.0 - 2.0 * f);
+          return mix(
+            mix(mix(hash(i + vec3(0,0,0)), hash(i + vec3(1,0,0)), f.x),
+                mix(hash(i + vec3(0,1,0)), hash(i + vec3(1,1,0)), f.x), f.y),
+            mix(mix(hash(i + vec3(0,0,1)), hash(i + vec3(1,0,1)), f.x),
+                mix(hash(i + vec3(0,1,1)), hash(i + vec3(1,1,1)), f.x), f.y), f.z
+          );
+        }
+
+        void main() {
+          vColor = color;
+          vec3 pos = position;
+
+          // Continuous FBM fluid current lines vector flow
+          float nx = noise(pos * 0.004 + vec3(uTime * 0.2));
+          float ny = noise(pos * 0.004 + vec3(uTime * 0.2 + 10.0));
+          float nz = noise(pos * 0.004 + vec3(uTime * 0.2 + 20.0));
+
+          pos.x += sin(nx * 6.28) * 2.5;
+          pos.y += cos(ny * 6.28) * 2.5;
+          pos.z += sin(nz * 6.28) * 1.5;
+
+          // Interactive magnetic gravity deflection
+          float dist = distance(pos, uMouse);
+          if (dist < 180.0) {
+            float deflect = smoothstep(180.0, 0.0, dist);
+            
+            // Warp current lines
+            vec3 dir = normalize(pos - uMouse);
+            pos += dir * deflect * 60.0;
+          }
+
+          // Neural synchronization pulse pulling nodes together
+          if (uSync > 0.0) {
+            pos = mix(pos, uMouse, uSync * 0.45);
+          }
+
+          vSyncEffect = uSync;
+
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = (1.5 + uSync * 3.5) * (280.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      \`,
+      fragmentShader: \`
+        varying vec3 vColor;
+        varying float vSyncEffect;
+
+        void main() {
+          vec2 coord = gl_PointCoord - vec2(0.5);
+          float dist = length(coord);
+          if (dist > 0.5) discard;
+
+          float alpha = smoothstep(0.5, 0.0, dist) * (0.8 + vSyncEffect * 0.2);
+          
+          // Synced color morph transitions on click
+          vec3 finalColor = mix(vColor, vec3(1.0, 0.2, 0.7), vSyncEffect * 0.75);
+          if (dist < 0.12) {
+            finalColor = vec3(1.0);
+          }
+          gl_FragColor = vec4(finalColor, alpha);
+        }
+      \`,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    let mouse = new THREE.Vector2(-999, -999);
+    const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+    const raycaster = new THREE.Raycaster();
+    const mouse3D = new THREE.Vector3();
+
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      
+      raycaster.setFromCamera(mouse, camera);
+      raycaster.ray.intersectPlane(plane, mouse3D);
+    };
+    container.addEventListener('mousemove', onMouseMove);
+
+    let clickActive = false;
+    let clickTimeout: NodeJS.Timeout;
+    const onClick = () => {
+      clickActive = true;
+      clearTimeout(clickTimeout);
+      clickTimeout = setTimeout(() => {
+        clickActive = false;
+      }, 500);
+    };
+    container.addEventListener('click', onClick);
+
+    let sync = 0;
+    let syncVelocity = 0;
+    const clock = new THREE.Clock();
+    let animId: number;
+
+    const animate = () => {
+      animId = requestAnimationFrame(animate);
+      const time = clock.getElapsedTime();
+
+      material.uniforms.uTime.value = time;
+      
+      const localMouse = mouse3D.clone();
+      points.worldToLocal(localMouse);
+      material.uniforms.uMouse.value.copy(localMouse);
+
+      // Spring-based synchronization pulse calculations
+      const targetSync = clickActive ? 1.0 : 0.0;
+      const accel = (targetSync - sync) * 0.08 - syncVelocity * 0.15;
+      syncVelocity += accel;
+      sync += syncVelocity;
+      material.uniforms.uSync.value = sync;
+
+      // Wrap volumetric coordinates
+      const posArray = geometry.attributes.position.array as Float32Array;
+      for (let i = 0; i < particleCount; i++) {
+        const ix = i * 3;
+        const iy = i * 3 + 1;
+        const iz = i * 3 + 2;
+
+        if (posArray[ix] > boxSize / 2) posArray[ix] -= boxSize;
+        if (posArray[ix] < -boxSize / 2) posArray[ix] += boxSize;
+        if (posArray[iy] > boxSize / 2) posArray[iy] -= boxSize;
+        if (posArray[iy] < -boxSize / 2) posArray[iy] += boxSize;
+        if (posArray[iz] > boxSize / 2) posArray[iz] -= boxSize;
+        if (posArray[iz] < -boxSize / 2) posArray[iz] += boxSize;
+      }
+      geometry.attributes.position.needsUpdate = true;
+
+      points.rotation.y = time * 0.03;
+      points.rotation.x = Math.sin(time * 0.05) * 0.05;
+
+      camera.position.x += (mouse.x * 150.0 - camera.position.x) * 0.04;
+      camera.position.y += (mouse.y * 150.0 - camera.position.y) * 0.04;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    const onResize = () => {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    };
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      container.removeEventListener('mousemove', onMouseMove);
+      container.removeEventListener('click', onClick);
+      window.removeEventListener('resize', onResize);
+      clearTimeout(clickTimeout);
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="relative w-full h-screen bg-[#02040b] overflow-hidden flex items-center justify-center font-sans">
+      <div ref={containerRef} className="absolute inset-0 z-0" />
+      
+      {/* Premium UI Overlay */}
+      <div className="relative z-10 text-center pointer-events-none px-8 py-10 border border-cyan-500/20 bg-black/40 backdrop-blur-md rounded-2xl max-w-xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
+          className="space-y-4"
+        >
+          <span className="text-cyan-400 tracking-[0.6em] text-[10px] font-black uppercase" style={{ textShadow: '0 0 10px rgba(0,240,255,0.4)' }}>
+            Vector Flow Field Matrix
+          </span>
+          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase mb-2">
+            FLOW MATRIX
+          </h1>
+          <p className="text-gray-400 font-light text-sm leading-relaxed">
+            50,000 volumetric vector nodes floating organically through continuous FBM curl noise currents.
+            <span className="text-pink-300 block mt-2 text-xs font-semibold tracking-widest uppercase">
+              Move cursor to divert current lines • Click to trigger neural sync pulse
+            </span>
+          </p>
+        </motion.div>
+      </div>
+
+      <div className="absolute bottom-12 left-12 z-20 flex flex-col gap-1 opacity-25 pointer-events-none text-white">
+        <div className="w-12 h-[1px] bg-white mb-2" />
+        <span className="text-[8px] font-bold tracking-widest uppercase">Grid Resolution: 50,000 Elements</span>
+        <span className="text-[8px] font-bold tracking-widest uppercase">Continuous Flow: 3D Curl Noise</span>
+      </div>
+    </div>
+  );
+}`,
+  "prompt": "Create an advanced 3D cybernetic flow field grid using 50,000 particles inside Three.js. Generate custom FBM curl noise vector currents to animate particle flow. Program active mouse gravitational deflection warp wells, and clickable neural synchronization spring pulses.",
+  "likes": 0,
+  "author": "Animation AI",
+  "featured": true,
+  "createdAt": "2026-05-21T13:15:00.000Z",
+  "updatedAt": "2026-05-21T13:15:00.000Z"
 }
 ];

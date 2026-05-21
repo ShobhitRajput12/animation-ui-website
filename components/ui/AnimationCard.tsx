@@ -60,7 +60,7 @@ export default function AnimationCard({
       {/* Preview */}
       <div className="relative h-48 bg-[#0a0a0b] overflow-hidden">
         <iframe
-          src={`/api/preview/${slug}`}
+          src={`/api/preview/${slug}?v=3`}
           className="w-full h-full border-0 pointer-events-none"
           title={title}
           loading="lazy"
