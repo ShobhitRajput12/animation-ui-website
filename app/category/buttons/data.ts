@@ -1,886 +1,11 @@
-export const BUTTONS_DATA = [ { "slug": "neon-button", "title": "Neon Glow Button", "category": "buttons", "tag": "css", "description": "Button with animated neon glow pulse and gradient border.", "previewCode": "<!DOCTYPE html><html><head><style>\n*{margin:0;padding:0}body{background:#050510;display:flex;align-items:center;justify-content:center;height:100vh;gap:20px;font-family:sans-serif;flex-wrap:wrap;padding:20px}\n.btn{position:relative;background:transparent;border:none;padding:0;cursor:pointer;border-radius:12px}\n.btn-inner{position:relative;background:#0a0a0b;border-radius:12px;padding:14px 28px;font-size:14px;font-weight:700;color:#fff;letter-spacing:0.02em;z-index:1}\n.btn::before{content:'';position:absolute;inset:-1px;border-radius:13px;background:linear-gradient(135deg,#7c5cfc,#22d3ee,#4ade80);z-index:0;animation:border-spin 3s linear infinite}\n.btn::after{content:'';position:absolute;inset:-4px;border-radius:16px;background:linear-gradient(135deg,#7c5cfc,#22d3ee,#4ade80);filter:blur(12px);opacity:0;z-index:-1;transition:opacity 0.3s;animation:glow-pulse 2s ease-in-out infinite}\n.btn:hover::after{opacity:0.6}\n@keyframes border-spin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}\n@keyframes glow-pulse{0%,100%{opacity:0.2}50%{opacity:0.5}}\n.btn-solid{background:linear-gradient(135deg,#7c5cfc,#a78bfa);border:none;padding:14px 28px;font-size:14px;font-weight:700;color:#fff;border-radius:12px;cursor:pointer;position:relative;overflow:hidden}\n.btn-solid::after{content:'';position:absolute;inset:0;background:white;opacity:0;transition:opacity 0.2s}\n.btn-solid:hover::after{opacity:0.1}\n.btn-ghost{background:rgba(124,92,252,0.08);border:1px solid rgba(124,92,252,0.3);padding:14px 28px;font-size:14px;font-weight:700;color:#a78bfa;border-radius:12px;cursor:pointer;transition:all 0.2s}\n.btn-ghost:hover{background:rgba(124,92,252,0.15);border-color:rgba(124,92,252,0.6)}\n</style></head><body>\n<div class=\"btn\"><div class=\"btn-inner\">Neon Border</div></div>\n<button class=\"btn-solid\">Gradient Fill</button>\n<button class=\"btn-ghost\">Ghost Button</button>\n</body></html>", "code": "/* Neon Glow Button • CSS */\n\n/* Gradient border trick using ::before */\n.btn-neon {\n position: relative;\n background: transparent;\n border: none;\n padding: 0;\n cursor: pointer;\n border-radius: 12px;\n}\n\n.btn-neon-inner {\n position: relative;\n background: #0a0a0b;\n border-radius: 12px;\n padding: 14px 28px;\n font-size: 14px;\n font-weight: 700;\n color: #fff;\n z-index: 1;\n}\n\n/* Gradient border */\n.btn-neon::before {\n content: '';\n position: absolute;\n inset: -1px;\n border-radius: 13px;\n background: linear-gradient(135deg, #7c5cfc, #22d3ee, #4ade80);\n z-index: 0;\n}\n\n/* Glow on hover */\n.btn-neon::after {\n content: '';\n position: absolute;\n inset: -4px;\n border-radius: 16px;\n background: linear-gradient(135deg, #7c5cfc, #22d3ee);\n filter: blur(12px);\n opacity: 0;\n z-index: -1;\n transition: opacity 0.3s;\n}\n\n.btn-neon:hover::after { opacity: 0.6; }\n\n/* Tailwind version */\n/* Use ring, ring-offset, and shadow utilities for similar effect */", "prompt": "Neon glow button with gradient border:\n• Gradient border: use ::before pseudo-element inset -1px with gradient bg\n• Inner button: dark bg #0a0a0b, rounded-xl, sits on top with z-index\n• Glow effect: ::after with blur(12px) gradient, opacity 0 •→ 0.6 on hover\n• Three variants: neon-border, solid-fill, ghost\n• Solid: linear-gradient fill with white overlay on hover (opacity trick)\n• Ghost: transparent bg with purple border, hover increases saturation", "likes": 0, "author": "Animation AI", "featured": false, "createdAt": "2026-05-10T13:19:37.564Z", "updatedAt": "2026-05-10T13:19:37.564Z" }, { "slug": "magnetic-liquid-button", "title": "Magnetic Liquid Button", "category": "buttons", "tag": "canvas", "description": "A gooey, magnetic liquid button that organically stretches toward the cursor using SVG filters and spring physics.", "previewCode": "<!DOCTYPE html><html><head><style>body{margin:0;background:#050510;display:flex;align-items:center;justify-content:center;height:100vh;overflow:hidden}.container{position:relative;filter:url('#goo')}.btn{position:relative;width:180px;height:60px;background:#7c5cfc;border-radius:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;font-family:sans-serif;font-weight:700;letter-spacing:1px;z-index:1}.blob{position:absolute;width:40px;height:40px;background:#7c5cfc;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);z-index:0;pointer-events:none}</style></head><body><div class=\"container\"><div class=\"btn\" id=\"btn\">EXPLORE</div><div class=\"blob\" id=\"blob\"></div></div><svg style=\"display:none\"><defs><filter id=\"goo\"><feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"10\" result=\"blur\"/><feColorMatrix in=\"blur\" mode=\"matrix\" values=\"1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 20 -10\" result=\"goo\"/></filter></defs></svg><script>const btn=document.getElementById('btn');const blob=document.getElementById('blob');let mx=0,my=0;let bx=0,by=0;window.addEventListener('mousemove',(e)=>{mx=e.clientX;my=e.clientY;});function animate(){const rect=btn.getBoundingClientRect();const cx=rect.left+rect.width/2;const cy=rect.top+rect.height/2;const dx=mx-cx;const dy=my-cy;const dist=Math.sqrt(dx*dx+dy*dy);if(dist<200){bx+=(dx-bx)*0.1;by+=(dy-by)*0.1;}else{bx+=(0-bx)*0.1;by+=(0-by)*0.1;}blob.style.transform=`translate(calc(-50% + ${bx}px), calc(-50% + ${by}px))`;requestAnimationFrame(animate);}animate();</script></body></html>", "code": "/* Magnetic Liquid Button • React + Framer Motion */\nimport { motion, useSpring, useMotionValue } from 'framer-motion';\n\nexport const MagneticButton = () => {\n const x = useMotionValue(0); const y = useMotionValue(0);\n const sx = useSpring(x, { stiffness: 150, damping: 15 });\n const sy = useSpring(y, { stiffness: 150, damping: 15 });\n\n return (\n <div className=\"relative group\">\n <motion.button \n style={{ x: sx, y: sy }} \n className=\"bg-indigo-600 px-8 py-3 rounded-full text-white font-bold\"\n onMouseMove={(e) => {\n const { left, top, width, height } = e.currentTarget.getBoundingClientRect();\n x.set(e.clientX - (left + width/2)); y.set(e.clientY - (top + height/2));\n }}\n onMouseLeave={() => { x.set(0); y.set(0); }}\n >\n EXPLORE\n </motion.button>\n <svg style={{ display: 'none' }}>\n <defs>\n <filter id=\"goo\">\n <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"10\" result=\"blur\"/>\n <feColorMatrix in=\"blur\" mode=\"matrix\" values=\"1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 20 -10\" result=\"goo\"/>\n </filter>\n </defs>\n </svg>\n </div>\n );\n};", "prompt": "Create a 'Magnetic Liquid Button' that uses SVG gooey filters and Framer Motion spring physics. The button should have a companion 'blob' that stretches toward the mouse when it's within a 200px radius. Use a deep indigo palette (#7c5cfc).", "likes": 0, "author": "Animation AI", "featured": true, "createdAt": "2026-05-10T14:52:00.000Z", "updatedAt": "2026-05-10T14:52:00.000Z" } , {
-  "slug": "quantum-particle-warp-button",
-  "title": "Quantum Particle Warp Button",
-  "category": "buttons",
-  "tag": "threejs",
-  "description": "A high-end 3D WebGL button filled with 4,000 glowing particles that orbit a custom path, swirl magnetically around the cursor, and burst outward in hyperdrive streaks on click.",
-  "previewCode": `<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #020208;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    .button-container {
-      position: relative;
-      width: 220px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .warp-btn {
-      position: relative;
-      width: 200px;
-      height: 50px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 25px;
-      color: #ffffff;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      cursor: pointer;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-blur: 12px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 
-        inset 0 0 12px rgba(255, 255, 255, 0.03),
-        0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-    .warp-btn:hover {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(255, 255, 255, 0.15);
-      color: #00ffcc;
-      box-shadow: 
-        inset 0 0 16px rgba(0, 255, 200, 0.05),
-        0 6px 24px rgba(0, 255, 200, 0.1);
-    }
-  </style>
-</head>
-<body>
-  <div class="button-container">
-    <button class="warp-btn" id="warpBtn">Warp Portal</button>
-    <canvas id="warpCanvas"></canvas>
-  </div>
-
-  <script type="importmap">
-    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
-  </script>
-  <script type="module">
-    import * as THREE from 'three';
-
-    const canvas = document.getElementById('warpCanvas');
-    const container = canvas.parentElement;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-110, 110, 30, -30, 0.1, 100);
-    camera.position.z = 10;
-
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(220, 60);
-
-    const particleCount = 4000;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const originalCoords = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-    const sizes = new Float32Array(particleCount);
-
-    const w = 180;
-    const h = 40;
-    const radius = 20;
-
-    function getBorderPoint(t) {
-      const angle = t * Math.PI * 2;
-      const x = Math.cos(angle) * (w / 2);
-      const y = Math.sin(angle) * (h / 2);
-      return new THREE.Vector2(x, y);
-    }
-
-    const color1 = new THREE.Color(0x00ffcc);
-    const color2 = new THREE.Color(0x3a5bbf);
-
-    for (let i = 0; i < particleCount; i++) {
-      const t = i / particleCount;
-      const borderPt = getBorderPoint(t);
-      
-      const angle = t * Math.PI * 2;
-      const rx = borderPt.x + (Math.random() - 0.5) * 8;
-      const ry = borderPt.y + (Math.random() - 0.5) * 8;
-      
-      positions[i * 3] = rx;
-      positions[i * 3 + 1] = ry;
-      positions[i * 3 + 2] = 0;
-
-      originalCoords[i * 3] = rx;
-      originalCoords[i * 3 + 1] = ry;
-      originalCoords[i * 3 + 2] = 0;
-
-      const mixedColor = color1.clone().lerp(color2, Math.sin(t * Math.PI * 2) * 0.5 + 0.5);
-      colors[i * 3] = mixedColor.r;
-      colors[i * 3 + 1] = mixedColor.g;
-      colors[i * 3 + 2] = mixedColor.b;
-
-      sizes[i] = Math.random() * 1.5 + 0.5;
-    }
-
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    const material = new THREE.ShaderMaterial({
-      vertexColors: true,
-      uniforms: {
-        uTime: { value: 0 },
-        uMouse: { value: new THREE.Vector3(-999, -999, 0) },
-        uHover: { value: 0 },
-        uClick: { value: 0 }
-      },
-      vertexShader: \`
-        uniform float uTime;
-        uniform vec3 uMouse;
-        uniform float uHover;
-        uniform float uClick;
-        varying vec3 vColor;
-
-        void main() {
-          vColor = color;
-          vec3 pos = position;
-
-          float distToMouse = distance(pos.xy, uMouse.xy);
-          
-          if (uHover > 0.01 && distToMouse < 45.0) {
-            float pull = smoothstep(45.0, 0.0, distToMouse) * uHover;
-            vec2 dir = normalize(pos.xy - uMouse.xy);
-            float angle = uTime * 4.0;
-            vec2 rotated = vec2(
-              dir.x * cos(angle) - dir.y * sin(angle),
-              dir.x * sin(angle) + dir.y * cos(angle)
-            );
-            pos.xy = mix(pos.xy, uMouse.xy + rotated * 12.0, pull * 0.85);
-          } else {
-            pos.x += sin(uTime * 2.0 + pos.y * 0.1) * 0.8;
-            pos.y += cos(uTime * 2.0 + pos.x * 0.1) * 0.8;
-          }
-
-          if (uClick > 0.01) {
-            vec2 center = vec2(0.0);
-            vec2 dir = normalize(pos.xy - center);
-            pos.xy += dir * uClick * 65.0;
-          }
-
-          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = (1.5 + uClick * 2.0) * (300.0 / -mvPosition.z);
-          gl_Position = projectionMatrix * mvPosition;
-        }
-      \`,
-      fragmentShader: \`
-        varying vec3 vColor;
-        void main() {
-          float dist = length(gl_PointCoord - vec2(0.5));
-          if (dist > 0.5) discard;
-          float alpha = smoothstep(0.5, 0.1, dist);
-          gl_FragColor = vec4(vColor, alpha * 0.85);
-        }
-      \`,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-
-    const points = new THREE.Points(geometry, material);
-    scene.add(points);
-
-    let mouse = new THREE.Vector3(-999, -999, 0);
-    let hoverState = 0;
-    let clickState = 0;
-
-    const btn = document.getElementById('warpBtn');
-
-    btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 220 - 110;
-      const y = -(((e.clientY - rect.top) / rect.height) * 60 - 30);
-      mouse.set(x, y, 0);
-      hoverState = 1.0;
-    });
-
-    btn.addEventListener('mouseenter', () => { hoverState = 1.0; });
-    btn.addEventListener('mouseleave', () => { hoverState = 0.0; mouse.set(-999, -999, 0); });
-
-    btn.addEventListener('mousedown', () => {
-      clickState = 1.0;
-    });
-
-    const clock = new THREE.Clock();
-
-    function animate() {
-      requestAnimationFrame(animate);
-      const time = clock.getElapsedTime();
-
-      material.uniforms.uTime.value = time;
-      material.uniforms.uMouse.value.copy(mouse);
-      
-      material.uniforms.uHover.value += (hoverState - material.uniforms.uHover.value) * 0.1;
-      
-      if (clickState > 0) {
-        clickState -= 0.035;
-        if (clickState < 0) clickState = 0;
-      }
-      material.uniforms.uClick.value += (clickState - material.uniforms.uClick.value) * 0.15;
-
-      const posArray = geometry.attributes.position.array;
-      for (let i = 0; i < particleCount; i++) {
-        const ix = i * 3;
-        const iy = i * 3 + 1;
-        const ox = originalCoords[ix];
-        const oy = originalCoords[iy];
-
-        if (clickState < 0.01 && hoverState < 0.01) {
-          posArray[ix] += (ox - posArray[ix]) * 0.08;
-          posArray[iy] += (oy - posArray[iy]) * 0.08;
-        }
-      }
-      geometry.attributes.position.needsUpdate = true;
-
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    window.addEventListener('resize', () => {
-      renderer.setSize(220, 60);
-    });
-  </script>
-</body>
-</html>`,
-  "code": `"use client";
-import React, { useRef, useEffect } from 'react';
-import * as THREE from 'three';
-
-export default function QuantumWarpButton() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const btn = containerRef.current;
-    const canvas = canvasRef.current;
-    if (!btn || !canvas || typeof window === 'undefined') return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-110, 110, 30, -30, 0.1, 100);
-    camera.position.z = 10;
-
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(220, 60);
-
-    const particleCount = 4000;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const originalCoords = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-
-    const w = 180;
-    const h = 40;
-
-    function getBorderPoint(t: number) {
-      const angle = t * Math.PI * 2;
-      return new THREE.Vector2(Math.cos(angle) * (w / 2), Math.sin(angle) * (h / 2));
-    }
-
-    const color1 = new THREE.Color(0x00ffcc);
-    const color2 = new THREE.Color(0x3a5bbf);
-
-    for (let i = 0; i < particleCount; i++) {
-      const t = i / particleCount;
-      const borderPt = getBorderPoint(t);
-      const rx = borderPt.x + (Math.random() - 0.5) * 8;
-      const ry = borderPt.y + (Math.random() - 0.5) * 8;
-      
-      positions[i * 3] = rx;
-      positions[i * 3 + 1] = ry;
-      positions[i * 3 + 2] = 0;
-
-      originalCoords[i * 3] = rx;
-      originalCoords[i * 3 + 1] = ry;
-      originalCoords[i * 3 + 2] = 0;
-
-      const mixedColor = color1.clone().lerp(color2, Math.sin(t * Math.PI * 2) * 0.5 + 0.5);
-      colors[i * 3] = mixedColor.r;
-      colors[i * 3 + 1] = mixedColor.g;
-      colors[i * 3 + 2] = mixedColor.b;
-    }
-
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    const material = new THREE.ShaderMaterial({
-      vertexColors: true,
-      uniforms: {
-        uTime: { value: 0 },
-        uMouse: { value: new THREE.Vector3(-999, -999, 0) },
-        uHover: { value: 0 },
-        uClick: { value: 0 }
-      },
-      vertexShader: \`
-        uniform float uTime;
-        uniform vec3 uMouse;
-        uniform float uHover;
-        uniform float uClick;
-        varying vec3 vColor;
-
-        void main() {
-          vColor = color;
-          vec3 pos = position;
-
-          float distToMouse = distance(pos.xy, uMouse.xy);
-          
-          if (uHover > 0.01 && distToMouse < 45.0) {
-            float pull = smoothstep(45.0, 0.0, distToMouse) * uHover;
-            vec2 dir = normalize(pos.xy - uMouse.xy);
-            float angle = uTime * 4.0;
-            vec2 rotated = vec2(
-              dir.x * cos(angle) - dir.y * sin(angle),
-              dir.x * sin(angle) + dir.y * cos(angle)
-            );
-            pos.xy = mix(pos.xy, uMouse.xy + rotated * 12.0, pull * 0.85);
-          } else {
-            pos.x += sin(uTime * 2.0 + pos.y * 0.1) * 0.8;
-            pos.y += cos(uTime * 2.0 + pos.x * 0.1) * 0.8;
-          }
-
-          if (uClick > 0.01) {
-            vec2 center = vec2(0.0);
-            vec2 dir = normalize(pos.xy - center);
-            pos.xy += dir * uClick * 65.0;
-          }
-
-          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = (1.5 + uClick * 2.0) * (300.0 / -mvPosition.z);
-          gl_Position = projectionMatrix * mvPosition;
-        }
-      \`,
-      fragmentShader: \`
-        varying vec3 vColor;
-        void main() {
-          float dist = length(gl_PointCoord - vec2(0.5));
-          if (dist > 0.5) discard;
-          float alpha = smoothstep(0.5, 0.1, dist);
-          gl_FragColor = vec4(vColor, alpha * 0.85);
-        }
-      \`,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-
-    const points = new THREE.Points(geometry, material);
-    scene.add(points);
-
-    let mouse = new THREE.Vector3(-999, -999, 0);
-    let hoverState = 0;
-    let clickState = 0;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = btn.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 220 - 110;
-      const y = -(((e.clientY - rect.top) / rect.height) * 60 - 30);
-      mouse.set(x, y, 0);
-      hoverState = 1.0;
-    };
-
-    const handleMouseEnter = () => { hoverState = 1.0; };
-    const handleMouseLeave = () => { hoverState = 0.0; mouse.set(-999, -999, 0); };
-    const handleMouseDown = () => { clickState = 1.0; };
-
-    btn.addEventListener('mousemove', handleMouseMove);
-    btn.addEventListener('mouseenter', handleMouseEnter);
-    btn.addEventListener('mouseleave', handleMouseLeave);
-    btn.addEventListener('mousedown', handleMouseDown);
-
-    const clock = new THREE.Clock();
-
-    let animId: number;
-    function animate() {
-      animId = requestAnimationFrame(animate);
-      const time = clock.getElapsedTime();
-
-      material.uniforms.uTime.value = time;
-      material.uniforms.uMouse.value.copy(mouse);
-      material.uniforms.uHover.value += (hoverState - material.uniforms.uHover.value) * 0.1;
-      
-      if (clickState > 0) {
-        clickState -= 0.035;
-        if (clickState < 0) clickState = 0;
-      }
-      material.uniforms.uClick.value += (clickState - material.uniforms.uClick.value) * 0.15;
-
-      const posArray = geometry.attributes.position.array as Float32Array;
-      for (let i = 0; i < particleCount; i++) {
-        const ix = i * 3;
-        const iy = i * 3 + 1;
-        const ox = originalCoords[ix];
-        const oy = originalCoords[iy];
-
-        if (clickState < 0.01 && hoverState < 0.01) {
-          posArray[ix] += (ox - posArray[ix]) * 0.08;
-          posArray[iy] += (oy - posArray[iy]) * 0.08;
-        }
-      }
-      geometry.attributes.position.needsUpdate = true;
-
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animId);
-      btn.removeEventListener('mousemove', handleMouseMove);
-      btn.removeEventListener('mouseenter', handleMouseEnter);
-      btn.removeEventListener('mouseleave', handleMouseLeave);
-      btn.removeEventListener('mousedown', handleMouseDown);
-    };
-  }, []);
-
-  return (
-    <div className="relative w-[220px] h-[60px] flex items-center justify-center bg-transparent group">
-      <button 
-        ref={containerRef}
-        className="relative w-[200px] h-[50px] bg-white/[0.03] border border-white/[0.08] rounded-full text-white text-xs font-semibold tracking-[0.15em] uppercase cursor-pointer z-10 flex items-center justify-center backdrop-blur-md transition-all duration-300 hover:bg-white/[0.06] hover:border-white/[0.15] hover:text-[#00ffcc] active:scale-95"
-      >
-        Warp Portal
-      </button>
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-0" />
-    </div>
-  );
-}`,
-  "prompt": "Create an advanced Quantum Particle Warp Button in Three.js. Standard view should display 4,000 tiny glowing particles circling along a rounded rectangular track. When mouse hovers, particles are magnetically attracted to the cursor position, forming a swirling orbital tornado around the cursor. On click, the particles instantly expand outwards in satisfying hyperdrive speed streaks, returning smoothly afterwards.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "plasma-liquid-border-button",
-  "title": "Plasma Liquid Border Button",
-  "category": "buttons",
-  "tag": "threejs",
-  "description": "An interactive button surrounded by a multi-layered 3D plasma energy ring generated via custom vertex noise shaders that magnetically flexes towards the cursor.",
-  "previewCode": `<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #020208;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    .button-container {
-      position: relative;
-      width: 240px;
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .plasma-btn {
-      position: relative;
-      width: 200px;
-      height: 50px;
-      background: rgba(10, 10, 15, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 25px;
-      color: #ffffff;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      cursor: pointer;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-blur: 15px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .plasma-btn:hover {
-      color: #ff33aa;
-      border-color: rgba(255, 50, 170, 0.3);
-      box-shadow: 0 0 30px rgba(255, 50, 170, 0.15);
-    }
-  </style>
-</head>
-<body>
-  <div class="button-container">
-    <button class="plasma-btn" id="plasmaBtn">Plasma Ring</button>
-    <canvas id="plasmaCanvas"></canvas>
-  </div>
-
-  <script type="importmap">
-    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
-  </script>
-  <script type="module">
-    import * as THREE from 'three';
-
-    const canvas = document.getElementById('plasmaCanvas');
-    const container = canvas.parentElement;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-120, 120, 35, -35, 0.1, 100);
-    camera.position.z = 10;
-
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(240, 70);
-
-    const segmentCount = 280;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(segmentCount * 3);
-    const colors = new Float32Array(segmentCount * 3);
-
-    const w = 196;
-    const h = 46;
-
-    function getRectPoint(t) {
-      const angle = t * Math.PI * 2;
-      return new THREE.Vector2(Math.cos(angle) * (w / 2), Math.sin(angle) * (h / 2));
-    }
-
-    for (let i = 0; i < segmentCount; i++) {
-      const t = i / segmentCount;
-      const pt = getRectPoint(t);
-      positions[i * 3] = pt.x;
-      positions[i * 3 + 1] = pt.y;
-      positions[i * 3 + 2] = 0;
-
-      const c = new THREE.Color();
-      c.setHSL(0.85 + t * 0.15, 0.95, 0.55);
-      colors[i * 3] = c.r;
-      colors[i * 3 + 1] = c.g;
-      colors[i * 3 + 2] = c.b;
-    }
-
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    const material = new THREE.ShaderMaterial({
-      vertexColors: true,
-      uniforms: {
-        uTime: { value: 0 },
-        uMouse: { value: new THREE.Vector3(-999, -999, 0) },
-        uHover: { value: 0 },
-        uClick: { value: 0 }
-      },
-      vertexShader: \`
-        uniform float uTime;
-        uniform vec3 uMouse;
-        uniform float uHover;
-        uniform float uClick;
-        varying vec3 vColor;
-
-        void main() {
-          vColor = color;
-          vec3 pos = position;
-
-          float distToMouse = distance(pos.xy, uMouse.xy);
-          
-          float wave = sin(pos.x * 0.08 + uTime * 6.0) * cos(pos.y * 0.08 + uTime * 4.0) * (2.2 + uHover * 4.0);
-          
-          vec2 center = vec2(0.0);
-          vec2 outwardDir = normalize(pos.xy - center);
-          pos.xy += outwardDir * wave;
-
-          if (uHover > 0.01 && distToMouse < 60.0) {
-            float pull = smoothstep(60.0, 0.0, distToMouse) * uHover;
-            pos.xy += normalize(uMouse.xy - pos.xy) * pull * 14.0;
-          }
-
-          if (uClick > 0.01) {
-            pos.xy += outwardDir * sin(uTime * 15.0) * uClick * 12.0;
-          }
-
-          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = (2.2 + uHover * 1.5) * (300.0 / -mvPosition.z);
-          gl_Position = projectionMatrix * mvPosition;
-        }
-      \`,
-      fragmentShader: \`
-        varying vec3 vColor;
-        void main() {
-          float dist = length(gl_PointCoord - vec2(0.5));
-          if (dist > 0.5) discard;
-          float alpha = smoothstep(0.5, 0.05, dist);
-          gl_FragColor = vec4(vColor, alpha * 0.9);
-        }
-      \`,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-
-    const line = new THREE.Points(geometry, material);
-    scene.add(line);
-
-    let mouse = new THREE.Vector3(-999, -999, 0);
-    let hoverVal = 0;
-    let clickVal = 0;
-
-    const btn = document.getElementById('plasmaBtn');
-
-    btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 240 - 120;
-      const y = -(((e.clientY - rect.top) / rect.height) * 70 - 35);
-      mouse.set(x, y, 0);
-      hoverVal = 1.0;
-    });
-
-    btn.addEventListener('mouseenter', () => { hoverVal = 1.0; });
-    btn.addEventListener('mouseleave', () => { hoverVal = 0.0; mouse.set(-999, -999, 0); });
-    btn.addEventListener('mousedown', () => {
-      clickVal = 1.0;
-    });
-
-    const clock = new THREE.Clock();
-
-    function animate() {
-      requestAnimationFrame(animate);
-      const time = clock.getElapsedTime();
-
-      material.uniforms.uTime.value = time;
-      material.uniforms.uMouse.value.copy(mouse);
-
-      material.uniforms.uHover.value += (hoverVal - material.uniforms.uHover.value) * 0.1;
-
-      if (clickVal > 0) {
-        clickVal -= 0.04;
-        if (clickVal < 0) clickVal = 0;
-      }
-      material.uniforms.uClick.value += (clickVal - material.uniforms.uClick.value) * 0.15;
-
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    window.addEventListener('resize', () => {
-      renderer.setSize(240, 70);
-    });
-  </script>
-</body>
-</html>`,
-  "code": `"use client";
-import React, { useRef, useEffect } from 'react';
-import * as THREE from 'three';
-
-export default function PlasmaLiquidButton() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const btn = containerRef.current;
-    const canvas = canvasRef.current;
-    if (!btn || !canvas || typeof window === 'undefined') return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-120, 120, 35, -35, 0.1, 100);
-    camera.position.z = 10;
-
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(240, 70);
-
-    const segmentCount = 280;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(segmentCount * 3);
-    const colors = new Float32Array(segmentCount * 3);
-
-    const w = 196;
-    const h = 46;
-
-    function getRectPoint(t: number) {
-      const angle = t * Math.PI * 2;
-      return new THREE.Vector2(Math.cos(angle) * (w / 2), Math.sin(angle) * (h / 2));
-    }
-
-    for (let i = 0; i < segmentCount; i++) {
-      const t = i / segmentCount;
-      const pt = getRectPoint(t);
-      positions[i * 3] = pt.x;
-      positions[i * 3 + 1] = pt.y;
-      positions[i * 3 + 2] = 0;
-
-      const c = new THREE.Color();
-      c.setHSL(0.85 + t * 0.15, 0.95, 0.55);
-      colors[i * 3] = c.r;
-      colors[i * 3 + 1] = c.g;
-      colors[i * 3 + 2] = c.b;
-    }
-
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    const material = new THREE.ShaderMaterial({
-      vertexColors: true,
-      uniforms: {
-        uTime: { value: 0 },
-        uMouse: { value: new THREE.Vector3(-999, -999, 0) },
-        uHover: { value: 0 },
-        uClick: { value: 0 }
-      },
-      vertexShader: \`
-        uniform float uTime;
-        uniform vec3 uMouse;
-        uniform float uHover;
-        uniform float uClick;
-        varying vec3 vColor;
-
-        void main() {
-          vColor = color;
-          vec3 pos = position;
-
-          float distToMouse = distance(pos.xy, uMouse.xy);
-          float wave = sin(pos.x * 0.08 + uTime * 6.0) * cos(pos.y * 0.08 + uTime * 4.0) * (2.2 + uHover * 4.0);
-          
-          vec2 center = vec2(0.0);
-          vec2 outwardDir = normalize(pos.xy - center);
-          pos.xy += outwardDir * wave;
-
-          if (uHover > 0.01 && distToMouse < 60.0) {
-            float pull = smoothstep(60.0, 0.0, distToMouse) * uHover;
-            pos.xy += normalize(uMouse.xy - pos.xy) * pull * 14.0;
-          }
-
-          if (uClick > 0.01) {
-            pos.xy += outwardDir * sin(uTime * 15.0) * uClick * 12.0;
-          }
-
-          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = (2.2 + uHover * 1.5) * (300.0 / -mvPosition.z);
-          gl_Position = projectionMatrix * mvPosition;
-        }
-      \`,
-      fragmentShader: \`
-        varying vec3 vColor;
-        void main() {
-          float dist = length(gl_PointCoord - vec2(0.5));
-          if (dist > 0.5) discard;
-          float alpha = smoothstep(0.5, 0.05, dist);
-          gl_FragColor = vec4(vColor, alpha * 0.9);
-        }
-      \`,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-
-    const line = new THREE.Points(geometry, material);
-    scene.add(line);
-
-    let mouse = new THREE.Vector3(-999, -999, 0);
-    let hoverVal = 0;
-    let clickVal = 0;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = btn.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 240 - 120;
-      const y = -(((e.clientY - rect.top) / rect.height) * 70 - 35);
-      mouse.set(x, y, 0);
-      hoverVal = 1.0;
-    };
-
-    const handleMouseEnter = () => { hoverVal = 1.0; };
-    const handleMouseLeave = () => { hoverVal = 0.0; mouse.set(-999, -999, 0); };
-    const handleMouseDown = () => { clickVal = 1.0; };
-
-    btn.addEventListener('mousemove', handleMouseMove);
-    btn.addEventListener('mouseenter', handleMouseEnter);
-    btn.addEventListener('mouseleave', handleMouseLeave);
-    btn.addEventListener('mousedown', handleMouseDown);
-
-    const clock = new THREE.Clock();
-
-    let animId: number;
-    function animate() {
-      animId = requestAnimationFrame(animate);
-      const time = clock.getElapsedTime();
-
-      material.uniforms.uTime.value = time;
-      material.uniforms.uMouse.value.copy(mouse);
-      material.uniforms.uHover.value += (hoverVal - material.uniforms.uHover.value) * 0.1;
-
-      if (clickVal > 0) {
-        clickVal -= 0.04;
-        if (clickVal < 0) clickVal = 0;
-      }
-      material.uniforms.uClick.value += (clickVal - material.uniforms.uClick.value) * 0.15;
-
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animId);
-      btn.removeEventListener('mousemove', handleMouseMove);
-      btn.removeEventListener('mouseenter', handleMouseEnter);
-      btn.removeEventListener('mouseleave', handleMouseLeave);
-      btn.removeEventListener('mousedown', handleMouseDown);
-    };
-  }, []);
-
-  return (
-    <div className="relative w-[240px] h-[70px] flex items-center justify-center bg-transparent group">
-      <button 
-        ref={containerRef}
-        className="relative w-[200px] h-[50px] bg-[#0a0a0f]/70 border border-white/[0.05] rounded-full text-white text-[10px] font-bold tracking-[0.2em] uppercase cursor-pointer z-10 flex items-center justify-center backdrop-blur-md transition-all duration-300 hover:text-[#ff33aa] hover:border-pink-500/30 hover:shadow-[0_0_30px_rgba(255,50,170,0.15)] active:scale-95"
-      >
-        Plasma Ring
-      </button>
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-0" />
-    </div>
-  );
-}`,
-  "prompt": "Create an advanced Plasma Liquid Border Button in Three.js. The button should be surrounded by a highly detailed, flowing 3D plasma energy ring generated via custom vertex noise shaders. Standard view should display organic fluid-like wave ripples circulating around the border. When mouse hovers, the plasma wave organically stretches and flexes towards the cursor. On click, it triggers a powerful chromatic aberration pulse.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "bioluminescent-shimmer-wave-button",
-  "title": "Bioluminescent Shimmer Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A glassmorphic button with an active metallic sweeping gradient, producing reactive bioluminescent trails and concentric ripples on click.",
-  "previewCode": `<!DOCTYPE html>
+export const BUTTONS_DATA = [
+  {
+    "slug": "bioluminescent-shimmer-wave-button",
+    "title": "Bioluminescent Shimmer Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A glassmorphic button with an active metallic sweeping gradient, producing reactive bioluminescent trails and concentric ripples on click.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -1144,7 +269,7 @@ export default function PlasmaLiquidButton() {
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -1365,19 +490,19 @@ export default function BioluminescentShimmerButton({
   );
 }
 `,
-  "prompt": "Create an advanced Bioluminescent Shimmer Button. It should combine a continuous elegant sweeping metallic gradient highlight mask with a highly interactive canvas overlay that spawns trailing bioluminescent particles on cursor hover. The particles should drift upwards organically using damping spring physics, dynamically colored from cyan to purple based on the cursor X coordinate. On click, trigger circular glowing ripples and explosive sparks.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "cybernetic-magnetic-spark-button",
-  "title": "Cybernetic Spark Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "An obsidian cyber-button featuring a high-frequency laser sweep border that magnetically pulls electrostatic sparks to its rounded border path.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Bioluminescent Shimmer Button. It should combine a continuous elegant sweeping metallic gradient highlight mask with a highly interactive canvas overlay that spawns trailing bioluminescent particles on cursor hover. The particles should drift upwards organically using damping spring physics, dynamically colored from cyan to purple based on the cursor X coordinate. On click, trigger circular glowing ripples and explosive sparks.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "cybernetic-magnetic-spark-button",
+    "title": "Cybernetic Spark Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "An obsidian cyber-button featuring a high-frequency laser sweep border that magnetically pulls electrostatic sparks to its rounded border path.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -1663,7 +788,7 @@ export default function BioluminescentShimmerButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -1916,19 +1041,19 @@ export default function CyberneticSparkButton({
   );
 }
 `,
-  "prompt": "Create an advanced Cybernetic Spark Button. It should features an obsidian cyber-button layout with a high-frequency looping neon cybernetic laser scanner line sweep, combined with an interactive 2D canvas overlay. The canvas should spawn electro-static sparks under the cursor which are magnetically pulled to the button's outer rounded border track and orbit along it. On click, it triggers a satisfying cybernetic particle detonate explosion.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "gravity-well-particle-vortex-button",
-  "title": "Gravity Vortex Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A glassmorphic space-inspired button featuring a swirling orbital particle field that reacts dynamically to cursor gravitational forces.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Cybernetic Spark Button. It should features an obsidian cyber-button layout with a high-frequency looping neon cybernetic laser scanner line sweep, combined with an interactive 2D canvas overlay. The canvas should spawn electro-static sparks under the cursor which are magnetically pulled to the button's outer rounded border track and orbit along it. On click, it triggers a satisfying cybernetic particle detonate explosion.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "gravity-well-particle-vortex-button",
+    "title": "Gravity Vortex Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A glassmorphic space-inspired button featuring a swirling orbital particle field that reacts dynamically to cursor gravitational forces.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -2189,7 +1314,7 @@ export default function CyberneticSparkButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -2398,19 +1523,19 @@ export default function GravityVortexButton({
   );
 }
 `,
-  "prompt": "Create an advanced Gravity Vortex Button. It features a space-inspired event horizon outline border sweep with a continuous looping nebula light mask. The layout incorporates a 2D canvas particle overlay representing cosmic dust field nodes. Moving the cursor acts as a highly responsive gravitational singularity well, drawing all nearby particles into a tight spiral orbital trajectory centered around the pointer. Clicking triggers a supernova collapse followed by a massive radial stardust expansion.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "chronos-time-warp-distortion-button",
-  "title": "Chronos Warp Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A retro-futuristic dark brass amber button presenting a magnifying time-warp lens distortion effect on an underlying grid layout.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Gravity Vortex Button. It features a space-inspired event horizon outline border sweep with a continuous looping nebula light mask. The layout incorporates a 2D canvas particle overlay representing cosmic dust field nodes. Moving the cursor acts as a highly responsive gravitational singularity well, drawing all nearby particles into a tight spiral orbital trajectory centered around the pointer. Clicking triggers a supernova collapse followed by a massive radial stardust expansion.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "chronos-time-warp-distortion-button",
+    "title": "Chronos Warp Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A retro-futuristic dark brass amber button presenting a magnifying time-warp lens distortion effect on an underlying grid layout.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -2622,7 +1747,7 @@ export default function GravityVortexButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -2786,19 +1911,19 @@ export default function ChronosWarpButton({
   );
 }
 `,
-  "prompt": "Create an advanced Chronos Warp Button. The design presents a retro-futuristic dark brass amber chassis with a sweeping chronograph time-dial ray overlay on top. The 2D canvas contains a coordinates lattice network grid connected by timeline threads. Moving the pointer creates a space-time glass lens dilation/magnification refraction warping effect, dynamically pulling and bending coordinates around it. Clicking the button freezes time temporarily for 300ms.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "acoustic-soundwave-visualizer-button",
-  "title": "Acoustic Wave Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A carbon carbon-fiber dark button displaying a live 2D graphic equalizer visualizer wave that spikes and speeds up on cursor movement.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Chronos Warp Button. The design presents a retro-futuristic dark brass amber chassis with a sweeping chronograph time-dial ray overlay on top. The 2D canvas contains a coordinates lattice network grid connected by timeline threads. Moving the pointer creates a space-time glass lens dilation/magnification refraction warping effect, dynamically pulling and bending coordinates around it. Clicking the button freezes time temporarily for 300ms.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "acoustic-soundwave-visualizer-button",
+    "title": "Acoustic Wave Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A carbon carbon-fiber dark button displaying a live 2D graphic equalizer visualizer wave that spikes and speeds up on cursor movement.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -3002,7 +2127,7 @@ export default function ChronosWarpButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -3160,19 +2285,19 @@ export default function AudioVisualizerButton({
   );
 }
 `,
-  "prompt": "Create an advanced Acoustic Wave Button. The layout integrates a sleek dark design with a 2D canvas overlay running a live audio graphic equalizer. Frequency spectrum bars pulse elegantly. Moving the pointer creates active audio interference ripples, scaling frequency bars upwards proportionally to cursor velocity. Clicking triggers a simulated beat drop peak pulse across the layout.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "neural-network-synapse-button",
-  "title": "Neural Net Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "An intelligent cyber blue glassmorphic button exhibiting an interactive neural synapse network that fires signals on hover.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Acoustic Wave Button. The layout integrates a sleek dark design with a 2D canvas overlay running a live audio graphic equalizer. Frequency spectrum bars pulse elegantly. Moving the pointer creates active audio interference ripples, scaling frequency bars upwards proportionally to cursor velocity. Clicking triggers a simulated beat drop peak pulse across the layout.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "neural-network-synapse-button",
+    "title": "Neural Net Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "An intelligent cyber blue glassmorphic button exhibiting an interactive neural synapse network that fires signals on hover.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -3390,7 +2515,7 @@ export default function AudioVisualizerButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -3567,19 +2692,19 @@ export default function NeuralSynapseButton({
   );
 }
 `,
-  "prompt": "Create an advanced Neural Net Button. The layout features an elegant deep cyber blue structure surrounded by a continuous looping gradient highlights mask. Inside the 2D canvas overlay, nodes representing synaptic cells float organically. Hovering the pointer activates active synapse dendrite branches that target the cursor node, firing glowing cyber impulses. Clicking triggers a high-voltage electrical pulse overload, momentarily lightning up the complete network.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "quantum-superfluid-vortex-button",
-  "title": "Quantum Fluid Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A pink-indigo quantum stardust button featuring phase-locking quantum wave condensate flows that wrap around the cursor.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Neural Net Button. The layout features an elegant deep cyber blue structure surrounded by a continuous looping gradient highlights mask. Inside the 2D canvas overlay, nodes representing synaptic cells float organically. Hovering the pointer activates active synapse dendrite branches that target the cursor node, firing glowing cyber impulses. Clicking triggers a high-voltage electrical pulse overload, momentarily lightning up the complete network.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "quantum-superfluid-vortex-button",
+    "title": "Quantum Fluid Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A pink-indigo quantum stardust button featuring phase-locking quantum wave condensate flows that wrap around the cursor.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -3813,7 +2938,7 @@ export default function NeuralSynapseButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -3993,19 +3118,19 @@ export default function QuantumSuperfluidButton({
   );
 }
 `,
-  "prompt": "Create an advanced Quantum Superfluid Button. The design presents a sleek violet dark body surrounded by stardust sweep highlights. The 2D canvas particle overlay runs a physical superfluid simulator. Hovering the pointer locks the phases of stardust nodes, causing them to group and flow into a synchronized waves coordinate flow around the cursor. Clicking triggers quantum tunneling.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "magnetic-ferrofluid-ripple-button",
-  "title": "Ferrofluid Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "An obsidian black metallic button showcasing an interactive magnetic liquid simulation that spikes and ripples on hover.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Quantum Superfluid Button. The design presents a sleek violet dark body surrounded by stardust sweep highlights. The 2D canvas particle overlay runs a physical superfluid simulator. Hovering the pointer locks the phases of stardust nodes, causing them to group and flow into a synchronized waves coordinate flow around the cursor. Clicking triggers quantum tunneling.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "magnetic-ferrofluid-ripple-button",
+    "title": "Ferrofluid Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "An obsidian black metallic button showcasing an interactive magnetic liquid simulation that spikes and ripples on hover.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -4220,7 +3345,7 @@ export default function QuantumSuperfluidButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -4391,19 +3516,19 @@ export default function MagneticFerrofluidButton({
   );
 }
 `,
-  "prompt": "Create an advanced Ferrofluid Button. The design presents a dark obsidian body. Inside the 2D canvas overlay runs a smooth magnetic fluid simulator. Concentric magnetic field contours are visible. Hovering the pointer acts as a high-intensity Neodymium magnet, growing dynamic metallic liquid spikes that reach towards the cursor. Clicking triggers a simulated electromagnetic wave ripple shockwave across the liquid body.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "gravitational-singularity-button",
-  "title": "Singularity Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "An ultra-violet space-theme button containing an interactive starfield orbiting a central gravitational singularity core.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Ferrofluid Button. The design presents a dark obsidian body. Inside the 2D canvas overlay runs a smooth magnetic fluid simulator. Concentric magnetic field contours are visible. Hovering the pointer acts as a high-intensity Neodymium magnet, growing dynamic metallic liquid spikes that reach towards the cursor. Clicking triggers a simulated electromagnetic wave ripple shockwave across the liquid body.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "gravitational-singularity-button",
+    "title": "Singularity Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "An ultra-violet space-theme button containing an interactive starfield orbiting a central gravitational singularity core.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -4623,7 +3748,7 @@ export default function MagneticFerrofluidButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -4789,19 +3914,19 @@ export default function GravitationalSingularityButton({
   );
 }
 `,
-  "prompt": "Create an advanced Gravitational Singularity Button. The layout presents a sleek violet dark body surrounded by stardust sweep highlights. In the 2D canvas overlay, stardust orbits a central gravitational singularity. Hovering the pointer warps spacetime, pulling local stardust towards the cursor. Clicking triggers a supernova accretion expansion burst.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "bioluminescent-coral-button",
-  "title": "Bio Coral Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A deep-ocean bioluminescent button featuring recursively growing marine coral branches that light up and bend towards the cursor.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Gravitational Singularity Button. The layout presents a sleek violet dark body surrounded by stardust sweep highlights. In the 2D canvas overlay, stardust orbits a central gravitational singularity. Hovering the pointer warps spacetime, pulling local stardust towards the cursor. Clicking triggers a supernova accretion expansion burst.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "bioluminescent-coral-button",
+    "title": "Bio Coral Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A deep-ocean bioluminescent button featuring recursively growing marine coral branches that light up and bend towards the cursor.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -5018,7 +4143,7 @@ export default function GravitationalSingularityButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -5181,19 +4306,19 @@ export default function BioluminescentCoralButton({
   );
 }
 `,
-  "prompt": "Create an advanced Bioluminescent Coral Button. The layout displays a deep-ocean structure with smooth cyan highlights sweep. Inside the 2D canvas overlay, organically grown marine coral branches stretch from the bottom boundary. Hovering the pointer illuminates and gently bends branches towards the cursor coordinate. Clicking triggers a release of neon bioluminescent spores.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "cyberspace-lightcycle-button",
-  "title": "Lightcycle Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "An 80s outrun style cyberspace button with high-speed light cycles chasing the cursor and leaving glowing neon turn trails.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Bioluminescent Coral Button. The layout displays a deep-ocean structure with smooth cyan highlights sweep. Inside the 2D canvas overlay, organically grown marine coral branches stretch from the bottom boundary. Hovering the pointer illuminates and gently bends branches towards the cursor coordinate. Clicking triggers a release of neon bioluminescent spores.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "cyberspace-lightcycle-button",
+    "title": "Lightcycle Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "An 80s outrun style cyberspace button with high-speed light cycles chasing the cursor and leaving glowing neon turn trails.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -5408,7 +4533,7 @@ export default function BioluminescentCoralButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -5582,19 +4707,19 @@ export default function CyberspaceLightcycleButton({
   );
 }
 `,
-  "prompt": "Create an advanced Cyberspace Lightcycle Button. The layout displays a hot pink outrun cyber grid. Inside the 2D canvas overlay, multiple neon lightcycles travel at high velocity. Hovering the pointer commands the cycles to break their linear path, chasing the cursor and making sharp 90-degree turns. Clicking triggers an EMP reboot flash.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "solar-flare-corona-button",
-  "title": "Solar Flare Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A cosmic plasma button surrounded by dynamic solar coronal loops that stretch and erupt towards the cursor.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Cyberspace Lightcycle Button. The layout displays a hot pink outrun cyber grid. Inside the 2D canvas overlay, multiple neon lightcycles travel at high velocity. Hovering the pointer commands the cycles to break their linear path, chasing the cursor and making sharp 90-degree turns. Clicking triggers an EMP reboot flash.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "solar-flare-corona-button",
+    "title": "Solar Flare Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A cosmic plasma button surrounded by dynamic solar coronal loops that stretch and erupt towards the cursor.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -5802,7 +4927,7 @@ export default function CyberspaceLightcycleButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -5960,19 +5085,19 @@ export default function SolarFlareCoronaButton({
   );
 }
 `,
-  "prompt": "Create an advanced Solar Flare Coronal Loop Button. The layout displays a stellar orange body with solar sweep highlights. Inside the 2D canvas overlay, dynamic solar flares emerge from the coronal ring. Hovering the pointer acts as a strong gravitational field, bending and pulling plasma arcs toward the cursor. Clicking triggers a high-velocity coronal mass ejection wave burst.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "hyperdimensional-tesseract-button",
-  "title": "Tesseract Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A futuristic 4D tesseract portal button that dynamically rotates and warps dimensions under pointer movement.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Solar Flare Coronal Loop Button. The layout displays a stellar orange body with solar sweep highlights. Inside the 2D canvas overlay, dynamic solar flares emerge from the coronal ring. Hovering the pointer acts as a strong gravitational field, bending and pulling plasma arcs toward the cursor. Clicking triggers a high-velocity coronal mass ejection wave burst.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "hyperdimensional-tesseract-button",
+    "title": "Tesseract Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A futuristic 4D tesseract portal button that dynamically rotates and warps dimensions under pointer movement.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -6214,7 +5339,7 @@ export default function SolarFlareCoronaButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -6400,19 +5525,19 @@ export default function HyperdimensionalTesseractButton({
   );
 }
 `,
-  "prompt": "Create an advanced Hyperdimensional Tesseract Portal Button. The layout displays a cosmic dark violet portal body. Inside the 2D canvas overlay runs a projected 3D hypercube wireframe. Hovering the pointer warps the tesseract projection coordinates towards the cursor coordinate. Clicking triggers a dimensions rift collapse.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "liquid-mercury-ripple-button",
-  "title": "Liquid Mercury Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A high-end glossy button featuring fluid metallic chrome mercury droplets that naturally splash and coalesce under click actions.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Hyperdimensional Tesseract Portal Button. The layout displays a cosmic dark violet portal body. Inside the 2D canvas overlay runs a projected 3D hypercube wireframe. Hovering the pointer warps the tesseract projection coordinates towards the cursor coordinate. Clicking triggers a dimensions rift collapse.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "liquid-mercury-ripple-button",
+    "title": "Liquid Mercury Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A high-end glossy button featuring fluid metallic chrome mercury droplets that naturally splash and coalesce under click actions.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -6624,7 +5749,7 @@ export default function HyperdimensionalTesseractButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -6778,19 +5903,19 @@ export default function LiquidMercuryRippleButton({
   );
 }
 `,
-  "prompt": "Create an advanced Hydrodynamic Liquid Mercury Ripple Button. The layout displays a highly glossy chrome body with silver sweep highlights. Inside the 2D canvas overlay runs a hydrodynamic liquid mercury simulation. Hovering the pointer warps mercury droplet boundaries, and clicking splits it into multiple high-shine droplets that dynamically coalesce back together.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "quantum-string-resonance-button",
-  "title": "Quantum String Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "An interactive quantum mechanics theme button where strings vibrate and resonate dynamically with pointer movements.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Hydrodynamic Liquid Mercury Ripple Button. The layout displays a highly glossy chrome body with silver sweep highlights. Inside the 2D canvas overlay runs a hydrodynamic liquid mercury simulation. Hovering the pointer warps mercury droplet boundaries, and clicking splits it into multiple high-shine droplets that dynamically coalesce back together.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "quantum-string-resonance-button",
+    "title": "Quantum String Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "An interactive quantum mechanics theme button where strings vibrate and resonate dynamically with pointer movements.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -6989,7 +6114,7 @@ export default function LiquidMercuryRippleButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -7131,19 +6256,19 @@ export default function QuantumStringResonanceButton({
   );
 }
 `,
-  "prompt": "Create an advanced Quantum String Vibrational Resonance Button. The layout displays an ultra-vibrant electric violet frame. Inside the 2D canvas overlay run multiple quantum vibrating strings. Hovering the pointer pinches and warps the strings local frequency and amplitude. Clicking triggers a high-frequency symmetry burst ripple.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "nanite-swarm-hive-button",
-  "title": "Nanite Hive Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A sci-fi nanotech button featuring micro-nanites that coordinate, orbit, and align dynamically towards the pointer.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Quantum String Vibrational Resonance Button. The layout displays an ultra-vibrant electric violet frame. Inside the 2D canvas overlay run multiple quantum vibrating strings. Hovering the pointer pinches and warps the strings local frequency and amplitude. Clicking triggers a high-frequency symmetry burst ripple.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "nanite-swarm-hive-button",
+    "title": "Nanite Hive Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A sci-fi nanotech button featuring micro-nanites that coordinate, orbit, and align dynamically towards the pointer.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -7363,7 +6488,7 @@ export default function QuantumStringResonanceButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -7526,19 +6651,19 @@ export default function NaniteSwarmHiveButton({
   );
 }
 `,
-  "prompt": "Create an advanced Cybernetic Nanite Swarm Hive Button. The layout displays a dark hexagonal framework. Inside the 2D canvas overlay, a swarm of micro-nanites orbit. Hovering the pointer acts as a hive beacon, causing nanites to align and build connection vectors toward the cursor coordinates. Clicking triggers an explosive swarm dispersal.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "gravitational-lensing-button",
-  "title": "Black Hole Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A stellar astrophysics button showcasing gravitational light bending (lensing) around a central black hole singularity.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Cybernetic Nanite Swarm Hive Button. The layout displays a dark hexagonal framework. Inside the 2D canvas overlay, a swarm of micro-nanites orbit. Hovering the pointer acts as a hive beacon, causing nanites to align and build connection vectors toward the cursor coordinates. Clicking triggers an explosive swarm dispersal.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "gravitational-lensing-button",
+    "title": "Black Hole Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A stellar astrophysics button showcasing gravitational light bending (lensing) around a central black hole singularity.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -7751,7 +6876,7 @@ export default function NaniteSwarmHiveButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -7906,19 +7031,19 @@ export default function GravitationalLensingButton({
   );
 }
 `,
-  "prompt": "Create an advanced Astrophysical Black Hole Gravitational Lensing Button. The layout displays a dark orange accretion ring. Inside the 2D canvas overlay runs an active orbit simulation around a dark singularity. Hovering the pointer acts as an external gravitational wave source bending light, and clicking triggers a white Hawking Radiation wave burst.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "bioluminescent-synaptic-button",
-  "title": "Synaptic Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "An organic neural net theme button featuring electrical action potential pulses that light up Axons and Synaptic Nodes.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Astrophysical Black Hole Gravitational Lensing Button. The layout displays a dark orange accretion ring. Inside the 2D canvas overlay runs an active orbit simulation around a dark singularity. Hovering the pointer acts as an external gravitational wave source bending light, and clicking triggers a white Hawking Radiation wave burst.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "bioluminescent-synaptic-button",
+    "title": "Synaptic Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "An organic neural net theme button featuring electrical action potential pulses that light up Axons and Synaptic Nodes.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -8140,7 +7265,7 @@ export default function GravitationalLensingButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -8313,19 +7438,19 @@ export default function BioluminescentSynapticButton({
   );
 }
 `,
-  "prompt": "Create an advanced Bioluminescent Neural Synaptic Grid Button. The layout displays a deep cyan organic framework. Inside the 2D canvas overlay, an interconnected network of neural nodes and axonal connections pulsate action potentials. Hovering deforms and enlarges nodes, and clicking triggers a vibrant violet synapse thoughts burst.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "interactive-ferrofluid-button",
-  "title": "Ferrofluid Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A high-end dark laboratory physics button featuring a metallic black liquid ferrofluid blob that spikes aggressively under magnetic mouse pointer actions.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Bioluminescent Neural Synaptic Grid Button. The layout displays a deep cyan organic framework. Inside the 2D canvas overlay, an interconnected network of neural nodes and axonal connections pulsate action potentials. Hovering deforms and enlarges nodes, and clicking triggers a vibrant violet synapse thoughts burst.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "interactive-ferrofluid-button",
+    "title": "Ferrofluid Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A high-end dark laboratory physics button featuring a metallic black liquid ferrofluid blob that spikes aggressively under magnetic mouse pointer actions.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -8532,7 +7657,7 @@ export default function BioluminescentSynapticButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -8691,19 +7816,19 @@ export default function InteractiveFerrofluidButton({
   );
 }
 `,
-  "prompt": "Create an advanced Magnetic Iron Fluid Ferrofluid Blob Button. The layout displays a dark experimental chrome frame. Inside the 2D canvas overlay runs an organic liquid blob. Hovering deforms and shapes magnetic spiked outlines pointing towards coordinates, and clicking triggers polar inversion spike ripples.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "subatomic-orbital-button",
-  "title": "Subatomic Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A physics theme button featuring subatomic electrons that revolve fast inside intersecting orbital shell loops.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Magnetic Iron Fluid Ferrofluid Blob Button. The layout displays a dark experimental chrome frame. Inside the 2D canvas overlay runs an organic liquid blob. Hovering deforms and shapes magnetic spiked outlines pointing towards coordinates, and clicking triggers polar inversion spike ripples.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "subatomic-orbital-button",
+    "title": "Subatomic Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A physics theme button featuring subatomic electrons that revolve fast inside intersecting orbital shell loops.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -8904,7 +8029,7 @@ export default function InteractiveFerrofluidButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -9048,19 +8173,19 @@ export default function SubatomicOrbitalShellButton({
   );
 }
 `,
-  "prompt": "Create an advanced Subatomic Electron Orbital Shell Button. The layout displays an orbital hot pink shell framework. Inside the 2D canvas overlay run intersecting atomic orbit paths with traveling subatomic electrons. Hovering speeds up the electrons spin, and clicking triggers a quantum energy state transition flash.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "aurora-plasma-wave-button",
-  "title": "Aurora Wave Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A breathtaking northern-lights button featuring shimmering aurora plasma ribbons that ripple and billow dynamically toward the cursor.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Subatomic Electron Orbital Shell Button. The layout displays an orbital hot pink shell framework. Inside the 2D canvas overlay run intersecting atomic orbit paths with traveling subatomic electrons. Hovering speeds up the electrons spin, and clicking triggers a quantum energy state transition flash.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "aurora-plasma-wave-button",
+    "title": "Aurora Wave Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A breathtaking northern-lights button featuring shimmering aurora plasma ribbons that ripple and billow dynamically toward the cursor.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -9174,7 +8299,7 @@ export default function SubatomicOrbitalShellButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -9279,19 +8404,19 @@ export default function AuroraPlasmaWaveButton({
   );
 }
 `,
-  "prompt": "Create an advanced Aurora Borealis Plasma Wave Button. Three shimmering aurora ribbons (emerald, cyan, indigo) undulate across the button in constant sine motion. Hovering bends the ribbons toward the cursor like a magnetic field pulling plasma sheets. Clicking erupts a high-frequency ripple burst across all three ribbons.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "digital-rain-matrix-button",
-  "title": "Matrix Rain Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A cyberpunk Matrix-inspired button where columns of falling katakana glyphs accelerate on hover and explode outward on click.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Aurora Borealis Plasma Wave Button. Three shimmering aurora ribbons (emerald, cyan, indigo) undulate across the button in constant sine motion. Hovering bends the ribbons toward the cursor like a magnetic field pulling plasma sheets. Clicking erupts a high-frequency ripple burst across all three ribbons.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "digital-rain-matrix-button",
+    "title": "Matrix Rain Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A cyberpunk Matrix-inspired button where columns of falling katakana glyphs accelerate on hover and explode outward on click.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -9400,7 +8525,7 @@ export default function AuroraPlasmaWaveButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -9502,19 +8627,19 @@ export default function DigitalRainMatrixButton({
   );
 }
 `,
-  "prompt": "Create an advanced Digital Rain Matrix Button. Columns of falling katakana glyphs cascade continuously across the button surface in classic Matrix green. Hovering triples their fall speed and brightens the glow. Clicking detonates a flash-burst that briefly floods all columns with maximum brightness before fading back to the ambient rain.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "lava-lamp-blob-button",
-  "title": "Lava Lamp Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A hypnotic lava-lamp button where glowing metaball blobs slowly drift, merge, and separate — snapping toward the cursor on hover.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Digital Rain Matrix Button. Columns of falling katakana glyphs cascade continuously across the button surface in classic Matrix green. Hovering triples their fall speed and brightens the glow. Clicking detonates a flash-burst that briefly floods all columns with maximum brightness before fading back to the ambient rain.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "lava-lamp-blob-button",
+    "title": "Lava Lamp Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A hypnotic lava-lamp button where glowing metaball blobs slowly drift, merge, and separate — snapping toward the cursor on hover.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -9593,7 +8718,7 @@ export default function DigitalRainMatrixButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -9707,19 +8832,19 @@ export default function LavaLampBlobButton({
   );
 }
 `,
-  "prompt": "Create an advanced Lava Lamp Metaball Blob Button. Four glowing radial-gradient blobs drift lazily inside the button, bouncing off walls with soft physics. On hover they gravitate toward the cursor. On click they burst apart at 3× speed with expanded radii, then slowly settle back into their slow drift.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "starfield-warp-button",
-  "title": "Warp Speed Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A warp-drive space button where stars expand outward from the center; hovering engages full warp and click triggers a hyperspace jump flash.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Lava Lamp Metaball Blob Button. Four glowing radial-gradient blobs drift lazily inside the button, bouncing off walls with soft physics. On hover they gravitate toward the cursor. On click they burst apart at 3× speed with expanded radii, then slowly settle back into their slow drift.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "starfield-warp-button",
+    "title": "Warp Speed Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A warp-drive space button where stars expand outward from the center; hovering engages full warp and click triggers a hyperspace jump flash.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -9792,7 +8917,7 @@ export default function LavaLampBlobButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -9899,19 +9024,19 @@ export default function StarfieldWarpButton({
   );
 }
 `,
-  "prompt": "Create an advanced Starfield Warp Drive Button. 90 stars radiate outward from a central vanishing point with short streak tails at idle. Hovering engages warp speed — stars accelerate 4.5× and grow longer streaks. Clicking triggers a hyperspace jump: speed surges to 12×, streaks become massive light trails, then everything fades and resets.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "emp-shockwave-ring-button",
-  "title": "EMP Shockwave Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A high-tech military EMP button that fires expanding concentric shockwave pulse rings outward from the cursor on click.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Starfield Warp Drive Button. 90 stars radiate outward from a central vanishing point with short streak tails at idle. Hovering engages warp speed — stars accelerate 4.5× and grow longer streaks. Clicking triggers a hyperspace jump: speed surges to 12×, streaks become massive light trails, then everything fades and resets.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "emp-shockwave-ring-button",
+    "title": "EMP Shockwave Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A high-tech military EMP button that fires expanding concentric shockwave pulse rings outward from the cursor on click.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -10001,7 +9126,7 @@ export default function StarfieldWarpButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -10125,19 +9250,19 @@ export default function EmpShockwaveRingButton({
   );
 }
 `,
-  "prompt": "Create an advanced EMP Shockwave Pulse Ring Button. At idle a soft breathing ring pulses at the centre. On hover a live targeting reticle tracks the cursor. Clicking fires 4 concentric EMP shockwave rings from the exact click position, each with staggered speeds and fading opacity as they expand outward.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "ink-diffusion-button",
-  "title": "Ink Diffusion Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "An artistic sumi-e ink button where droplets bloom organically through simulated water on hover and explode into a full ink wash on click.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced EMP Shockwave Pulse Ring Button. At idle a soft breathing ring pulses at the centre. On hover a live targeting reticle tracks the cursor. Clicking fires 4 concentric EMP shockwave rings from the exact click position, each with staggered speeds and fading opacity as they expand outward.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "ink-diffusion-button",
+    "title": "Ink Diffusion Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "An artistic sumi-e ink button where droplets bloom organically through simulated water on hover and explode into a full ink wash on click.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -10232,7 +9357,7 @@ export default function EmpShockwaveRingButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -10368,19 +9493,19 @@ export default function InkDiffusionButton({
   );
 }
 `,
-  "prompt": "Create an advanced Sumi-e Ink Diffusion Button. The button uses a warm parchment background. Idle mode drips one random ink bloom every few seconds. Hovering trails small ink droplets that bloom with organic radial tendrils. Clicking erupts 6 large ink washes simultaneously with long spreading tendril arms, creating a full sumi-e ink splash.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "thermal-heatmap-button",
-  "title": "Thermal Scan Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "An infrared thermal scanner button that paints dynamic hot/cold heatmap zones under the cursor and flares to max temperature on click.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Sumi-e Ink Diffusion Button. The button uses a warm parchment background. Idle mode drips one random ink bloom every few seconds. Hovering trails small ink droplets that bloom with organic radial tendrils. Clicking erupts 6 large ink washes simultaneously with long spreading tendril arms, creating a full sumi-e ink splash.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "thermal-heatmap-button",
+    "title": "Thermal Scan Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "An infrared thermal scanner button that paints dynamic hot/cold heatmap zones under the cursor and flares to max temperature on click.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -10483,7 +9608,7 @@ export default function InkDiffusionButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -10611,19 +9736,19 @@ export default function ThermalHeatmapButton({
   );
 }
 `,
-  "prompt": "Create an advanced Infrared Thermal Heatmap Scanner Button. A low-resolution heat grid physically simulates diffusion and cooling. Hovering deposits heat at the cursor position which spreads organically through the grid using a diffusion algorithm, cycling through cold-blue to hot-white IR colours. Clicking flares the heat source to 3× intensity.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "glitch-corrupt-button",
-  "title": "Glitch Corrupt Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A cyberpunk data-corruption button with randomised RGB channel splits, scanline tears, and block-displacement glitch artifacts.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Infrared Thermal Heatmap Scanner Button. A low-resolution heat grid physically simulates diffusion and cooling. Hovering deposits heat at the cursor position which spreads organically through the grid using a diffusion algorithm, cycling through cold-blue to hot-white IR colours. Clicking flares the heat source to 3× intensity.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "glitch-corrupt-button",
+    "title": "Glitch Corrupt Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A cyberpunk data-corruption button with randomised RGB channel splits, scanline tears, and block-displacement glitch artifacts.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -10718,7 +9843,7 @@ export default function ThermalHeatmapButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -10841,19 +9966,19 @@ export default function GlitchCorruptButton({
   );
 }
 `,
-  "prompt": "Create an advanced Cyberpunk Glitch Data-Corruption Button. A sharp-edged dark button with faint idle flickers. Hovering triggers random micro-glitch artifacts including scanline tears and RGB channel splits. Clicking unleashes a full glitch storm — displaced blocks, colour-channel separation, vertical noise bars — all fading naturally via sin curve over ~1 second.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "sound-waveform-button",
-  "title": "Waveform Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A music-studio equaliser button with reactive frequency bars that idle softly, surge on hover, and detonate a bass-drop beat on click.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Cyberpunk Glitch Data-Corruption Button. A sharp-edged dark button with faint idle flickers. Hovering triggers random micro-glitch artifacts including scanline tears and RGB channel splits. Clicking unleashes a full glitch storm — displaced blocks, colour-channel separation, vertical noise bars — all fading naturally via sin curve over ~1 second.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "sound-waveform-button",
+    "title": "Waveform Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A music-studio equaliser button with reactive frequency bars that idle softly, surge on hover, and detonate a bass-drop beat on click.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -10933,7 +10058,7 @@ export default function GlitchCorruptButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -11039,19 +10164,19 @@ export default function SoundWaveformButton({
   );
 }
 `,
-  "prompt": "Create an advanced Sound Equaliser Waveform Button. 28 frequency bars rendered as mirrored vertical rectangles with violet gradient fills oscillate at independent simulated frequencies. Hovering nearly doubles their amplitude and glow. Clicking detonates a bass-drop that temporarily pushes all bars to maximum height via a sin-curve envelope.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}, {
-  "slug": "crystal-frost-shatter-button",
-  "title": "Crystal Frost Button",
-  "category": "buttons",
-  "tag": "canvas",
-  "description": "A frozen crystal button where ice-fracture lines branch recursively from the click point and frost builds up under the cursor on hover.",
-  "previewCode": `<!DOCTYPE html>
+    "prompt": "Create an advanced Sound Equaliser Waveform Button. 28 frequency bars rendered as mirrored vertical rectangles with violet gradient fills oscillate at independent simulated frequencies. Hovering nearly doubles their amplitude and glow. Clicking detonates a bass-drop that temporarily pushes all bars to maximum height via a sin-curve envelope.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }, {
+    "slug": "crystal-frost-shatter-button",
+    "title": "Crystal Frost Button",
+    "category": "buttons",
+    "tag": "canvas",
+    "description": "A frozen crystal button where ice-fracture lines branch recursively from the click point and frost builds up under the cursor on hover.",
+    "previewCode": `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -11158,7 +10283,7 @@ export default function SoundWaveformButton({
   </script>
 </body>
 </html>`,
-  "code": `"use client";
+    "code": `"use client";
 
 import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -11302,12 +10427,12 @@ export default function CrystalFrostShatterButton({
   );
 }
 `,
-  "prompt": "Create an advanced Crystal Ice Frost Shatter Button. Hovering the cursor breathes tiny frost particle dots that fade. Clicking fires 5 primary crack lines from the exact click point, each recursively branching 2-3 children with staggered delays, creating a realistic ice-fracture pattern that slowly fades after expanding.",
-  "likes": 0,
-  "author": "Animation AI",
-  "featured": true,
-  "createdAt": "2026-05-21T10:00:00.000Z",
-  "updatedAt": "2026-05-21T10:00:00.000Z"
-}
+    "prompt": "Create an advanced Crystal Ice Frost Shatter Button. Hovering the cursor breathes tiny frost particle dots that fade. Clicking fires 5 primary crack lines from the exact click point, each recursively branching 2-3 children with staggered delays, creating a realistic ice-fracture pattern that slowly fades after expanding.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-21T10:00:00.000Z",
+    "updatedAt": "2026-05-21T10:00:00.000Z"
+  }
 ];
 

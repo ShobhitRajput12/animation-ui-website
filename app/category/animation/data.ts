@@ -87,5 +87,1015 @@ export const ANIMATION_DATA = [
     "createdAt": "2026-05-10T13:19:37.564Z",
     "updatedAt": "2026-05-20T04:57:30.231Z",
     "prompt": "Create a Premium 3D Torus System Simulation with Three.js:\n• Custom GLSL vertex and fragment shader materials to render a neon holographic torus mesh\n• Hollow grid construction (using vUv math and discard in shader) with glowing running light pulses\n• Organic wave deformation in the vertex shader reacting to time and input warp speed\n• Fresnel rim highlight for extra depth and a center-pulsing plasma core sphere\n• Auto-rotating PerspectiveCamera with OrbitControls, floating ambient dust particles, and custom point lights\n• Post-processing: UnrealBloomPass to create intense cinematic bloom glow on glowing components\n• Premium sci-fi HUD overlay containing active status indicators, descriptions, and custom slider controls\n• Slider interactivity dynamically syncing to Three.js uniform speed parameters and camera auto-rotate damping\n• Designed with rich responsive typography (Syne/DM Mono) and premium vectors (rotated wireframe diamond HUD details)\n• Performance optimized for 60fps on modern screens"
+  },
+  {
+    "_id": "animation-cybernetic-core-observer",
+    "slug": "cybernetic-core-observer",
+    "title": "Cybernetic Core Observer",
+    "category": "animation",
+    "tag": "threejs",
+    "description": "A fully 3D robotic observer core built with Three.js. Its glowing optical lens tracks your cursor, surrounded by gyroscopic rings that overload on click.",
+    "previewCode": "<!DOCTYPE html><html><head><style>body{margin:0;background:radial-gradient(circle at center,#0a1122 0%,#02050a 100%);overflow:hidden;cursor:crosshair}canvas{display:block}.label{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:rgba(100,200,255,0.8);font-family:monospace;letter-spacing:4px;font-size:12px;text-transform:uppercase;pointer-events:none}</style></head><body><div class=\"label\">Cybernetic Core Observer</div><script type=\"importmap\">{\"imports\":{\"three\":\"https://unpkg.com/three@0.160.0/build/three.module.js\"}}</script><script type=\"module\">import * as THREE from 'three';const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,1000);camera.position.z=15;const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});renderer.setSize(window.innerWidth,window.innerHeight);renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));document.body.appendChild(renderer.domElement);const ambientLight=new THREE.AmbientLight(0xffffff,0.5);scene.add(ambientLight);const dirLight=new THREE.DirectionalLight(0xffffff,2);dirLight.position.set(5,5,5);scene.add(dirLight);const blueLight=new THREE.PointLight(0x0088ff,5,20);scene.add(blueLight);const group=new THREE.Group();scene.add(group);const coreGeom=new THREE.SphereGeometry(2,64,64);const coreMat=new THREE.MeshPhysicalMaterial({color:0x111111,metalness:0.9,roughness:0.2,clearcoat:1.0,clearcoatRoughness:0.1});const core=new THREE.Mesh(coreGeom,coreMat);group.add(core);const lensGeom=new THREE.CylinderGeometry(0.8,0.8,0.5,32);lensGeom.rotateX(Math.PI/2);const lensMat=new THREE.MeshPhysicalMaterial({color:0x00eeff,emissive:0x0088ff,emissiveIntensity:1,metalness:1,roughness:0,transparent:true,opacity:0.9});const lens=new THREE.Mesh(lensGeom,lensMat);lens.position.z=1.85;core.add(lens);const irisGeom=new THREE.TorusGeometry(0.5,0.05,16,32);const irisMat=new THREE.MeshStandardMaterial({color:0x222222,metalness:0.8});const iris=new THREE.Mesh(irisGeom,irisMat);iris.position.z=2.0;core.add(iris);const rings=[];for(let i=0;i<4;i++){const ringGeom=new THREE.TorusGeometry(3.5+i*1.0,0.12,16,100);const ringMat=new THREE.MeshStandardMaterial({color:0x333333,metalness:0.9,roughness:0.3});const ring=new THREE.Mesh(ringGeom,ringMat);ring.rotation.x=Math.random()*Math.PI;ring.rotation.y=Math.random()*Math.PI;group.add(ring);rings.push({mesh:ring,speedX:(Math.random()-0.5)*0.03,speedY:(Math.random()-0.5)*0.03})}let mouse=new THREE.Vector2(0,0);let targetRotation=new THREE.Vector2(0,0);let isOverloading=false;let overloadTime=0;window.addEventListener('mousemove',(e)=>{mouse.x=(e.clientX/window.innerWidth)*2-1;mouse.y=-(e.clientY/window.innerHeight)*2+1;targetRotation.x=mouse.y*0.8;targetRotation.y=mouse.x*0.8});window.addEventListener('mousedown',()=>{isOverloading=true;overloadTime=1.0;lensMat.emissiveIntensity=5;lensMat.color.setHex(0xffffff);blueLight.intensity=15});window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)});function animate(){requestAnimationFrame(animate);core.rotation.x+=(targetRotation.x-core.rotation.x)*0.1;core.rotation.y+=(targetRotation.y-core.rotation.y)*0.1;rings.forEach((r,i)=>{let speedMult=isOverloading?5:1;r.mesh.rotation.x+=r.speedX*speedMult;r.mesh.rotation.y+=r.speedY*speedMult;if(isOverloading){r.mesh.position.x=(Math.random()-0.5)*0.1;r.mesh.position.y=(Math.random()-0.5)*0.1}else{r.mesh.position.set(0,0,0)}});if(isOverloading){overloadTime-=0.02;if(overloadTime<=0){isOverloading=false;lensMat.emissiveIntensity=1;lensMat.color.setHex(0x00eeff);blueLight.intensity=5}}group.position.y=Math.sin(Date.now()*0.002)*0.5;renderer.render(scene,camera)}animate();</script></body></html>",
+    "code": "\"use client\"\n\nimport React, { useRef, useEffect } from 'react'\nimport * as THREE from 'three'\n\nexport default function CyberneticCoreObserver() {\n  const containerRef = useRef<HTMLDivElement>(null)\n\n  useEffect(() => {\n    if (!containerRef.current || typeof window === 'undefined') return\n\n    const container = containerRef.current\n    const scene = new THREE.Scene()\n    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000)\n    camera.position.z = 15\n\n    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })\n    renderer.setSize(container.clientWidth, container.clientHeight)\n    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))\n    container.appendChild(renderer.domElement)\n\n    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)\n    scene.add(ambientLight)\n\n    const dirLight = new THREE.DirectionalLight(0xffffff, 2)\n    dirLight.position.set(5, 5, 5)\n    scene.add(dirLight)\n\n    const blueLight = new THREE.PointLight(0x0088ff, 5, 20)\n    scene.add(blueLight)\n\n    const group = new THREE.Group()\n    scene.add(group)\n\n    const coreGeom = new THREE.SphereGeometry(2, 64, 64)\n    const coreMat = new THREE.MeshPhysicalMaterial({\n        color: 0x111111,\n        metalness: 0.9,\n        roughness: 0.2,\n        clearcoat: 1.0,\n        clearcoatRoughness: 0.1\n    })\n    const core = new THREE.Mesh(coreGeom, coreMat)\n    group.add(core)\n\n    const lensGeom = new THREE.CylinderGeometry(0.8, 0.8, 0.5, 32)\n    lensGeom.rotateX(Math.PI / 2)\n    const lensMat = new THREE.MeshPhysicalMaterial({\n        color: 0x00eeff,\n        emissive: 0x0088ff,\n        emissiveIntensity: 1.5,\n        metalness: 1,\n        roughness: 0,\n        transparent: true,\n        opacity: 0.9\n    })\n    const lens = new THREE.Mesh(lensGeom, lensMat)\n    lens.position.z = 1.85\n    core.add(lens)\n\n    const irisGeom = new THREE.TorusGeometry(0.5, 0.05, 16, 32)\n    const irisMat = new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.8 })\n    const iris = new THREE.Mesh(irisGeom, irisMat)\n    iris.position.z = 2.0\n    core.add(iris)\n\n    const rings: { mesh: THREE.Mesh, speedX: number, speedY: number }[] = []\n    for (let i = 0; i < 4; i++) {\n        const ringGeom = new THREE.TorusGeometry(3.5 + i * 1.0, 0.12, 16, 100)\n        const ringMat = new THREE.MeshStandardMaterial({ \n            color: 0x333333, \n            metalness: 0.9,\n            roughness: 0.3\n        })\n        const ring = new THREE.Mesh(ringGeom, ringMat)\n        ring.rotation.x = Math.random() * Math.PI\n        ring.rotation.y = Math.random() * Math.PI\n        group.add(ring)\n        rings.push({ mesh: ring, speedX: (Math.random() - 0.5) * 0.03, speedY: (Math.random() - 0.5) * 0.03 })\n    }\n\n    let targetRotation = new THREE.Vector2(0, 0)\n    let isOverloading = false\n    let overloadTime = 0\n\n    const handleMouseMove = (e: MouseEvent) => {\n        const rect = container.getBoundingClientRect()\n        const mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1\n        const mouseY = -((e.clientY - rect.top) / rect.height) * 2 + 1\n        targetRotation.x = mouseY * 0.6\n        targetRotation.y = mouseX * 0.6\n    }\n\n    const handleMouseDown = () => {\n        isOverloading = true\n        overloadTime = 1.0\n        lensMat.emissiveIntensity = 8\n        lensMat.color.setHex(0xffffff)\n        blueLight.intensity = 20\n    }\n\n    window.addEventListener('mousemove', handleMouseMove)\n    container.addEventListener('mousedown', handleMouseDown)\n\n    const resize = () => {\n        camera.aspect = container.clientWidth / container.clientHeight\n        camera.updateProjectionMatrix()\n        renderer.setSize(container.clientWidth, container.clientHeight)\n    }\n    window.addEventListener('resize', resize)\n\n    let frame = 0\n    const clock = new THREE.Clock()\n\n    const animate = () => {\n        frame = requestAnimationFrame(animate)\n        const time = clock.getElapsedTime()\n        \n        core.rotation.x += (targetRotation.x - core.rotation.x) * 0.08\n        core.rotation.y += (targetRotation.y - core.rotation.y) * 0.08\n        \n        rings.forEach((r) => {\n            let speedMult = isOverloading ? 6 : 1\n            r.mesh.rotation.x += r.speedX * speedMult\n            r.mesh.rotation.y += r.speedY * speedMult\n            \n            if (isOverloading) {\n                r.mesh.position.x = (Math.random() - 0.5) * 0.15\n                r.mesh.position.y = (Math.random() - 0.5) * 0.15\n            } else {\n                r.mesh.position.set(0,0,0)\n            }\n        })\n        \n        if (isOverloading) {\n            overloadTime -= 0.015\n            if (overloadTime <= 0) {\n                isOverloading = false\n                lensMat.emissiveIntensity = 1.5\n                lensMat.color.setHex(0x00eeff)\n                blueLight.intensity = 5\n            }\n        }\n        \n        group.position.y = Math.sin(time * 2) * 0.4\n        \n        renderer.render(scene, camera)\n    }\n\n    animate()\n\n    return () => {\n        cancelAnimationFrame(frame)\n        window.removeEventListener('mousemove', handleMouseMove)\n        container.removeEventListener('mousedown', handleMouseDown)\n        window.removeEventListener('resize', resize)\n        renderer.dispose()\n        if (container.contains(renderer.domElement)) {\n            container.removeChild(renderer.domElement)\n        }\n    }\n  }, [])\n\n  return (\n    <div className=\"relative w-full h-[640px] overflow-hidden rounded-[32px] border border-cyan-500/20 bg-[radial-gradient(circle_at_center,#0a1122_0%,#02050a_100%)]\">\n      <div ref={containerRef} className=\"absolute inset-0 cursor-crosshair\" />\n      <div className=\"absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full border border-cyan-500/30 bg-black/50 backdrop-blur-md pointer-events-none\">\n        <p className=\"text-cyan-400/90 text-xs font-bold tracking-[0.3em] uppercase\">Cybernetic Core</p>\n      </div>\n    </div>\n  )\n}",
+    "prompt": "Create a Cybernetic Core Observer using Three.js. Generate a dark metallic sphere with a glowing cyan optical lens (cylinder) attached to the front. The core must continuously look at the mouse cursor in 3D space. Surround the core with 4 gyroscopic metal rings that slowly rotate on independent axes. When the user clicks the screen, the core 'overloads', causing the lens to flash bright white, the lighting intensity to spike, and the rings to spin rapidly while vibrating. Use MeshPhysicalMaterial for realistic reflections.",
+    "likes": 0,
+    "author": "Animation AI",
+    "featured": true,
+    "createdAt": "2026-05-20T09:15:00.000Z",
+    "updatedAt": "2026-05-20T09:15:00.000Z"
+  },
+  {
+    _id: 'animation-quantum-aegis-sentinel',
+    slug: 'quantum-aegis-sentinel',
+    title: 'Quantum Aegis Sentinel',
+    category: 'animation',
+    tag: 'threejs',
+    description: 'A high-fidelity mechanical guardian projecting a responsive hexagonal energy shield. Features cursor-locked visual tracking, click-to-fire energy impacts, dynamic particle debris, and beautiful holographic shaders.',
+    previewCode: `<!DOCTYPE html><html><head><style>
+body{margin:0;background:radial-gradient(circle at center,#050b14 0%,#010204 100%);overflow:hidden;cursor:crosshair}
+canvas{display:block}
+.hud{position:absolute;top:20px;left:20px;padding:12px;border:1px solid rgba(0,240,255,0.15);border-radius:12px;background:rgba(0,0,0,0.5);color:#00f0ff;font-family:monospace;font-size:11px;pointer-events:none}
+.label{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(0,240,255,0.8);font-family:monospace;font-size:12px;letter-spacing:4px;text-transform:uppercase;pointer-events:none;text-align:center}
+.sub{font-size:9px;color:rgba(0,240,255,0.4);letter-spacing:2px;margin-top:4px}
+</style></head><body>
+<div class="hud">
+  SHIELD STATUS: ACTIVE<br>
+  INTEGRITY: 100%<br>
+  MODE: GUARDIAN
+</div>
+<div class="label">
+  QUANTUM AEGIS SENTINEL
+  <div class="sub">CLICK SHIELD TO TEST ENERGY IMPACT</div>
+</div>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 12;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+document.body.appendChild(renderer.domElement);
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+scene.add(ambientLight);
+
+const blueLight = new THREE.PointLight(0x00aaff, 3, 20);
+blueLight.position.set(0, 0, 4);
+scene.add(blueLight);
+
+const purpleLight = new THREE.PointLight(0xaa00ff, 3, 20);
+purpleLight.position.set(0, 0, -4);
+scene.add(purpleLight);
+
+const sentinelGroup = new THREE.Group();
+scene.add(sentinelGroup);
+
+const coreGeom = new THREE.SphereGeometry(1.2, 32, 32);
+const darkMetalMat = new THREE.MeshPhysicalMaterial({
+  color: 0x1a1a1a,
+  metalness: 0.9,
+  roughness: 0.15,
+  clearcoat: 1.0,
+  clearcoatRoughness: 0.1
+});
+const core = new THREE.Mesh(coreGeom, darkMetalMat);
+sentinelGroup.add(core);
+
+const eyeGeom = new THREE.CylinderGeometry(0.4, 0.4, 0.3, 32);
+eyeGeom.rotateX(Math.PI / 2);
+const eyeMat = new THREE.MeshPhysicalMaterial({
+  color: 0x00f0ff,
+  emissive: 0x00aaff,
+  emissiveIntensity: 2.0,
+  metalness: 0.9,
+  roughness: 0
+});
+const eyeMesh = new THREE.Mesh(eyeGeom, eyeMat);
+eyeMesh.position.z = 1.1;
+core.add(eyeMesh);
+
+const collarGeom = new THREE.TorusGeometry(1.8, 0.06, 16, 100);
+const goldMat = new THREE.MeshStandardMaterial({ color: 0xffaa00, metalness: 0.9, roughness: 0.2 });
+const collar = new THREE.Mesh(collarGeom, goldMat);
+collar.rotation.x = Math.PI / 2.5;
+sentinelGroup.add(collar);
+
+const pLeft = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.1, 0.8, 16).rotateX(Math.PI / 2), darkMetalMat);
+pLeft.position.set(-1.8, 0, 0.2);
+sentinelGroup.add(pLeft);
+
+const pRight = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.1, 0.8, 16).rotateX(Math.PI / 2), darkMetalMat);
+pRight.position.set(1.8, 0, 0.2);
+sentinelGroup.add(pRight);
+
+const shieldGeom = new THREE.SphereGeometry(3.2, 64, 64);
+const shieldMat = new THREE.ShaderMaterial({
+  uniforms: {
+    uTime: { value: 0 },
+    uImpact: { value: new THREE.Vector4(0, 0, 0, 0) },
+    uImpactTime: { value: 0 },
+  },
+  vertexShader: "varying vec2 vUv; varying vec3 vPosition; void main() { vUv = uv; vPosition = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }",
+  fragmentShader: "varying vec2 vUv; varying vec3 vPosition; uniform float uTime; uniform vec4 uImpact; uniform float uImpactTime; void main() { vec2 uv = vUv * 16.0; vec2 r = vec2(1.0, 1.7320508); vec2 h = r * 0.5; vec2 a = mod(uv, r) - h; vec2 b = mod(uv + h, r) - h; vec2 gv = length(a) < length(b) ? a : b; float distToEdge = 0.5 - max(abs(gv.x), dot(gv, normalize(r))); float hex = smoothstep(0.01, 0.04, distToEdge); float d = distance(vPosition, uImpact.xyz); float ripple = 0.0; if (uImpactTime > 0.0) { float wave = sin(d * 4.5 - uImpactTime * 18.0) * 0.5 + 0.5; float att = exp(-d * 0.8) * uImpactTime; ripple = wave * att; } float glow = 0.08 / (distToEdge + 0.015); vec3 baseColor = vec3(0.0, 0.5, 1.0); vec3 rippleColor = vec3(0.1, 0.9, 1.0); vec3 color = mix(baseColor * (1.0 - hex + glow * 0.12), rippleColor * 2.5, ripple * 0.8); float alpha = mix(0.12, 0.85, ripple) + (1.0 - hex) * 0.22; gl_FragColor = vec4(color, alpha); }",
+  transparent: true,
+  side: THREE.DoubleSide,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending
+});
+const shield = new THREE.Mesh(shieldGeom, shieldMat);
+scene.add(shield);
+
+const laserMat = new THREE.LineBasicMaterial({ color: 0x00f0ff, linewidth: 2, transparent: true, opacity: 0 });
+const laserGeom = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()]);
+const laserLine = new THREE.Line(laserGeom, laserMat);
+scene.add(laserLine);
+
+const particleCount = 40;
+const pGeom = new THREE.BufferGeometry();
+const pPos = new Float32Array(particleCount * 3);
+const pVels = [];
+for (let i = 0; i < particleCount; i++) {
+  pVels.push(new THREE.Vector3());
+}
+pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+const pMat = new THREE.PointsMaterial({
+  color: 0x00f0ff,
+  size: 0.12,
+  transparent: true,
+  opacity: 0,
+  blending: THREE.AdditiveBlending
+});
+const particles = new THREE.Points(pGeom, pMat);
+scene.add(particles);
+
+const mouse = new THREE.Vector2(0, 0);
+const targetRotation = new THREE.Vector2(0, 0);
+let uImpactTimeVal = 0;
+let laserIntensity = 0;
+let particleLife = 0;
+let targetPosLeft = new THREE.Vector3();
+let targetPosRight = new THREE.Vector3();
+
+window.addEventListener('mousemove', (e) => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  targetRotation.x = mouse.y * 0.4;
+  targetRotation.y = mouse.x * 0.5;
+});
+
+const raycaster = new THREE.Raycaster();
+window.addEventListener('mousedown', () => {
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObject(shield);
+  if (intersects.length > 0) {
+    const point = intersects[0].point;
+    shieldMat.uniforms.uImpact.value.set(point.x, point.y, point.z, 1.0);
+    uImpactTimeVal = 1.0;
+    
+    pLeft.getWorldPosition(targetPosLeft);
+    pRight.getWorldPosition(targetPosRight);
+    
+    const positions = laserGeom.getAttribute('position');
+    positions.setXYZ(0, targetPosLeft.x, targetPosLeft.y, targetPosLeft.z);
+    positions.setXYZ(1, point.x, point.y, point.z);
+    positions.setXYZ(2, targetPosRight.x, targetPosRight.y, targetPosRight.z);
+    positions.needsUpdate = true;
+    laserIntensity = 1.0;
+    
+    const posAttr = pGeom.getAttribute('position');
+    for (let i = 0; i < particleCount; i++) {
+      posAttr.setXYZ(i, point.x, point.y, point.z);
+      const angle1 = Math.random() * Math.PI * 2;
+      const angle2 = Math.random() * Math.PI;
+      pVels[i].set(
+        Math.cos(angle1) * Math.sin(angle2) * 5,
+        Math.sin(angle1) * Math.sin(angle2) * 5,
+        Math.cos(angle2) * 5
+      );
+    }
+    posAttr.needsUpdate = true;
+    particleLife = 1.0;
+    
+    blueLight.intensity = 15;
+    eyeMat.emissiveIntensity = 6.0;
+  }
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+function animate() {
+  requestAnimationFrame(animate);
+  const time = Date.now() * 0.001;
+  shieldMat.uniforms.uTime.value = time;
+  
+  sentinelGroup.rotation.x += (targetRotation.x - sentinelGroup.rotation.x) * 0.08;
+  sentinelGroup.rotation.y += (targetRotation.y - sentinelGroup.rotation.y) * 0.08;
+  sentinelGroup.position.y = Math.sin(time * 2) * 0.25;
+  collar.rotation.z += 0.01;
+  
+  if (uImpactTimeVal > 0) {
+    uImpactTimeVal -= 0.015;
+    shieldMat.uniforms.uImpactTime.value = 1.0 - uImpactTimeVal;
+  } else {
+    shieldMat.uniforms.uImpactTime.value = 0;
+  }
+  
+  if (laserIntensity > 0) {
+    laserIntensity -= 0.08;
+    laserMat.opacity = laserIntensity;
+  } else {
+    laserMat.opacity = 0;
+  }
+  
+  if (particleLife > 0) {
+    particleLife -= 0.02;
+    pMat.opacity = particleLife;
+    const posAttr = pGeom.getAttribute('position');
+    for (let i = 0; i < particleCount; i++) {
+      const x = posAttr.getX(i) + pVels[i].x * 0.016;
+      const y = posAttr.getY(i) + pVels[i].y * 0.016;
+      const z = posAttr.getZ(i) + pVels[i].z * 0.016;
+      posAttr.setXYZ(i, x, y, z);
+      pVels[i].multiplyScalar(0.95);
+    }
+    posAttr.needsUpdate = true;
+  } else {
+    pMat.opacity = 0;
+  }
+  
+  blueLight.intensity += (3.0 - blueLight.intensity) * 0.1;
+  eyeMat.emissiveIntensity += (2.0 - eyeMat.emissiveIntensity) * 0.1;
+  
+  renderer.render(scene, camera);
+}
+animate();
+</script></body></html>`,
+    code: `"use client"
+
+import React, { useRef, useEffect, useState } from 'react'
+import * as THREE from 'three'
+import { Shield, Activity, Cpu } from 'lucide-react'
+
+export default function QuantumAegisSentinel() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [integrity, setIntegrity] = useState(100)
+  const [shieldStatus, setShieldStatus] = useState("ACTIVE")
+  const [activeMode, setActiveMode] = useState("GUARDIAN")
+
+  useEffect(() => {
+    if (!containerRef.current || typeof window === 'undefined') return
+    const container = containerRef.current
+    
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000)
+    camera.position.z = 12
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    renderer.setSize(container.clientWidth, container.clientHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    container.appendChild(renderer.domElement)
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.3)
+    scene.add(ambientLight)
+
+    const blueLight = new THREE.PointLight(0x00aaff, 3, 20)
+    blueLight.position.set(0, 0, 4)
+    scene.add(blueLight)
+
+    const purpleLight = new THREE.PointLight(0xaa00ff, 3, 20)
+    purpleLight.position.set(0, 0, -4)
+    scene.add(purpleLight)
+
+    const sentinelGroup = new THREE.Group()
+    scene.add(sentinelGroup)
+
+    const coreGeom = new THREE.SphereGeometry(1.2, 32, 32)
+    const darkMetalMat = new THREE.MeshPhysicalMaterial({
+      color: 0x1a1a1a,
+      metalness: 0.9,
+      roughness: 0.15,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1
+    })
+    const core = new THREE.Mesh(coreGeom, darkMetalMat)
+    sentinelGroup.add(core)
+
+    const eyeGeom = new THREE.CylinderGeometry(0.4, 0.4, 0.3, 32)
+    eyeGeom.rotateX(Math.PI / 2)
+    const eyeMat = new THREE.MeshPhysicalMaterial({
+      color: 0x00f0ff,
+      emissive: 0x00aaff,
+      emissiveIntensity: 2.0,
+      metalness: 0.9,
+      roughness: 0
+    })
+    const eyeMesh = new THREE.Mesh(eyeGeom, eyeMat)
+    eyeMesh.position.z = 1.1
+    core.add(eyeMesh)
+
+    const collarGeom = new THREE.TorusGeometry(1.8, 0.06, 16, 100)
+    const goldMat = new THREE.MeshStandardMaterial({ color: 0xffaa00, metalness: 0.9, roughness: 0.2 })
+    const collar = new THREE.Mesh(collarGeom, goldMat)
+    collar.rotation.x = Math.PI / 2.5;
+    sentinelGroup.add(collar)
+
+    const shoulderGeom = new THREE.CylinderGeometry(0.18, 0.1, 0.8, 16)
+    shoulderGeom.rotateX(Math.PI / 2)
+    const pLeft = new THREE.Mesh(shoulderGeom, darkMetalMat)
+    pLeft.position.set(-1.8, 0, 0.2)
+    sentinelGroup.add(pLeft)
+
+    const pRight = new THREE.Mesh(shoulderGeom, darkMetalMat)
+    pRight.position.set(1.8, 0, 0.2)
+    sentinelGroup.add(pRight)
+
+    const shieldGeom = new THREE.SphereGeometry(3.2, 64, 64)
+    const shieldMat = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uImpact: { value: new THREE.Vector4(0, 0, 0, 0) },
+        uImpactTime: { value: 0 },
+      },
+      vertexShader: "varying vec2 vUv; varying vec3 vPosition; void main() { vUv = uv; vPosition = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }",
+      fragmentShader: "varying vec2 vUv; varying vec3 vPosition; uniform float uTime; uniform vec4 uImpact; uniform float uImpactTime; void main() { vec2 uv = vUv * 16.0; vec2 r = vec2(1.0, 1.7320508); vec2 h = r * 0.5; vec2 a = mod(uv, r) - h; vec2 b = mod(uv + h, r) - h; vec2 gv = length(a) < length(b) ? a : b; float distToEdge = 0.5 - max(abs(gv.x), dot(gv, normalize(r))); float hex = smoothstep(0.01, 0.04, distToEdge); float d = distance(vPosition, uImpact.xyz); float ripple = 0.0; if (uImpactTime > 0.0) { float wave = sin(d * 4.5 - uImpactTime * 18.0) * 0.5 + 0.5; float att = exp(-d * 0.8) * uImpactTime; ripple = wave * att; } float glow = 0.08 / (distToEdge + 0.015); vec3 baseColor = vec3(0.0, 0.5, 1.0); vec3 rippleColor = vec3(0.1, 0.9, 1.0); vec3 color = mix(baseColor * (1.0 - hex + glow * 0.125), rippleColor * 2.5, ripple * 0.8); float alpha = mix(0.12, 0.85, ripple) + (1.0 - hex) * 0.22; gl_FragColor = vec4(color, alpha); }",
+      transparent: true,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    })
+    const shield = new THREE.Mesh(shieldGeom, shieldMat)
+    scene.add(shield)
+
+    const laserMat = new THREE.LineBasicMaterial({ color: 0x00f0ff, linewidth: 2, transparent: true, opacity: 0 })
+    const laserGeom = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
+    const laserLine = new THREE.Line(laserGeom, laserMat)
+    scene.add(laserLine)
+
+    const particleCount = 40
+    const pGeom = new THREE.BufferGeometry()
+    const pPos = new Float32Array(particleCount * 3)
+    const pVels: THREE.Vector3[] = []
+    for (let i = 0; i < particleCount; i++) {
+      pVels.push(new THREE.Vector3())
+    }
+    pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3))
+    const pMat = new THREE.PointsMaterial({
+      color: 0x00f0ff,
+      size: 0.12,
+      transparent: true,
+      opacity: 0,
+      blending: THREE.AdditiveBlending
+    })
+    const particles = new THREE.Points(pGeom, pMat)
+    scene.add(particles)
+
+    const mouse = new THREE.Vector2(0, 0)
+    const targetRotation = new THREE.Vector2(0, 0)
+    let uImpactTimeVal = 0
+    let laserIntensity = 0
+    let particleLife = 0
+    const targetPosLeft = new THREE.Vector3()
+    const targetPosRight = new THREE.Vector3()
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect()
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      targetRotation.x = mouse.y * 0.4
+      targetRotation.y = mouse.x * 0.5
+    }
+
+    const raycaster = new THREE.Raycaster()
+    const handleMouseDown = () => {
+      raycaster.setFromCamera(mouse, camera)
+      const intersects = raycaster.intersectObject(shield)
+      if (intersects.length > 0) {
+        const point = intersects[0].point
+        shieldMat.uniforms.uImpact.value.set(point.x, point.y, point.z, 1.0)
+        uImpactTimeVal = 1.0
+        
+        pLeft.getWorldPosition(targetPosLeft)
+        pRight.getWorldPosition(targetPosRight)
+        
+        const positions = laserGeom.getAttribute('position') as THREE.BufferAttribute
+        positions.setXYZ(0, targetPosLeft.x, targetPosLeft.y, targetPosLeft.z)
+        positions.setXYZ(1, point.x, point.y, point.z)
+        positions.setXYZ(2, targetPosRight.x, targetPosRight.y, targetPosRight.z)
+        positions.needsUpdate = true
+        laserIntensity = 1.0
+        
+        const posAttr = pGeom.getAttribute('position') as THREE.BufferAttribute
+        for (let i = 0; i < particleCount; i++) {
+          posAttr.setXYZ(i, point.x, point.y, point.z)
+          const angle1 = Math.random() * Math.PI * 2
+          const angle2 = Math.random() * Math.PI
+          pVels[i].set(
+            Math.cos(angle1) * Math.sin(angle2) * 5,
+            Math.sin(angle1) * Math.sin(angle2) * 5,
+            Math.cos(angle2) * 5
+          )
+        }
+        posAttr.needsUpdate = true
+        particleLife = 1.0
+        
+        blueLight.intensity = 15
+        eyeMat.emissiveIntensity = 6.0
+        
+        setIntegrity(prev => {
+          const next = Math.max(10, prev - Math.floor(Math.random() * 8 + 3))
+          if (next === 10) {
+            setShieldStatus("CRITICAL")
+            setActiveMode("EMERGENCY DEFENSE")
+          }
+          return next
+        })
+      }
+    }
+
+    container.addEventListener('mousemove', handleMouseMove)
+    container.addEventListener('mousedown', handleMouseDown)
+
+    const handleResize = () => {
+      camera.aspect = container.clientWidth / container.clientHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(container.clientWidth, container.clientHeight)
+    }
+    window.addEventListener('resize', handleResize)
+
+    let frame = 0
+    const animate = () => {
+      frame = requestAnimationFrame(animate)
+      const time = Date.now() * 0.001
+      shieldMat.uniforms.uTime.value = time
+      
+      sentinelGroup.rotation.x += (targetRotation.x - sentinelGroup.rotation.x) * 0.08
+      sentinelGroup.rotation.y += (targetRotation.y - sentinelGroup.rotation.y) * 0.08
+      sentinelGroup.position.y = Math.sin(time * 2) * 0.25
+      collar.rotation.z += 0.01
+      
+      if (uImpactTimeVal > 0) { 
+        uImpactTimeVal -= 0.015
+        shieldMat.uniforms.uImpactTime.value = 1.0 - uImpactTimeVal
+      } else {
+        shieldMat.uniforms.uImpactTime.value = 0
+      }
+      
+      if (laserIntensity > 0) {
+        laserIntensity -= 0.08
+        laserMat.opacity = laserIntensity
+      } else {
+        laserMat.opacity = 0
+      }
+      
+      if (particleLife > 0) {
+        particleLife -= 0.02
+        pMat.opacity = particleLife
+        const posAttr = pGeom.getAttribute('position') as THREE.BufferAttribute
+        for (let i = 0; i < particleCount; i++) {
+          const x = posAttr.getX(i) + pVels[i].x * 0.016
+          const y = posAttr.getY(i) + pVels[i].y * 0.016
+          const z = posAttr.getZ(i) + pVels[i].z * 0.016
+          posAttr.setXYZ(i, x, y, z)
+          pVels[i].multiplyScalar(0.95)
+        } 
+        posAttr.needsUpdate = true
+      } else {
+        pMat.opacity = 0
+      }
+      
+      blueLight.intensity += (3.0 - blueLight.intensity) * 0.1
+      eyeMat.emissiveIntensity += (2.0 - eyeMat.emissiveIntensity) * 0.1
+      
+      renderer.render(scene, camera)
+    }
+    animate()
+
+    return () => {
+      cancelAnimationFrame(frame)
+      container.removeEventListener('mousemove', handleMouseMove)
+      container.removeEventListener('mousedown', handleMouseDown)
+      window.removeEventListener('resize', handleResize)
+      renderer.dispose()
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement)
+      }
+    }
+  }, [])
+
+  return (
+    <div className="relative w-full h-[640px] overflow-hidden rounded-[32px] border border-cyan-500/20 bg-[radial-gradient(circle_at_center,#050b14_0%,#010204_100%)] select-none">
+      <div ref={containerRef} className="absolute inset-0 cursor-crosshair" />
+      
+      <div className="absolute top-6 left-6 p-4 rounded-2xl border border-cyan-500/10 bg-black/40 backdrop-blur-md text-cyan-400 font-mono text-xs flex flex-col gap-2 pointer-events-none">
+        <div className="flex items-center gap-2">
+          <Shield className="w-4 h-4 text-cyan-400 animate-pulse" />
+          <span className="font-bold uppercase tracking-wider text-[10px]">Quantum Shield Grid</span>
+        </div>
+        <div className="h-[1px] bg-cyan-500/25 my-1" />
+        <div className="flex justify-between gap-4"><span>SHIELD STATUS:</span><span className="text-white font-bold">{shieldStatus}</span></div>
+        <div className="flex justify-between gap-4"><span>INTEGRITY:</span><span className="text-white font-bold">{integrity}%</span></div>
+        <div className="flex justify-between gap-4"><span>MODE:</span><span className="text-white font-bold">{activeMode}</span></div>
+      </div>
+
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-5 py-2.5 rounded-full border border-cyan-500/30 bg-black/60 backdrop-blur-md pointer-events-none text-center"> 
+        <p className="text-cyan-400 text-xs font-bold tracking-[0.25em] uppercase">Quantum Aegis Sentinel</p>
+        <p className="text-cyan-300/40 text-[9px] font-medium tracking-[0.15em] uppercase mt-1">Click shield to test energy impact</p>
+      </div>
+    </div>
+  )
+}`,
+    prompt: "Create an advanced Quantum Aegis Sentinel using Three.js. Feature a central dark mechanical orb core that dynamically looks toward the cursor with floating shoulder projector cannons. Project a larger concentric sphere representing a holographic defense grid with a custom procedural hexagonal shader. Clicking anywhere should raycast to the shield, projecting a glowing ripple wave from the impact point, generating a dual-laser beam hit from the cannons, emitting a burst of physics particle sparks, and decreasing HUD shield integrity.",
+    likes: 0,
+    author: "Animation AI",
+    featured: true,
+    createdAt: "2026-05-22T09:00:00.000Z",
+    updatedAt: "2026-05-22T09:00:00.000Z"
+  },
+  {
+    _id: "animation-nebula-chrono-core",
+    slug: "nebula-chrono-core",
+    title: "Nebula Chrono-Mech Core",
+    category: "animation",
+    tag: "threejs",
+    description: "An intricate cosmic clock-reactor featuring interlocking gyroscopic brass gears, floating planetary rings, and a swirling particle nebula. Pulls particles gravitationally and triggers time-warp speed rotation upon clicking.",
+    previewCode: `<!DOCTYPE html><html><head><style>
+body{margin:0;background:radial-gradient(circle at center,#0f0514 0%,#030106 100%);overflow:hidden;cursor:crosshair}
+canvas{display:block}
+.hud{position:absolute;top:20px;left:20px;padding:12px;border:1px solid rgba(180,0,255,0.15);border-radius:12px;background:rgba(0,0,0,0.5);color:#d3a0ff;font-family:monospace;font-size:11px;pointer-events:none}
+.label{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(180,0,255,0.8);font-family:monospace;font-size:12px;letter-spacing:4px;text-transform:uppercase;pointer-events:none;text-align:center}
+.sub{font-size:9px;color:rgba(180,0,255,0.4);letter-spacing:2px;margin-top:4px}
+</style></head><body>
+<div class="hud">
+  TIME DILATION: 1.00x<br>
+  CHRONO FREQ: 60.0 Hz<br>
+  WARP DRIVE: READY
+</div>
+<div class="label">
+  NEBULA CHRONO-MECH CORE
+  <div class="sub">CLICK CORE TO WARP SPACE-TIME</div>
+</div>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 10;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+document.body.appendChild(renderer.domElement);
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+scene.add(ambientLight);
+
+const orangeLight = new THREE.PointLight(0xffaa44, 4, 15);
+orangeLight.position.set(0, 0, 3);
+scene.add(orangeLight);
+
+const purpleLight = new THREE.PointLight(0x8822ff, 4, 15);
+purpleLight.position.set(0, 0, -3);
+scene.add(purpleLight);
+
+const coreGroup = new THREE.Group();
+scene.add(coreGroup);
+
+const reactorGeom = new THREE.SphereGeometry(0.8, 32, 32);
+const reactorMat = new THREE.MeshBasicMaterial({
+  color: 0xffeedd,
+  transparent: true,
+  opacity: 0.95
+});
+const reactor = new THREE.Mesh(reactorGeom, reactorMat);
+coreGroup.add(reactor);
+
+const shellGeom = new THREE.IcosahedronGeometry(0.92, 2);
+const shellMat = new THREE.MeshBasicMaterial({ color: 0xff8800, wireframe: true, transparent: true, opacity: 0.5 });
+const shell = new THREE.Mesh(shellGeom, shellMat);
+coreGroup.add(shell);
+
+const goldMat = new THREE.MeshStandardMaterial({ color: 0xcca84e, metalness: 0.9, roughness: 0.25 });
+const gears = [];
+
+function createGear(radius, toothCount, toothSize, rotSpeed) {
+  const gearGroup = new THREE.Group();
+  const ringGeom = new THREE.TorusGeometry(radius, 0.06, 8, 100);
+  const ringMesh = new THREE.Mesh(ringGeom, goldMat);
+  gearGroup.add(ringMesh);
+  
+  const toothGeom = new THREE.BoxGeometry(toothSize.x, toothSize.y, toothSize.z);
+  for (let i = 0; i < toothCount; i++) {
+    const angle = (i / toothCount) * Math.PI * 2;
+    const tooth = new THREE.Mesh(toothGeom, goldMat);
+    tooth.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius, 0);
+    tooth.rotation.z = angle;
+    gearGroup.add(tooth);
+  }
+  
+  coreGroup.add(gearGroup);
+  gears.push({ group: gearGroup, speed: rotSpeed });
+}
+
+createGear(1.5, 16, new THREE.Vector3(0.08, 0.16, 0.08), 0.015);
+createGear(2.3, 24, new THREE.Vector3(0.1, 0.2, 0.1), -0.008);
+createGear(3.1, 32, new THREE.Vector3(0.12, 0.24, 0.12), 0.004);
+
+gears[0].group.rotation.x = Math.PI / 2;
+gears[1].group.rotation.y = Math.PI / 3;
+
+const starCount = 2000;
+const starsGeom = new THREE.BufferGeometry();
+const starPos = new Float32Array(starCount * 3);
+const starColor = new Float32Array(starCount * 3);
+const c1 = new THREE.Color(0xff6600);
+const c2 = new THREE.Color(0x9900ff);
+const starData = [];
+
+for (let i = 0; i < starCount; i++) {
+  const r = Math.random() * 5 + 0.6;
+  const theta = r * 1.8 + (i % 2 === 0 ? 0 : Math.PI);
+  const x = Math.cos(theta) * r + (Math.random() - 0.5) * 0.4 * r;
+  const z = Math.sin(theta) * r + (Math.random() - 0.5) * 0.4 * r;
+  const y = (Math.random() - 0.5) * 0.12 * (5 - r);
+  
+  starPos[i*3] = x;
+  starPos[i*3+1] = y;
+  starPos[i*3+2] = z;
+  
+  const mixColor = c1.clone().lerp(c2, r / 5);
+  starColor[i*3] = mixColor.r;
+  starColor[i*3+1] = mixColor.g;
+  starColor[i*3+2] = mixColor.b;
+  
+  starData.push({ r, theta, y, speed: 0.012 / (r + 0.2) });
+}
+starsGeom.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+starsGeom.setAttribute('color', new THREE.BufferAttribute(starColor, 3));
+
+const starsMat = new THREE.PointsMaterial({
+  size: 0.06,
+  vertexColors: true,
+  transparent: true,
+  blending: THREE.AdditiveBlending
+});
+const starPoints = new THREE.Points(starsGeom, starsMat);
+scene.add(starPoints);
+
+const shockwaveGeom = new THREE.RingGeometry(0.1, 0.15, 32);
+const shockwaveMat = new THREE.MeshBasicMaterial({ color: 0xbb55ff, side: THREE.DoubleSide, transparent: true, opacity: 0 });
+const shockwave = new THREE.Mesh(shockwaveGeom, shockwaveMat);
+shockwave.rotation.x = Math.PI / 2;
+scene.add(shockwave);
+
+const mouse = new THREE.Vector2(0, 0);
+const targetRotation = new THREE.Vector2(0, 0);
+let warpTime = 0;
+let isWarping = false;
+
+window.addEventListener('mousemove', (e) => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  targetRotation.x = mouse.y * 0.4;
+  targetRotation.y = -mouse.x * 0.4;
+});
+
+window.addEventListener('mousedown', () => {
+  isWarping = true;
+  warpTime = 1.0;
+  shockwave.scale.set(0.1, 0.1, 0.1);
+  shockwaveMat.opacity = 1.0;
+  orangeLight.color.setHex(0xbb00ff);
+  purpleLight.color.setHex(0xffffff);
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const time = clock.getElapsedTime();
+  const dt = clock.getDelta();
+  
+  coreGroup.rotation.x += (targetRotation.x - coreGroup.rotation.x) * 0.08;
+  coreGroup.rotation.y += (targetRotation.y - coreGroup.rotation.y) * 0.08;
+  
+  const currentWarp = 1.0 + warpTime * 8.0;
+  
+  gears.forEach((gear) => {
+    gear.group.rotation.z += gear.speed * currentWarp;
+  });
+  
+  shell.rotation.y += 0.01 * currentWarp;
+  shell.rotation.x += 0.005 * currentWarp;
+  
+  const scale = 1.0 + Math.sin(time * 3) * 0.05 + warpTime * 0.6;
+  reactor.scale.setScalar(scale);
+  
+  const positions = starsGeom.getAttribute('position');
+  for (let i = 0; i < starCount; i++) {
+    const data = starData[i];
+    data.theta += data.speed * currentWarp;
+    
+    let warpStretch = 1.0 + warpTime * 0.3 * Math.sin(time * 5 + data.r);
+    let r = data.r * warpStretch;
+    
+    const targetX = Math.cos(data.theta) * r + mouse.x * 0.3 * (5 - r);
+    const targetZ = Math.sin(data.theta) * r + mouse.y * 0.3 * (5 - r);
+    
+    positions.setXYZ(i, targetX, data.y, targetZ);
+  }
+  positions.needsUpdate = true;
+  
+  if (warpTime > 0) {
+    warpTime -= 0.015;
+    shockwave.scale.addScalar(0.12);
+    shockwaveMat.opacity = warpTime;
+    
+    const colorVal = new THREE.Color().lerpColors(new THREE.Color(0xffeedd), new THREE.Color(0xaa00ff), warpTime);
+    reactorMat.color.copy(colorVal);
+  } else {
+    isWarping = false;
+    orangeLight.color.setHex(0xffaa44);
+    purpleLight.color.setHex(0x8822ff);
+    reactorMat.color.setHex(0xffeedd);
+  }
+  
+  renderer.render(scene, camera);
+}
+animate();
+</script></body></html>`,
+    code: `"use client"
+
+import React, { useRef, useEffect, useState } from 'react'
+import * as THREE from 'three'
+import { Activity, Clock, Zap } from 'lucide-react'
+
+export default function NebulaChronoMechCore() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [dilation, setDilation] = useState(1.0)
+  const [frequency, setFrequency] = useState(60.0)
+  const [warpStatus, setWarpStatus] = useState("READY")
+
+  useEffect(() => {
+    if (!containerRef.current || typeof window === 'undefined') return
+    const container = containerRef.current
+    
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000)
+    camera.position.z = 10
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    renderer.setSize(container.clientWidth, container.clientHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    container.appendChild(renderer.domElement)
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.3)
+    scene.add(ambientLight)
+
+    const orangeLight = new THREE.PointLight(0xffaa44, 4, 15)
+    orangeLight.position.set(0, 0, 3)
+    scene.add(orangeLight)
+
+    const purpleLight = new THREE.PointLight(0x8822ff, 4, 15)
+    purpleLight.position.set(0, 0, -3)
+    scene.add(purpleLight)
+
+    const coreGroup = new THREE.Group()
+    scene.add(coreGroup)
+
+    const reactorGeom = new THREE.SphereGeometry(0.8, 32, 32)
+    const reactorMat = new THREE.MeshBasicMaterial({
+      color: 0xffeedd,
+      transparent: true,
+      opacity: 0.95
+    })
+    const reactor = new THREE.Mesh(reactorGeom, reactorMat)
+    coreGroup.add(reactor)
+
+    const shellGeom = new THREE.IcosahedronGeometry(0.92, 2)
+    const shellMat = new THREE.MeshBasicMaterial({ color: 0xff8800, wireframe: true, transparent: true, opacity: 0.5 })
+    const shell = new THREE.Mesh(shellGeom, shellMat)
+    coreGroup.add(shell)
+
+    const goldMat = new THREE.MeshStandardMaterial({ color: 0xcca84e, metalness: 0.9, roughness: 0.25 })
+    const gears: { group: THREE.Group, speed: number }[] = []
+
+    const createGear = (radius: number, toothCount: number, toothSize: THREE.Vector3, rotSpeed: number) => {
+      const gearGroup = new THREE.Group()
+      const ringGeom = new THREE.TorusGeometry(radius, 0.06, 8, 100)
+      const ringMesh = new THREE.Mesh(ringGeom, goldMat)
+      gearGroup.add(ringMesh)
+      
+      const toothGeom = new THREE.BoxGeometry(toothSize.x, toothSize.y, toothSize.z)
+      for (let i = 0; i < toothCount; i++) {
+        const angle = (i / toothCount) * Math.PI * 2
+        const tooth = new THREE.Mesh(toothGeom, goldMat)
+        tooth.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius, 0)
+        tooth.rotation.z = angle
+        gearGroup.add(tooth)
+      }
+      
+      coreGroup.add(gearGroup)
+      gears.push({ group: gearGroup, speed: rotSpeed })
+    }
+
+    createGear(1.5, 16, new THREE.Vector3(0.08, 0.16, 0.08), 0.015)
+    createGear(2.3, 24, new THREE.Vector3(0.1, 0.2, 0.1), -0.008)
+    createGear(3.1, 32, new THREE.Vector3(0.12, 0.24, 0.12), 0.004)
+
+    gears[0].group.rotation.x = Math.PI / 2
+    gears[1].group.rotation.y = Math.PI / 3
+
+    const starCount = 2000
+    const starsGeom = new THREE.BufferGeometry()
+    const starPos = new Float32Array(starCount * 3)
+    const starColor = new Float32Array(starCount * 3)
+    const c1 = new THREE.Color(0xff6600)
+    const c2 = new THREE.Color(0x9900ff)
+    
+    interface StarData {
+      r: number
+      theta: number
+      y: number
+      speed: number
+    }
+    const starData: StarData[] = []
+
+    for (let i = 0; i < starCount; i++) {
+      const r = Math.random() * 5 + 0.6
+      const theta = r * 1.8 + (i % 2 === 0 ? 0 : Math.PI)
+      const x = Math.cos(theta) * r + (Math.random() - 0.5) * 0.4 * r
+      const z = Math.sin(theta) * r + (Math.random() - 0.5) * 0.4 * r
+      const y = (Math.random() - 0.5) * 0.12 * (5 - r)
+      
+      starPos[i*3] = x
+      starPos[i*3+1] = y
+      starPos[i*3+2] = z
+      
+      const mixColor = c1.clone().lerp(c2, r / 5)
+      starColor[i*3] = mixColor.r
+      starColor[i*3+1] = mixColor.g
+      starColor[i*3+2] = mixColor.b
+      
+      starData.push({ r, theta, y, speed: 0.012 / (r + 0.2) })
+    }
+    starsGeom.setAttribute('position', new THREE.BufferAttribute(starPos, 3))
+    starsGeom.setAttribute('color', new THREE.BufferAttribute(starColor, 3))
+
+    const starsMat = new THREE.PointsMaterial({
+      size: 0.06,
+      vertexColors: true,
+      transparent: true,
+      blending: THREE.AdditiveBlending
+    })
+    const starPoints = new THREE.Points(starsGeom, starsMat)
+    scene.add(starPoints)
+
+    const shockwaveGeom = new THREE.RingGeometry(0.1, 0.15, 32)
+    const shockwaveMat = new THREE.MeshBasicMaterial({ color: 0xbb55ff, side: THREE.DoubleSide, transparent: true, opacity: 0 })
+    const shockwave = new THREE.Mesh(shockwaveGeom, shockwaveMat)
+    shockwave.rotation.x = Math.PI / 2
+    scene.add(shockwave)
+
+    const mouse = new THREE.Vector2(0, 0)
+    const targetRotation = new THREE.Vector2(0, 0)
+    let warpTime = 0
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect()
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      targetRotation.x = mouse.y * 0.4
+      targetRotation.y = -mouse.x * 0.4
+    }
+
+    const handleMouseDown = () => {
+      warpTime = 1.0
+      shockwave.scale.set(0.1, 0.1, 0.1)
+      shockwaveMat.opacity = 1.0
+      orangeLight.color.setHex(0xbb00ff)
+      purpleLight.color.setHex(0xffffff)
+      setWarpStatus("WARPING")
+    }
+
+    container.addEventListener('mousemove', handleMouseMove)
+    container.addEventListener('mousedown', handleMouseDown)
+
+    const handleResize = () => {
+      camera.aspect = container.clientWidth / container.clientHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(container.clientWidth, container.clientHeight)
+    }
+    window.addEventListener('resize', handleResize)
+
+    let frame = 0
+    const clock = new THREE.Clock()
+
+    const animate = () => {
+      frame = requestAnimationFrame(animate)
+      const time = clock.getElapsedTime()
+      
+      coreGroup.rotation.x += (targetRotation.x - coreGroup.rotation.x) * 0.08
+      coreGroup.rotation.y += (targetRotation.y - coreGroup.rotation.y) * 0.08
+      
+      const currentWarp = 1.0 + warpTime * 8.0
+      setDilation(Number(currentWarp.toFixed(2)))
+      setFrequency(Number((60.0 + warpTime * 440.0).toFixed(1)))
+      
+      gears.forEach((gear) => {
+        gear.group.rotation.z += gear.speed * currentWarp
+      })
+      
+      shell.rotation.y += 0.01 * currentWarp
+      shell.rotation.x += 0.005 * currentWarp
+      
+      const scale = 1.0 + Math.sin(time * 3) * 0.05 + warpTime * 0.6
+      reactor.scale.setScalar(scale)
+      
+      const positions = starsGeom.getAttribute('position') as THREE.BufferAttribute
+      for (let i = 0; i < starCount; i++) {
+        const data = starData[i]
+        data.theta += data.speed * currentWarp
+        
+        const warpStretch = 1.0 + warpTime * 0.3 * Math.sin(time * 5 + data.r)
+        const r = data.r * warpStretch
+        
+        const targetX = Math.cos(data.theta) * r + mouse.x * 0.3 * (5 - r)
+        const targetZ = Math.sin(data.theta) * r + mouse.y * 0.3 * (5 - r)
+        
+        positions.setXYZ(i, targetX, data.y, targetZ)
+      }
+      positions.needsUpdate = true
+      
+      if (warpTime > 0) {
+        warpTime -= 0.015
+        shockwave.scale.addScalar(0.12)
+        shockwaveMat.opacity = warpTime
+        
+        const colorVal = new THREE.Color().lerpColors(new THREE.Color(0xffeedd), new THREE.Color(0xaa00ff), warpTime)
+        reactorMat.color.copy(colorVal)
+      } else {
+        orangeLight.color.setHex(0xffaa44)
+        purpleLight.color.setHex(0x8822ff)
+        reactorMat.color.setHex(0xffeedd)
+        setWarpStatus("READY")
+      }
+      
+      renderer.render(scene, camera)
+    }
+    animate()
+
+    return () => {
+      cancelAnimationFrame(frame)
+      container.removeEventListener('mousemove', handleMouseMove)
+      container.removeEventListener('mousedown', handleMouseDown)
+      window.removeEventListener('resize', handleResize)
+      renderer.dispose()
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement)
+      }
+    }
+  }, [])
+
+  return (
+    <div className="relative w-full h-[640px] overflow-hidden rounded-[32px] border border-purple-500/20 bg-[radial-gradient(circle_at_center,#0f0514_0%,#030106_100%)] select-none">
+      <div ref={containerRef} className="absolute inset-0 cursor-crosshair" />
+      
+      <div className="absolute top-6 left-6 p-4 rounded-2xl border border-purple-500/10 bg-black/40 backdrop-blur-md text-purple-400 font-mono text-xs flex flex-col gap-2 pointer-events-none">
+        <div className="flex items-center gap-2">
+          <Clock className="w-4 h-4 text-purple-400 animate-pulse" />
+          <span className="font-bold uppercase tracking-wider text-[10px]">Temporal Reactor Core</span>
+        </div>
+        <div className="h-[1px] bg-purple-500/25 my-1" />
+        <div className="flex justify-between gap-4"><span>TIME DILATION:</span><span className="text-white font-bold">{dilation}x</span></div>
+        <div className="flex justify-between gap-4"><span>CHRONO FREQ:</span><span className="text-white font-bold">{frequency} Hz</span></div>
+        <div className="flex justify-between gap-4"><span>WARP DRIVE:</span><span className="text-white font-bold">{warpStatus}</span></div>
+      </div>
+
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-5 py-2.5 rounded-full border border-purple-500/30 bg-black/60 backdrop-blur-md pointer-events-none text-center">
+        <p className="text-purple-400 text-xs font-bold tracking-[0.25em] uppercase">Nebula Chrono-Mech Core</p>
+        <p className="text-purple-300/40 text-[9px] font-medium tracking-[0.15em] uppercase mt-1">Click reactor to warp space-time</p>
+      </div>
+    </div>
+  )
+}`,
+    prompt: `Create an advanced Nebula Chrono-Mech Core using Three.js. Render a floating central reactor sphere that breathes organically, surrounded by an intricate technical wireframe shell. Build three concentric golden mechanical rings, each fitted with box teeth styled as mechanical gears, rotating on independent axes (X, Y, Z). Form a beautiful dual-armed spiral galaxy of 2000 particle stars swirling around the core. Implement cursor gravitational force causing stars to tilt and pull toward the pointer. Clicking anywhere should trigger a warp speed effect speeding gears and particles up by 8x, morphing the core's emissive color to electric purple, expanding a circular flat energy shockwave, and reflecting dilation metrics in a custom HUD.`,
+    likes: 0,
+    author: 'Animation AI',
+    featured: true,
+    createdAt: '2026-05-22T09:05:00.000Z',
+    updatedAt: '2026-05-22T09:05:00.000Z'
   }
 ];
