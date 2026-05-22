@@ -2957,8 +2957,673 @@ export default function TeamMemberCard() {
     featured: true,
     createdAt: "2026-05-22T12:30:00.000Z",
     updatedAt: "2026-05-22T12:30:00.000Z"
+  },
+  {
+    slug: "weather-forecast-card",
+    title: "Weather Forecast Card",
+    category: "cards",
+    tag: "canvas",
+    description: "A premium weather card with an animated cloud particle canvas sky, live temperature display, 5-day forecast row, and a traveling beam border that changes color with weather state.",
+    previewCode: `<!DOCTYPE html><html><head><style>
+*{margin:0;padding:0;box-sizing:border-box}body{min-height:100vh;background:#080c14;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif}
+.card{position:relative;width:300px;border-radius:24px;overflow:hidden;background:rgba(8,12,20,.85);border:1px solid rgba(255,255,255,.07);backdrop-filter:blur(20px);box-shadow:0 20px 60px -15px rgba(0,0,0,.9)}
+.ring{position:absolute;inset:0;border-radius:24px;padding:1.5px;pointer-events:none}
+.ring::before{content:"";position:absolute;inset:0;border-radius:24px;background:conic-gradient(from 0deg,transparent 25%,#38bdf8 45%,#7dd3fc 60%,transparent 80%);animation:spin 7s linear infinite;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.45}
+@keyframes spin{to{transform:rotate(360deg)}}
+canvas{position:absolute;top:0;left:0;width:100%;height:140px;pointer-events:none}
+.body{position:relative;z-index:2;padding:22px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;margin-top:100px}
+.temp{font-size:52px;font-weight:800;color:#fff;line-height:1}
+.deg{font-size:24px;font-weight:300;color:rgba(255,255,255,.5)}
+.cond{font-size:13px;color:rgba(255,255,255,.5);margin-top:4px}
+.loc{text-align:right}.city{font-size:14px;font-weight:600;color:#fff}.country{font-size:11px;color:rgba(255,255,255,.4)}
+.details{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:16px 0}
+.det{background:rgba(255,255,255,.04);border-radius:10px;padding:10px;text-align:center}
+.dv{font-size:13px;font-weight:700;color:#fff}.dl{font-size:9px;color:rgba(255,255,255,.35);margin-top:2px}
+.forecast{display:flex;gap:6px;border-top:1px solid rgba(255,255,255,.06);padding-top:14px}
+.day{flex:1;text-align:center;padding:8px 4px;border-radius:10px;background:rgba(255,255,255,.03)}
+.dn{font-size:9px;color:rgba(255,255,255,.4);margin-bottom:6px}
+.di{font-size:16px;margin-bottom:4px}
+.dt{font-size:11px;font-weight:600;color:#fff}
+</style></head><body>
+<div class="card"><div class="ring"></div>
+<canvas id="cv"></canvas>
+<div class="body">
+  <div class="top">
+    <div><div class="temp">24<span class="deg">°C</span></div><div class="cond">Partly Cloudy</div></div>
+    <div class="loc"><div class="city">San Francisco</div><div class="country">California, US</div></div>
+  </div>
+  <div class="details">
+    <div class="det"><div class="dv">68%</div><div class="dl">Humidity</div></div>
+    <div class="det"><div class="dv">12km/h</div><div class="dl">Wind</div></div>
+    <div class="det"><div class="dv">8km</div><div class="dl">Visibility</div></div>
+  </div>
+  <div class="forecast">
+    <div class="day"><div class="dn">Mon</div><div class="di">☀️</div><div class="dt">26°</div></div>
+    <div class="day"><div class="dn">Tue</div><div class="di">⛅</div><div class="dt">22°</div></div>
+    <div class="day"><div class="dn">Wed</div><div class="di">🌧️</div><div class="dt">18°</div></div>
+    <div class="day"><div class="dn">Thu</div><div class="di">⛅</div><div class="dt">21°</div></div>
+    <div class="day"><div class="dn">Fri</div><div class="di">☀️</div><div class="dt">25°</div></div>
+  </div>
+</div></div>
+<script>
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+cv.width=300;cv.height=140;
+const clouds=Array.from({length:6},()=>({x:Math.random()*400-50,y:20+Math.random()*60,r:18+Math.random()*22,speed:.25+Math.random()*.35,alpha:.12+Math.random()*.1}));
+const stars=Array.from({length:30},()=>({x:Math.random()*300,y:Math.random()*100,r:Math.random()*1.2,t:Math.random()*Math.PI*2}));
+let t=0;
+function draw(){
+  ctx.clearRect(0,0,300,140);
+  const grd=ctx.createLinearGradient(0,0,0,140);
+  grd.addColorStop(0,'rgba(14,30,60,0.9)');grd.addColorStop(1,'rgba(8,12,20,0)');
+  ctx.fillStyle=grd;ctx.fillRect(0,0,300,140);
+  stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=\`rgba(255,255,255,\${.4+Math.sin(t*2+s.t)*.3})\`;ctx.fill();});
+  clouds.forEach(c=>{
+    c.x+=c.speed;if(c.x>350)c.x=-60;
+    ctx.beginPath();ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
+    ctx.arc(c.x+c.r*.7,c.y-c.r*.3,c.r*.7,0,Math.PI*2);
+    ctx.arc(c.x+c.r*1.3,c.y,c.r*.8,0,Math.PI*2);
+    ctx.fillStyle=\`rgba(180,210,255,\${c.alpha})\`;ctx.fill();
+  });
+  t+=0.02;requestAnimationFrame(draw);
+}
+draw();
+</script></body></html>`,
+    code: `'use client'
+import React, { useRef, useEffect } from 'react'
+import { motion } from 'framer-motion'
+
+const FORECAST = [
+  { day:'Mon', icon:'☀️', temp:'26°' },{ day:'Tue', icon:'⛅', temp:'22°' },
+  { day:'Wed', icon:'🌧️', temp:'18°' },{ day:'Thu', icon:'⛅', temp:'21°' },{ day:'Fri', icon:'☀️', temp:'25°' },
+]
+const DETAILS = [{ v:'68%', l:'Humidity' },{ v:'12km/h', l:'Wind' },{ v:'8km', l:'Visibility' }]
+
+export default function WeatherForecastCard() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const cv = canvasRef.current; if (!cv) return
+    const ctx = cv.getContext('2d')!
+    const dpr = window.devicePixelRatio || 1
+    cv.width = 300 * dpr; cv.height = 140 * dpr; ctx.scale(dpr, dpr)
+    const W = 300, H = 140
+
+    const clouds = Array.from({ length: 6 }, () => ({
+      x: Math.random() * 400 - 50, y: 20 + Math.random() * 60,
+      r: 18 + Math.random() * 22, speed: 0.25 + Math.random() * 0.35,
+      alpha: 0.12 + Math.random() * 0.1
+    }))
+    const stars = Array.from({ length: 30 }, () => ({
+      x: Math.random() * W, y: Math.random() * 100,
+      r: Math.random() * 1.2, t: Math.random() * Math.PI * 2
+    }))
+    let t = 0, id: number
+
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H)
+      const grd = ctx.createLinearGradient(0, 0, 0, H)
+      grd.addColorStop(0, 'rgba(14,30,60,0.9)'); grd.addColorStop(1, 'rgba(8,12,20,0)')
+      ctx.fillStyle = grd; ctx.fillRect(0, 0, W, H)
+
+      stars.forEach(s => {
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
+        ctx.fillStyle = \`rgba(255,255,255,\${0.4 + Math.sin(t * 2 + s.t) * 0.3})\`; ctx.fill()
+      })
+      clouds.forEach(c => {
+        c.x += c.speed; if (c.x > 350) c.x = -60
+        ctx.beginPath()
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2)
+        ctx.arc(c.x + c.r * 0.7, c.y - c.r * 0.3, c.r * 0.7, 0, Math.PI * 2)
+        ctx.arc(c.x + c.r * 1.3, c.y, c.r * 0.8, 0, Math.PI * 2)
+        ctx.fillStyle = \`rgba(180,210,255,\${c.alpha})\`; ctx.fill()
+      })
+      t += 0.02; id = requestAnimationFrame(draw)
+    }
+    draw()
+    return () => cancelAnimationFrame(id)
+  }, [])
+
+  return (
+    <div className="flex items-center justify-center w-full h-full p-4">
+      <div className="relative w-[300px] rounded-3xl overflow-hidden bg-[rgba(8,12,20,0.85)] border border-white/[0.07] backdrop-blur-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.9)] group">
+        <motion.div className="absolute inset-0 rounded-3xl pointer-events-none opacity-45 group-hover:opacity-100 transition-opacity duration-500"
+          style={{ background: 'conic-gradient(from 0deg,transparent 25%,#38bdf8 45%,#7dd3fc 60%,transparent 80%)', WebkitMaskImage: 'linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)', WebkitMaskComposite: 'xor', maskComposite: 'exclude', padding: '1.5px' }}
+          animate={{ rotate: 360 }} transition={{ duration: 7, repeat: Infinity, ease: 'linear' }} />
+        <canvas ref={canvasRef} className="absolute top-0 left-0 w-full pointer-events-none" style={{ height: 140 }} />
+        <div className="relative z-10 p-[22px]">
+          <div className="flex justify-between items-start mt-[100px]">
+            <div>
+              <p className="text-6xl font-black text-white leading-none">24<span className="text-2xl font-light text-white/50">°C</span></p>
+              <p className="text-sm text-white/50 mt-1">Partly Cloudy</p>
+            </div>
+            <div className="text-right">
+              <p className="text-sm font-semibold text-white">San Francisco</p>
+              <p className="text-[11px] text-white/40">California, US</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-2 my-4">
+            {DETAILS.map(d => (
+              <div key={d.l} className="bg-white/[0.04] rounded-xl p-2.5 text-center">
+                <p className="text-white font-bold text-sm">{d.v}</p>
+                <p className="text-white/35 text-[9px] mt-0.5">{d.l}</p>
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-1.5 border-t border-white/[0.06] pt-3.5">
+            {FORECAST.map((f, i) => (
+              <motion.div key={f.day} className="flex-1 text-center py-2 rounded-xl bg-white/[0.03]"
+                initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.06 }}>
+                <p className="text-[9px] text-white/40 mb-1">{f.day}</p>
+                <p className="text-base mb-1">{f.icon}</p>
+                <p className="text-xs font-semibold text-white">{f.temp}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}`,
+    prompt: `Create a Weather Forecast Card with animated canvas sky:
+• Canvas sky: drifting semi-transparent cloud blobs + twinkling star particles behind the card header
+• Rotating sky-blue conic border using mask-composite exclude, brightens on hover
+• Temperature hero text + condition label overlaid on canvas area
+• Detail grid: Humidity / Wind / Visibility in glass tiles
+• 5-day forecast row with emoji icons, staggered fade-up entrance`,
+    likes: 0,
+    author: "Animation AI",
+    featured: true,
+    createdAt: "2026-05-22T13:00:00.000Z",
+    updatedAt: "2026-05-22T13:00:00.000Z"
+  },
+  {
+    slug: "music-player-card",
+    title: "Music Player Card",
+    category: "cards",
+    tag: "framer-motion",
+    description: "A premium dark music player card with an animated waveform canvas visualizer, play/pause/skip controls, rotating album art, and a progress bar — all wrapped in a glassmorphism shell with traveling beams.",
+    previewCode: `<!DOCTYPE html><html><head><style>
+*{margin:0;padding:0;box-sizing:border-box}body{min-height:100vh;background:#060409;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif}
+.card{position:relative;width:300px;border-radius:24px;overflow:hidden;background:rgba(6,4,9,.9);border:1px solid rgba(255,255,255,.07);backdrop-filter:blur(20px);box-shadow:0 20px 60px -15px rgba(0,0,0,.9)}
+.beams{position:absolute;inset:0;overflow:hidden;border-radius:24px;pointer-events:none}
+.beam{position:absolute;height:2px;width:55%}
+.bt{top:0;left:-55%;background:linear-gradient(90deg,transparent,#e879f9,transparent);animation:bH 3s ease-in-out infinite}
+.bb{bottom:0;right:-55%;background:linear-gradient(90deg,transparent,#a855f7,transparent);animation:bH2 3s ease-in-out infinite 1.5s}
+@keyframes bH{0%{left:-55%}100%{left:110%}}@keyframes bH2{0%{right:-55%}100%{right:110%}}
+.body{padding:24px;position:relative;z-index:2}
+.album{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#e879f9,#7c3aed);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:36px;box-shadow:0 0 40px rgba(232,121,249,.3);animation:spin 8s linear infinite paused;border:2px solid rgba(255,255,255,.1)}
+.album.playing{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.title{text-align:center;font-size:16px;font-weight:600;color:#fff;margin-bottom:4px}
+.artist{text-align:center;font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px}
+canvas{width:100%;height:40px;display:block;border-radius:8px;margin-bottom:14px}
+.progress{height:3px;background:rgba(255,255,255,.1);border-radius:99px;margin-bottom:16px;cursor:pointer}
+.prog-fill{height:100%;width:30%;background:linear-gradient(90deg,#a855f7,#e879f9);border-radius:99px;transition:width .1s}
+.controls{display:flex;justify-content:center;align-items:center;gap:20px}
+.btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .2s;color:#fff}
+.btn:hover{background:rgba(168,85,247,.3);border-color:rgba(168,85,247,.5);transform:scale(1.1)}
+.play{width:44px;height:44px;background:linear-gradient(135deg,#a855f7,#e879f9);border:none;font-size:16px;box-shadow:0 0 20px rgba(168,85,247,.4)}
+.play:hover{transform:scale(1.12);box-shadow:0 0 30px rgba(168,85,247,.6)}
+</style></head><body>
+<div class="card"><div class="beams"><div class="beam bt"></div><div class="beam bb"></div></div>
+<div class="body">
+  <div class="album" id="album">🎵</div>
+  <div class="title">Neon Dreams</div>
+  <div class="artist">Synthwave Collective</div>
+  <canvas id="cv" height="40"></canvas>
+  <div class="progress"><div class="prog-fill" id="prog"></div></div>
+  <div class="controls">
+    <div class="btn">⏮</div>
+    <div class="btn play" id="play">▶</div>
+    <div class="btn">⏭</div>
+  </div>
+</div></div>
+<script>
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+cv.width=cv.offsetWidth*2||540;cv.height=80;ctx.scale(2,1);
+const W=cv.offsetWidth/2||270,H=40;
+let playing=false,prog=30,t=0;
+const bars=Array.from({length:36},()=>({h:5+Math.random()*20,v:Math.random()*Math.PI*2}));
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  bars.forEach((b,i)=>{
+    const h=playing?8+Math.abs(Math.sin(t*3+b.v))*22:b.h;
+    const x=i*(W/36);const y=(H-h)/2;
+    const g=ctx.createLinearGradient(0,y,0,y+h);
+    g.addColorStop(0,'rgba(232,121,249,0.8)');g.addColorStop(1,'rgba(168,85,247,0.4)');
+    ctx.fillStyle=g;ctx.fillRect(x,y,W/36-2,h);
+  });
+  if(playing){prog=Math.min(prog+.015,100);document.getElementById('prog').style.width=prog+'%';}
+  t+=0.04;requestAnimationFrame(draw);
+}
+draw();
+document.getElementById('play').addEventListener('click',()=>{
+  playing=!playing;
+  document.getElementById('play').textContent=playing?'⏸':'▶';
+  document.getElementById('album').className='album'+(playing?' playing':'');
+});
+</script></body></html>`,
+    code: `'use client'
+import React, { useRef, useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+
+export default function MusicPlayerCard() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [playing, setPlaying] = useState(false)
+  const [progress, setProgress] = useState(30)
+  const playingRef = useRef(false)
+  const progressRef = useRef(30)
+
+  useEffect(() => {
+    playingRef.current = playing
+  }, [playing])
+
+  useEffect(() => {
+    const cv = canvasRef.current; if (!cv) return
+    const ctx = cv.getContext('2d')!
+    const dpr = window.devicePixelRatio || 1
+    const W = 256, H = 40
+    cv.width = W * dpr; cv.height = H * dpr; ctx.scale(dpr, dpr)
+
+    const bars = Array.from({ length: 36 }, () => ({ h: 5 + Math.random() * 20, v: Math.random() * Math.PI * 2 }))
+    let t = 0, id: number
+
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H)
+      bars.forEach((b, i) => {
+        const h = playingRef.current ? 8 + Math.abs(Math.sin(t * 3 + b.v)) * 22 : b.h
+        const x = i * (W / 36), y = (H - h) / 2
+        const g = ctx.createLinearGradient(0, y, 0, y + h)
+        g.addColorStop(0, 'rgba(232,121,249,0.8)'); g.addColorStop(1, 'rgba(168,85,247,0.4)')
+        ctx.fillStyle = g; ctx.fillRect(x, y, W / 36 - 2, h)
+      })
+      if (playingRef.current) {
+        progressRef.current = Math.min(progressRef.current + 0.015, 100)
+        setProgress(progressRef.current)
+      }
+      t += 0.04; id = requestAnimationFrame(draw)
+    }
+    draw()
+    return () => cancelAnimationFrame(id)
+  }, [])
+
+  const BEAMS = [
+    { cls: 'top-0 left-0 h-[2px] w-[55%]', color: '#e879f9', anim: { left: ['-55%', '110%'] }, delay: 0 },
+    { cls: 'bottom-0 right-0 h-[2px] w-[55%]', color: '#a855f7', anim: { right: ['-55%', '110%'] }, delay: 1.5 },
+  ]
+
+  return (
+    <div className="flex items-center justify-center w-full h-full p-4">
+      <div className="relative w-[300px] rounded-3xl overflow-hidden bg-[rgba(6,4,9,0.9)] border border-white/[0.07] backdrop-blur-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.9)] group">
+        <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
+          {BEAMS.map((b, i) => (
+            <motion.div key={i} className={\`absolute \${b.cls}\`}
+              style={{ background: \`linear-gradient(90deg,transparent,\${b.color},transparent)\`, opacity: 0.6 }}
+              animate={b.anim as any}
+              transition={{ duration: 3, ease: 'easeInOut', repeat: Infinity, repeatDelay: 1, delay: b.delay }} />
+          ))}
+        </div>
+        <div className="relative z-10 p-6">
+          <motion.div className="w-[100px] h-[100px] rounded-full bg-gradient-to-br from-violet-700 via-fuchsia-500 to-violet-700 mx-auto mb-4 flex items-center justify-center text-4xl border-2 border-white/10 shadow-[0_0_40px_rgba(232,121,249,0.3)]"
+            animate={{ rotate: playing ? 360 : 0 }}
+            transition={{ duration: 8, repeat: playing ? Infinity : 0, ease: 'linear' }}>
+            🎵
+          </motion.div>
+          <p className="text-white font-semibold text-base text-center">Neon Dreams</p>
+          <p className="text-white/40 text-xs text-center mt-1 mb-4">Synthwave Collective</p>
+          <canvas ref={canvasRef} className="w-full rounded-lg mb-3.5" style={{ height: 40 }} />
+          <div className="h-[3px] bg-white/10 rounded-full mb-4 overflow-hidden cursor-pointer">
+            <motion.div className="h-full bg-gradient-to-r from-purple-500 to-fuchsia-400 rounded-full"
+              style={{ width: \`\${progress}%\` }} />
+          </div>
+          <div className="flex justify-center items-center gap-5">
+            {[['⏮', 36], ['', 44], ['⏭', 36]].map(([icon, size], i) => {
+              const isPlay = i === 1
+              return (
+                <motion.button key={i}
+                  onClick={isPlay ? () => setPlaying(p => !p) : undefined}
+                  whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.92 }}
+                  className="rounded-full flex items-center justify-center text-white transition-colors"
+                  style={{
+                    width: size as number, height: size as number,
+                    background: isPlay ? 'linear-gradient(135deg,#a855f7,#e879f9)' : 'rgba(255,255,255,0.06)',
+                    border: isPlay ? 'none' : '1px solid rgba(255,255,255,0.1)',
+                    boxShadow: isPlay ? '0 0 20px rgba(168,85,247,0.4)' : 'none',
+                    fontSize: isPlay ? 16 : 14,
+                  }}>
+                  <AnimatePresence mode="wait">
+                    <motion.span key={isPlay ? String(playing) : String(i)}
+                      initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.5, opacity: 0 }}
+                      transition={{ duration: 0.15 }}>
+                      {isPlay ? (playing ? '⏸' : '▶') : icon}
+                    </motion.span>
+                  </AnimatePresence>
+                </motion.button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}`,
+    prompt: `Create a Music Player Card with canvas waveform visualizer:
+• Canvas waveform: 36 bars animate with sine wave heights when playing=true, static when paused
+• Album art rotates continuously via Framer Motion animate rotate:360 when playing, stops when paused
+• Play/pause toggles with AnimatePresence icon swap (▶ ↔ ⏸)
+• Progress bar width tied to ref that increments 0.015 per frame while playing
+• Fuchsia/purple traveling beams on top+bottom, gradient CTA play button with glow shadow`,
+    likes: 0,
+    author: "Animation AI",
+    featured: true,
+    createdAt: "2026-05-22T13:00:00.000Z",
+    updatedAt: "2026-05-22T13:00:00.000Z"
+  },
+  {
+    slug: "code-snippet-card",
+    title: "Code Snippet Card",
+    category: "cards",
+    tag: "css",
+    description: "A premium dark code snippet display card with syntax-highlighted lines, a copy-to-clipboard button with animated checkmark feedback, line numbers, and a cyan sweeping border beam.",
+    previewCode: `<!DOCTYPE html><html><head><style>
+*{margin:0;padding:0;box-sizing:border-box}body{min-height:100vh;background:#08090e;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif}
+.card{position:relative;width:340px;border-radius:20px;overflow:hidden;background:#0d1117;border:1px solid rgba(255,255,255,.07);box-shadow:0 20px 60px -15px rgba(0,0,0,.9)}
+.beams{position:absolute;inset:0;overflow:hidden;border-radius:20px;pointer-events:none}
+.beam{position:absolute;height:2px;width:55%}
+.bt{top:0;left:-55%;background:linear-gradient(90deg,transparent,#22d3ee,transparent);animation:bH 3s ease-in-out infinite}
+.bb{bottom:0;right:-55%;background:linear-gradient(90deg,transparent,#0ea5e9,transparent);animation:bH2 3s ease-in-out infinite 1.5s}
+@keyframes bH{0%{left:-55%}100%{left:110%}}@keyframes bH2{0%{right:-55%}100%{right:110%}}
+.header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#161b22;border-bottom:1px solid rgba(255,255,255,.06)}
+.dots{display:flex;gap:6px}.dot{width:10px;height:10px;border-radius:50%}
+.lang{font-size:11px;font-family:monospace;color:rgba(255,255,255,.35);letter-spacing:.5px}
+.copy{padding:4px 10px;border-radius:6px;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.2);font-size:11px;color:#22d3ee;cursor:pointer;transition:all .2s;font-family:monospace}
+.copy:hover{background:rgba(34,211,238,.2)}
+.copy.done{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:#10b981}
+pre{padding:16px;overflow-x:auto;font-size:13px;line-height:1.7;font-family:'Fira Code',monospace}
+.ln{color:rgba(255,255,255,.2);user-select:none;margin-right:16px;display:inline-block;width:16px;text-align:right}
+.kw{color:#ff7b72}.fn{color:#d2a8ff}.str{color:#a5d6ff}.cm{color:#8b949e;font-style:italic}.num{color:#79c0ff}.op{color:#ff7b72}
+.tag{font-size:10px;font-family:monospace;color:rgba(255,255,255,.25);padding:0 16px 10px;display:block}
+</style></head><body>
+<div class="card"><div class="beams"><div class="beam bt"></div><div class="beam bb"></div></div>
+<div class="header">
+  <div class="dots"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+  <span class="lang">TYPESCRIPT</span>
+  <button class="copy" id="copy" onclick="doCopy()">Copy</button>
+</div>
+<pre><span class="ln">1</span><span class="cm">// Particle physics engine</span>
+<span class="ln">2</span><span class="kw">function</span> <span class="fn">createParticle</span>(<span class="fn">x</span>: <span class="str">number</span>) {
+<span class="ln">3</span>  <span class="kw">return</span> {
+<span class="ln">4</span>    pos: { x, y: <span class="num">0</span> },
+<span class="ln">5</span>    vel: <span class="fn">randomVec</span>(<span class="num">2.5</span>),
+<span class="ln">6</span>    life: <span class="num">1.0</span>,
+<span class="ln">7</span>    <span class="fn">update</span>() {
+<span class="ln">8</span>      <span class="kw">this</span>.pos.<span class="fn">x</span> += <span class="kw">this</span>.vel.x
+<span class="ln">9</span>      <span class="kw">this</span>.life -= <span class="num">0.02</span>
+<span class="ln">10</span>    }
+<span class="ln">11</span>  }
+<span class="ln">12</span>}</pre>
+<span class="tag">// animation-ai · snippet #047</span>
+</div>
+<script>
+function doCopy(){
+  const btn=document.getElementById('copy');
+  btn.textContent='✓ Copied';btn.className='copy done';
+  setTimeout(()=>{btn.textContent='Copy';btn.className='copy';},2000);
+}
+</script></body></html>`,
+    code: `'use client'
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+
+const LINES = [
+  { n:1, tokens:[{ t:'cm', v:'// Particle physics engine' }] },
+  { n:2, tokens:[{ t:'kw', v:'function' },{ t:'', v:' ' },{ t:'fn', v:'createParticle' },{ t:'', v:'(' },{ t:'fn', v:'x' },{ t:'', v:': ' },{ t:'str', v:'number' },{ t:'', v:') {' }] },
+  { n:3, tokens:[{ t:'', v:'  ' },{ t:'kw', v:'return' },{ t:'', v:' {' }] },
+  { n:4, tokens:[{ t:'', v:'    pos: { x, y: ' },{ t:'num', v:'0' },{ t:'', v:' },' }] },
+  { n:5, tokens:[{ t:'', v:'    vel: ' },{ t:'fn', v:'randomVec' },{ t:'', v:'(' },{ t:'num', v:'2.5' },{ t:'', v:'),' }] },
+  { n:6, tokens:[{ t:'', v:'    life: ' },{ t:'num', v:'1.0' },{ t:'', v:',' }] },
+  { n:7, tokens:[{ t:'', v:'    ' },{ t:'fn', v:'update' },{ t:'', v:'() {' }] },
+  { n:8, tokens:[{ t:'kw', v:'this' },{ t:'', v:'.pos.' },{ t:'fn', v:'x' },{ t:'', v:' += ' },{ t:'kw', v:'this' },{ t:'', v:'.vel.x' }] },
+  { n:9, tokens:[{ t:'kw', v:'this' },{ t:'', v:'.life -= ' },{ t:'num', v:'0.02' }] },
+  { n:10, tokens:[{ t:'', v:'    }' }] },
+  { n:11, tokens:[{ t:'', v:'  }' }] },
+  { n:12, tokens:[{ t:'', v:'}' }] },
+]
+
+const CLR: Record<string,string> = { kw:'#ff7b72', fn:'#d2a8ff', str:'#a5d6ff', cm:'#8b949e', num:'#79c0ff', '':'rgba(230,237,243,0.85)' }
+
+export default function CodeSnippetCard() {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = () => {
+    navigator.clipboard?.writeText('function createParticle(x: number) { ... }')
+    setCopied(true); setTimeout(() => setCopied(false), 2000)
+  }
+
+  const BEAMS = [
+    { cls:'top-0 left-0 h-[2px] w-[55%]', color:'#22d3ee', anim:{ left:['-55%','110%'] }, delay:0 },
+    { cls:'bottom-0 right-0 h-[2px] w-[55%]', color:'#0ea5e9', anim:{ right:['-55%','110%'] }, delay:1.5 },
+  ]
+
+  return (
+    <div className="flex items-center justify-center w-full h-full p-4">
+      <div className="relative w-[340px] rounded-[20px] overflow-hidden bg-[#0d1117] border border-white/[0.07] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.9)]">
+        <div className="absolute inset-0 overflow-hidden rounded-[20px] pointer-events-none">
+          {BEAMS.map((b,i)=>(
+            <motion.div key={i} className={\`absolute \${b.cls}\`}
+              style={{background:\`linear-gradient(90deg,transparent,\${b.color},transparent)\`,opacity:0.65}}
+              animate={b.anim as any}
+              transition={{duration:3,ease:'easeInOut',repeat:Infinity,repeatDelay:1,delay:b.delay}}/>
+          ))}
+        </div>
+        <div className="flex justify-between items-center px-4 py-3 bg-[#161b22] border-b border-white/[0.06]">
+          <div className="flex gap-1.5">
+            {['#ff5f57','#febc2e','#28c840'].map(c=><div key={c} className="w-2.5 h-2.5 rounded-full" style={{background:c}}/>)}
+          </div>
+          <span className="font-mono text-[11px] text-white/35 tracking-wider">TYPESCRIPT</span>
+          <motion.button onClick={handleCopy} whileHover={{scale:1.05}} whileTap={{scale:0.95}}
+            className="px-2.5 py-1 rounded-md font-mono text-[11px] transition-all duration-300 border"
+            style={{ background: copied ? 'rgba(16,185,129,0.1)' : 'rgba(34,211,238,0.1)', borderColor: copied ? 'rgba(16,185,129,0.3)' : 'rgba(34,211,238,0.2)', color: copied ? '#10b981' : '#22d3ee' }}>
+            <AnimatePresence mode="wait">
+              <motion.span key={String(copied)} initial={{opacity:0,y:3}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-3}} transition={{duration:0.15}}>
+                {copied ? '✓ Copied' : 'Copy'}
+              </motion.span>
+            </AnimatePresence>
+          </motion.button>
+        </div>
+        <pre className="p-4 overflow-x-auto text-[13px] leading-[1.7] font-mono">
+          {LINES.map((line,i)=>(
+            <motion.div key={line.n} className="flex" initial={{opacity:0,x:-6}} animate={{opacity:1,x:0}} transition={{delay:0.03*i}}>
+              <span className="text-white/20 w-5 text-right mr-4 select-none flex-shrink-0 text-xs leading-[1.7]">{line.n}</span>
+              <span>{line.tokens.map((tk,j)=><span key={j} style={{color:CLR[tk.t]||CLR[''],fontStyle:tk.t==='cm'?'italic':'normal'}}>{tk.v}</span>)}</span>
+            </motion.div>
+          ))}
+        </pre>
+        <p className="font-mono text-[10px] text-white/25 px-4 pb-3">// animation-ai · snippet #047</p>
+      </div>
+    </div>
+  )
+}`,
+    prompt: `Create a Code Snippet Card with syntax highlighting:
+• Syntax token spans with themed colors per type (keyword/fn/string/comment/number)
+• Line numbers column with dimmed color and select-none
+• macOS window chrome (red/yellow/green dots) + language badge header
+• Copy button toggles to "✓ Copied" with AnimatePresence text swap and color change
+• Cyan traveling beams on top+bottom edges with 1.5s stagger`,
+    likes: 0,
+    author: "Animation AI",
+    featured: true,
+    createdAt: "2026-05-22T13:30:00.000Z",
+    updatedAt: "2026-05-22T13:30:00.000Z"
+  },
+  {
+    slug: "task-board-card",
+    title: "Task Board Card",
+    category: "cards",
+    tag: "framer-motion",
+    description: "An interactive Kanban-style task board card with draggable task pills, animated completion checkboxes, a live progress ring, and traveling amber border beams.",
+    previewCode: `<!DOCTYPE html><html><head><style>
+*{margin:0;padding:0;box-sizing:border-box}body{min-height:100vh;background:#090810;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif}
+.card{position:relative;width:300px;border-radius:22px;overflow:hidden;background:rgba(9,8,16,.9);border:1px solid rgba(255,255,255,.07);backdrop-filter:blur(20px);box-shadow:0 20px 60px -15px rgba(0,0,0,.9)}
+.beams{position:absolute;inset:0;overflow:hidden;border-radius:22px;pointer-events:none}
+.beam{position:absolute;height:2px;width:55%}
+.bt{top:0;left:-55%;background:linear-gradient(90deg,transparent,#f59e0b,transparent);animation:bH 3s ease-in-out infinite}
+.bb{bottom:0;right:-55%;background:linear-gradient(90deg,transparent,#fbbf24,transparent);animation:bH2 3s ease-in-out infinite 1.5s}
+@keyframes bH{0%{left:-55%}100%{left:110%}}@keyframes bH2{0%{right:-55%}100%{right:110%}}
+.body{padding:20px;position:relative;z-index:2}
+.hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.htitle{font-size:15px;font-weight:600;color:#fff}
+.ring-wrap{position:relative;width:40px;height:40px}
+svg.ring{width:40px;height:40px;transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:3}
+.ring-fill{fill:none;stroke:#f59e0b;stroke-width:3;stroke-linecap:round;stroke-dasharray:100;transition:stroke-dashoffset .6s ease}
+.ring-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#f59e0b}
+.col-label{font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.task{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);margin-bottom:6px;cursor:pointer;transition:background .2s}
+.task:hover{background:rgba(255,255,255,.07)}
+.cb{width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(255,255,255,.25);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:9px}
+.cb.done{background:#f59e0b;border-color:#f59e0b;color:#000}
+.task-text{font-size:12px;color:rgba(255,255,255,.8);transition:all .2s}
+.task-text.done{color:rgba(255,255,255,.3);text-decoration:line-through}
+.chip{margin-left:auto;font-size:9px;padding:2px 7px;border-radius:99px;flex-shrink:0}
+.add{width:100%;margin-top:10px;padding:8px;border-radius:10px;background:rgba(245,158,11,.08);border:1px dashed rgba(245,158,11,.2);color:rgba(245,158,11,.6);font-size:12px;cursor:pointer;transition:all .2s;text-align:center}
+.add:hover{background:rgba(245,158,11,.15);color:#f59e0b}
+</style></head><body>
+<div class="card"><div class="beams"><div class="beam bt"></div><div class="beam bb"></div></div>
+<div class="body">
+  <div class="hdr">
+    <div><div class="htitle">Sprint #12</div><div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:2px">4 tasks · Due Friday</div></div>
+    <div class="ring-wrap">
+      <svg class="ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9"/><circle class="ring-fill" id="rf" cx="18" cy="18" r="15.9" stroke-dashoffset="75"/></svg>
+      <div class="ring-txt" id="rp">25%</div>
+    </div>
+  </div>
+  <div class="col-label">In Progress</div>
+  <div id="tasks"></div>
+  <div class="add" onclick="addTask()">+ Add task</div>
+</div></div>
+<script>
+const TASKS=[
+  {t:'Design system tokens',done:true,chip:'Design',cc:'rgba(168,85,247,.15)',tc:'#a855f7'},
+  {t:'API rate limiting',done:false,chip:'Backend',cc:'rgba(6,182,212,.15)',tc:'#06b6d4'},
+  {t:'Write unit tests',done:false,chip:'QA',cc:'rgba(16,185,129,.15)',tc:'#10b981'},
+  {t:'Deploy to staging',done:false,chip:'DevOps',cc:'rgba(245,158,11,.15)',tc:'#f59e0b'},
+];
+function pct(){return Math.round(TASKS.filter(t=>t.done).length/TASKS.length*100)}
+function updateRing(){const p=pct();const o=100-(p/100*100);document.getElementById('rf').style.strokeDashoffset=o;document.getElementById('rp').textContent=p+'%';}
+function render(){
+  const c=document.getElementById('tasks');c.innerHTML='';
+  TASKS.forEach((tk,i)=>{
+    const d=document.createElement('div');d.className='task';d.onclick=()=>{tk.done=!tk.done;render();updateRing();};
+    d.innerHTML=\`<div class="cb \${tk.done?'done':''}\">\${tk.done?'✓':''}</div><span class="task-text \${tk.done?'done':''}">\${tk.t}</span><span class="chip" style="background:\${tk.cc};color:\${tk.tc}">\${tk.chip}</span>\`;
+    c.appendChild(d);
+  });
+}
+render();updateRing();
+let extra=0;
+function addTask(){if(extra>1)return;extra++;TASKS.push({t:'New task '+(extra),done:false,chip:'Todo',cc:'rgba(255,255,255,.07)',tc:'rgba(255,255,255,.5)'});render();updateRing();}
+</script></body></html>`,
+    code: `'use client'
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+
+interface Task { id: number; text: string; done: boolean; chip: string; chipBg: string; chipColor: string }
+
+const INIT: Task[] = [
+  { id:1, text:'Design system tokens', done:true, chip:'Design', chipBg:'rgba(168,85,247,0.15)', chipColor:'#a855f7' },
+  { id:2, text:'API rate limiting', done:false, chip:'Backend', chipBg:'rgba(6,182,212,0.15)', chipColor:'#06b6d4' },
+  { id:3, text:'Write unit tests', done:false, chip:'QA', chipBg:'rgba(16,185,129,0.15)', chipColor:'#10b981' },
+  { id:4, text:'Deploy to staging', done:false, chip:'DevOps', chipBg:'rgba(245,158,11,0.15)', chipColor:'#f59e0b' },
+]
+
+export default function TaskBoardCard() {
+  const [tasks, setTasks] = useState<Task[]>(INIT)
+  const toggle = (id: number) => setTasks(ts => ts.map(t => t.id === id ? { ...t, done: !t.done } : t))
+
+  const done = tasks.filter(t => t.done).length
+  const pct = Math.round(done / tasks.length * 100)
+  const circumference = 2 * Math.PI * 15.9
+  const offset = circumference - (pct / 100) * circumference
+
+  const BEAMS = [
+    { cls:'top-0 left-0 h-[2px] w-[55%]', color:'#f59e0b', anim:{ left:['-55%','110%'] }, delay:0 },
+    { cls:'bottom-0 right-0 h-[2px] w-[55%]', color:'#fbbf24', anim:{ right:['-55%','110%'] }, delay:1.5 },
+  ]
+
+  return (
+    <div className="flex items-center justify-center w-full h-full p-4">
+      <div className="relative w-[300px] rounded-[22px] overflow-hidden bg-[rgba(9,8,16,0.9)] border border-white/[0.07] backdrop-blur-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.9)]">
+        <div className="absolute inset-0 overflow-hidden rounded-[22px] pointer-events-none">
+          {BEAMS.map((b,i)=>(
+            <motion.div key={i} className={\`absolute \${b.cls}\`}
+              style={{background:\`linear-gradient(90deg,transparent,\${b.color},transparent)\`,opacity:0.65}}
+              animate={b.anim as any}
+              transition={{duration:3,ease:'easeInOut',repeat:Infinity,repeatDelay:1,delay:b.delay}}/>
+          ))}
+        </div>
+        <div className="relative z-10 p-5">
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <p className="text-white font-semibold text-[15px]">Sprint #12</p>
+              <p className="text-white/30 text-[10px] mt-0.5">{tasks.length} tasks · Due Friday</p>
+            </div>
+            <div className="relative w-10 h-10">
+              <svg className="w-10 h-10" style={{transform:'rotate(-90deg)'}} viewBox="0 0 36 36">
+                <circle fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="3" cx="18" cy="18" r="15.9"/>
+                <motion.circle fill="none" stroke="#f59e0b" strokeWidth="3" strokeLinecap="round" cx="18" cy="18" r="15.9"
+                  style={{strokeDasharray:circumference}}
+                  animate={{strokeDashoffset:offset}} transition={{duration:0.6,ease:'easeOut'}}/>
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-amber-400">{pct}%</div>
+            </div>
+          </div>
+          <p className="text-[9px] text-white/30 uppercase tracking-widest mb-2">In Progress</p>
+          <div className="space-y-1.5">
+            <AnimatePresence>
+              {tasks.map(task=>(
+                <motion.div key={task.id} layout
+                  initial={{opacity:0,x:-8}} animate={{opacity:1,x:0}} exit={{opacity:0,x:8}}
+                  onClick={()=>toggle(task.id)}
+                  className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06] cursor-pointer hover:bg-white/[0.07] transition-colors">
+                  <motion.div
+                    className="w-4 h-4 rounded-full border-[1.5px] flex-shrink-0 flex items-center justify-center text-[9px]"
+                    animate={{ background: task.done ? '#f59e0b' : 'transparent', borderColor: task.done ? '#f59e0b' : 'rgba(255,255,255,0.25)', color: task.done ? '#000' : 'transparent' }}
+                    transition={{duration:0.2}}>
+                    ✓
+                  </motion.div>
+                  <motion.span className="text-xs flex-1" animate={{color: task.done ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.8)', textDecoration: task.done ? 'line-through' : 'none'}} transition={{duration:0.2}}>
+                    {task.text}
+                  </motion.span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded-full flex-shrink-0" style={{background:task.chipBg,color:task.chipColor}}>{task.chip}</span>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+          <motion.button whileHover={{scale:1.01}} whileTap={{scale:0.98}}
+            className="w-full mt-3 py-2 rounded-xl bg-amber-500/[0.08] border border-dashed border-amber-500/20 text-amber-500/60 hover:text-amber-400 hover:bg-amber-500/15 hover:border-amber-500/30 transition-all text-xs">
+            + Add task
+          </motion.button>
+        </div>
+      </div>
+    </div>
+  )
+}`,
+    prompt: `Create a Task Board Card with Framer Motion:
+• Animated SVG progress ring: strokeDashoffset animates smoothly via Framer Motion on task toggle
+• Task rows: click toggles done state; checkbox animates background+border with amber fill; text gets line-through
+• AnimatePresence wraps task list with layout prop for smooth reorder animations
+• Amber traveling beams on top+bottom edges with 1.5s stagger
+• Add task button with dashed amber border hover transition`,
+    likes: 0,
+    author: "Animation AI",
+    featured: true,
+    createdAt: "2026-05-22T13:30:00.000Z",
+    updatedAt: "2026-05-22T13:30:00.000Z"
   }
 ];
+
+
 
 
 
