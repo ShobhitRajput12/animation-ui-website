@@ -1,9 +1,12 @@
 import Link from 'next/link'
 import { connectDB } from '@/lib/mongodb'
 import Animation from '@/lib/models/Animation'
+import { SAMPLE_ANIMATIONS } from '@/lib/sampleAnimations'
 import FeaturedGrid from '@/components/ui/FeaturedGrid'
 import HomeNavbar from '@/components/ui/HomeNavbar'
 import Footer from '@/components/ui/Footer'
+
+export const dynamic = 'force-dynamic'
 
 async function getFeatured() {
   try {
@@ -17,7 +20,10 @@ async function getFeatured() {
     return JSON.parse(JSON.stringify(data))
   } catch (err) {
     console.error('HomePage Error:', err)
-    return []
+    return SAMPLE_ANIMATIONS
+      .filter((item) => item.featured)
+      .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
+      .slice(0, 6)
   }
 }
 
