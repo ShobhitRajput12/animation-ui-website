@@ -187,7 +187,7 @@ type RobotMode = {
 }
 
 const MODES: RobotMode[] = [
-  { name: 'Patrol Protocol', title: 'Sentinel Mode', title: 'Sentinel Mode', accent: '#6af7ff' },
+  { name: 'Patrol Protocol', title: 'Sentinel Mode', accent: '#6af7ff' },
   { name: 'Defense Protocol', title: 'Threat Scan', accent: '#ff8f6a' },
   { name: 'Repair Protocol', title: 'Maintenance Loop', accent: '#82ffb5' },
 ]
