@@ -1,0 +1,11 @@
+# PR_FIX_TODO
+
+- [ ] Add 4 new footer items into app/category/footers/data.ts (FOOTER_DATA)
+  - [ ] curtain-marquee-privacy-footer (tag: css)
+  - [ ] magnetic-pill-credits-footer (tag: css)
+  - [ ] svg-text-reveal-footer (tag: css)
+  - [ ] scroll-spotlight-grid-footer (tag: css)
+
+Note:
+- User requested: write data in todo files; they will update manually.
+

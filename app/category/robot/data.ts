@@ -1,7 +1,7 @@
 export const ROBOT_DATA = [
   {
     "_id": "robot-cybernetic-core-observer",
-    "slug": "cybernetic-core-observer",
+    "slug": "cybernetic-core-observer-robot",
     "title": "Cybernetic Core Observer",
     "category": "robot",
     "tag": "threejs",
@@ -502,7 +502,7 @@ export default function OrbitalMechDrone() {
   },
   {
     _id: 'robot-quantum-aegis-sentinel',
-    slug: 'quantum-aegis-sentinel',
+    slug: 'quantum-aegis-sentinel-robot',
     title: 'Quantum Aegis Sentinel',
     category: 'robot',
     tag: 'threejs',
@@ -1016,7 +1016,7 @@ export default function QuantumAegisSentinel() {
   },
   {
     _id: 'robot-nebula-chrono-core',
-    slug: 'nebula-chrono-core',
+    slug: 'nebula-chrono-core-robot',
     title: 'Nebula Chrono-Mech Core',
     category: 'robot',
     tag: 'threejs',
@@ -1493,206 +1493,6 @@ export default function NebulaChronoMechCore() {
     featured: true,
     createdAt: '2026-05-22T09:05:00.000Z',
     updatedAt: '2026-05-22T09:05:00.000Z'
-  },
-  {
-    _id: 'robot-spline-obsidian-sentinel-x',
-    slug: 'spline-obsidian-sentinel-x',
-    title: 'Spline Obsidian Sentinel X',
-    category: 'robot',
-    tag: 'react',
-    description:
-      'An advanced robotic Spline presentation with cursor-linked lighting, protocol switching, immersive HUD overlays, and a stronger black-chrome silhouette than the reference.',
-    previewCode: `<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><style>
-*{box-sizing:border-box;margin:0;padding:0}body{background:#020304;font-family:Arial,sans-serif;overflow:hidden}
-.stage{position:relative;min-height:100vh;padding:28px;background:
-radial-gradient(circle at var(--mx,24%) 18%,rgba(255,255,255,.22),transparent 18%),
-radial-gradient(circle at 74% 52%,rgba(110,244,255,.08),transparent 22%),
-linear-gradient(135deg,#040404 0%,#050607 42%,#010101 100%)}
-.stage:before{content:'';position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(to bottom,transparent,black 12%,black 88%,transparent);opacity:.26}
-.panel{position:absolute;z-index:3;padding:18px 18px 16px;border-radius:24px;border:1px solid rgba(255,255,255,.08);background:rgba(6,9,12,.72);backdrop-filter:blur(14px);color:#edfaff;box-shadow:0 20px 45px rgba(0,0,0,.28)}
-.panel small{display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:rgba(213,243,255,.5);margin-bottom:10px}
-.panel h1{font-size:28px;line-height:1;margin-bottom:10px}
-.panel p{font-size:13px;line-height:1.6;color:rgba(230,245,255,.65)}
-.panel.left{left:26px;top:26px;width:270px}.panel.right{right:26px;top:26px;width:210px}
-.stat{display:flex;justify-content:space-between;gap:18px;padding:10px 0;border-top:1px solid rgba(255,255,255,.07);font-size:12px}
-.stat b{color:#fff}
-.dock{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;min-height:100vh}
-.frame{position:relative;width:min(720px,100%);height:min(82vh,760px);border-radius:38px;border:1px solid rgba(255,255,255,.08);overflow:hidden;background:
-radial-gradient(circle at 50% 14%,rgba(255,255,255,.08),transparent 16%),
-radial-gradient(circle at 50% 44%,rgba(255,255,255,.04),transparent 24%),
-linear-gradient(180deg,#0a0b0d 0%,#020202 100%);
-box-shadow:0 36px 100px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.06)}
-.frame:before{content:'';position:absolute;inset:-24%;background:conic-gradient(from 0deg,transparent,rgba(137,240,255,.12),transparent 34%,rgba(255,255,255,.06),transparent 60%,rgba(255,98,98,.08),transparent 82%);animation:spin 18s linear infinite}
-.frame:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 16%,transparent 78%,rgba(255,255,255,.02));pointer-events:none}
-.spot{position:absolute;left:50%;top:-14%;width:58%;height:36%;transform:translateX(-50%);background:radial-gradient(circle,rgba(255,255,255,.58) 0%,rgba(255,255,255,.22) 30%,transparent 72%);filter:blur(28px)}
-.ring{position:absolute;left:50%;top:46%;width:410px;height:410px;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(145,241,255,.12);box-shadow:0 0 80px rgba(145,241,255,.08) inset}
-.ring:before,.ring:after{content:'';position:absolute;inset:18px;border-radius:50%;border:1px dashed rgba(255,255,255,.09)}.ring:after{inset:52px;animation:spin 24s linear reverse infinite}
-.robot{position:absolute;left:50%;bottom:42px;width:310px;height:610px;transform:translateX(-50%) rotateY(calc((var(--x,.5) - .5)*20deg)) rotateX(calc((.5 - var(--y,.5))*10deg));transform-style:preserve-3d}
-.robot:before{content:'';position:absolute;left:50%;bottom:6px;width:250px;height:56px;transform:translateX(-50%);background:radial-gradient(circle,rgba(120,240,255,.18),transparent 70%);filter:blur(14px)}
-.head{position:absolute;left:50%;top:12px;width:136px;height:160px;transform:translateX(-50%);border-radius:44px 44px 36px 36px;background:linear-gradient(165deg,#20242b 0%,#020202 40%,#0c0d10 70%,#252a31 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -12px 18px rgba(255,255,255,.04),0 22px 40px rgba(0,0,0,.56)}
-.head:before{content:'';position:absolute;left:26px;right:26px;top:28px;height:42px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.03));box-shadow:inset 0 0 32px rgba(132,245,255,.12)}
-.head:after{content:'';position:absolute;left:50%;top:42px;width:34px;height:18px;transform:translateX(-50%);border-radius:999px;background:radial-gradient(circle,#ffffff 0%,#d7fdff 20%,#83f2ff 45%,#091015 85%);box-shadow:0 0 32px rgba(131,242,255,.72)}
-.neck{position:absolute;left:50%;top:158px;width:56px;height:34px;transform:translateX(-50%);border-radius:16px;background:linear-gradient(180deg,#2d323a,#0a0b0d)}
-.torso{position:absolute;left:50%;top:174px;width:198px;height:266px;transform:translateX(-50%);border-radius:32% 32% 22% 22%/18% 18% 16% 16%;background:linear-gradient(180deg,#181c22 0%,#010101 54%,#171b21 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),inset 0 -18px 22px rgba(255,255,255,.04),0 28px 54px rgba(0,0,0,.58)}
-.torso:before{content:'';position:absolute;left:50%;top:74px;width:68px;height:68px;transform:translateX(-50%);border-radius:24px;background:radial-gradient(circle,#f8ffff 0%,#7bf1ff 18%,rgba(123,241,255,.22) 44%,rgba(12,19,24,.2) 70%);box-shadow:0 0 34px rgba(123,241,255,.4)}
-.torso:after{content:'';position:absolute;left:50%;top:52px;width:138px;height:138px;transform:translateX(-50%) rotateX(74deg);border-radius:50%;border:1px solid rgba(134,245,255,.2);animation:spin 10s linear infinite}
-.shoulder,.forearm,.thigh,.shin{position:absolute;background:linear-gradient(180deg,#242931 0%,#050608 60%,#1d2128 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
-.shoulder{top:210px;width:56px;height:158px;border-radius:28px}.shoulder.left{left:18px;transform:rotate(16deg)}.shoulder.right{right:18px;transform:rotate(-16deg)}
-.forearm{top:338px;width:42px;height:124px;border-radius:22px}.forearm.left{left:30px;transform:rotate(12deg)}.forearm.right{right:30px;transform:rotate(-12deg)}
-.thigh{top:428px;width:62px;height:126px;border-radius:26px}.thigh.left{left:86px}.thigh.right{right:86px}
-.shin{bottom:4px;width:54px;height:134px;border-radius:22px}.shin.left{left:90px}.shin.right{right:90px}
-.scan{position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.03) 0 1px,transparent 1px 5px);mix-blend-mode:screen;opacity:.22;pointer-events:none}
-.mode{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:3;padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:rgba(6,10,14,.76);color:#f2fbff;font-size:11px;letter-spacing:.28em;text-transform:uppercase;backdrop-filter:blur(14px)}
-.hint{position:absolute;right:30px;bottom:30px;z-index:3;color:rgba(225,244,255,.44);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
-@keyframes spin{to{transform:rotate(360deg)}}@media(max-width:900px){.panel.left,.panel.right{position:relative;left:auto;right:auto;top:auto;width:auto;margin:0 0 16px}.stage{padding:18px}.dock{min-height:auto}.frame{height:720px}.hint{display:none}}@media(max-height:560px){.stage{padding:0}.panel.left,.panel.right,.hint{display:none}.dock{min-height:100vh}.frame{width:100%;height:100vh;border-radius:0;border:none}.spot{top:-10%;width:64%;height:34%}.ring{top:56%;width:300px;height:300px;opacity:.7}.robot{bottom:-18px;transform:translateX(-50%) scale(.82) rotateY(calc((var(--x,.5) - .5)*16deg)) rotateX(calc((.5 - var(--y,.5))*8deg))}.mode{bottom:10px;padding:9px 14px;font-size:10px;letter-spacing:.18em}}
-</style></head><body><section class="stage" id="stage"><div class="panel left"><small>Robot Category</small><h1>Obsidian Sentinel X</h1><p>Built as a richer robot presentation layer for Spline scenes, with dramatic spotlighting, black-chrome surfacing, and protocol-aware UI.</p></div><div class="panel right"><small>Telemetry</small><div class="stat"><span>Mode</span><b id="modeLabel">Guard</b></div><div class="stat"><span>Core</span><b>99%</b></div><div class="stat"><span>Tracking</span><b>Active</b></div></div><div class="dock"><div class="frame"><div class="spot"></div><div class="ring"></div><div class="robot"><div class="head"></div><div class="neck"></div><div class="torso"></div><div class="shoulder left"></div><div class="shoulder right"></div><div class="forearm left"></div><div class="forearm right"></div><div class="thigh left"></div><div class="thigh right"></div><div class="shin left"></div><div class="shin right"></div></div><div class="scan"></div></div></div><div class="mode" id="modePill">Guard Protocol</div><div class="hint">Move pointer · Click to change protocol</div></section><script>const stage=document.getElementById('stage');const modes=['Guard Protocol','Analyze Protocol','Repair Protocol'];let index=0;stage.addEventListener('mousemove',e=>{const r=stage.getBoundingClientRect();const x=(e.clientX-r.left)/r.width;const y=(e.clientY-r.top)/r.height;stage.style.setProperty('--mx',x*100+'%');stage.style.setProperty('--x',x);stage.style.setProperty('--y',y)});stage.addEventListener('click',()=>{index=(index+1)%modes.length;document.getElementById('modePill').textContent=modes[index];document.getElementById('modeLabel').textContent=modes[index].split(' ')[0]});</script></body></html>`,
-    code: `'use client'
-
-import { Suspense, lazy, useMemo, useState } from 'react'
-
-const Spline = lazy(() => import('@splinetool/react-spline'))
-
-const PROTOCOLS = [
-  { name: 'Guard Protocol', accent: '#8cf0ff', status: 'Perimeter Stable' },
-  { name: 'Analyze Protocol', accent: '#ffb37a', status: 'Threat Parsing' },
-  { name: 'Repair Protocol', accent: '#8df7b5', status: 'Self-Healing Mesh' },
-]
-
-interface SplineObsidianSentinelXProps {
-  scene: string
-  className?: string
-}
-
-export function SplineObsidianSentinelX({ scene, className }: SplineObsidianSentinelXProps) {
-  const [pointer, setPointer] = useState({ x: 0.5, y: 0.38 })
-  const [protocolIndex, setProtocolIndex] = useState(0)
-
-  const protocol = PROTOCOLS[protocolIndex]
-
-  const frameTransform = useMemo(() => {
-    const rotateY = (pointer.x - 0.5) * 10
-    const rotateX = (0.5 - pointer.y) * 6
-    return \`perspective(1800px) rotateX(\${rotateX}deg) rotateY(\${rotateY}deg)\`
-  }, [pointer])
-
-  return (
-    <section
-      onMouseMove={(event) => {
-        const rect = event.currentTarget.getBoundingClientRect()
-        setPointer({
-          x: (event.clientX - rect.left) / rect.width,
-          y: (event.clientY - rect.top) / rect.height,
-        })
-      }}
-      onMouseLeave={() => setPointer({ x: 0.5, y: 0.38 })}
-      onClick={() => setProtocolIndex((current) => (current + 1) % PROTOCOLS.length)}
-      className="relative overflow-hidden rounded-[38px] border border-white/10 bg-[#020304] text-white"
-      style={{
-        ['--accent' as string]: protocol.accent,
-        backgroundImage: \`
-          radial-gradient(circle at \${pointer.x * 100}% 18%, rgba(255,255,255,0.2), transparent 18%),
-          radial-gradient(circle at 74% 52%, rgba(110,244,255,0.08), transparent 22%),
-          linear-gradient(135deg, #040404 0%, #050607 42%, #010101 100%)
-        \`,
-      }}
-    >
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:52px_52px] opacity-25 [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]" />
-
-      <div className="relative z-10 min-h-[760px] px-5 py-5 md:px-7">
-        <div className="grid gap-4 lg:grid-cols-[270px_minmax(0,1fr)_220px]">
-          <div className="rounded-[24px] border border-white/8 bg-slate-950/72 p-5 backdrop-blur-xl">
-            <div className="text-[10px] uppercase tracking-[0.24em] text-white/45">Robot Category</div>
-            <h2 className="mt-3 text-[30px] font-black leading-none">Obsidian Sentinel X</h2>
-            <p className="mt-3 text-sm leading-7 text-white/65">
-              A stronger presentation shell for robot-focused Spline scenes with dramatic spotlighting,
-              richer chrome surfacing, and a protocol-aware HUD.
-            </p>
-          </div>
-
-          <div className="flex items-center justify-center">
-            <div
-              className="relative h-[720px] w-full max-w-[720px] overflow-hidden rounded-[38px] border border-white/8 bg-[radial-gradient(circle_at_50%_14%,rgba(255,255,255,0.08),transparent_16%),radial-gradient(circle_at_50%_44%,rgba(255,255,255,0.04),transparent_24%),linear-gradient(180deg,#0a0b0d_0%,#020202_100%)] shadow-[0_36px_100px_rgba(0,0,0,0.55)]"
-              style={{ transform: frameTransform, transformStyle: 'preserve-3d' }}
-            >
-              <div className="pointer-events-none absolute inset-[-24%] animate-[spin_18s_linear_infinite] bg-[conic-gradient(from_0deg,transparent,rgba(137,240,255,0.12),transparent_34%,rgba(255,255,255,0.06),transparent_60%,rgba(255,98,98,0.08),transparent_82%)]" />
-              <div className="pointer-events-none absolute left-1/2 top-[-14%] h-[36%] w-[58%] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.58)_0%,rgba(255,255,255,0.22)_30%,transparent_72%)] blur-[28px]" />
-              <div className="pointer-events-none absolute left-1/2 top-[46%] h-[410px] w-[410px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-100/10 shadow-[inset_0_0_80px_rgba(145,241,255,0.08)]" />
-              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),transparent_16%,transparent_78%,rgba(255,255,255,0.02))]" />
-              <div className="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(180deg,rgba(255,255,255,0.03)_0_1px,transparent_1px_5px)] opacity-20 mix-blend-screen" />
-
-              <Suspense
-                fallback={
-                  <div className="flex h-full items-end justify-center">
-                    <div className="relative h-[610px] w-[310px]">
-                      <div className="absolute left-1/2 top-3 h-40 w-[136px] -translate-x-1/2 rounded-[44px_44px_36px_36px] bg-[linear-gradient(165deg,#20242b_0%,#020202_40%,#0c0d10_70%,#252a31_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_22px_40px_rgba(0,0,0,0.56)]" />
-                      <div className="absolute left-1/2 top-11 h-[18px] w-[34px] -translate-x-1/2 rounded-full bg-white shadow-[0_0_32px_rgba(131,242,255,0.72)]" />
-                      <div className="absolute left-1/2 top-[158px] h-[34px] w-14 -translate-x-1/2 rounded-2xl bg-[linear-gradient(180deg,#2d323a,#0a0b0d)]" />
-                      <div className="absolute left-1/2 top-[174px] h-[266px] w-[198px] -translate-x-1/2 rounded-[32%_32%_22%_22%/18%_18%_16%_16%] bg-[linear-gradient(180deg,#181c22_0%,#010101_54%,#171b21_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_28px_54px_rgba(0,0,0,0.58)]" />
-                      <div className="absolute left-1/2 top-[248px] h-[68px] w-[68px] -translate-x-1/2 rounded-[24px] bg-[radial-gradient(circle,#f8ffff_0%,#7bf1ff_18%,rgba(123,241,255,0.22)_44%,rgba(12,19,24,0.2)_70%)] shadow-[0_0_34px_rgba(123,241,255,0.4)]" />
-                      <div className="absolute left-[18px] top-[210px] h-[158px] w-14 rotate-[16deg] rounded-[28px] bg-[linear-gradient(180deg,#242931_0%,#050608_60%,#1d2128_100%)]" />
-                      <div className="absolute right-[18px] top-[210px] h-[158px] w-14 -rotate-[16deg] rounded-[28px] bg-[linear-gradient(180deg,#242931_0%,#050608_60%,#1d2128_100%)]" />
-                      <div className="absolute left-[30px] top-[338px] h-[124px] w-[42px] rotate-[12deg] rounded-[22px] bg-[linear-gradient(180deg,#242931_0%,#050608_60%,#1d2128_100%)]" />
-                      <div className="absolute right-[30px] top-[338px] h-[124px] w-[42px] -rotate-[12deg] rounded-[22px] bg-[linear-gradient(180deg,#242931_0%,#050608_60%,#1d2128_100%)]" />
-                      <div className="absolute left-[86px] top-[428px] h-[126px] w-[62px] rounded-[26px] bg-[linear-gradient(180deg,#242931_0%,#050608_60%,#1d2128_100%)]" />
-                      <div className="absolute right-[86px] top-[428px] h-[126px] w-[62px] rounded-[26px] bg-[linear-gradient(180deg,#242931_0%,#050608_60%,#1d2128_100%)]" />
-                      <div className="absolute bottom-1 left-[90px] h-[134px] w-[54px] rounded-[22px] bg-[linear-gradient(180deg,#242931_0%,#050608_60%,#1d2128_100%)]" />
-                      <div className="absolute bottom-1 right-[90px] h-[134px] w-[54px] rounded-[22px] bg-[linear-gradient(180deg,#242931_0%,#050608_60%,#1d2128_100%)]" />
-                      <div className="absolute bottom-4 left-1/2 h-14 w-[250px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(120,240,255,0.18),transparent_70%)] blur-xl" />
-                    </div>
-                  </div>
-                }
-              >
-                <Spline className={className ?? 'h-full w-full'} scene={scene} />
-              </Suspense>
-            </div>
-          </div>
-
-          <div className="rounded-[24px] border border-white/8 bg-slate-950/72 p-5 backdrop-blur-xl">
-            <div className="text-[10px] uppercase tracking-[0.24em] text-white/45">Telemetry</div>
-            <div className="mt-4 space-y-4 text-sm text-white/68">
-              <div className="flex items-center justify-between border-t border-white/8 pt-3">
-                <span>Mode</span>
-                <strong style={{ color: protocol.accent }}>{protocol.name.replace(' Protocol', '')}</strong>
-              </div>
-              <div className="flex items-center justify-between border-t border-white/8 pt-3">
-                <span>Core</span>
-                <strong className="text-white">99%</strong>
-              </div>
-              <div className="flex items-center justify-between border-t border-white/8 pt-3">
-                <span>Tracking</span>
-                <strong className="text-white">Active</strong>
-              </div>
-              <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-4">
-                <div className="text-[10px] uppercase tracking-[0.22em] text-white/40">Status</div>
-                <div className="mt-2 text-lg font-bold" style={{ color: protocol.accent }}>
-                  {protocol.status}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="pointer-events-none absolute bottom-7 left-1/2 -translate-x-1/2 rounded-full border border-white/8 bg-slate-950/76 px-5 py-3 text-[11px] uppercase tracking-[0.28em] text-white backdrop-blur-xl">
-          {protocol.name}
-        </div>
-      </div>
-    </section>
-  )
-}`,
-    prompt: `Create a new robot-category component called "Spline Obsidian Sentinel X".
-- Build it as a premium wrapper around a Spline robot scene using React Suspense + lazy-loaded @splinetool/react-spline
-- The robot presentation must feel stronger and more cinematic than a simple black robot screenshot: deeper black-chrome surfaces, spotlight stage lighting, larger silhouette, and more confident framing
-- Add cursor-linked radial lighting and slight 3D tilt so the whole frame feels responsive
-- Add protocol switching on click, with a right-side telemetry card that updates its label and accent color
-- Add scanline texture, ambient conic glow, circular reactor rings, and a polished robot fallback silhouette while Spline loads
-- Use a dark monochrome palette with cold cyan highlights and optional warm amber mode
-- Make the component feel like a finished showcase card, not just a loading wrapper`,
-    likes: 0,
-    author: 'Animation AI',
-    featured: true,
-    createdAt: '2026-05-22T10:20:00.000Z',
-    updatedAt: '2026-05-22T10:20:00.000Z'
-
   },
   {
     _id: 'robot-obsidian-aegis-prime',
@@ -4102,5 +3902,5985 @@ export default IsaacToonCryingMech;
     featured: true,
     createdAt: '2026-05-22T14:15:00.000Z',
     updatedAt: '2026-05-22T14:15:00.000Z'
+  }
+
+
+,
+  {
+    _id: 'robot-synthetix-cyber-skeleton-prime',
+    slug: 'synthetix-cyber-skeleton-prime',
+    title: 'Synthetix Cyber-Skeleton Prime',
+    category: 'robot',
+    tag: 'threejs',
+    description: 'A highly interactive programmatic 3D human skeleton robot custom-built in raw Three.js. Features a detailed biomechanical spine segment stack, elliptical ribcage bars protecting a glowing core heart, mechanical limbs with dual-bar bones, dynamic visual cursor look-at tracking, and a click-to-trigger core overload discharge.',
+    previewCode: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #020204; overflow: hidden; cursor: crosshair; font-family: 'Courier New', monospace; user-select: none; }
+canvas { display: block; width: 100vw; height: 100vh; }
+.hud { position: absolute; top: 24px; left: 24px; padding: 18px; border: 1px solid rgba(0, 240, 255, 0.15); border-radius: 16px; background: rgba(2, 4, 8, 0.85); color: #00f0ff; backdrop-filter: blur(12px); pointer-events: none; font-size: 11px; min-width: 240px; transition: all 0.3s; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+.hud-title { font-weight: bold; letter-spacing: 2px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; text-transform: uppercase; }
+.hud-sep { height: 1px; background: rgba(0, 240, 255, 0.2); margin: 8px 0; transition: background 0.3s; }
+.hud-item { display: flex; justify-content: space-between; margin: 5px 0; }
+.hud-item span { color: rgba(0, 240, 255, 0.55); }
+.hud-item strong { color: #fff; }
+.label { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: #00f0ff; letter-spacing: 5px; text-transform: uppercase; pointer-events: none; text-align: center; transition: all 0.4s; font-size: 13px; font-weight: 900; }
+.sub { font-size: 9px; color: rgba(0, 240, 255, 0.4); letter-spacing: 2px; margin-top: 6px; font-weight: normal; }
+</style>
+</head>
+<body>
+<div class="hud" id="hud">
+  <div class="hud-title" id="hudTitle">⚡ SYNAPSE PROTOCOL: IDLE</div>
+  <div class="hud-sep" id="hudSep"></div>
+  <div class="hud-item"><span>Chassis Code</span><strong>CYBER-HUMANOID SOLID</strong></div>
+  <div class="hud-item"><span>Core Sync</span><strong id="syncStatus">STABLE</strong></div>
+  <div class="hud-item"><span>Synaptic Freq</span><strong id="frequency">92.4 Hz</strong></div>
+  <div class="hud-item"><span>Energy Core</span><strong id="energyOut">100%</strong></div>
+</div>
+<div class="label" id="label">
+  Synthetix Cyber-Humanoid Prime
+  <div class="sub">Click Screen to Discharge Overload • Move Cursor to Track</div>
+</div>
+
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+
+let currentProtocol = 0; // 0: IDLE, 1: OVERLOAD
+let time = 0;
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x020204, 0.065);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0.2, 8.5);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+
+// Lights
+const ambientLight = new THREE.AmbientLight(0x030815, 1.5);
+scene.add(ambientLight);
+
+const mainSpot = new THREE.SpotLight(0xffffff, 40, 15, Math.PI / 6, 0.5, 1);
+mainSpot.position.set(0, 6, 4);
+scene.add(mainSpot);
+
+const rimLightL = new THREE.PointLight(0x00f0ff, 20, 8);
+rimLightL.position.set(-4, 1.5, -2);
+scene.add(rimLightL);
+
+const rimLightR = new THREE.PointLight(0x9a00ff, 15, 8);
+rimLightR.position.set(4, 1.5, -2);
+scene.add(rimLightR);
+
+const cursorLight = new THREE.PointLight(0x00f0ff, 10, 6);
+cursorLight.position.set(0, 0, 3);
+scene.add(cursorLight);
+
+// Materials
+const titaniumMat = new THREE.MeshStandardMaterial({
+  color: 0xccd5e0, // Highly polished bright titanium/ceramic alloy
+  roughness: 0.15,
+  metalness: 0.85
+});
+
+const chromeMat = new THREE.MeshStandardMaterial({
+  color: 0xffffff,
+  roughness: 0.05,
+  metalness: 1.0
+});
+
+const cyberShellMat = new THREE.MeshStandardMaterial({
+  color: 0x0a101f, // Deep rich solid cyber glass human shell
+  roughness: 0.1,
+  metalness: 0.9,
+  transparent: true,
+  opacity: 0.6,
+  side: THREE.DoubleSide
+});
+
+const glowingCoreMat = new THREE.MeshBasicMaterial({
+  color: 0x00f0ff
+});
+
+const eyeMat = new THREE.MeshBasicMaterial({
+  color: 0x00f0ff
+});
+
+// Biomechanical Group
+const skeletonGroup = new THREE.Group();
+skeletonGroup.position.y = -1.2;
+scene.add(skeletonGroup);
+
+// --- 1. Programmatic Skull & Helmet Faceplate ---
+const skullGroup = new THREE.Group();
+skullGroup.position.y = 2.7;
+skeletonGroup.add(skullGroup);
+
+const cranium = new THREE.Mesh(new THREE.SphereGeometry(0.42, 32, 24), titaniumMat);
+cranium.scale.set(1.0, 1.15, 0.95);
+skullGroup.add(cranium);
+
+const jaw = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.22, 0.35), titaniumMat);
+jaw.position.set(0, -0.38, 0.12);
+skullGroup.add(jaw);
+
+// Sleek Visor
+const visor = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.32, 0.32, 0.15, 24, 1, false, -Math.PI / 3, Math.PI * 2 / 3),
+  eyeMat
+);
+visor.rotation.x = Math.PI / 2;
+visor.position.set(0, 0.08, 0.24);
+skullGroup.add(visor);
+
+// Ear covers
+const earL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.08, 16), chromeMat);
+earL.rotation.z = Math.PI / 2;
+earL.position.set(-0.44, 0, 0);
+skullGroup.add(earL);
+
+const earR = earL.clone();
+earR.position.x = 0.44;
+skullGroup.add(earR);
+
+// --- 2. Programmatic Vertebral Spine ---
+const spineSegments = [];
+const spineGroup = new THREE.Group();
+skeletonGroup.add(spineGroup);
+
+const spineCount = 10;
+const startY = 0.5;
+const endY = 2.4;
+const stepY = (endY - startY) / spineCount;
+
+for (let i = 0; i < spineCount; i++) {
+  const segGrp = new THREE.Group();
+  segGrp.position.y = startY + i * stepY;
+  
+  // Vertebra disc
+  const disc = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.15, 0.06, 16), chromeMat);
+  segGrp.add(disc);
+  
+  // Spinous process (back spike)
+  const spike = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.04, 0.18), titaniumMat);
+  spike.position.set(0, 0, -0.15);
+  spike.rotation.x = Math.PI / 8;
+  segGrp.add(spike);
+  
+  spineGroup.add(segGrp);
+  spineSegments.push(segGrp);
+}
+
+// --- 3. Programmatic Ribcage & Torso Solid Shell ---
+const ribcageGroup = new THREE.Group();
+ribcageGroup.position.y = 1.45;
+skeletonGroup.add(ribcageGroup);
+
+const ribPairs = 5;
+const ribs = [];
+for (let i = 0; i < ribPairs; i++) {
+  const yOffset = (i - (ribPairs - 1) / 2) * 0.24;
+  
+  const ribRadX = 0.58 - i * 0.03;
+  
+  // Left Rib
+  const ribGeomL = new THREE.TorusGeometry(ribRadX, 0.035, 8, 32, Math.PI * 0.8);
+  const ribL = new THREE.Mesh(ribGeomL, titaniumMat);
+  ribL.position.set(-0.1, yOffset, 0.05);
+  ribL.rotation.set(0.1, Math.PI / 16, Math.PI / 2);
+  ribcageGroup.add(ribL);
+  
+  // Right Rib
+  const ribR = ribL.clone();
+  ribR.position.x = 0.1;
+  ribR.rotation.y = -Math.PI / 16;
+  ribR.rotation.z = -Math.PI / 2;
+  ribcageGroup.add(ribR);
+  
+  ribs.push({ left: ribL, right: ribR, baseScale: 1.0 });
+}
+
+// Sternum
+const sternum = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.1, 0.08), chromeMat);
+sternum.position.set(0, 0, 0.56);
+ribcageGroup.add(sternum);
+
+// Torso Breastplate solid humanoid chest
+const chestPlateL = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.35, 1.2, 16, 1, false, 0, Math.PI * 0.9), cyberShellMat);
+chestPlateL.position.set(-0.25, 0, 0.1);
+chestPlateL.rotation.y = 0.15;
+chestPlateL.scale.set(1.0, 1.0, 0.5);
+ribcageGroup.add(chestPlateL);
+
+const chestPlateR = chestPlateL.clone();
+chestPlateR.position.x = 0.25;
+chestPlateR.rotation.y = -0.15;
+ribcageGroup.add(chestPlateR);
+
+// Solid Human Abs Block
+const absPlate = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.6, 0.25), cyberShellMat);
+absPlate.position.set(0, -0.8, 0.05);
+ribcageGroup.add(absPlate);
+
+// --- 4. Pulse Biomech Heart Core ---
+const heartCore = new THREE.Mesh(new THREE.IcosahedronGeometry(0.18, 2), glowingCoreMat);
+heartCore.position.set(0, 0.15, 0.12);
+ribcageGroup.add(heartCore);
+
+// Orbital core rings
+const coreRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.26, 0.015, 8, 32), chromeMat);
+coreRing1.position.copy(heartCore.position);
+ribcageGroup.add(coreRing1);
+
+const coreRing2 = coreRing1.clone();
+coreRing2.rotation.x = Math.PI / 2;
+ribcageGroup.add(coreRing2);
+
+// --- 5. Pelvis Hip Plate ---
+const pelvisGroup = new THREE.Group();
+pelvisGroup.position.y = 0.4;
+skeletonGroup.add(pelvisGroup);
+
+const hipPlate = new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.16, 0.4), titaniumMat);
+pelvisGroup.add(hipPlate);
+
+// Solid hip guard shell
+const hipGuard = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.35, 0.45), cyberShellMat);
+hipGuard.position.y = -0.05;
+pelvisGroup.add(hipGuard);
+
+const sacrum = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.25, 0.25, 16), chromeMat);
+sacrum.position.y = 0.15;
+pelvisGroup.add(sacrum);
+
+// --- 6. Solid Humanoid Arms ---
+const shoulderL = new THREE.Group();
+shoulderL.position.set(-0.85, 2.05, 0);
+skeletonGroup.add(shoulderL);
+
+const jointCapL = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), chromeMat);
+shoulderL.add(jointCapL);
+
+// Solid shoulder deltoid pad
+const shoulderCapL = new THREE.Mesh(new THREE.SphereGeometry(0.24, 16, 16), cyberShellMat);
+shoulderCapL.scale.set(1.0, 1.2, 1.0);
+shoulderL.add(shoulderCapL);
+
+const armGroupL = new THREE.Group();
+shoulderL.add(armGroupL);
+
+// Inner Humerus
+const humerusL = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.05, 0.65, 12), titaniumMat);
+humerusL.position.y = -0.35;
+armGroupL.add(humerusL);
+
+// Solid Bicep/Tricep muscle shell
+const bicepShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.11, 0.6, 12), cyberShellMat);
+bicepShellL.position.y = -0.35;
+armGroupL.add(bicepShellL);
+
+// Forearm Group
+const forearmGroupL = new THREE.Group();
+forearmGroupL.position.set(0, -0.7, 0);
+armGroupL.add(forearmGroupL);
+
+const elbowL = new THREE.Mesh(new THREE.SphereGeometry(0.08, 16, 16), chromeMat);
+forearmGroupL.add(elbowL);
+
+const radiusL = new THREE.Mesh(new THREE.CylinderGeometry(0.038, 0.03, 0.62, 8), titaniumMat);
+radiusL.position.set(-0.04, -0.32, 0);
+forearmGroupL.add(radiusL);
+
+const ulnaL = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.038, 0.62, 8), titaniumMat);
+ulnaL.position.set(0.04, -0.32, 0);
+forearmGroupL.add(ulnaL);
+
+// Solid Forearm guard plate
+const forearmShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.09, 0.58, 12), cyberShellMat);
+forearmShellL.position.set(0, -0.32, 0);
+forearmGroupL.add(forearmShellL);
+
+const handL = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, 0.12), chromeMat);
+handL.position.y = -0.65;
+forearmGroupL.add(handL);
+
+// Symmetrical Right Arm
+const shoulderR = shoulderL.clone();
+shoulderR.position.x = 0.85;
+skeletonGroup.add(shoulderR);
+
+// --- 7. Solid Humanoid Legs ---
+const legL = new THREE.Group();
+legL.position.set(-0.35, 0.35, 0);
+skeletonGroup.add(legL);
+
+const hipJointL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 16), chromeMat);
+legL.add(hipJointL);
+
+// Inner femur
+const femurL = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.06, 0.85, 12), titaniumMat);
+femurL.position.y = -0.45;
+legL.add(femurL);
+
+// Solid Thigh Shell plate
+const thighShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.14, 0.8, 12), cyberShellMat);
+thighShellL.position.y = -0.45;
+legL.add(thighShellL);
+
+const lowerLegL = new THREE.Group();
+lowerLegL.position.set(0, -0.9, 0);
+legL.add(lowerLegL);
+
+const kneeL = new THREE.Mesh(new THREE.SphereGeometry(0.09, 16, 16), chromeMat);
+lowerLegL.add(kneeL);
+
+// Inner shin bones
+const tibiaL = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.035, 0.8, 8), titaniumMat);
+tibiaL.position.set(-0.03, -0.42, 0);
+lowerLegL.add(tibiaL);
+
+const fibulaL = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.8, 8), titaniumMat);
+fibulaL.position.set(0.03, -0.42, 0);
+lowerLegL.add(fibulaL);
+
+// Solid Shin/Calf Shell plate
+const calfShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.09, 0.76, 12), cyberShellMat);
+calfShellL.position.set(0, -0.42, 0);
+lowerLegL.add(calfShellL);
+
+// Symmetrical Right Leg
+const legR = legL.clone();
+legR.position.x = 0.35;
+skeletonGroup.add(legR);
+
+// --- 8. Dynamic Core Forcefield Grid ---
+const forcefield = new THREE.Mesh(
+  new THREE.SphereGeometry(1.6, 32, 32),
+  new THREE.MeshBasicMaterial({
+    color: 0x00f0ff,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.0
+  })
+);
+forcefield.position.copy(heartCore.position);
+ribcageGroup.add(forcefield);
+
+// --- 9. Kinetic Particle Sparks ---
+const pCount = 200;
+const pGeom = new THREE.BufferGeometry();
+const pPos = new Float32Array(pCount * 3);
+const pVels = [];
+
+for (let i = 0; i < pCount; i++) {
+  pPos[i*3] = (Math.random() - 0.5) * 6;
+  pPos[i*3+1] = Math.random() * 4 - 1;
+  pPos[i*3+2] = (Math.random() - 0.5) * 5;
+  pVels.push(new THREE.Vector3(
+    (Math.random() - 0.5) * 0.15,
+    Math.random() * 0.4 + 0.15,
+    (Math.random() - 0.5) * 0.15
+  ));
+}
+pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+const pMat = new THREE.PointsMaterial({
+  color: 0x00f0ff,
+  size: 0.045,
+  transparent: true,
+  opacity: 0.55,
+  blending: THREE.AdditiveBlending
+});
+const particles = new THREE.Points(pGeom, pMat);
+scene.add(particles);
+
+// Mouse tracking
+const mouse = new THREE.Vector2(0, 0);
+const target = new THREE.Vector3(0, 0, 0);
+
+window.addEventListener('mousemove', (e) => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  target.x = mouse.x * 2.2;
+  target.y = mouse.y * 1.6 + 1.2;
+});
+
+// Click Interaction (Core Discharge)
+let triggerDuration = 0;
+window.addEventListener('mousedown', () => {
+  currentProtocol = currentProtocol === 0 ? 1 : 0;
+  
+  const hud = document.getElementById('hud');
+  const hudTitle = document.getElementById('hudTitle');
+  const hudSep = document.getElementById('hudSep');
+  const label = document.getElementById('label');
+  const syncStatus = document.getElementById('syncStatus');
+  const frequency = document.getElementById('frequency');
+  const energyOut = document.getElementById('energyOut');
+
+  if (currentProtocol === 1) {
+    // Discharge Overload mode
+    hudTitle.textContent = "💥 SYNAPSE PROTOCOL: OVERLOAD";
+    hudTitle.style.color = "#ff0066";
+    hudSep.style.background = "#ff0066";
+    hud.style.borderColor = "#ff006688";
+    hud.style.boxShadow = "0 15px 35px rgba(255,0,102,0.3)";
+    label.style.color = "#ff0066";
+    syncStatus.textContent = "STRESSED";
+    syncStatus.style.color = "#ff0066";
+    frequency.textContent = "410.2 Hz";
+    energyOut.textContent = "385%";
+    energyOut.style.color = "#ff0066";
+    
+    // Core color change
+    glowingCoreMat.color.setHex(0xff0066);
+    eyeMat.color.setHex(0xff0066);
+    rimLightL.color.setHex(0xff0066);
+    pMat.color.setHex(0xff0066);
+    cyberShellMat.color.setHex(0x2f0210); // Reddish human body shell
+    
+    // Expand forcefield pulse
+    forcefield.scale.setScalar(0.2);
+    forcefield.material.opacity = 0.65;
+    triggerDuration = 1.0;
+  } else {
+    // Return to Normal Synapse mode
+    hudTitle.textContent = "⚡ SYNAPSE PROTOCOL: IDLE";
+    hudTitle.style.color = "#00f0ff";
+    hudSep.style.background = "rgba(0, 240, 255, 0.2)";
+    hud.style.borderColor = "rgba(0, 240, 255, 0.15)";
+    hud.style.boxShadow = "0 15px 35px rgba(0,0,0,0.5)";
+    label.style.color = "#00f0ff";
+    syncStatus.textContent = "STABLE";
+    syncStatus.style.color = "#fff";
+    frequency.textContent = "92.4 Hz";
+    energyOut.textContent = "100%";
+    energyOut.style.color = "#fff";
+    
+    glowingCoreMat.color.setHex(0x00f0ff);
+    eyeMat.color.setHex(0x00f0ff);
+    rimLightL.color.setHex(0x00f0ff);
+    pMat.color.setHex(0x00f0ff);
+    cyberShellMat.color.setHex(0x0a101f); // Return deep cyan
+    
+    forcefield.material.opacity = 0;
+  }
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Animation Loop
+const clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  time = clock.getElapsedTime();
+  
+  // 1. Dynamic Cursor Visual Tracking
+  skullGroup.lookAt(target.x, target.y + 1.2, 3);
+  
+  // Vertebrae organic twisting/chain flex
+  spineSegments.forEach((seg, idx) => {
+    const factor = idx / spineCount;
+    seg.rotation.y += (mouse.x * 0.32 * factor - seg.rotation.y) * 0.08;
+    seg.rotation.x += (mouse.y * 0.16 * factor - seg.rotation.x) * 0.08;
+    
+    // Spine idle breathing ripple
+    seg.position.x = Math.sin(time * 2 + idx * 0.4) * 0.015;
+  });
+  
+  // Ribcage follows spine look direction and breaths
+  ribcageGroup.rotation.y += (mouse.x * 0.18 - ribcageGroup.rotation.y) * 0.06;
+  const breathFactor = 1.0 + Math.sin(time * 2) * 0.024;
+  ribs.forEach((pair, idx) => {
+    const scale = breathFactor * (1.0 + (currentProtocol === 1 ? 0.07 : 0));
+    pair.left.scale.set(scale, scale, scale);
+    pair.right.scale.set(scale, scale, scale);
+  });
+  
+  // Dynamic arm reaction swing
+  shoulderL.rotation.y = -Math.PI / 12 + Math.sin(time * 1.2) * 0.05 + mouse.x * 0.12;
+  shoulderR.rotation.y = Math.PI / 12 - Math.sin(time * 1.2) * 0.05 + mouse.x * 0.12;
+  
+  // Pulse active joints and heart core
+  const pulseSpeed = currentProtocol === 1 ? 15.0 : 3.0;
+  const pulseScale = 1.0 + Math.sin(time * pulseSpeed) * 0.15;
+  heartCore.scale.setScalar(pulseScale);
+  
+  // Spin orbital rings
+  coreRing1.rotation.y += currentProtocol === 1 ? 0.1 : 0.02;
+  coreRing2.rotation.x += currentProtocol === 1 ? 0.08 : 0.015;
+  
+  // PointLight cursor movement
+  cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1;
+  cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1;
+  
+  // 2. Overload Forcefield pulse decay
+  if (currentProtocol === 1 && triggerDuration > 0) {
+    triggerDuration -= 0.015;
+    forcefield.scale.addScalar(0.08);
+    forcefield.material.opacity = triggerDuration * 0.65;
+  } else if (currentProtocol === 1 && triggerDuration <= 0) {
+    // Loop pulse
+    forcefield.scale.setScalar(0.2);
+    forcefield.material.opacity = 0.65;
+    triggerDuration = 1.0;
+  }
+  
+  // 3. Spikes/Particles animation
+  const posAttr = pGeom.getAttribute('position');
+  const speedMult = currentProtocol === 1 ? 3.5 : 1.0;
+  for (let i = 0; i < pCount; i++) {
+    let y = posAttr.getY(i) + pVels[i].y * 0.016 * speedMult;
+    if (y > 4) {
+      y = -1.5;
+      posAttr.setX(i, (Math.random() - 0.5) * 6);
+      posAttr.setZ(i, (Math.random() - 0.5) * 5);
+    }
+    posAttr.setY(i, y);
+    posAttr.setX(i, posAttr.getX(i) + Math.sin(time * 1.5 + i) * 0.002);
+  }
+  posAttr.needsUpdate = true;
+  
+  renderer.render(scene, camera);
+}
+
+animate();
+</script>
+</body>
+</html>
+`,
+    code: `'use client'
+
+import React, { useEffect, useRef, useState } from 'react'
+import * as THREE from 'three'
+
+export function SynthetixCyberSkeletonPrime() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  
+  // React State for Telemetry HUD
+  const [protocol, setProtocol] = useState<'IDLE' | 'OVERLOAD'>('IDLE')
+  const [frequency, setFrequency] = useState(92.4)
+  const [energy, setEnergy] = useState(100)
+  const [logs, setLogs] = useState<string[]>([
+    'System initialization successful.',
+    'Chassis structure: cybernetic human solid humanoid body.',
+    'Tracking systems active. Awaiting input.'
+  ])
+
+  useEffect(() => {
+    if (!containerRef.current || !canvasRef.current) return
+
+    const container = containerRef.current
+    const canvas = canvasRef.current
+
+    let currentProtocolState = 0 // 0: IDLE, 1: OVERLOAD
+    let animationFrameId: number
+    let time = 0
+
+    // Scene setup
+    const scene = new THREE.Scene()
+    scene.fog = new THREE.FogExp2(0x020204, 0.065)
+
+    // Camera setup
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100)
+    camera.position.set(0, 0.2, 8.5)
+
+    // Renderer setup
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
+    renderer.setSize(container.clientWidth, container.clientHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.toneMapping = THREE.ACESFilmicToneMapping
+
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0x030815, 1.5)
+    scene.add(ambientLight)
+
+    const mainSpot = new THREE.SpotLight(0xffffff, 40, 15, Math.PI / 6, 0.5, 1)
+    mainSpot.position.set(0, 6, 4)
+    scene.add(mainSpot)
+
+    const rimLightL = new THREE.PointLight(0x00f0ff, 20, 8)
+    rimLightL.position.set(-4, 1.5, -2)
+    scene.add(rimLightL)
+
+    const rimLightR = new THREE.PointLight(0x9a00ff, 15, 8)
+    rimLightR.position.set(4, 1.5, -2)
+    scene.add(rimLightR)
+
+    const cursorLight = new THREE.PointLight(0x00f0ff, 10, 6)
+    cursorLight.position.set(0, 0, 3)
+    scene.add(cursorLight)
+
+    // Materials
+    const titaniumMat = new THREE.MeshStandardMaterial({
+      color: 0xccd5e0, // Highly polished bright titanium/ceramic alloy
+      roughness: 0.15,
+      metalness: 0.85
+    })
+
+    const chromeMat = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 0.05,
+      metalness: 1.0
+    })
+
+    const cyberShellMat = new THREE.MeshStandardMaterial({
+      color: 0x0a101f, // Deep rich solid cyber glass human shell
+      roughness: 0.1,
+      metalness: 0.9,
+      transparent: true,
+      opacity: 0.6,
+      side: THREE.DoubleSide
+    })
+
+    const glowingCoreMat = new THREE.MeshBasicMaterial({
+      color: 0x00f0ff
+    })
+
+    const eyeMat = new THREE.MeshBasicMaterial({
+      color: 0x00f0ff
+    })
+
+    // Biomechanical Group
+    const skeletonGroup = new THREE.Group()
+    skeletonGroup.position.y = -1.2
+    scene.add(skeletonGroup)
+
+    // --- 1. Programmatic Skull & Helmet Faceplate ---
+    const skullGroup = new THREE.Group()
+    skullGroup.position.y = 2.7
+    skeletonGroup.add(skullGroup)
+
+    const cranium = new THREE.Mesh(new THREE.SphereGeometry(0.42, 32, 24), titaniumMat)
+    cranium.scale.set(1.0, 1.15, 0.95)
+    skullGroup.add(cranium)
+
+    // Solid Human jaw
+    const jaw = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.22, 0.35), titaniumMat)
+    jaw.position.set(0, -0.38, 0.12)
+    skullGroup.add(jaw)
+
+    // Sleek Visor
+    const visor = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.32, 0.32, 0.15, 24, 1, false, -Math.PI / 3, Math.PI * 2 / 3),
+      eyeMat
+    )
+    visor.rotation.x = Math.PI / 2
+    visor.position.set(0, 0.08, 0.24)
+    skullGroup.add(visor)
+
+    // Ear covers (Heaphones style solid plates)
+    const earL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.08, 16), chromeMat)
+    earL.rotation.z = Math.PI / 2
+    earL.position.set(-0.44, 0, 0)
+    skullGroup.add(earL)
+
+    const earR = earL.clone()
+    earR.position.x = 0.44
+    skullGroup.add(earR)
+
+    // --- 2. Programmatic Vertebral Spine ---
+    const spineSegments: THREE.Group[] = []
+    const spineGroup = new THREE.Group()
+    skeletonGroup.add(spineGroup)
+
+    const spineCount = 10
+    const startY = 0.5
+    const endY = 2.4
+    const stepY = (endY - startY) / spineCount
+
+    for (let i = 0; i < spineCount; i++) {
+      const segGrp = new THREE.Group()
+      segGrp.position.y = startY + i * stepY
+      
+      // Vertebra disc
+      const disc = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.15, 0.06, 16), chromeMat)
+      segGrp.add(disc)
+      
+      // Spinous process (back spike)
+      const spike = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.04, 0.18), titaniumMat)
+      spike.position.set(0, 0, -0.15)
+      spike.rotation.x = Math.PI / 8
+      segGrp.add(spike)
+      
+      spineGroup.add(segGrp)
+      spineSegments.push(segGrp)
+    }
+
+    // --- 3. Programmatic Ribcage & Torso Solid Shell ---
+    const ribcageGroup = new THREE.Group()
+    ribcageGroup.position.y = 1.45
+    skeletonGroup.add(ribcageGroup)
+
+    const ribPairs = 5
+    const ribs: { left: THREE.Mesh; right: THREE.Mesh }[] = []
+    for (let i = 0; i < ribPairs; i++) {
+      const yOffset = (i - (ribPairs - 1) / 2) * 0.24
+      
+      const ribRadX = 0.58 - i * 0.03
+      
+      // Left Rib
+      const ribGeomL = new THREE.TorusGeometry(ribRadX, 0.035, 8, 32, Math.PI * 0.8)
+      const ribL = new THREE.Mesh(ribGeomL, titaniumMat)
+      ribL.position.set(-0.1, yOffset, 0.05)
+      ribL.rotation.set(0.1, Math.PI / 16, Math.PI / 2)
+      ribcageGroup.add(ribL)
+      
+      // Right Rib
+      const ribR = ribL.clone()
+      ribR.position.x = 0.1
+      ribR.rotation.y = -Math.PI / 16
+      ribR.rotation.z = -Math.PI / 2
+      ribcageGroup.add(ribR)
+      
+      ribs.push({ left: ribL, right: ribR })
+    }
+
+    // Sternum
+    const sternum = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.1, 0.08), chromeMat)
+    sternum.position.set(0, 0, 0.56)
+    ribcageGroup.add(sternum)
+
+    // Torso Breastplate solid humanoid chest
+    const chestPlateL = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.35, 1.2, 16, 1, false, 0, Math.PI * 0.9), cyberShellMat)
+    chestPlateL.position.set(-0.25, 0, 0.1)
+    chestPlateL.rotation.y = 0.15
+    chestPlateL.scale.set(1.0, 1.0, 0.5)
+    ribcageGroup.add(chestPlateL)
+
+    const chestPlateR = chestPlateL.clone()
+    chestPlateR.position.x = 0.25
+    chestPlateR.rotation.y = -0.15
+    ribcageGroup.add(chestPlateR)
+
+    // Solid Human Abs Block
+    const absPlate = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.6, 0.25), cyberShellMat)
+    absPlate.position.set(0, -0.8, 0.05)
+    ribcageGroup.add(absPlate)
+
+    // --- 4. Pulse Biomech Heart Core ---
+    const heartCore = new THREE.Mesh(new THREE.IcosahedronGeometry(0.18, 2), glowingCoreMat)
+    heartCore.position.set(0, 0.15, 0.12)
+    ribcageGroup.add(heartCore)
+
+    // Orbital core rings
+    const coreRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.26, 0.015, 8, 32), chromeMat)
+    coreRing1.position.copy(heartCore.position)
+    ribcageGroup.add(coreRing1)
+
+    const coreRing2 = coreRing1.clone()
+    coreRing2.rotation.x = Math.PI / 2
+    ribcageGroup.add(coreRing2)
+
+    // --- 5. Pelvis Hip Plate ---
+    const pelvisGroup = new THREE.Group()
+    pelvisGroup.position.y = 0.4
+    skeletonGroup.add(pelvisGroup)
+
+    const hipPlate = new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.16, 0.4), titaniumMat)
+    pelvisGroup.add(hipPlate)
+
+    // Solid hip guard shell
+    const hipGuard = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.35, 0.45), cyberShellMat)
+    hipGuard.position.y = -0.05
+    pelvisGroup.add(hipGuard)
+
+    const sacrum = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.25, 0.25, 16), chromeMat)
+    sacrum.position.y = 0.15
+    pelvisGroup.add(sacrum)
+
+    // --- 6. Solid Humanoid Arms ---
+    const shoulderL = new THREE.Group()
+    shoulderL.position.set(-0.85, 2.05, 0)
+    skeletonGroup.add(shoulderL)
+
+    const jointCapL = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), chromeMat)
+    shoulderL.add(jointCapL)
+
+    // Solid shoulder deltoid pad
+    const shoulderCapL = new THREE.Mesh(new THREE.SphereGeometry(0.24, 16, 16), cyberShellMat)
+    shoulderCapL.scale.set(1.0, 1.2, 1.0)
+    shoulderL.add(shoulderCapL)
+
+    const armGroupL = new THREE.Group()
+    shoulderL.add(armGroupL)
+
+    // Inner Humerus
+    const humerusL = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.05, 0.65, 12), titaniumMat)
+    humerusL.position.y = -0.35
+    armGroupL.add(humerusL)
+
+    // Solid Bicep/Tricep muscle shell
+    const bicepShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.11, 0.6, 12), cyberShellMat)
+    bicepShellL.position.y = -0.35
+    armGroupL.add(bicepShellL)
+
+    // Forearm Group (Radius + Ulna dual bones inside Forearm guard)
+    const forearmGroupL = new THREE.Group()
+    forearmGroupL.position.set(0, -0.7, 0)
+    armGroupL.add(forearmGroupL)
+
+    const elbowL = new THREE.Mesh(new THREE.SphereGeometry(0.08, 16, 16), chromeMat)
+    forearmGroupL.add(elbowL)
+
+    const radiusL = new THREE.Mesh(new THREE.CylinderGeometry(0.038, 0.03, 0.62, 8), titaniumMat)
+    radiusL.position.set(-0.04, -0.32, 0)
+    forearmGroupL.add(radiusL)
+
+    const ulnaL = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.038, 0.62, 8), titaniumMat)
+    ulnaL.position.set(0.04, -0.32, 0)
+    forearmGroupL.add(ulnaL)
+
+    // Solid Forearm guard plate
+    const forearmShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.09, 0.58, 12), cyberShellMat)
+    forearmShellL.position.set(0, -0.32, 0)
+    forearmGroupL.add(forearmShellL)
+
+    const handL = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, 0.12), chromeMat)
+    handL.position.y = -0.65
+    forearmGroupL.add(handL)
+
+    // Symmetrical Right Arm
+    const shoulderR = shoulderL.clone()
+    shoulderR.position.x = 0.85
+    skeletonGroup.add(shoulderR)
+
+    // --- 7. Solid Humanoid Legs ---
+    const legL = new THREE.Group()
+    legL.position.set(-0.35, 0.35, 0)
+    skeletonGroup.add(legL)
+
+    const hipJointL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 16), chromeMat)
+    legL.add(hipJointL)
+
+    // Inner femur
+    const femurL = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.06, 0.85, 12), titaniumMat)
+    femurL.position.y = -0.45
+    legL.add(femurL)
+
+    // Solid Thigh Shell plate
+    const thighShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.14, 0.8, 12), cyberShellMat)
+    thighShellL.position.y = -0.45
+    legL.add(thighShellL)
+
+    const lowerLegL = new THREE.Group()
+    lowerLegL.position.set(0, -0.9, 0)
+    legL.add(lowerLegL)
+
+    const kneeL = new THREE.Mesh(new THREE.SphereGeometry(0.09, 16, 16), chromeMat)
+    lowerLegL.add(kneeL)
+
+    // Inner shin bones
+    const tibiaL = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.035, 0.8, 8), titaniumMat)
+    tibiaL.position.set(-0.03, -0.42, 0)
+    lowerLegL.add(tibiaL)
+
+    const fibulaL = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.8, 8), titaniumMat)
+    fibulaL.position.set(0.03, -0.42, 0)
+    lowerLegL.add(fibulaL)
+
+    // Solid Shin/Calf Shell plate
+    const calfShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.09, 0.76, 12), cyberShellMat)
+    calfShellL.position.set(0, -0.42, 0)
+    lowerLegL.add(calfShellL)
+
+    // Symmetrical Right Leg
+    const legR = legL.clone()
+    legR.position.x = 0.35
+    skeletonGroup.add(legR)
+
+    // --- 8. Dynamic Core Forcefield Grid ---
+    const forcefield = new THREE.Mesh(
+      new THREE.SphereGeometry(1.6, 32, 32),
+      new THREE.MeshBasicMaterial({
+        color: 0x00f0ff,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.0
+      })
+    )
+    forcefield.position.copy(heartCore.position)
+    ribcageGroup.add(forcefield)
+
+    // --- 9. Kinetic Particle Sparks ---
+    const pCount = 200
+    const pGeom = new THREE.BufferGeometry()
+    const pPos = new Float32Array(pCount * 3)
+    const pVels: THREE.Vector3[] = []
+
+    for (let i = 0; i < pCount; i++) {
+      pPos[i*3] = (Math.random() - 0.5) * 6
+      pPos[i*3+1] = Math.random() * 4 - 1
+      pPos[i*3+2] = (Math.random() - 0.5) * 5
+      pVels.push(new THREE.Vector3(
+        (Math.random() - 0.5) * 0.15,
+        Math.random() * 0.4 + 0.15,
+        (Math.random() - 0.5) * 0.15
+      ))
+    }
+    pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3))
+    const pMat = new THREE.PointsMaterial({
+      color: 0x00f0ff,
+      size: 0.045,
+      transparent: true,
+      opacity: 0.55,
+      blending: THREE.AdditiveBlending
+    })
+    const particles = new THREE.Points(pGeom, pMat)
+    scene.add(particles)
+
+    // Mouse tracking vectors
+    const mouse = new THREE.Vector2(0, 0)
+    const target = new THREE.Vector3(0, 0, 0)
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      const y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      mouse.x = x
+      mouse.y = y
+      target.x = x * 2.2
+      target.y = y * 1.6 + 1.2
+    }
+
+    // Direct Click handler to trigger overload
+    let triggerDuration = 0
+    const handleMouseDown = () => {
+      currentProtocolState = currentProtocolState === 0 ? 1 : 0
+      
+      if (currentProtocolState === 1) {
+        setProtocol('OVERLOAD')
+        setFrequency(410.2)
+        setEnergy(385)
+        setLogs(prev => [
+          \`[\${new Date().toLocaleTimeString()}] ⚠️ CORE DISCHARGE DEPLOYED!\`,
+          \`[\${new Date().toLocaleTimeString()}] Synaptic overclock: 410.2Hz\`,
+          ...prev.slice(0, 4)
+        ])
+
+        glowingCoreMat.color.setHex(0xff0066)
+        eyeMat.color.setHex(0xff0066)
+        rimLightL.color.setHex(0xff0066)
+        pMat.color.setHex(0xff0066)
+        cyberShellMat.color.setHex(0x2f0210) // Glow reddish
+
+        forcefield.scale.setScalar(0.2)
+        forcefield.material.opacity = 0.65
+        triggerDuration = 1.0
+      } else {
+        setProtocol('IDLE')
+        setFrequency(92.4)
+        setEnergy(100)
+        setLogs(prev => [
+          \`[\${new Date().toLocaleTimeString()}] 🟢 Core stabilized. Synapse Protocol: Idle\`,
+          ...prev.slice(0, 4)
+        ])
+
+        glowingCoreMat.color.setHex(0x00f0ff)
+        eyeMat.color.setHex(0x00f0ff)
+        rimLightL.color.setHex(0x00f0ff)
+        pMat.color.setHex(0x00f0ff)
+        cyberShellMat.color.setHex(0x0a101f) // Return dark cyan
+
+        forcefield.material.opacity = 0
+      }
+    }
+
+    container.addEventListener('mousemove', handleMouseMove)
+    container.addEventListener('mousedown', handleMouseDown)
+
+    // Window resize
+    const handleResize = () => {
+      if (!containerRef.current) return
+      camera.aspect = container.clientWidth / container.clientHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(container.clientWidth, container.clientHeight)
+    }
+    window.addEventListener('resize', handleResize)
+
+    // Animation Loop
+    const clock = new THREE.Clock()
+    const animate = () => {
+      animationFrameId = requestAnimationFrame(animate)
+      time = clock.getElapsedTime()
+
+      // 1. Skull look at cursor
+      skullGroup.lookAt(target.x, target.y + 1.2, 3)
+
+      // Spine organic Chain Flex
+      spineSegments.forEach((seg, idx) => {
+        const factor = idx / spineCount
+        seg.rotation.y += (mouse.x * 0.32 * factor - seg.rotation.y) * 0.08
+        seg.rotation.x += (mouse.y * 0.16 * factor - seg.rotation.x) * 0.08
+        
+        // Idle spine ripples
+        seg.position.x = Math.sin(time * 2 + idx * 0.4) * 0.015
+      })
+
+      // Ribcage updates
+      ribcageGroup.rotation.y += (mouse.x * 0.18 - ribcageGroup.rotation.y) * 0.06
+      const breathFactor = 1.0 + Math.sin(time * 2) * 0.024
+      ribs.forEach((pair) => {
+        const scale = breathFactor * (1.0 + (currentProtocolState === 1 ? 0.07 : 0))
+        pair.left.scale.set(scale, scale, scale)
+        pair.right.scale.set(scale, scale, scale)
+      })
+
+      // Dynamic arms movement
+      shoulderL.rotation.y = -Math.PI / 12 + Math.sin(time * 1.2) * 0.05 + mouse.x * 0.12
+      shoulderR.rotation.y = Math.PI / 12 - Math.sin(time * 1.2) * 0.05 + mouse.x * 0.12
+
+      // Core pulsing
+      const pulseSpeed = currentProtocolState === 1 ? 15.0 : 3.0
+      const pulseScale = 1.0 + Math.sin(time * pulseSpeed) * 0.15
+      heartCore.scale.setScalar(pulseScale)
+
+      // Ring rotations
+      coreRing1.rotation.y += currentProtocolState === 1 ? 0.1 : 0.02
+      coreRing2.rotation.x += currentProtocolState === 1 ? 0.08 : 0.015
+
+      // Light target interpolations
+      cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1
+      cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1
+
+      // 2. Overload Forcefield pulse decay
+      if (currentProtocolState === 1 && triggerDuration > 0) {
+        triggerDuration -= 0.015
+        forcefield.scale.addScalar(0.08)
+        forcefield.material.opacity = triggerDuration * 0.65
+      } else if (currentProtocolState === 1 && triggerDuration <= 0) {
+        forcefield.scale.setScalar(0.2)
+        forcefield.material.opacity = 0.65
+        triggerDuration = 1.0
+      }
+
+      // 3. Spikes/Particles flow
+      const posAttr = pGeom.getAttribute('position')
+      const speedMult = currentProtocolState === 1 ? 3.5 : 1.0
+      for (let i = 0; i < pCount; i++) {
+        let y = posAttr.getY(i) + pVels[i].y * 0.016 * speedMult
+        if (y > 4) {
+          y = -1.5
+          posAttr.setX(i, (Math.random() - 0.5) * 6)
+          posAttr.setZ(i, (Math.random() - 0.5) * 5)
+        }
+        posAttr.setY(i, y)
+        posAttr.setX(i, posAttr.getX(i) + Math.sin(time * 1.5 + i) * 0.002)
+      }
+      posAttr.needsUpdate = true
+
+      renderer.render(scene, camera)
+    }
+
+    animate()
+
+    // Resource Cleanups
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      container.removeEventListener('mousemove', handleMouseMove)
+      container.removeEventListener('mousedown', handleMouseDown)
+      window.removeEventListener('resize', handleResize)
+      
+      // Traversal to dispose bionic geometries & standard materials
+      scene.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return
+        if (object.geometry) object.geometry.dispose()
+        if (Array.isArray(object.material)) {
+          object.material.forEach((mat) => mat.dispose())
+        } else if (object.material) {
+          object.material.dispose()
+        }
+      })
+      pGeom.dispose()
+      pMat.dispose()
+      renderer.dispose()
+    }
+  }, [])
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative flex h-[720px] w-full flex-col justify-between overflow-hidden rounded-[38px] border border-white/10 bg-[#020204] text-white"
+    >
+      {/* 3D Canvas Context */}
+      <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full" />
+
+      {/* Reactive HUD Overlay (Left Panel) */}
+      <div
+        className="relative z-10 m-6 w-[280px] rounded-2xl border bg-black/80 p-5 backdrop-blur-xl transition-all duration-300"
+        style={{
+          borderColor: protocol === 'OVERLOAD' ? '#ff006655' : 'rgba(0, 240, 255, 0.15)',
+          boxShadow: protocol === 'OVERLOAD' ? '0 15px 35px rgba(255, 0, 102, 0.15)' : 'none'
+        }}
+      >
+        <div
+          className="flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors duration-300"
+          style={{ color: protocol === 'OVERLOAD' ? '#ff0066' : '#00f0ff' }}
+        >
+          {protocol === 'OVERLOAD' ? '💥 SYNAPSE PROTOCOL: OVERLOAD' : '⚡ SYNAPSE PROTOCOL: IDLE'}
+        </div>
+        <div
+          className="my-3 h-[1px] transition-colors duration-300"
+          style={{ backgroundColor: protocol === 'OVERLOAD' ? '#ff0066' : 'rgba(0, 240, 255, 0.2)' }}
+        />
+
+        <div className="space-y-2.5 text-xs">
+          <div className="flex justify-between">
+            <span className="text-white/40">Chassis Code</span>
+            <strong className="text-white">CYBER-HUMANOID SOLID</strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Core Sync</span>
+            <strong
+              className="transition-colors duration-300"
+              style={{ color: protocol === 'OVERLOAD' ? '#ff0066' : '#a3e635' }}
+            >
+              {protocol === 'OVERLOAD' ? 'STRESSED' : 'STABLE'}
+            </strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Synaptic Freq</span>
+            <strong className="text-white">{frequency} Hz</strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Energy Core</span>
+            <strong
+              className="transition-colors duration-300"
+              style={{ color: protocol === 'OVERLOAD' ? '#ff0066' : '#00f0ff' }}
+            >
+              {energy}%
+            </strong>
+          </div>
+        </div>
+
+        {/* Real-time Bio-logs */}
+        <div className="mt-4 border-t border-white/5 pt-3">
+          <div className="mb-2 text-[10px] uppercase tracking-wider text-white/30">System Telemetry</div>
+          <div className="h-[90px] overflow-y-auto rounded-lg bg-black/40 p-2.5 text-[9px] font-mono leading-relaxed text-white/50 space-y-1">
+            {logs.map((log, idx) => (
+              <div key={idx} className="border-b border-white/5 pb-0.5 last:border-b-0 last:text-white/70">
+                {log}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Aesthetic Bottom Footer Info */}
+      <div className="relative z-10 mx-auto mb-6 text-center">
+        <h3
+          className="text-sm font-black uppercase tracking-[0.3em] transition-colors duration-400"
+          style={{ color: protocol === 'OVERLOAD' ? '#ff0066' : '#00f0ff' }}
+        >
+          Synthetix Cyber-Humanoid Prime
+        </h3>
+        <p className="mt-1.5 text-[9px] font-medium tracking-[0.18em] text-white/40 uppercase">
+          Click screen to discharge core • Move mouse to rotate biomech body
+        </p>
+      </div>
+    </div>
+  )
+}
+export default SynthetixCyberSkeletonPrime;
+`,
+    prompt: `Create a highly interactive programmatic 3D human skeleton robot called "Synthetix Cyber-Skeleton Prime".\n- Built entirely using raw Three.js primitives (Sphere, Cylinder, Torus geometries) and glossy metallic white titanium/chrome PBR materials\n- Features a detailed human skeletal hierarchy: stylized skull with glowing visor eye, stacked 10-vertebra spine process, 5 pairs of curved mechanical ribs protecting a pulsing core fusion heart with orbital rings\n- Left and right limbs built using humerus, femur, and dual-bar radius/ulna forearm structures\n- Full mouse cursor coordinates tracking causing the skull, spine segments, and ribcage to smoothly look-at and twist towards the target\n- Click-to-trigger overdrive protocol changing the theme from cyan to crimson/magenta, expanding a wireframe forcefield shell, accelerating particle spark flows, and updating reactive telemetry HUD displays\n- Clean resource disposal of meshes, geometries, and standard materials on React component unmount`,
+    likes: 0,
+    author: 'Animation AI',
+    featured: true,
+    createdAt: '2026-05-23T10:00:00.000Z',
+    updatedAt: '2026-05-23T10:00:00.000Z'
+  },
+  {
+    _id: 'robot-nova-toon-crying-android-x',
+    slug: 'nova-toon-crying-android-x',
+    title: 'Nova-Toon Crying Android X',
+    category: 'robot',
+    tag: 'threejs',
+    description: 'A highly interactive cell-shaded 3D humanoid robot crying glowing neon bionic liquid tears. Custom-built in Three.js, it features smooth visual cursor look-at tracking, breathing chest scaling, cute bionic cheek blushing, and organic sobbing head-shake oscillations that overclock into a dramatic hypercry explosion on click.',
+    previewCode: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #040108; overflow: hidden; cursor: crosshair; font-family: 'Courier New', monospace; user-select: none; }
+canvas { display: block; width: 100vw; height: 100vh; }
+.hud { position: absolute; top: 24px; left: 24px; padding: 18px; border: 1px solid rgba(0, 240, 255, 0.15); border-radius: 16px; background: rgba(4, 1, 8, 0.85); color: #00f0ff; backdrop-filter: blur(12px); pointer-events: none; font-size: 11px; min-width: 250px; transition: all 0.3s; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+.hud-title { font-weight: bold; letter-spacing: 2px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; text-transform: uppercase; }
+.hud-sep { height: 1px; background: rgba(0, 240, 255, 0.2); margin: 8px 0; transition: background 0.3s; }
+.hud-item { display: flex; justify-content: space-between; margin: 5px 0; }
+.hud-item span { color: rgba(0, 240, 255, 0.55); }
+.hud-item strong { color: #fff; }
+.label { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: #00f0ff; letter-spacing: 5px; text-transform: uppercase; pointer-events: none; text-align: center; transition: all 0.4s; font-size: 13px; font-weight: 900; }
+.sub { font-size: 9px; color: rgba(0, 240, 255, 0.4); letter-spacing: 2px; margin-top: 6px; font-weight: normal; }
+</style>
+</head>
+<body>
+<div class="hud" id="hud">
+  <div class="hud-title" id="hudTitle">💧 EMOTION CORE: MELANCHOLY</div>
+  <div class="hud-sep" id="hudSep"></div>
+  <div class="hud-item"><span>Chassis Code</span><strong>NOVA-TOON CYBER BOY</strong></div>
+  <div class="hud-item"><span>Tear Frequency</span><strong id="tearFreq">8.4 Hz</strong></div>
+  <div class="hud-item"><span>Sobbing Wobble</span><strong id="sobbingAmp">MODERATE</strong></div>
+  <div class="hud-item"><span>Active Tears</span><strong id="tearsCount">0</strong></div>
+</div>
+<div class="label" id="label">
+  Nova-Toon Crying Android X
+  <div class="sub">Click Screen to Trigger Hypercry • Move Cursor to Interact</div>
+</div>
+
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+
+let currentPreset = 0; // 0: MELANCHOLY, 1: TRAGIC HYPERCRY
+let time = 0;
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x040108, 0.07);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0.2, 8.5);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+
+// Lights
+const ambientLight = new THREE.AmbientLight(0x0e061c, 2.0);
+scene.add(ambientLight);
+
+const mainSpot = new THREE.SpotLight(0xffffff, 30, 15, Math.PI / 6, 0.5, 1);
+mainSpot.position.set(0, 5, 4);
+scene.add(mainSpot);
+
+const keyLight = new THREE.DirectionalLight(0xffbbf2, 1.5);
+keyLight.position.set(2, 3, 2);
+scene.add(keyLight);
+
+const rimLight = new THREE.PointLight(0x00f0ff, 25, 8);
+rimLight.position.set(-3, 1, -2);
+scene.add(rimLight);
+
+const cursorLight = new THREE.PointLight(0x00f0ff, 8, 6);
+cursorLight.position.set(0, 0, 3);
+scene.add(cursorLight);
+
+// Materials (Cute Matte Cartoon / Cell-shaded looks)
+const skinMat = new THREE.MeshToonMaterial({
+  color: 0x93e6ff, // Soft bionic neon-blue skin
+  roughness: 0.8
+});
+
+const darkMat = new THREE.MeshToonMaterial({
+  color: 0x110825, // Deep violet-black joints
+  roughness: 0.6
+});
+
+const whiteMat = new THREE.MeshToonMaterial({
+  color: 0xffffff,
+  roughness: 0.5
+});
+
+const glowTearsMat = new THREE.MeshBasicMaterial({
+  color: 0x00f0ff,
+  transparent: true,
+  opacity: 0.85
+});
+
+const mouthMat = new THREE.MeshBasicMaterial({
+  color: 0xff0066
+});
+
+// Humanoid Character Group
+const androidGroup = new THREE.Group();
+androidGroup.position.y = -1.2;
+scene.add(androidGroup);
+
+// --- 1. Cute Programmatic Helmet Head ---
+const headGroup = new THREE.Group();
+headGroup.position.y = 2.4;
+androidGroup.add(headGroup);
+
+// Large round head shell
+const headShell = new THREE.Mesh(new THREE.SphereGeometry(0.68, 32, 32), skinMat);
+headShell.scale.set(1.0, 1.05, 0.95);
+headGroup.add(headShell);
+
+// Cute bionic headphone ears
+const earCapL = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.08, 16), darkMat);
+earCapL.rotation.z = Math.PI / 2;
+earCapL.position.set(-0.7, 0, 0);
+headGroup.add(earCapL);
+
+const earCapR = earCapL.clone();
+earCapR.position.x = 0.7;
+headGroup.add(earCapR);
+
+// Visor eyes
+const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), darkMat);
+eyeL.scale.set(1.0, 1.1, 0.3);
+eyeL.position.set(-0.25, 0.05, 0.58);
+headGroup.add(eyeL);
+
+const eyeR = eyeL.clone();
+eyeR.position.x = 0.25;
+headGroup.add(eyeR);
+
+// Cute blushing cheeks
+const blushL = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.06, 0.02), new THREE.MeshBasicMaterial({ color: 0xff0066 }));
+blushL.position.set(-0.28, -0.16, 0.62);
+headGroup.add(blushL);
+
+const blushR = blushL.clone();
+blushR.position.x = 0.28;
+headGroup.add(blushR);
+
+// Crying Tear ducts
+const tearDuctL = new THREE.Group();
+tearDuctL.position.set(-0.24, 0.02, 0.62);
+headGroup.add(tearDuctL);
+
+const tearDuctR = new THREE.Group();
+tearDuctR.position.set(0.24, 0.02, 0.62);
+headGroup.add(tearDuctR);
+
+// --- 2. Cute Programmatic Solid Torso ---
+const chestGroup = new THREE.Group();
+chestGroup.position.y = 1.3;
+androidGroup.add(chestGroup);
+
+const torsoShell = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.32, 1.1, 16), skinMat);
+torsoShell.scale.set(1.0, 1.0, 0.7);
+chestGroup.add(torsoShell);
+
+// Cute chest heart glass reactor
+const chestCore = new THREE.Mesh(new THREE.SphereGeometry(0.16, 16, 16), new THREE.MeshBasicMaterial({ color: 0x00f0ff }));
+chestCore.position.set(0, 0.15, 0.38);
+chestGroup.add(chestCore);
+
+// Neck connector
+const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.25, 16), darkMat);
+neck.position.y = 0.65;
+chestGroup.add(neck);
+
+// --- 3. Solid Cartoon Limbs ---
+// Shoulders
+const shoulderL = new THREE.Group();
+shoulderL.position.set(-0.68, 1.8, 0);
+androidGroup.add(shoulderL);
+
+const shoulderPadL = new THREE.Mesh(new THREE.SphereGeometry(0.15, 16, 16), darkMat);
+shoulderL.add(shoulderPadL);
+
+const armGroupL = new THREE.Group();
+shoulderL.add(armGroupL);
+
+// Solid Upper Arm
+const upperArmL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.09, 0.58, 12), skinMat);
+upperArmL.position.y = -0.32;
+armGroupL.add(upperArmL);
+
+const elbowL = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), darkMat);
+elbowL.position.y = -0.62;
+armGroupL.add(elbowL);
+
+// Solid Forearm
+const forearmL = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.07, 0.52, 12), skinMat);
+forearmL.position.set(0, -0.88, 0);
+armGroupL.add(forearmL);
+
+const handL = new THREE.Mesh(new THREE.SphereGeometry(0.09, 12, 12), whiteMat);
+handL.position.set(0, -1.18, 0);
+armGroupL.add(handL);
+
+// Symmetrical Right Arm
+const shoulderR = shoulderL.clone();
+shoulderR.position.x = 0.68;
+androidGroup.add(shoulderR);
+
+// --- 4. Pelvis & Legs ---
+const pelvis = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.16, 0.38), darkMat);
+pelvis.position.y = 0.68;
+androidGroup.add(pelvis);
+
+// Left Leg
+const legL = new THREE.Group();
+legL.position.set(-0.25, 0.58, 0);
+androidGroup.add(legL);
+
+const hipL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 12, 12), darkMat);
+legL.add(hipL);
+
+const femurL = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.1, 0.72, 12), skinMat);
+femurL.position.y = -0.4;
+legL.add(femurL);
+
+const kneeL = new THREE.Mesh(new THREE.SphereGeometry(0.09, 12, 12), darkMat);
+kneeL.position.y = -0.76;
+legL.add(kneeL);
+
+const tibiaL = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.07, 0.68, 12), skinMat);
+tibiaL.position.y = -1.1;
+legL.add(tibiaL);
+
+const footL = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.08, 0.24), whiteMat);
+footL.position.set(0, -1.48, 0.06);
+legL.add(footL);
+
+// Symmetrical Right Leg
+const legR = legL.clone();
+legR.position.x = 0.25;
+androidGroup.add(legR);
+
+// --- 5. Kinetic Neon Tears Physics Engine ---
+const activeTears = [];
+const tearPoolCount = 80;
+const tearGeometry = new THREE.SphereGeometry(0.045, 12, 12);
+
+function spawnTear(sourceDuct, side) {
+  const tMesh = new THREE.Mesh(tearGeometry, glowTearsMat);
+  
+  // Get absolute duct positions
+  const wPos = new THREE.Vector3();
+  sourceDuct.getWorldPosition(wPos);
+  
+  tMesh.position.copy(wPos);
+  scene.add(tMesh);
+  
+  // Tear velocity and curve physics
+  activeTears.push({
+    mesh: tMesh,
+    age: 0,
+    maxAge: Math.random() * 0.8 + 0.6,
+    vel: new THREE.Vector3(
+      (Math.random() - 0.5) * 0.08 + (side === 'left' ? -0.1 : 0.1),
+      (Math.random() - 0.5) * 0.05,
+      Math.random() * 0.15 + 0.1
+    ),
+    side
+  });
+}
+
+// Mouse coordinates
+const mouse = new THREE.Vector2(0, 0);
+const target = new THREE.Vector3(0, 0, 0);
+
+window.addEventListener('mousemove', (e) => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  target.x = mouse.x * 2.2;
+  target.y = mouse.y * 1.6 + 1.2;
+});
+
+// Click Interaction (Hypercry Overload)
+let spawnTimer = 0;
+window.addEventListener('mousedown', () => {
+  currentPreset = currentPreset === 0 ? 1 : 0;
+  
+  const hud = document.getElementById('hud');
+  const hudTitle = document.getElementById('hudTitle');
+  const hudSep = document.getElementById('hudSep');
+  const label = document.getElementById('label');
+  const tearFreq = document.getElementById('tearFreq');
+  const sobbingAmp = document.getElementById('sobbingAmp');
+
+  if (currentPreset === 1) {
+    // Hypercry Overload
+    hudTitle.textContent = "💥 EMOTION CORE: HYPERCRY OVERLOAD";
+    hudTitle.style.color = "#ff0066";
+    hudSep.style.background = "#ff0066";
+    hud.style.borderColor = "#ff006688";
+    hud.style.boxShadow = "0 15px 35px rgba(255,0,102,0.3)";
+    label.style.color = "#ff0066";
+    tearFreq.textContent = "48.2 Hz";
+    sobbingAmp.textContent = "EXTREME";
+    sobbingAmp.style.color = "#ff0066";
+    
+    // Core & tears color change
+    glowTearsMat.color.setHex(0xff0066);
+    chestCore.material.color.setHex(0xff0066);
+    rimLight.color.setHex(0xff0066);
+    
+    // Spawn massive tear burst instantly
+    for (let i = 0; i < 20; i++) {
+      spawnTear(tearDuctL, 'left');
+      spawnTear(tearDuctR, 'right');
+    }
+  } else {
+    // Return to Normal Melancholy
+    hudTitle.textContent = "💧 EMOTION CORE: MELANCHOLY";
+    hudTitle.style.color = "#00f0ff";
+    hudSep.style.background = "rgba(0, 240, 255, 0.2)";
+    hud.style.borderColor = "rgba(0, 240, 255, 0.15)";
+    hud.style.boxShadow = "0 15px 35px rgba(0,0,0,0.5)";
+    label.style.color = "#00f0ff";
+    tearFreq.textContent = "8.4 Hz";
+    sobbingAmp.textContent = "MODERATE";
+    sobbingAmp.style.color = "#fff";
+    
+    glowTearsMat.color.setHex(0x00f0ff);
+    chestCore.material.color.setHex(0x00f0ff);
+    rimLight.color.setHex(0x00f0ff);
+  }
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Animation Loop
+const clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  time = clock.getElapsedTime();
+  
+  // 1. Dynamic Cursor Look-At Tracking
+  headGroup.lookAt(target.x, target.y + 0.8, 3);
+  chestGroup.rotation.y += (mouse.x * 0.24 - chestGroup.rotation.y) * 0.08;
+  
+  // 2. Continuous Organic Sobbing Wobble
+  const sobSpeed = currentPreset === 1 ? 24.0 : 9.0;
+  const sobAmp = currentPreset === 1 ? 0.065 : 0.024;
+  const wobbleY = Math.sin(time * sobSpeed) * sobAmp;
+  const wobbleZ = Math.cos(time * sobSpeed * 0.8) * sobAmp * 0.5;
+  
+  headGroup.position.y = 2.4 + wobbleY;
+  headGroup.rotation.z = Math.sin(time * sobSpeed * 0.5) * (currentPreset === 1 ? 0.05 : 0.015);
+  
+  // Breathing scale oscillation
+  const breath = 1.0 + Math.sin(time * 2.5) * 0.015;
+  torsoShell.scale.set(breath, breath, breath);
+  
+  // Arms flex to shield chest
+  const armAngle = currentPreset === 1 ? -0.2 : 0.05;
+  shoulderL.rotation.y = -Math.PI / 12 + mouse.x * 0.12;
+  shoulderR.rotation.y = Math.PI / 12 + mouse.x * 0.12;
+  
+  // 3. Neon Tears Spawn and Physics updates
+  spawnTimer += clock.getDelta();
+  const spawnThreshold = currentPreset === 1 ? 0.02 : 0.12;
+  
+  // Continuously spawn tears
+  if (Math.random() < (currentPreset === 1 ? 0.8 : 0.25)) {
+    spawnTear(tearDuctL, 'left');
+    spawnTear(tearDuctR, 'right');
+  }
+  
+  // Update HUD active tears count
+  document.getElementById('tearsCount').textContent = activeTears.length;
+  
+  // Process existing tears
+  for (let i = activeTears.length - 1; i >= 0; i--) {
+    const tear = activeTears[i];
+    tear.age += 0.016;
+    
+    if (tear.age >= tear.maxAge) {
+      scene.remove(tear.mesh);
+      tear.mesh.geometry.dispose();
+      activeTears.splice(i, 1);
+      continue;
+    }
+    
+    // Gravity pulls down, inertia carries outward
+    tear.vel.y -= 0.14 * 0.016; // gravity
+    tear.mesh.position.add(tear.vel);
+    
+    // Tear scale decays
+    const lifeRatio = 1.0 - (tear.age / tear.maxAge);
+    tear.mesh.scale.setScalar(lifeRatio);
+  }
+  
+  // PointLight cursor movement
+  cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1;
+  cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1;
+  
+  renderer.render(scene, camera);
+}
+
+animate();
+</script>
+</body>
+</html>
+`,
+    code: `'use client'
+
+import React, { useEffect, useRef, useState } from 'react'
+import * as THREE from 'three'
+
+interface TearParticle {
+  mesh: THREE.Mesh
+  age: number
+  maxAge: number
+  vel: THREE.Vector3
+  side: 'left' | 'right'
+}
+
+export function NovaToonCryingAndroidX() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  
+  // React State for Telemetry HUD
+  const [preset, setPreset] = useState<'MELANCHOLY' | 'OVERLOAD'>('MELANCHOLY')
+  const [tearFreq, setTearFreq] = useState(8.4)
+  const [sobbing, setSobbing] = useState<'MODERATE' | 'EXTREME'>('MODERATE')
+  const [activeCount, setActiveCount] = useState(0)
+  const [logs, setLogs] = useState<string[]>([
+    'Tear duct system check: OK.',
+    'Atmospheric sobbing dampening active.',
+    'System status: Melancholy.'
+  ])
+
+  useEffect(() => {
+    if (!containerRef.current || !canvasRef.current) return
+
+    const container = containerRef.current
+    const canvas = canvasRef.current
+
+    let currentPresetState = 0 // 0: MELANCHOLY, 1: HYPERCRY OVERLOAD
+    let animationFrameId: number
+    let time = 0
+
+    // Scene setup
+    const scene = new THREE.Scene()
+    scene.fog = new THREE.FogExp2(0x040108, 0.07)
+
+    // Camera setup
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100)
+    camera.position.set(0, 0.2, 8.5)
+
+    // Renderer setup
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
+    renderer.setSize(container.clientWidth, container.clientHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.toneMapping = THREE.ACESFilmicToneMapping
+
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0x0e061c, 2.0)
+    scene.add(ambientLight)
+
+    const mainSpot = new THREE.SpotLight(0xffffff, 30, 15, Math.PI / 6, 0.5, 1)
+    mainSpot.position.set(0, 5, 4)
+    scene.add(mainSpot)
+
+    const keyLight = new THREE.DirectionalLight(0xffbbf2, 1.5)
+    keyLight.position.set(2, 3, 2)
+    scene.add(keyLight)
+
+    const rimLight = new THREE.PointLight(0x00f0ff, 25, 8)
+    rimLight.position.set(-3, 1, -2)
+    scene.add(rimLight)
+
+    const cursorLight = new THREE.PointLight(0x00f0ff, 8, 6)
+    cursorLight.position.set(0, 0, 3)
+    scene.add(cursorLight)
+
+    // Materials (Cute Matte Cartoon/Cell-shaded looks)
+    const skinMat = new THREE.MeshToonMaterial({
+      color: 0x93e6ff, // Soft bionic neon-blue skin
+      roughness: 0.8
+    })
+
+    const darkMat = new THREE.MeshToonMaterial({
+      color: 0x110825, // Deep violet-black joints
+      roughness: 0.6
+    })
+
+    const whiteMat = new THREE.MeshToonMaterial({
+      color: 0xffffff,
+      roughness: 0.5
+    })
+
+    const glowTearsMat = new THREE.MeshBasicMaterial({
+      color: 0x00f0ff,
+      transparent: true,
+      opacity: 0.85
+    })
+
+    const blushMat = new THREE.MeshBasicMaterial({
+      color: 0xff0066
+    })
+
+    // Humanoid Character Group
+    const androidGroup = new THREE.Group()
+    androidGroup.position.y = -1.2
+    scene.add(androidGroup)
+
+    // --- 1. Cute Programmatic Helmet Head ---
+    const headGroup = new THREE.Group()
+    headGroup.position.y = 2.4
+    androidGroup.add(headGroup)
+
+    // Large round head shell
+    const headShell = new THREE.Mesh(new THREE.SphereGeometry(0.68, 32, 32), skinMat)
+    headShell.scale.set(1.0, 1.05, 0.95)
+    headGroup.add(headShell)
+
+    // Cute bionic headphone ears
+    const earCapL = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.08, 16), darkMat)
+    earCapL.rotation.z = Math.PI / 2
+    earCapL.position.set(-0.7, 0, 0)
+    headGroup.add(earCapL)
+
+    const earCapR = earCapL.clone()
+    earCapR.position.x = 0.7
+    headGroup.add(earCapR)
+
+    // Visor eyes
+    const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), darkMat)
+    eyeL.scale.set(1.0, 1.1, 0.3)
+    eyeL.position.set(-0.25, 0.05, 0.58)
+    headGroup.add(eyeL)
+
+    const eyeR = eyeL.clone()
+    eyeR.position.x = 0.25
+    headGroup.add(eyeR)
+
+    // Cute blushing cheeks
+    const blushL = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.06, 0.02), blushMat)
+    blushL.position.set(-0.28, -0.16, 0.62)
+    headGroup.add(blushL)
+
+    const blushR = blushL.clone()
+    blushR.position.x = 0.28
+    headGroup.add(blushR)
+
+    // Crying Tear ducts
+    const tearDuctL = new THREE.Group()
+    tearDuctL.position.set(-0.24, 0.02, 0.62)
+    headGroup.add(tearDuctL)
+
+    const tearDuctR = new THREE.Group()
+    tearDuctR.position.set(0.24, 0.02, 0.62)
+    headGroup.add(tearDuctR)
+
+    // --- 2. Cute Programmatic Solid Torso ---
+    const chestGroup = new THREE.Group()
+    chestGroup.position.y = 1.3
+    androidGroup.add(chestGroup)
+
+    const torsoShell = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.32, 1.1, 16), skinMat)
+    torsoShell.scale.set(1.0, 1.0, 0.7)
+    chestGroup.add(torsoShell)
+
+    // Cute chest heart glass reactor
+    const chestCore = new THREE.Mesh(new THREE.SphereGeometry(0.16, 16, 16), new THREE.MeshBasicMaterial({ color: 0x00f0ff }))
+    chestCore.position.set(0, 0.15, 0.38)
+    chestGroup.add(chestCore)
+
+    // Neck connector
+    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.25, 16), darkMat)
+    neck.position.y = 0.65
+    chestGroup.add(neck)
+
+    // --- 3. Solid Cartoon Limbs ---
+    const shoulderL = new THREE.Group()
+    shoulderL.position.set(-0.68, 1.8, 0)
+    androidGroup.add(shoulderL)
+
+    const shoulderPadL = new THREE.Mesh(new THREE.SphereGeometry(0.15, 16, 16), darkMat)
+    shoulderL.add(shoulderPadL)
+
+    const armGroupL = new THREE.Group()
+    shoulderL.add(armGroupL)
+
+    // Solid Upper Arm
+    const upperArmL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.09, 0.58, 12), skinMat)
+    upperArmL.position.y = -0.32
+    armGroupL.add(upperArmL)
+
+    const elbowL = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), darkMat)
+    elbowL.position.y = -0.62
+    armGroupL.add(elbowL)
+
+    // Solid Forearm
+    const forearmL = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.07, 0.52, 12), skinMat)
+    forearmL.position.set(0, -0.88, 0)
+    armGroupL.add(forearmL)
+
+    const handL = new THREE.Mesh(new THREE.SphereGeometry(0.09, 12, 12), whiteMat)
+    handL.position.set(0, -1.18, 0)
+    armGroupL.add(handL)
+
+    // Symmetrical Right Arm
+    const shoulderR = shoulderL.clone()
+    shoulderR.position.x = 0.68
+    androidGroup.add(shoulderR)
+
+    // --- 4. Pelvis & Legs ---
+    const pelvis = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.16, 0.38), darkMat)
+    pelvis.position.y = 0.68
+    androidGroup.add(pelvis)
+
+    // Left Leg
+    const legL = new THREE.Group()
+    legL.position.set(-0.25, 0.58, 0)
+    androidGroup.add(legL)
+
+    const hipL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 12, 12), darkMat)
+    legL.add(hipL)
+
+    const femurL = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.1, 0.72, 12), skinMat)
+    femurL.position.y = -0.4
+    legL.add(femurL)
+
+    const kneeL = new THREE.Mesh(new THREE.SphereGeometry(0.09, 12, 12), darkMat)
+    kneeL.position.y = -0.76
+    legL.add(kneeL)
+
+    const tibiaL = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.07, 0.68, 12), skinMat)
+    tibiaL.position.y = -1.1
+    legL.add(tibiaL)
+
+    const footL = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.08, 0.24), whiteMat)
+    footL.position.set(0, -1.48, 0.06)
+    legL.add(footL)
+
+    // Symmetrical Right Leg
+    const legR = legL.clone()
+    legR.position.x = 0.25
+    androidGroup.add(legR)
+
+    // --- 5. Neon Tears Physics Engine ---
+    const activeTears: TearParticle[] = []
+    const tearGeometry = new THREE.SphereGeometry(0.045, 12, 12)
+
+    const spawnTear = (sourceDuct: THREE.Group, side: 'left' | 'right') => {
+      const tMesh = new THREE.Mesh(tearGeometry, glowTearsMat)
+      const wPos = new THREE.Vector3()
+      sourceDuct.getWorldPosition(wPos)
+      tMesh.position.copy(wPos)
+      scene.add(tMesh)
+      
+      activeTears.push({
+        mesh: tMesh,
+        age: 0,
+        maxAge: Math.random() * 0.8 + 0.6,
+        vel: new THREE.Vector3(
+          (Math.random() - 0.5) * 0.08 + (side === 'left' ? -0.1 : 0.1),
+          (Math.random() - 0.5) * 0.05,
+          Math.random() * 0.15 + 0.1
+        ),
+        side
+      })
+    }
+
+    // Mouse vectors
+    const mouse = new THREE.Vector2(0, 0)
+    const target = new THREE.Vector3(0, 0, 0)
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      const y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      mouse.x = x
+      mouse.y = y
+      target.x = x * 2.2
+      target.y = y * 1.6 + 1.2
+    }
+
+    // Click handler to trigger overload/hypercry
+    const handleMouseDown = () => {
+      currentPresetState = currentPresetState === 0 ? 1 : 0
+      
+      if (currentPresetState === 1) {
+        setPreset('OVERLOAD')
+        setTearFreq(48.2)
+        setSobbing('EXTREME')
+        setLogs(prev => [
+          \`[\${new Date().toLocaleTimeString()}] ⚠️ EMOTION OVERLOAD DETECTED!\`,
+          \`[\${new Date().toLocaleTimeString()}] Crying overclock: 48.2Hz\`,
+          ...prev.slice(0, 4)
+        ])
+
+        glowTearsMat.color.setHex(0xff0066)
+        chestCore.material.color.setHex(0xff0066)
+        rimLight.color.setHex(0xff0066)
+
+        // Massive tear burst
+        for (let i = 0; i < 20; i++) {
+          spawnTear(tearDuctL, 'left')
+          spawnTear(tearDuctR, 'right')
+        }
+      } else {
+        setPreset('MELANCHOLY')
+        setTearFreq(8.4)
+        setSobbing('MODERATE')
+        setLogs(prev => [
+          \`[\${new Date().toLocaleTimeString()}] 🟢 Core emotional sync stable. System: Melancholy.\`,
+          ...prev.slice(0, 4)
+        ])
+
+        glowTearsMat.color.setHex(0x00f0ff)
+        chestCore.material.color.setHex(0x00f0ff)
+        rimLight.color.setHex(0x00f0ff)
+      }
+    }
+
+    container.addEventListener('mousemove', handleMouseMove)
+    container.addEventListener('mousedown', handleMouseDown)
+
+    const handleResize = () => {
+      if (!containerRef.current) return
+      camera.aspect = container.clientWidth / container.clientHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(container.clientWidth, container.clientHeight)
+    }
+    window.addEventListener('resize', handleResize)
+
+    // Animation Loop
+    const clock = new THREE.Clock()
+    const animate = () => {
+      animationFrameId = requestAnimationFrame(animate)
+      time = clock.getElapsedTime()
+
+      // 1. Skull look at cursor
+      headGroup.lookAt(target.x, target.y + 0.8, 3)
+      chestGroup.rotation.y += (mouse.x * 0.24 - chestGroup.rotation.y) * 0.08
+
+      // 2. Sobbing oscillations
+      const sobSpeed = currentPresetState === 1 ? 24.0 : 9.0
+      const sobAmp = currentPresetState === 1 ? 0.065 : 0.024
+      const wobbleY = Math.sin(time * sobSpeed) * sobAmp
+      
+      headGroup.position.y = 2.4 + wobbleY
+      headGroup.rotation.z = Math.sin(time * sobSpeed * 0.5) * (currentPresetState === 1 ? 0.05 : 0.015)
+
+      // Chest breathing
+      const breath = 1.0 + Math.sin(time * 2.5) * 0.015
+      torsoShell.scale.set(breath, breath, breath)
+
+      // Arms swing
+      shoulderL.rotation.y = -Math.PI / 12 + mouse.x * 0.12
+      shoulderR.rotation.y = Math.PI / 12 + mouse.x * 0.12
+
+      // 3. Spawning tears
+      if (Math.random() < (currentPresetState === 1 ? 0.8 : 0.25)) {
+        spawnTear(tearDuctL, 'left')
+        spawnTear(tearDuctR, 'right')
+      }
+
+      // Update state count
+      setActiveCount(activeTears.length)
+
+      // Update tear particles
+      for (let i = activeTears.length - 1; i >= 0; i--) {
+        const tear = activeTears[i]
+        tear.age += 0.016
+        
+        if (tear.age >= tear.maxAge) {
+          scene.remove(tear.mesh)
+          tear.mesh.geometry.dispose()
+          activeTears.splice(i, 1)
+          continue
+        }
+        
+        tear.vel.y -= 0.14 * 0.016
+        tear.mesh.position.add(tear.vel)
+        
+        const lifeRatio = 1.0 - (tear.age / tear.maxAge)
+        tear.mesh.scale.setScalar(lifeRatio)
+      }
+
+      // Cursor light follow
+      cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1
+      cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1
+
+      renderer.render(scene, camera)
+    }
+
+    animate()
+
+    // Cleanups
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      container.removeEventListener('mousemove', handleMouseMove)
+      container.removeEventListener('mousedown', handleMouseDown)
+      window.removeEventListener('resize', handleResize)
+      
+      // Traverse to dispose
+      scene.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return
+        if (object.geometry) object.geometry.dispose()
+        if (Array.isArray(object.material)) {
+          object.material.forEach((mat) => mat.dispose())
+        } else if (object.material) {
+          object.material.dispose()
+        }
+      })
+      tearGeometry.dispose()
+      renderer.dispose()
+    }
+  }, [])
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative flex h-[720px] w-full flex-col justify-between overflow-hidden rounded-[38px] border border-white/10 bg-[#040108] text-white"
+    >
+      {/* 3D Canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full" />
+
+      {/* Reactive HUD Overlay */}
+      <div
+        className="relative z-10 m-6 w-[280px] rounded-2xl border bg-black/80 p-5 backdrop-blur-xl transition-all duration-300"
+        style={{
+          borderColor: preset === 'OVERLOAD' ? '#ff006655' : 'rgba(0, 240, 255, 0.15)',
+          boxShadow: preset === 'OVERLOAD' ? '0 15px 35px rgba(255, 0, 102, 0.15)' : 'none'
+        }}
+      >
+        <div
+          className="flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors duration-300"
+          style={{ color: preset === 'OVERLOAD' ? '#ff0066' : '#00f0ff' }}
+        >
+          {preset === 'OVERLOAD' ? '💥 EMOTION CORE: HYPERCRY OVERLOAD' : '💧 EMOTION CORE: MELANCHOLY'}
+        </div>
+        <div
+          className="my-3 h-[1px] transition-colors duration-300"
+          style={{ backgroundColor: preset === 'OVERLOAD' ? '#ff0066' : 'rgba(0, 240, 255, 0.2)' }}
+        />
+
+        <div className="space-y-2.5 text-xs">
+          <div className="flex justify-between">
+            <span className="text-white/40">Chassis Code</span>
+            <strong className="text-white">NOVA-TOON CYBER BOY</strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Tear Frequency</span>
+            <strong className="text-white">{tearFreq} Hz</strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Sobbing Wobble</span>
+            <strong
+              className="transition-colors duration-300"
+              style={{ color: preset === 'OVERLOAD' ? '#ff0066' : '#fff' }}
+            >
+              {sobbing}
+            </strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Active Tears</span>
+            <strong
+              className="transition-colors duration-300"
+              style={{ color: preset === 'OVERLOAD' ? '#ff0066' : '#00f0ff' }}
+            >
+              {activeCount}
+            </strong>
+          </div>
+        </div>
+
+        {/* Real-time Bio-logs */}
+        <div className="mt-4 border-t border-white/5 pt-3">
+          <div className="mb-2 text-[10px] uppercase tracking-wider text-white/30">System Telemetry</div>
+          <div className="h-[90px] overflow-y-auto rounded-lg bg-black/40 p-2.5 text-[9px] font-mono leading-relaxed text-white/50 space-y-1">
+            {logs.map((log, idx) => (
+              <div key={idx} className="border-b border-white/5 pb-0.5 last:border-b-0 last:text-white/70">
+                {log}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Aesthetic Bottom Info */}
+      <div className="relative z-10 mx-auto mb-6 text-center">
+        <h3
+          className="text-sm font-black uppercase tracking-[0.3em] transition-colors duration-400"
+          style={{ color: preset === 'OVERLOAD' ? '#ff0066' : '#00f0ff' }}
+        >
+          Nova-Toon Crying Android X
+        </h3>
+        <p className="mt-1.5 text-[9px] font-medium tracking-[0.18em] text-white/40 uppercase">
+          Click screen to trigger hypercry • Move mouse to track bionic look-at
+        </p>
+      </div>
+    </div>
+  )
+}
+export default NovaToonCryingAndroidX;
+`,
+    prompt: `Build a highly interactive cell-shaded 3D humanoid robot called "Nova-Toon Crying Android X".\n- Inspired by Zdog cute vector graphics but implemented inside raw Three.js with flat-shaded MeshToonMaterials\n- Features a solid humanoid body chassis: large spherical helmet with blushing cheeks and weeping visor eyes, cylinder torso shell with cyan heart reactor, and solid white/cyan limbs\n- Spawns continuous glowing neon-cyan liquid tear particles from the eye ducts that flow downward under realistic gravity and scale-decay physics\n- Continuous organic wobbly head-shaking sobbing translations and breathing chest oscillations\n- Smooth cursor look-at tracking targeting pointer coordinates\n- Click-to-trigger hypercry overload changing the tear color to bright crimson, releasing a massive burst of tear flows, accelerating the sobbing wobble speed, and showing real-time reactive logs on the telemetry HUD panel\n- Clean resource disposal of meshes, geometries, and materials on React component unmount`,
+    likes: 0,
+    author: 'Animation AI',
+    featured: true,
+    createdAt: '2026-05-23T10:00:00.000Z',
+    updatedAt: '2026-05-23T10:00:00.000Z'
+  },
+  {
+    _id: 'robot-zenith-humanoid-sentinel-x',
+    slug: 'zenith-humanoid-sentinel-x',
+    title: 'Zenith Humanoid Sentinel X',
+    category: 'robot',
+    tag: 'threejs',
+    description: 'A highly interactive solid humanoid sentinel robot custom-built in Three.js. It features a solid carbon-titanium body shell, a gold-trimmed spine process, a horizontal cyan visor that projects a physical cursor-tracking laser beam, and a click-to-trigger Aegis Shield forcefield that overclocks the chassis core into a brilliant golden energy dome.',
+    previewCode: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #030206; overflow: hidden; cursor: crosshair; font-family: 'Courier New', monospace; user-select: none; }
+canvas { display: block; width: 100vw; height: 100vh; }
+.hud { position: absolute; top: 24px; left: 24px; padding: 18px; border: 1px solid rgba(0, 255, 204, 0.15); border-radius: 16px; background: rgba(3, 2, 6, 0.85); color: #00ffcc; backdrop-filter: blur(12px); pointer-events: none; font-size: 11px; min-width: 250px; transition: all 0.3s; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+.hud-title { font-weight: bold; letter-spacing: 2px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; text-transform: uppercase; }
+.hud-sep { height: 1px; background: rgba(0, 255, 204, 0.2); margin: 8px 0; transition: background 0.3s; }
+.hud-item { display: flex; justify-content: space-between; margin: 5px 0; }
+.hud-item span { color: rgba(0, 255, 204, 0.55); }
+.hud-item strong { color: #fff; }
+.label { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: #00ffcc; letter-spacing: 5px; text-transform: uppercase; pointer-events: none; text-align: center; transition: all 0.4s; font-size: 13px; font-weight: 900; }
+.sub { font-size: 9px; color: rgba(0, 255, 204, 0.4); letter-spacing: 2px; margin-top: 6px; font-weight: normal; }
+</style>
+</head>
+<body>
+<div class="hud" id="hud">
+  <div class="hud-title" id="hudTitle">🛡️ SENTINEL STATUS: ACTIVE</div>
+  <div class="hud-sep" id="hudSep"></div>
+  <div class="hud-item"><span>Chassis Code</span><strong>ZENITH-SENTINEL X</strong></div>
+  <div class="hud-item"><span>Visor Scan</span><strong id="visorStatus">TRACKING</strong></div>
+  <div class="hud-item"><span>Aegis Shield</span><strong id="shieldStatus">READY</strong></div>
+  <div class="hud-item"><span>Core Output</span><strong id="energyOut">100%</strong></div>
+</div>
+<div class="label" id="label">
+  Zenith Humanoid Sentinel X
+  <div class="sub">Click Screen to Engage Aegis Shield • Move Cursor to Direct Visor Laser</div>
+</div>
+
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+
+let currentShieldState = 0; // 0: IDLE, 1: ACTIVE (Shield up)
+let time = 0;
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x030206, 0.065);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0.2, 8.5);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+
+// Lights
+const ambientLight = new THREE.AmbientLight(0x040b10, 1.8);
+scene.add(ambientLight);
+
+const mainSpot = new THREE.SpotLight(0xffffff, 40, 15, Math.PI / 6, 0.5, 1);
+mainSpot.position.set(0, 6, 4);
+scene.add(mainSpot);
+
+const rimLightL = new THREE.PointLight(0x00ffcc, 25, 8);
+rimLightL.position.set(-4, 1.5, -2);
+scene.add(rimLightL);
+
+const rimLightR = new THREE.PointLight(0x0099ff, 15, 8);
+rimLightR.position.set(4, 1.5, -2);
+scene.add(rimLightR);
+
+const cursorLight = new THREE.PointLight(0x00ffcc, 8, 6);
+cursorLight.position.set(0, 0, 3);
+scene.add(cursorLight);
+
+// Materials
+const armorMat = new THREE.MeshStandardMaterial({
+  color: 0x1b202e, // Sleek polished carbon titanium
+  roughness: 0.15,
+  metalness: 0.9
+});
+
+const goldTrimMat = new THREE.MeshStandardMaterial({
+  color: 0xffd700, // Highly polished gold bionic joint trims
+  roughness: 0.08,
+  metalness: 1.0
+});
+
+const cyberShellMat = new THREE.MeshStandardMaterial({
+  color: 0x050a14, // Solid deep dark bionic glass plates
+  roughness: 0.1,
+  metalness: 0.9,
+  transparent: true,
+  opacity: 0.65,
+  side: THREE.DoubleSide
+});
+
+const glowingVisorMat = new THREE.MeshBasicMaterial({
+  color: 0x00ffcc
+});
+
+const laserMat = new THREE.MeshBasicMaterial({
+  color: 0x00ffcc,
+  transparent: true,
+  opacity: 0.35
+});
+
+// Humanoid Group
+const sentinelGroup = new THREE.Group();
+sentinelGroup.position.y = -1.2;
+scene.add(sentinelGroup);
+
+// --- 1. Programmatic Helmet Head ---
+const headGroup = new THREE.Group();
+headGroup.position.y = 2.7;
+sentinelGroup.add(headGroup);
+
+const helmet = new THREE.Mesh(new THREE.SphereGeometry(0.42, 32, 24), armorMat);
+helmet.scale.set(1.0, 1.15, 0.95);
+headGroup.add(helmet);
+
+// Sleek horizontal laser visor
+const visor = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.32, 0.32, 0.15, 24, 1, false, -Math.PI / 3, Math.PI * 2 / 3),
+  glowingVisorMat
+);
+visor.rotation.x = Math.PI / 2;
+visor.position.set(0, 0.08, 0.24);
+headGroup.add(visor);
+
+// Ear headphone plates
+const earL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.08, 16), goldTrimMat);
+earL.rotation.z = Math.PI / 2;
+earL.position.set(-0.44, 0, 0);
+headGroup.add(earL);
+
+const earR = earL.clone();
+earR.position.x = 0.44;
+headGroup.add(earR);
+
+// --- 2. Programmatic Vertebral Spine ---
+const spineSegments = [];
+const spineGroup = new THREE.Group();
+sentinelGroup.add(spineGroup);
+
+const spineCount = 10;
+const startY = 0.5;
+const endY = 2.4;
+const stepY = (endY - startY) / spineCount;
+
+for (let i = 0; i < spineCount; i++) {
+  const segGrp = new THREE.Group();
+  segGrp.position.y = startY + i * stepY;
+  
+  const disc = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.15, 0.06, 16), goldTrimMat);
+  segGrp.add(disc);
+  
+  const spike = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.04, 0.18), armorMat);
+  spike.position.set(0, 0, -0.15);
+  spike.rotation.x = Math.PI / 8;
+  segGrp.add(spike);
+  
+  spineGroup.add(segGrp);
+  spineSegments.push(segGrp);
+}
+
+// --- 3. Torso Solid Human Chest ---
+const ribcageGroup = new THREE.Group();
+ribcageGroup.position.y = 1.45;
+sentinelGroup.add(ribcageGroup);
+
+const ribPairs = 5;
+const ribs = [];
+for (let i = 0; i < ribPairs; i++) {
+  const yOffset = (i - (ribPairs - 1) / 2) * 0.24;
+  const ribRadX = 0.58 - i * 0.03;
+  
+  const ribGeomL = new THREE.TorusGeometry(ribRadX, 0.035, 8, 32, Math.PI * 0.8);
+  const ribL = new THREE.Mesh(ribGeomL, armorMat);
+  ribL.position.set(-0.1, yOffset, 0.05);
+  ribL.rotation.set(0.1, Math.PI / 16, Math.PI / 2);
+  ribcageGroup.add(ribL);
+  
+  const ribR = ribL.clone();
+  ribR.position.x = 0.1;
+  ribR.rotation.y = -Math.PI / 16;
+  ribR.rotation.z = -Math.PI / 2;
+  ribcageGroup.add(ribR);
+  
+  ribs.push({ left: ribL, right: ribR });
+}
+
+// Sternum
+const sternum = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.1, 0.08), goldTrimMat);
+sternum.position.set(0, 0, 0.56);
+ribcageGroup.add(sternum);
+
+// Solid V-tapered cyber chest armor
+const chestPlateL = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.35, 1.2, 16, 1, false, 0, Math.PI * 0.9), cyberShellMat);
+chestPlateL.position.set(-0.25, 0, 0.1);
+chestPlateL.rotation.y = 0.15;
+chestPlateL.scale.set(1.0, 1.0, 0.5);
+ribcageGroup.add(chestPlateL);
+
+const chestPlateR = chestPlateL.clone();
+chestPlateR.position.x = 0.25;
+chestPlateR.rotation.y = -0.15;
+ribcageGroup.add(chestPlateR);
+
+// Solid abs plate
+const absPlate = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.6, 0.25), cyberShellMat);
+absPlate.position.set(0, -0.8, 0.05);
+ribcageGroup.add(absPlate);
+
+// Pulse reactor core
+const heartCore = new THREE.Mesh(new THREE.IcosahedronGeometry(0.18, 2), glowingVisorMat);
+heartCore.position.set(0, 0.15, 0.12);
+ribcageGroup.add(heartCore);
+
+// Orbital rings
+const coreRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.26, 0.015, 8, 32), goldTrimMat);
+coreRing1.position.copy(heartCore.position);
+ribcageGroup.add(coreRing1);
+
+const coreRing2 = coreRing1.clone();
+coreRing2.rotation.x = Math.PI / 2;
+ribcageGroup.add(coreRing2);
+
+// --- 4. Pelvis & Solid Arms ---
+const pelvisGroup = new THREE.Group();
+pelvisGroup.position.y = 0.4;
+sentinelGroup.add(pelvisGroup);
+
+const hipPlate = new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.16, 0.4), armorMat);
+pelvisGroup.add(hipPlate);
+
+const hipGuard = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.35, 0.45), cyberShellMat);
+hipGuard.position.y = -0.05;
+pelvisGroup.add(hipGuard);
+
+// Arms
+const shoulderL = new THREE.Group();
+shoulderL.position.set(-0.85, 2.05, 0);
+sentinelGroup.add(shoulderL);
+
+const jointCapL = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), goldTrimMat);
+shoulderL.add(jointCapL);
+
+const shoulderCapL = new THREE.Mesh(new THREE.SphereGeometry(0.24, 16, 16), cyberShellMat);
+shoulderCapL.scale.set(1.0, 1.2, 1.0);
+shoulderL.add(shoulderCapL);
+
+const armGroupL = new THREE.Group();
+shoulderL.add(armGroupL);
+
+const bicepShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.11, 0.6, 12), cyberShellMat);
+bicepShellL.position.y = -0.35;
+armGroupL.add(bicepShellL);
+
+const forearmGroupL = new THREE.Group();
+forearmGroupL.position.set(0, -0.7, 0);
+armGroupL.add(forearmGroupL);
+
+const elbowL = new THREE.Mesh(new THREE.SphereGeometry(0.08, 16, 16), goldTrimMat);
+forearmGroupL.add(elbowL);
+
+const forearmShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.09, 0.58, 12), cyberShellMat);
+forearmShellL.position.set(0, -0.32, 0);
+forearmGroupL.add(forearmShellL);
+
+const handL = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, 0.12), goldTrimMat);
+handL.position.y = -0.65;
+forearmGroupL.add(handL);
+
+// Symmetrical Right Arm
+const shoulderR = shoulderL.clone();
+shoulderR.position.x = 0.85;
+sentinelGroup.add(shoulderR);
+
+// --- 5. Solid Legs ---
+const legL = new THREE.Group();
+legL.position.set(-0.35, 0.35, 0);
+sentinelGroup.add(legL);
+
+const femurL = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.06, 0.85, 12), armorMat);
+femurL.position.y = -0.45;
+legL.add(femurL);
+
+const thighShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.14, 0.8, 12), cyberShellMat);
+thighShellL.position.y = -0.45;
+legL.add(thighShellL);
+
+const lowerLegL = new THREE.Group();
+lowerLegL.position.set(0, -0.9, 0);
+legL.add(lowerLegL);
+
+const kneeL = new THREE.Mesh(new THREE.SphereGeometry(0.09, 16, 16), goldTrimMat);
+lowerLegL.add(kneeL);
+
+const calfShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.09, 0.76, 12), cyberShellMat);
+calfShellL.position.set(0, -0.42, 0);
+lowerLegL.add(calfShellL);
+
+const footL = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.09, 0.28), goldTrimMat);
+footL.position.set(0, -0.85, 0.06);
+lowerLegL.add(footL);
+
+// Symmetrical Right Leg
+const legR = legL.clone();
+legR.position.x = 0.35;
+sentinelGroup.add(legR);
+
+// --- 6. Tracking Visor Laser Beam ---
+const laserGeometry = new THREE.CylinderGeometry(0.015, 0.015, 1.0, 8);
+const laserMesh = new THREE.Mesh(laserGeometry, laserMat);
+laserMesh.rotation.x = Math.PI / 2;
+scene.add(laserMesh);
+
+// --- 7. Aegis Forcefield Shield Dome ---
+const shieldDome = new THREE.Mesh(
+  new THREE.SphereGeometry(1.9, 32, 32),
+  new THREE.MeshBasicMaterial({
+    color: 0x00ffcc,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.0
+  })
+);
+shieldDome.position.copy(heartCore.position);
+ribcageGroup.add(shieldDome);
+
+// --- 8. Particle Energy Vortex ---
+const pCount = 150;
+const pGeom = new THREE.BufferGeometry();
+const pPos = new Float32Array(pCount * 3);
+const pVels = [];
+const pSpeeds = [];
+
+for (let i = 0; i < pCount; i++) {
+  const theta = Math.random() * Math.PI * 2;
+  const radius = Math.random() * 0.8 + 0.6;
+  pPos[i*3] = Math.cos(theta) * radius;
+  pPos[i*3+1] = Math.random() * 3.5 - 0.5;
+  pPos[i*3+2] = Math.sin(theta) * radius;
+  
+  pVels.push(theta);
+  pSpeeds.push(Math.random() * 0.03 + 0.01);
+}
+pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+const pMat = new THREE.PointsMaterial({
+  color: 0x00ffcc,
+  size: 0.035,
+  transparent: true,
+  opacity: 0.5,
+  blending: THREE.AdditiveBlending
+});
+const particles = new THREE.Points(pGeom, pMat);
+scene.add(particles);
+
+// Mouse tracking coordinates
+const mouse = new THREE.Vector2(0, 0);
+const target = new THREE.Vector3(0, 0, 0);
+
+window.addEventListener('mousemove', (e) => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  target.x = mouse.x * 2.5;
+  target.y = mouse.y * 1.8 + 1.2;
+});
+
+// Click Interaction (Engage Aegis Shield)
+let shieldDuration = 0;
+window.addEventListener('mousedown', () => {
+  currentShieldState = currentShieldState === 0 ? 1 : 0;
+  
+  const hud = document.getElementById('hud');
+  const hudTitle = document.getElementById('hudTitle');
+  const hudSep = document.getElementById('hudSep');
+  const label = document.getElementById('label');
+  const shieldStatus = document.getElementById('shieldStatus');
+  const energyOut = document.getElementById('energyOut');
+
+  if (currentShieldState === 1) {
+    // Shield Active
+    hudTitle.textContent = "🛡️ AEGIS SHIELD: MAXIMUM OUTPUT";
+    hudTitle.style.color = "#ffd700";
+    hudSep.style.background = "#ffd700";
+    hud.style.borderColor = "#ffd70088";
+    hud.style.boxShadow = "0 15px 35px rgba(255,215,0,0.25)";
+    label.style.color = "#ffd700";
+    shieldStatus.textContent = "CHARGED";
+    shieldStatus.style.color = "#ffd700";
+    energyOut.textContent = "260%";
+    energyOut.style.color = "#ffd700";
+    
+    // Core & Visor shift to gold
+    glowingVisorMat.color.setHex(0xffd700);
+    laserMat.color.setHex(0xffd700);
+    pMat.color.setHex(0xffd700);
+    cyberShellMat.color.setHex(0x1a1202); // Rich dark amber/gold bionic glass
+    
+    // Expand protective dome
+    shieldDome.scale.setScalar(0.2);
+    shieldDome.material.opacity = 0.55;
+    shieldDuration = 1.0;
+  } else {
+    // Return to Normal Tracking
+    hudTitle.textContent = "🛡️ SENTINEL STATUS: ACTIVE";
+    hudTitle.style.color = "#00ffcc";
+    hudSep.style.background = "rgba(0, 255, 204, 0.2)";
+    hud.style.borderColor = "rgba(0, 255, 204, 0.15)";
+    hud.style.boxShadow = "0 15px 35px rgba(0,0,0,0.5)";
+    label.style.color = "#00ffcc";
+    shieldStatus.textContent = "READY";
+    shieldStatus.style.color = "#fff";
+    energyOut.textContent = "100%";
+    energyOut.style.color = "#fff";
+    
+    glowingVisorMat.color.setHex(0x00ffcc);
+    laserMat.color.setHex(0x00ffcc);
+    pMat.color.setHex(0x00ffcc);
+    cyberShellMat.color.setHex(0x050a14); // Return deep dark cyan
+    
+    shieldDome.material.opacity = 0;
+  }
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Animation Loop
+const clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  time = clock.getElapsedTime();
+  
+  // 1. Visor looking towards cursor
+  headGroup.lookAt(target.x, target.y + 1.2, 3);
+  
+  // Spine chain-link flex
+  spineSegments.forEach((seg, idx) => {
+    const factor = idx / spineCount;
+    seg.rotation.y += (mouse.x * 0.32 * factor - seg.rotation.y) * 0.08;
+    seg.rotation.x += (mouse.y * 0.16 * factor - seg.rotation.x) * 0.08;
+  });
+  
+  // Ribcage breathing flex
+  ribcageGroup.rotation.y += (mouse.x * 0.18 - ribcageGroup.rotation.y) * 0.06;
+  const breathFactor = 1.0 + Math.sin(time * 1.8) * 0.015;
+  chestPlateL.scale.set(1.0, 1.0, 0.5 * breathFactor);
+  chestPlateR.scale.set(1.0, 1.0, 0.5 * breathFactor);
+  
+  // Arm stance adjustments
+  const raiseSpeed = currentShieldState === 1 ? 0.15 : 0.06;
+  shoulderL.rotation.y = -Math.PI / 12 + mouse.x * 0.12;
+  shoulderR.rotation.y = Math.PI / 12 + mouse.x * 0.12;
+  
+  // Slow arm breathing float
+  shoulderL.rotation.x = Math.sin(time * 1.5) * 0.04;
+  shoulderR.rotation.x = -Math.sin(time * 1.5) * 0.04;
+  
+  // Pulse core heart
+  const pulseSpeed = currentShieldState === 1 ? 12.0 : 2.5;
+  const pulseScale = 1.0 + Math.sin(time * pulseSpeed) * 0.12;
+  heartCore.scale.setScalar(pulseScale);
+  
+  coreRing1.rotation.y += currentShieldState === 1 ? 0.08 : 0.015;
+  coreRing2.rotation.x += currentShieldState === 1 ? 0.06 : 0.012;
+  
+  // 2. Visor Laser beam positioning
+  const laserStart = new THREE.Vector3();
+  visor.getWorldPosition(laserStart);
+  
+  const laserEnd = new THREE.Vector3(target.x, target.y + 1.2, 3);
+  
+  const distance = laserStart.distanceTo(laserEnd);
+  laserMesh.scale.set(1, distance, 1);
+  
+  // Point and position laser mesh
+  laserMesh.position.copy(laserStart).add(laserEnd).multiplyScalar(0.5);
+  laserMesh.lookAt(laserEnd);
+  laserMesh.rotateX(Math.PI / 2);
+  
+  // 3. Aegis Forcefield pulse decay
+  if (currentShieldState === 1 && shieldDuration > 0) {
+    shieldDuration -= 0.012;
+    shieldDome.scale.addScalar(0.06);
+    shieldDome.material.opacity = shieldDuration * 0.55;
+  } else if (currentShieldState === 1 && shieldDuration <= 0) {
+    shieldDome.scale.setScalar(0.2);
+    shieldDome.material.opacity = 0.55;
+    shieldDuration = 1.0;
+  }
+  
+  // 4. Particle Energy Vortex orbit flows
+  const posAttr = pGeom.getAttribute('position');
+  const spiralSpeed = currentShieldState === 1 ? 2.5 : 1.0;
+  for (let i = 0; i < pCount; i++) {
+    pVels[i] += pSpeeds[i] * spiralSpeed;
+    const radius = 0.7 + Math.sin(time + i) * 0.15;
+    posAttr.setX(i, Math.cos(pVels[i]) * radius);
+    posAttr.setZ(i, Math.sin(pVels[i]) * radius);
+  }
+  posAttr.needsUpdate = true;
+  
+  // PointLight cursor movement
+  cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1;
+  cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1;
+  
+  renderer.render(scene, camera);
+}
+
+animate();
+</script>
+</body>
+</html>
+`,
+    code: `'use client'
+
+import React, { useEffect, useRef, useState } from 'react'
+import * as THREE from 'three'
+
+export function ZenithHumanoidSentinelX() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  
+  // React State for Telemetry HUD
+  const [shieldActive, setShieldActive] = useState<boolean>(false)
+  const [energyOutput, setEnergyOutput] = useState<number>(100)
+  const [logs, setLogs] = useState<string[]>([
+    'Shield capacity check: OK.',
+    'Atmospheric scanning array active.',
+    'Sentinel ready. Direct laser visor.'
+  ])
+
+  useEffect(() => {
+    if (!containerRef.current || !canvasRef.current) return
+
+    const container = containerRef.current
+    const canvas = canvasRef.current
+
+    let currentShieldState = 0 // 0: IDLE, 1: ACTIVE
+    let animationFrameId: number
+    let time = 0
+
+    // Scene setup
+    const scene = new THREE.Scene()
+    scene.fog = new THREE.FogExp2(0x030206, 0.065)
+
+    // Camera setup
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100)
+    camera.position.set(0, 0.2, 8.5)
+
+    // Renderer setup
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
+    renderer.setSize(container.clientWidth, container.clientHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.toneMapping = THREE.ACESFilmicToneMapping
+
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0x040b10, 1.8)
+    scene.add(ambientLight)
+
+    const mainSpot = new THREE.SpotLight(0xffffff, 40, 15, Math.PI / 6, 0.5, 1)
+    mainSpot.position.set(0, 6, 4)
+    scene.add(mainSpot)
+
+    const rimLightL = new THREE.PointLight(0x00ffcc, 25, 8)
+    rimLightL.position.set(-4, 1.5, -2)
+    scene.add(rimLightL)
+
+    const rimLightR = new THREE.PointLight(0x0099ff, 15, 8)
+    rimLightR.position.set(4, 1.5, -2)
+    scene.add(rimLightR)
+
+    const cursorLight = new THREE.PointLight(0x00ffcc, 8, 6)
+    cursorLight.position.set(0, 0, 3)
+    scene.add(cursorLight)
+
+    // Materials
+    const armorMat = new THREE.MeshStandardMaterial({
+      color: 0x1b202e, // Sleek polished carbon titanium
+      roughness: 0.15,
+      metalness: 0.9
+    })
+
+    const goldTrimMat = new THREE.MeshStandardMaterial({
+      color: 0xffd700, // Highly polished gold bionic joint trims
+      roughness: 0.08,
+      metalness: 1.0
+    })
+
+    const cyberShellMat = new THREE.MeshStandardMaterial({
+      color: 0x050a14, // Solid deep dark bionic glass plates
+      roughness: 0.1,
+      metalness: 0.9,
+      transparent: true,
+      opacity: 0.65,
+      side: THREE.DoubleSide
+    })
+
+    const glowingVisorMat = new THREE.MeshBasicMaterial({
+      color: 0x00ffcc
+    })
+
+    const laserMat = new THREE.MeshBasicMaterial({
+      color: 0x00ffcc,
+      transparent: true,
+      opacity: 0.35
+    })
+
+    // Humanoid Group
+    const sentinelGroup = new THREE.Group()
+    sentinelGroup.position.y = -1.2
+    scene.add(sentinelGroup)
+
+    // --- 1. Programmatic Helmet Head ---
+    const headGroup = new THREE.Group()
+    headGroup.position.y = 2.7
+    sentinelGroup.add(headGroup)
+
+    const helmet = new THREE.Mesh(new THREE.SphereGeometry(0.42, 32, 24), armorMat)
+    helmet.scale.set(1.0, 1.15, 0.95)
+    headGroup.add(helmet)
+
+    // Sleek horizontal laser visor
+    const visor = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.32, 0.32, 0.15, 24, 1, false, -Math.PI / 3, Math.PI * 2 / 3),
+      glowingVisorMat
+    )
+    visor.rotation.x = Math.PI / 2
+    visor.position.set(0, 0.08, 0.24)
+    headGroup.add(visor)
+
+    // Ear plates
+    const earL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.08, 16), goldTrimMat)
+    earL.rotation.z = Math.PI / 2
+    earL.position.set(-0.44, 0, 0)
+    headGroup.add(earL)
+
+    const earR = earL.clone()
+    earR.position.x = 0.44
+    headGroup.add(earR)
+
+    // --- 2. Programmatic Vertebral Spine ---
+    const spineSegments: THREE.Group[] = []
+    const spineGroup = new THREE.Group()
+    sentinelGroup.add(spineGroup)
+
+    const spineCount = 10
+    const startY = 0.5
+    const endY = 2.4
+    const stepY = (endY - startY) / spineCount
+
+    for (let i = 0; i < spineCount; i++) {
+      const segGrp = new THREE.Group()
+      segGrp.position.y = startY + i * stepY
+      
+      const disc = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.15, 0.06, 16), goldTrimMat)
+      segGrp.add(disc)
+      
+      const spike = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.04, 0.18), armorMat)
+      spike.position.set(0, 0, -0.15)
+      spike.rotation.x = Math.PI / 8
+      segGrp.add(spike)
+      
+      spineGroup.add(segGrp)
+      spineSegments.push(segGrp)
+    }
+
+    // --- 3. Torso Solid Human Chest ---
+    const ribcageGroup = new THREE.Group()
+    ribcageGroup.position.y = 1.45
+    sentinelGroup.add(ribcageGroup)
+
+    const ribPairs = 5
+    const ribs: { left: THREE.Mesh; right: THREE.Mesh }[] = []
+    for (let i = 0; i < ribPairs; i++) {
+      const yOffset = (i - (ribPairs - 1) / 2) * 0.24
+      const ribRadX = 0.58 - i * 0.03
+      
+      const ribGeomL = new THREE.TorusGeometry(ribRadX, 0.035, 8, 32, Math.PI * 0.8)
+      const ribL = new THREE.Mesh(ribGeomL, armorMat)
+      ribL.position.set(-0.1, yOffset, 0.05)
+      ribL.rotation.set(0.1, Math.PI / 16, Math.PI / 2)
+      ribcageGroup.add(ribL)
+      
+      const ribR = ribL.clone()
+      ribR.position.x = 0.1
+      ribR.rotation.y = -Math.PI / 16
+      ribR.rotation.z = -Math.PI / 2
+      ribcageGroup.add(ribR)
+      
+      ribs.push({ left: ribL, right: ribR })
+    }
+
+    // Sternum
+    const sternum = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.1, 0.08), goldTrimMat)
+    sternum.position.set(0, 0, 0.56)
+    ribcageGroup.add(sternum)
+
+    // Solid V-tapered cyber chest armor
+    const chestPlateL = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.35, 1.2, 16, 1, false, 0, Math.PI * 0.9), cyberShellMat)
+    chestPlateL.position.set(-0.25, 0, 0.1)
+    chestPlateL.rotation.y = 0.15
+    chestPlateL.scale.set(1.0, 1.0, 0.5)
+    ribcageGroup.add(chestPlateL)
+
+    const chestPlateR = chestPlateL.clone()
+    chestPlateR.position.x = 0.25
+    chestPlateR.rotation.y = -0.15
+    ribcageGroup.add(chestPlateR)
+
+    // Solid abs plate
+    const absPlate = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.6, 0.25), cyberShellMat)
+    absPlate.position.set(0, -0.8, 0.05)
+    ribcageGroup.add(absPlate)
+
+    // Pulse reactor core
+    const heartCore = new THREE.Mesh(new THREE.IcosahedronGeometry(0.18, 2), glowingVisorMat)
+    heartCore.position.set(0, 0.15, 0.12)
+    ribcageGroup.add(heartCore)
+
+    // Orbital rings
+    const coreRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.26, 0.015, 8, 32), goldTrimMat)
+    coreRing1.position.copy(heartCore.position)
+    ribcageGroup.add(coreRing1)
+
+    const coreRing2 = coreRing1.clone()
+    coreRing2.rotation.x = Math.PI / 2
+    ribcageGroup.add(coreRing2)
+
+    // --- 4. Pelvis & Solid Arms ---
+    const pelvisGroup = new THREE.Group()
+    pelvisGroup.position.y = 0.4
+    sentinelGroup.add(pelvisGroup)
+
+    const hipPlate = new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.16, 0.4), armorMat)
+    pelvisGroup.add(hipPlate)
+
+    const hipGuard = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.35, 0.45), cyberShellMat)
+    hipGuard.position.y = -0.05
+    pelvisGroup.add(hipGuard)
+
+    // Arms
+    const shoulderL = new THREE.Group()
+    shoulderL.position.set(-0.85, 2.05, 0)
+    sentinelGroup.add(shoulderL)
+
+    const jointCapL = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), goldTrimMat)
+    shoulderL.add(jointCapL)
+
+    const shoulderCapL = new THREE.Mesh(new THREE.SphereGeometry(0.24, 16, 16), cyberShellMat)
+    shoulderCapL.scale.set(1.0, 1.2, 1.0)
+    shoulderL.add(shoulderCapL)
+
+    const armGroupL = new THREE.Group()
+    shoulderL.add(armGroupL)
+
+    const bicepShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.11, 0.6, 12), cyberShellMat)
+    bicepShellL.position.y = -0.35
+    armGroupL.add(bicepShellL)
+
+    const forearmGroupL = new THREE.Group()
+    forearmGroupL.position.set(0, -0.7, 0)
+    armGroupL.add(forearmGroupL)
+
+    const elbowL = new THREE.Mesh(new THREE.SphereGeometry(0.08, 16, 16), goldTrimMat)
+    forearmGroupL.add(elbowL)
+
+    const forearmShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.09, 0.58, 12), cyberShellMat)
+    forearmShellL.position.set(0, -0.32, 0)
+    forearmGroupL.add(forearmShellL)
+
+    const handL = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, 0.12), goldTrimMat)
+    handL.position.y = -0.65
+    forearmGroupL.add(handL)
+
+    // Symmetrical Right Arm
+    const shoulderR = shoulderL.clone()
+    shoulderR.position.x = 0.85
+    sentinelGroup.add(shoulderR)
+
+    // --- 5. Solid Legs ---
+    const legL = new THREE.Group()
+    legL.position.set(-0.35, 0.35, 0)
+    sentinelGroup.add(legL)
+
+    const femurL = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.06, 0.85, 12), armorMat)
+    femurL.position.y = -0.45
+    legL.add(femurL)
+
+    const thighShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.14, 0.8, 12), cyberShellMat)
+    thighShellL.position.y = -0.45
+    legL.add(thighShellL)
+
+    const lowerLegL = new THREE.Group()
+    lowerLegL.position.set(0, -0.9, 0)
+    legL.add(lowerLegL)
+
+    const kneeL = new THREE.Mesh(new THREE.SphereGeometry(0.09, 16, 16), goldTrimMat)
+    lowerLegL.add(kneeL)
+
+    const calfShellL = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.09, 0.76, 12), cyberShellMat)
+    calfShellL.position.set(0, -0.42, 0)
+    lowerLegL.add(calfShellL)
+
+    const footL = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.09, 0.28), goldTrimMat)
+    footL.position.set(0, -0.85, 0.06)
+    lowerLegL.add(footL)
+
+    // Symmetrical Right Leg
+    const legR = legL.clone()
+    legR.position.x = 0.35
+    sentinelGroup.add(legR)
+
+    // --- 6. Tracking Visor Laser Beam ---
+    const laserGeometry = new THREE.CylinderGeometry(0.015, 0.015, 1.0, 8)
+    const laserMesh = new THREE.Mesh(laserGeometry, laserMat)
+    laserMesh.rotation.x = Math.PI / 2
+    scene.add(laserMesh)
+
+    // --- 7. Aegis Forcefield Shield Dome ---
+    const shieldDome = new THREE.Mesh(
+      new THREE.SphereGeometry(1.9, 32, 32),
+      new THREE.MeshBasicMaterial({
+        color: 0x00ffcc,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.0
+      })
+    )
+    shieldDome.position.copy(heartCore.position)
+    ribcageGroup.add(shieldDome)
+
+    // --- 8. Particle Energy Vortex ---
+    const pCount = 150
+    const pGeom = new THREE.BufferGeometry()
+    const pPos = new Float32Array(pCount * 3)
+    const pVels: number[] = []
+    const pSpeeds: number[] = []
+
+    for (let i = 0; i < pCount; i++) {
+      const theta = Math.random() * Math.PI * 2
+      const radius = Math.random() * 0.8 + 0.6
+      pPos[i*3] = Math.cos(theta) * radius
+      pPos[i*3+1] = Math.random() * 3.5 - 0.5
+      pPos[i*3+2] = Math.sin(theta) * radius
+      
+      pVels.push(theta)
+      pSpeeds.push(Math.random() * 0.03 + 0.01)
+    }
+    pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3))
+    const pMat = new THREE.PointsMaterial({
+      color: 0x00ffcc,
+      size: 0.035,
+      transparent: true,
+      opacity: 0.5,
+      blending: THREE.AdditiveBlending
+    })
+    const particles = new THREE.Points(pGeom, pMat)
+    scene.add(particles)
+
+    // Mouse tracking coordinates
+    const mouse = new THREE.Vector2(0, 0)
+    const target = new THREE.Vector3(0, 0, 0)
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      const y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      mouse.x = x
+      mouse.y = y
+      target.x = x * 2.5
+      target.y = y * 1.8 + 1.2
+    }
+
+    // Direct click handler for Aegis shield dome
+    let shieldDuration = 0
+    const handleMouseDown = () => {
+      currentShieldState = currentShieldState === 0 ? 1 : 0
+      
+      if (currentShieldState === 1) {
+        setShieldActive(true)
+        setEnergyOutput(260)
+        setLogs(prev => [
+          \`[\${new Date().toLocaleTimeString()}] 🛡️ AEGIS ENERGY FIELD DEPLOYED!\`,
+          \`[\${new Date().toLocaleTimeString()}] Core output: 260% overclocked\`,
+          ...prev.slice(0, 4)
+        ])
+
+        glowingVisorMat.color.setHex(0xffd700)
+        laserMat.color.setHex(0xffd700)
+        pMat.color.setHex(0xffd700)
+        cyberShellMat.color.setHex(0x1a1202) // Amber gold
+
+        shieldDome.scale.setScalar(0.2)
+        shieldDome.material.opacity = 0.55
+        shieldDuration = 1.0
+      } else {
+        setShieldActive(false)
+        setEnergyOutput(100)
+        setLogs(prev => [
+          \`[\${new Date().toLocaleTimeString()}] 🟢 Shield status: Idle. Sentinel Active.\`,
+          ...prev.slice(0, 4)
+        ])
+
+        glowingVisorMat.color.setHex(0x00ffcc)
+        laserMat.color.setHex(0x00ffcc)
+        pMat.color.setHex(0x00ffcc)
+        cyberShellMat.color.setHex(0x050a14) // Cyan
+
+        shieldDome.material.opacity = 0
+      }
+    }
+
+    container.addEventListener('mousemove', handleMouseMove)
+    container.addEventListener('mousedown', handleMouseDown)
+
+    const handleResize = () => {
+      if (!containerRef.current) return
+      camera.aspect = container.clientWidth / container.clientHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(container.clientWidth, container.clientHeight)
+    }
+    window.addEventListener('resize', handleResize)
+
+    // Animation Loop
+    const animate = () => {
+      animationFrameId = requestAnimationFrame(animate)
+      time = clock.getElapsedTime()
+
+      // Visor looking at cursor
+      headGroup.lookAt(target.x, target.y + 1.2, 3)
+
+      // Spine flexing
+      spineSegments.forEach((seg, idx) => {
+        const factor = idx / spineCount
+        seg.rotation.y += (mouse.x * 0.32 * factor - seg.rotation.y) * 0.08
+        seg.rotation.x += (mouse.y * 0.16 * factor - seg.rotation.x) * 0.08
+      })
+
+      // Ribcage breathing flex
+      ribcageGroup.rotation.y += (mouse.x * 0.18 - ribcageGroup.rotation.y) * 0.06
+      const breathFactor = 1.0 + Math.sin(time * 1.8) * 0.015
+      chestPlateL.scale.set(1.0, 1.0, 0.5 * breathFactor)
+      chestPlateR.scale.set(1.0, 1.0, 0.5 * breathFactor)
+
+      // Arms idle breathing floating
+      shoulderL.rotation.y = -Math.PI / 12 + mouse.x * 0.12
+      shoulderR.rotation.y = Math.PI / 12 + mouse.x * 0.12
+      shoulderL.rotation.x = Math.sin(time * 1.5) * 0.04
+      shoulderR.rotation.x = -Math.sin(time * 1.5) * 0.04
+
+      // Reactor core pulsing
+      const pulseSpeed = currentShieldState === 1 ? 12.0 : 2.5
+      const pulseScale = 1.0 + Math.sin(time * pulseSpeed) * 0.12
+      heartCore.scale.setScalar(pulseScale)
+
+      coreRing1.rotation.y += currentShieldState === 1 ? 0.08 : 0.015
+      coreRing2.rotation.x += currentShieldState === 1 ? 0.06 : 0.012
+
+      // Laser Beam positioning math
+      const laserStart = new THREE.Vector3()
+      visor.getWorldPosition(laserStart)
+      
+      const laserEnd = new THREE.Vector3(target.x, target.y + 1.2, 3)
+      const distance = laserStart.distanceTo(laserEnd)
+      
+      laserMesh.scale.set(1, distance, 1)
+      laserMesh.position.copy(laserStart).add(laserEnd).multiplyScalar(0.5)
+      laserMesh.lookAt(laserEnd)
+      laserMesh.rotateX(Math.PI / 2)
+
+      // Aegis Shield decay
+      if (currentShieldState === 1 && shieldDuration > 0) {
+        shieldDuration -= 0.012
+        shieldDome.scale.addScalar(0.06)
+        shieldDome.material.opacity = shieldDuration * 0.55
+      } else if (currentShieldState === 1 && shieldDuration <= 0) {
+        shieldDome.scale.setScalar(0.2)
+        shieldDome.material.opacity = 0.55
+        shieldDuration = 1.0
+      }
+
+      // Energy particles flow
+      const posAttr = pGeom.getAttribute('position')
+      const spiralSpeed = currentShieldState === 1 ? 2.5 : 1.0
+      for (let i = 0; i < pCount; i++) {
+        pVels[i] += pSpeeds[i] * spiralSpeed
+        const radius = 0.7 + Math.sin(time + i) * 0.15
+        posAttr.setX(i, Math.cos(pVels[i]) * radius)
+        posAttr.setZ(i, Math.sin(pVels[i]) * radius)
+      }
+      posAttr.needsUpdate = true
+
+      // Cursor light follow
+      cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1
+      cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1
+
+      renderer.render(scene, camera)
+    }
+
+    animate()
+
+    // Cleanups
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      container.removeEventListener('mousemove', handleMouseMove)
+      container.removeEventListener('mousedown', handleMouseDown)
+      window.removeEventListener('resize', handleResize)
+      
+      scene.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return
+        if (object.geometry) object.geometry.dispose()
+        if (Array.isArray(object.material)) {
+          object.material.forEach((mat) => mat.dispose())
+        } else if (object.material) {
+          object.material.dispose()
+        }
+      })
+      laserGeometry.dispose()
+      pGeom.dispose()
+      pMat.dispose()
+      renderer.dispose()
+    }
+  }, [])
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative flex h-[720px] w-full flex-col justify-between overflow-hidden rounded-[38px] border border-white/10 bg-[#030206] text-white"
+    >
+      {/* 3D Canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full" />
+
+      {/* Reactive HUD Overlay */}
+      <div
+        className="relative z-10 m-6 w-[280px] rounded-2xl border bg-black/80 p-5 backdrop-blur-xl transition-all duration-300"
+        style={{
+          borderColor: shieldActive ? '#ffd70055' : 'rgba(0, 255, 204, 0.15)',
+          boxShadow: shieldActive ? '0 15px 35px rgba(255, 215, 0, 0.15)' : 'none'
+        }}
+      >
+        <div
+          className="flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors duration-300"
+          style={{ color: shieldActive ? '#ffd700' : '#00ffcc' }}
+        >
+          {shieldActive ? '🛡️ AEGIS SHIELD: MAXIMUM OUTPUT' : '🛡️ SENTINEL STATUS: ACTIVE'}
+        </div>
+        <div
+          className="my-3 h-[1px] transition-colors duration-300"
+          style={{ backgroundColor: shieldActive ? '#ffd700' : 'rgba(0, 255, 204, 0.2)' }}
+        />
+
+        <div className="space-y-2.5 text-xs">
+          <div className="flex justify-between">
+            <span className="text-white/40">Chassis Code</span>
+            <strong className="text-white">ZENITH-SENTINEL X</strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Visor Scan</span>
+            <strong className="text-white">TRACKING</strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Aegis Shield</span>
+            <strong
+              className="transition-colors duration-300"
+              style={{ color: shieldActive ? '#ffd700' : '#00ffcc' }}
+            >
+              {shieldActive ? 'CHARGED' : 'READY'}
+            </strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Core Output</span>
+            <strong
+              className="transition-colors duration-300"
+              style={{ color: shieldActive ? '#ffd700' : '#00ffcc' }}
+            >
+              {energyOutput}%
+            </strong>
+          </div>
+        </div>
+
+        {/* Real-time Bio-logs */}
+        <div className="mt-4 border-t border-white/5 pt-3">
+          <div className="mb-2 text-[10px] uppercase tracking-wider text-white/30">System Telemetry</div>
+          <div className="h-[90px] overflow-y-auto rounded-lg bg-black/40 p-2.5 text-[9px] font-mono leading-relaxed text-white/50 space-y-1">
+            {logs.map((log, idx) => (
+              <div key={idx} className="border-b border-white/5 pb-0.5 last:border-b-0 last:text-white/70">
+                {log}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Aesthetic Bottom Info */}
+      <div className="relative z-10 mx-auto mb-6 text-center">
+        <h3
+          className="text-sm font-black uppercase tracking-[0.3em] transition-colors duration-400"
+          style={{ color: shieldActive ? '#ffd700' : '#00ffcc' }}
+        >
+          Zenith Humanoid Sentinel X
+        </h3>
+        <p className="mt-1.5 text-[9px] font-medium tracking-[0.18em] text-white/40 uppercase">
+          Click screen to engage Aegis Shield • Move cursor to target visor laser
+        </p>
+      </div>
+    </div>
+  )
+}
+export default ZenithHumanoidSentinelX;
+`,
+    prompt: `Build a highly interactive solid humanoid mecha sentinel called "Zenith Humanoid Sentinel X".\n- Built using raw Three.js geometries and glossy carbon-titanium PBR materials\n- Fully solid muscular chest plate, shoulders, hips, and limbs enclosing gold joint hubs\n- A sleek visor slit projecting a continuous, physical tracking laser beam that hits the cursor coordinates exactly\n- Smooth head and chest looking rotation towards the pointer coordinates\n- Click-to-trigger Aegis Shield dome that expands around the chassis, shifting the energy colors from cyan to bright golden amber, and triggering real-time defensive logs on the telemetry HUD panel\n- Clean resource disposal of meshes, geometries, and materials on React component unmount`,
+    likes: 0,
+    author: 'Animation AI',
+    featured: true,
+    createdAt: '2026-05-23T10:00:00.000Z',
+    updatedAt: '2026-05-23T10:00:00.000Z'
+  },
+  {
+    _id: 'robot-vanguard-human-boy-x',
+    slug: 'vanguard-human-boy-x',
+    title: 'Vanguard Human Boy X',
+    category: 'robot',
+    tag: 'threejs',
+    description: 'A highly interactive solid 3D cartoon human boy character built in raw Three.js. It features a complete solid humanoid body with skin, clothes, stylish hair bangs, blushing cheeks, and a happy smiling face. Offers smooth pointer look-at tracking, breathing torso movements, and a click-to-trigger golden Joy Confetti Aura vortex.',
+    previewCode: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #080112; overflow: hidden; cursor: crosshair; font-family: 'Courier New', monospace; user-select: none; }
+canvas { display: block; width: 100vw; height: 100vh; }
+.hud { position: absolute; top: 24px; left: 24px; padding: 18px; border: 1px solid rgba(255, 30, 86, 0.15); border-radius: 16px; background: rgba(8, 1, 18, 0.85); color: #ff1e56; backdrop-filter: blur(12px); pointer-events: none; font-size: 11px; min-width: 250px; transition: all 0.3s; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+.hud-title { font-weight: bold; letter-spacing: 2px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; text-transform: uppercase; }
+.hud-sep { height: 1px; background: rgba(255, 30, 86, 0.2); margin: 8px 0; transition: background 0.3s; }
+.hud-item { display: flex; justify-content: space-between; margin: 5px 0; }
+.hud-item span { color: rgba(255, 30, 86, 0.55); }
+.hud-item strong { color: #fff; }
+.label { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: #ff1e56; letter-spacing: 5px; text-transform: uppercase; pointer-events: none; text-align: center; transition: all 0.4s; font-size: 13px; font-weight: 900; }
+.sub { font-size: 9px; color: rgba(255, 30, 86, 0.4); letter-spacing: 2px; margin-top: 6px; font-weight: normal; }
+</style>
+</head>
+<body>
+<div class="hud" id="hud">
+  <div class="hud-title" id="hudTitle">✨ EMOTION SYNC: STABLE JOY</div>
+  <div class="hud-sep" id="hudSep"></div>
+  <div class="hud-item"><span>Chassis Code</span><strong>VANGUARD HUMAN BOY</strong></div>
+  <div class="hud-item"><span>Gaze Direction</span><strong id="gazeDir">ACTIVE</strong></div>
+  <div class="hud-item"><span>Joy Burst Aura</span><strong id="auraStatus">READY</strong></div>
+  <div class="hud-item"><span>Sync Ratio</span><strong id="energyOut">98.4%</strong></div>
+</div>
+<div class="label" id="label">
+  Vanguard Human Boy X
+  <div class="sub">Click Screen to Trigger Joy Spark Aura • Move Cursor to Interact</div>
+</div>
+
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+
+let currentJoyState = 0; // 0: IDLE, 1: ACTIVE (Joy Aura)
+let time = 0;
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x080112, 0.065);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0.2, 8.5);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+
+// Lights
+const ambientLight = new THREE.AmbientLight(0x180b30, 2.0);
+scene.add(ambientLight);
+
+const mainSpot = new THREE.SpotLight(0xffffff, 30, 15, Math.PI / 6, 0.5, 1);
+mainSpot.position.set(0, 6, 4);
+scene.add(mainSpot);
+
+const rimLight = new THREE.PointLight(0xff1e56, 20, 8);
+rimLight.position.set(-4, 1.5, -2);
+scene.add(rimLight);
+
+const keyLight = new THREE.DirectionalLight(0xffdf80, 1.5);
+keyLight.position.set(2, 3, 2);
+scene.add(keyLight);
+
+const cursorLight = new THREE.PointLight(0xff1e56, 8, 6);
+cursorLight.position.set(0, 0, 3);
+scene.add(cursorLight);
+
+// Materials (Cute Cartoon Matte Skin, Clothes, and Hair)
+const skinMat = new THREE.MeshToonMaterial({
+  color: 0xffe0bd, // Beautiful peach human skin tone
+  roughness: 0.85
+});
+
+const hairMat = new THREE.MeshToonMaterial({
+  color: 0x4a2c11, // Rich glossy brown hair
+  roughness: 0.6
+});
+
+const hoodieMat = new THREE.MeshToonMaterial({
+  color: 0xff1e56, // Vibrant crimson hoodie
+  roughness: 0.7
+});
+
+const pantsMat = new THREE.MeshToonMaterial({
+  color: 0x1f4068, // Cyber denim-blue pants
+  roughness: 0.8
+});
+
+const whiteMat = new THREE.MeshToonMaterial({
+  color: 0xffffff,
+  roughness: 0.5
+});
+
+const eyeMat = new THREE.MeshBasicMaterial({
+  color: 0x0a0518
+});
+
+const eyeGlowMat = new THREE.MeshBasicMaterial({
+  color: 0xffe080
+});
+
+// Human Cartoon Group
+const humanGroup = new THREE.Group();
+humanGroup.position.y = -1.2;
+scene.add(humanGroup);
+
+// --- 1. Cute Solid Human Head & Hair ---
+const headGroup = new THREE.Group();
+headGroup.position.y = 2.4;
+humanGroup.add(headGroup);
+
+// Round solid face
+const face = new THREE.Mesh(new THREE.SphereGeometry(0.65, 32, 32), skinMat);
+face.scale.set(1.0, 1.05, 0.95);
+headGroup.add(face);
+
+// Solid cartoon ears
+const earL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 16), skinMat);
+earL.position.set(-0.66, 0, -0.05);
+headGroup.add(earL);
+
+const earR = earL.clone();
+earR.position.x = 0.66;
+headGroup.add(earR);
+
+// Stylish Solid Cartoon Hair (Clustered Spheres for nice 3D cartoon volume)
+const hairGroup = new THREE.Group();
+headGroup.add(hairGroup);
+
+const hairTop = new THREE.Mesh(new THREE.SphereGeometry(0.68, 16, 16), hairMat);
+hairTop.position.set(0, 0.22, -0.05);
+hairTop.scale.set(1.02, 1.0, 1.05);
+hairGroup.add(hairTop);
+
+// Hair locks/bangs in front
+const lock1 = new THREE.Mesh(new THREE.SphereGeometry(0.22, 12, 12), hairMat);
+lock1.position.set(-0.25, 0.42, 0.38);
+hairGroup.add(lock1);
+
+const lock2 = lock1.clone();
+lock2.position.set(0.25, 0.42, 0.38);
+hairGroup.add(lock2);
+
+const lock3 = lock1.clone();
+lock3.position.set(0, 0.48, 0.44);
+hairGroup.add(lock3);
+
+// Sideburns
+const sideburnL = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.25, 0.15), hairMat);
+sideburnL.position.set(-0.62, 0.1, 0.15);
+hairGroup.add(sideburnL);
+
+const sideburnR = sideburnL.clone();
+sideburnR.position.x = 0.62;
+hairGroup.add(sideburnR);
+
+// Cute Solid Eyes
+const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 16), eyeMat);
+eyeL.scale.set(1.0, 1.1, 0.3);
+eyeL.position.set(-0.24, 0.05, 0.58);
+headGroup.add(eyeL);
+
+const eyeR = eyeL.clone();
+eyeR.position.x = 0.25;
+headGroup.add(eyeR);
+
+// Eye highlights
+const highlightL = new THREE.Mesh(new THREE.SphereGeometry(0.035, 8, 8), whiteMat);
+highlightL.position.set(-0.2, 0.1, 0.61);
+headGroup.add(highlightL);
+
+const highlightR = highlightL.clone();
+highlightR.position.x = 0.29;
+headGroup.add(highlightR);
+
+// Smiling mouth
+const mouthGeom = new THREE.TorusGeometry(0.12, 0.03, 8, 24, Math.PI);
+const mouth = new THREE.Mesh(mouthGeom, new THREE.MeshBasicMaterial({ color: 0xff5e7e }));
+mouth.position.set(0, -0.22, 0.58);
+mouth.rotation.set(0, 0, Math.PI); // smiling face curve
+headGroup.add(mouth);
+
+// Blushing pink cheeks
+const cheekL = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.05, 0.02), new THREE.MeshBasicMaterial({ color: 0xff5e7e }));
+cheekL.position.set(-0.28, -0.12, 0.61);
+headGroup.add(cheekL);
+
+const cheekR = cheekL.clone();
+cheekR.position.x = 0.28;
+headGroup.add(cheekR);
+
+// --- 2. Cute Solid Human Torso (Wearing Red Hoodie) ---
+const chestGroup = new THREE.Group();
+chestGroup.position.y = 1.35;
+humanGroup.add(chestGroup);
+
+const hoodieBody = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.35, 1.05, 16), hoodieMat);
+hoodieBody.scale.set(1.0, 1.0, 0.75);
+chestGroup.add(hoodieBody);
+
+// Neck skin
+const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.14, 0.2, 16), skinMat);
+neck.position.y = 0.62;
+chestGroup.add(neck);
+
+// Hoodie neck collar ring
+const collar = new THREE.Mesh(new THREE.TorusGeometry(0.24, 0.05, 8, 24), hoodieMat);
+collar.rotation.x = Math.PI / 2;
+collar.position.y = 0.52;
+chestGroup.add(collar);
+
+// --- 3. Solid Human Limbs (Sleeves & Skin Hands) ---
+const shoulderL = new THREE.Group();
+shoulderL.position.set(-0.68, 1.8, 0);
+humanGroup.add(shoulderL);
+
+const shoulderPadL = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), hoodieMat);
+shoulderL.add(shoulderPadL);
+
+const armGroupL = new THREE.Group();
+shoulderL.add(armGroupL);
+
+// Solid upper arm sleeve
+const sleeveL = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.1, 0.55, 12), hoodieMat);
+sleeveL.position.y = -0.3;
+armGroupL.add(sleeveL);
+
+const elbowL = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), hoodieMat);
+elbowL.position.y = -0.58;
+armGroupL.add(elbowL);
+
+// Solid skin forearm
+const forearmL = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.075, 0.5, 12), skinMat);
+forearmL.position.set(0, -0.82, 0);
+armGroupL.add(forearmL);
+
+// Peachy human hand glove plate
+const handL = new THREE.Mesh(new THREE.SphereGeometry(0.095, 12, 12), skinMat);
+handL.position.set(0, -1.1, 0);
+armGroupL.add(handL);
+
+// Symmetrical Right Arm
+const shoulderR = shoulderL.clone();
+shoulderR.position.x = 0.68;
+humanGroup.add(shoulderR);
+
+// --- 4. Pelvis & Solid Blue Jeans Legs ---
+const pelvis = new THREE.Mesh(new THREE.BoxGeometry(0.66, 0.16, 0.42), pantsMat);
+pelvis.position.y = 0.72;
+humanGroup.add(pelvis);
+
+// Left Leg
+const legL = new THREE.Group();
+legL.position.set(-0.25, 0.62, 0);
+humanGroup.add(legL);
+
+const hipL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 12, 12), pantsMat);
+legL.add(hipL);
+
+const jeansL = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.1, 0.75, 12), pantsMat);
+jeansL.position.y = -0.42;
+legL.add(jeansL);
+
+const kneeL = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), pantsMat);
+kneeL.position.y = -0.8;
+legL.add(kneeL);
+
+const lowerLegL = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.08, 0.72, 12), pantsMat);
+lowerLegL.position.y = -1.15;
+legL.add(lowerLegL);
+
+// Cool Yellow boots
+const bootL = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.1, 0.28), new THREE.MeshToonMaterial({ color: 0xffd700 }));
+bootL.position.set(0, -1.55, 0.06);
+legL.add(bootL);
+
+// Symmetrical Right Leg
+const legR = legL.clone();
+legR.position.x = 0.25;
+humanGroup.add(legR);
+
+// --- 5. Holographic Joy Aura Orbiting Rings ---
+const ringGroup = new THREE.Group();
+ringGroup.position.copy(headGroup.position);
+humanGroup.add(ringGroup);
+
+const joyRing = new THREE.Mesh(
+  new THREE.TorusGeometry(1.2, 0.025, 8, 48),
+  new THREE.MeshBasicMaterial({
+    color: 0xff1e56,
+    transparent: true,
+    opacity: 0.0
+  })
+);
+joyRing.rotation.x = Math.PI / 2.3;
+ringGroup.add(joyRing);
+
+// --- 6. Joy Aura Confetti Spark Particles ---
+const pCount = 100;
+const pGeom = new THREE.BufferGeometry();
+const pPos = new Float32Array(pCount * 3);
+const pVels = [];
+
+for (let i = 0; i < pCount; i++) {
+  pPos[i*3] = (Math.random() - 0.5) * 5;
+  pPos[i*3+1] = Math.random() * 4 - 1;
+  pPos[i*3+2] = (Math.random() - 0.5) * 4;
+  pVels.push(new THREE.Vector3(
+    (Math.random() - 0.5) * 0.1,
+    Math.random() * 0.3 + 0.1,
+    (Math.random() - 0.5) * 0.1
+  ));
+}
+pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+const pMat = new THREE.PointsMaterial({
+  color: 0xff1e56,
+  size: 0.045,
+  transparent: true,
+  opacity: 0.0,
+  blending: THREE.AdditiveBlending
+});
+const particles = new THREE.Points(pGeom, pMat);
+scene.add(particles);
+
+// Mouse tracking coordinates
+const mouse = new THREE.Vector2(0, 0);
+const target = new THREE.Vector3(0, 0, 0);
+
+window.addEventListener('mousemove', (e) => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  target.x = mouse.x * 2.2;
+  target.y = mouse.y * 1.6 + 1.2;
+});
+
+// Click Interaction (Hyper Joy Aura Burst)
+let joyAuraDuration = 0;
+window.addEventListener('mousedown', () => {
+  currentJoyState = currentJoyState === 0 ? 1 : 0;
+  
+  const hud = document.getElementById('hud');
+  const hudTitle = document.getElementById('hudTitle');
+  const hudSep = document.getElementById('hudSep');
+  const label = document.getElementById('label');
+  const auraStatus = document.getElementById('auraStatus');
+  const energyOut = document.getElementById('energyOut');
+
+  if (currentJoyState === 1) {
+    // Joy Aura Burst active
+    hudTitle.textContent = "✨ EMOTION OVERFLOW: MAXIMUM JOY";
+    hudTitle.style.color = "#ffd700";
+    hudSep.style.background = "#ffd700";
+    hud.style.borderColor = "#ffd70088";
+    hud.style.boxShadow = "0 15px 35px rgba(255,215,0,0.25)";
+    label.style.color = "#ffd700";
+    auraStatus.textContent = "BURSTING";
+    auraStatus.style.color = "#ffd700";
+    energyOut.textContent = "320%";
+    energyOut.style.color = "#ffd700";
+    
+    // Core & lights shift gold
+    eyeL.material = eyeGlowMat;
+    eyeR.material = eyeGlowMat;
+    pMat.color.setHex(0xffd700);
+    pMat.opacity = 0.85;
+    joyRing.material.color.setHex(0xffd700);
+    joyRing.material.opacity = 0.75;
+    rimLight.color.setHex(0xffd700);
+    
+    joyAuraDuration = 1.0;
+  } else {
+    // Return to Normal Joy
+    hudTitle.textContent = "✨ EMOTION SYNC: STABLE JOY";
+    hudTitle.style.color = "#ff1e56";
+    hudSep.style.background = "rgba(255, 30, 86, 0.2)";
+    hud.style.borderColor = "rgba(255, 30, 86, 0.15)";
+    hud.style.boxShadow = "0 15px 35px rgba(0,0,0,0.5)";
+    label.style.color = "#ff1e56";
+    auraStatus.textContent = "READY";
+    auraStatus.style.color = "#fff";
+    energyOut.textContent = "98.4%";
+    energyOut.style.color = "#fff";
+    
+    eyeL.material = eyeMat;
+    eyeR.material = eyeMat;
+    pMat.opacity = 0.0;
+    joyRing.material.opacity = 0.0;
+    rimLight.color.setHex(0xff1e56);
+  }
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Animation Loop
+const clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  time = clock.getElapsedTime();
+  
+  // 1. Face looks towards cursor
+  headGroup.lookAt(target.x, target.y + 0.8, 3);
+  
+  // Torso follows slightly
+  chestGroup.rotation.y += (mouse.x * 0.25 - chestGroup.rotation.y) * 0.08;
+  
+  // 2. Slow breathing float (Smooth & happy, no wobbly sops)
+  const floatY = Math.sin(time * 2.0) * 0.035;
+  humanGroup.position.y = -1.2 + floatY;
+  
+  // Arm breathing floats
+  shoulderL.rotation.z = Math.sin(time * 1.5) * 0.05;
+  shoulderR.rotation.z = -Math.sin(time * 1.5) * 0.05;
+  
+  // 3. Ring spin
+  if (currentJoyState === 1) {
+    ringGroup.rotation.y += 0.04;
+    ringGroup.rotation.z += 0.01;
+  }
+  
+  // 4. Confetti spark particle flow
+  if (currentJoyState === 1) {
+    const posAttr = pGeom.getAttribute('position');
+    for (let i = 0; i < pCount; i++) {
+      let y = posAttr.getY(i) + pVels[i].y * 0.08;
+      if (y > 4) {
+        y = -1.5;
+        posAttr.setX(i, (Math.random() - 0.5) * 5);
+        posAttr.setZ(i, (Math.random() - 0.5) * 4);
+      }
+      posAttr.setY(i, y);
+      posAttr.setX(i, posAttr.getX(i) + Math.sin(time * 1.5 + i) * 0.005);
+    }
+    posAttr.needsUpdate = true;
+  }
+  
+  // PointLight cursor movement
+  cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1;
+  cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1;
+  
+  renderer.render(scene, camera);
+}
+
+animate();
+</script>
+</body>
+</html>
+`,
+    code: `'use client'
+
+import React, { useEffect, useRef, useState } from 'react'
+import * as THREE from 'three'
+
+export function VanguardHumanBoyX() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  
+  // React State for Telemetry HUD
+  const [joyActive, setJoyActive] = useState<boolean>(false)
+  const [energyOutput, setEnergyOutput] = useState<number>(98.4)
+  const [logs, setLogs] = useState<string[]>([
+    'Emotion sync: Stable joy.',
+    'Atmospheric scanner arrays active.',
+    'System ready. Move mouse to play.'
+  ])
+
+  useEffect(() => {
+    if (!containerRef.current || !canvasRef.current) return
+
+    const container = containerRef.current
+    const canvas = canvasRef.current
+
+    let currentJoyState = 0 // 0: IDLE, 1: ACTIVE
+    let animationFrameId: number
+    let time = 0
+
+    // Scene setup
+    const scene = new THREE.Scene()
+    scene.fog = new THREE.FogExp2(0x080112, 0.065)
+
+    // Camera setup
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100)
+    camera.position.set(0, 0.2, 8.5)
+
+    // Renderer setup
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
+    renderer.setSize(container.clientWidth, container.clientHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.toneMapping = THREE.ACESFilmicToneMapping
+
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0x180b30, 2.0)
+    scene.add(ambientLight)
+
+    const mainSpot = new THREE.SpotLight(0xffffff, 30, 15, Math.PI / 6, 0.5, 1)
+    mainSpot.position.set(0, 6, 4)
+    scene.add(mainSpot)
+
+    const rimLight = new THREE.PointLight(0xff1e56, 20, 8)
+    rimLight.position.set(-4, 1.5, -2)
+    scene.add(rimLight)
+
+    const keyLight = new THREE.DirectionalLight(0xffdf80, 1.5)
+    keyLight.position.set(2, 3, 2)
+    scene.add(keyLight)
+
+    const cursorLight = new THREE.PointLight(0xff1e56, 8, 6)
+    cursorLight.position.set(0, 0, 3)
+    scene.add(cursorLight)
+
+    // Materials (Cute Cartoon Matte Skin, Clothes, and Hair)
+    const skinMat = new THREE.MeshToonMaterial({
+      color: 0xffe0bd, // Peach human skin tone
+      roughness: 0.85
+    })
+
+    const hairMat = new THREE.MeshToonMaterial({
+      color: 0x4a2c11, // Brown hair
+      roughness: 0.6
+    })
+
+    const hoodieMat = new THREE.MeshToonMaterial({
+      color: 0xff1e56, // Crimson hoodie
+      roughness: 0.7
+    })
+
+    const pantsMat = new THREE.MeshToonMaterial({
+      color: 0x1f4068, // Denim blue pants
+      roughness: 0.8
+    })
+
+    const whiteMat = new THREE.MeshToonMaterial({
+      color: 0xffffff,
+      roughness: 0.5
+    })
+
+    const eyeMat = new THREE.MeshBasicMaterial({
+      color: 0x0a0518
+    })
+
+    const eyeGlowMat = new THREE.MeshBasicMaterial({
+      color: 0xffe080
+    })
+
+    // Human Cartoon Group
+    const humanGroup = new THREE.Group()
+    humanGroup.position.y = -1.2
+    scene.add(humanGroup)
+
+    // --- 1. Cute Solid Human Head & Hair ---
+    const headGroup = new THREE.Group()
+    headGroup.position.y = 2.4
+    humanGroup.add(headGroup)
+
+    // Round solid face
+    const face = new THREE.Mesh(new THREE.SphereGeometry(0.65, 32, 32), skinMat)
+    face.scale.set(1.0, 1.05, 0.95)
+    headGroup.add(face)
+
+    // Ears
+    const earL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 16), skinMat)
+    earL.position.set(-0.66, 0, -0.05)
+    headGroup.add(earL)
+
+    const earR = earL.clone()
+    earR.position.x = 0.66
+    headGroup.add(earR)
+
+    // Stylish Hair Clustered spheres
+    const hairGroup = new THREE.Group()
+    headGroup.add(hairGroup)
+
+    const hairTop = new THREE.Mesh(new THREE.SphereGeometry(0.68, 16, 16), hairMat)
+    hairTop.position.set(0, 0.22, -0.05)
+    hairTop.scale.set(1.02, 1.0, 1.05)
+    hairGroup.add(hairTop)
+
+    const lock1 = new THREE.Mesh(new THREE.SphereGeometry(0.22, 12, 12), hairMat)
+    lock1.position.set(-0.25, 0.42, 0.38)
+    hairGroup.add(lock1)
+
+    const lock2 = lock1.clone()
+    lock2.position.set(0.25, 0.42, 0.38)
+    hairGroup.add(lock2)
+
+    const lock3 = lock1.clone()
+    lock3.position.set(0, 0.48, 0.44)
+    hairGroup.add(lock3)
+
+    const sideburnL = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.25, 0.15), hairMat)
+    sideburnL.position.set(-0.62, 0.1, 0.15)
+    hairGroup.add(sideburnL)
+
+    const sideburnR = sideburnL.clone()
+    sideburnR.position.x = 0.62
+    hairGroup.add(sideburnR)
+
+    // Cute solid eyes
+    const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 16), eyeMat)
+    eyeL.scale.set(1.0, 1.1, 0.3)
+    eyeL.position.set(-0.24, 0.05, 0.58)
+    headGroup.add(eyeL)
+
+    const eyeR = eyeL.clone()
+    eyeR.position.x = 0.25
+    headGroup.add(eyeR)
+
+    // Highlights
+    const highlightL = new THREE.Mesh(new THREE.SphereGeometry(0.035, 8, 8), whiteMat)
+    highlightL.position.set(-0.2, 0.1, 0.61)
+    headGroup.add(highlightL)
+
+    const highlightR = highlightL.clone()
+    highlightR.position.x = 0.29
+    headGroup.add(highlightR)
+
+    // Smiling mouth
+    const mouthGeom = new THREE.TorusGeometry(0.12, 0.03, 8, 24, Math.PI)
+    const mouth = new THREE.Mesh(mouthGeom, new THREE.MeshBasicMaterial({ color: 0xff5e7e }))
+    mouth.position.set(0, -0.22, 0.58)
+    mouth.rotation.set(0, 0, Math.PI)
+    headGroup.add(mouth)
+
+    // Cheeks
+    const cheekL = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.05, 0.02), new THREE.MeshBasicMaterial({ color: 0xff5e7e }))
+    cheekL.position.set(-0.28, -0.12, 0.61)
+    headGroup.add(cheekL)
+
+    const cheekR = cheekL.clone()
+    cheekR.position.x = 0.28
+    headGroup.add(cheekR)
+
+    // --- 2. Torso (Hoodie) ---
+    const chestGroup = new THREE.Group()
+    chestGroup.position.y = 1.35
+    humanGroup.add(chestGroup)
+
+    const hoodieBody = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.35, 1.05, 16), hoodieMat)
+    hoodieBody.scale.set(1.0, 1.0, 0.75)
+    chestGroup.add(hoodieBody)
+
+    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.14, 0.2, 16), skinMat)
+    neck.position.y = 0.62
+    chestGroup.add(neck)
+
+    const collar = new THREE.Mesh(new THREE.TorusGeometry(0.24, 0.05, 8, 24), hoodieMat)
+    collar.rotation.x = Math.PI / 2
+    collar.position.y = 0.52
+    chestGroup.add(collar)
+
+    // --- 3. Solid Arms ---
+    const shoulderL = new THREE.Group()
+    shoulderL.position.set(-0.68, 1.8, 0)
+    humanGroup.add(shoulderL)
+
+    const shoulderPadL = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), hoodieMat)
+    shoulderL.add(shoulderPadL)
+
+    const armGroupL = new THREE.Group()
+    shoulderL.add(armGroupL)
+
+    const sleeveL = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.1, 0.55, 12), hoodieMat)
+    sleeveL.position.y = -0.3
+    armGroupL.add(sleeveL)
+
+    const elbowL = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), hoodieMat)
+    elbowL.position.y = -0.58
+    armGroupL.add(elbowL)
+
+    const forearmL = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.075, 0.5, 12), skinMat)
+    forearmL.position.set(0, -0.82, 0)
+    armGroupL.add(forearmL)
+
+    const handL = new THREE.Mesh(new THREE.SphereGeometry(0.095, 12, 12), skinMat)
+    handL.position.set(0, -1.1, 0)
+    armGroupL.add(handL)
+
+    // Symmetrical Right Arm
+    const shoulderR = shoulderL.clone()
+    shoulderR.position.x = 0.68
+    humanGroup.add(shoulderR)
+
+    // --- 4. Pelvis & Pants Legs ---
+    const pelvis = new THREE.Mesh(new THREE.BoxGeometry(0.66, 0.16, 0.42), pantsMat)
+    pelvis.position.y = 0.72
+    humanGroup.add(pelvis)
+
+    // Left Leg
+    const legL = new THREE.Group()
+    legL.position.set(-0.25, 0.62, 0)
+    humanGroup.add(legL)
+
+    const hipL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 12, 12), pantsMat)
+    legL.add(hipL)
+
+    const jeansL = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.1, 0.75, 12), pantsMat)
+    jeansL.position.y = -0.42
+    legL.add(jeansL)
+
+    const kneeL = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), pantsMat)
+    kneeL.position.y = -0.8
+    legL.add(kneeL)
+
+    const lowerLegL = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.08, 0.72, 12), pantsMat)
+    lowerLegL.position.y = -1.15
+    legL.add(lowerLegL)
+
+    const bootL = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.1, 0.28), new THREE.MeshToonMaterial({ color: 0xffd700 }))
+    bootL.position.set(0, -1.55, 0.06)
+    legL.add(bootL)
+
+    // Symmetrical Right Leg
+    const legR = legL.clone()
+    legR.position.x = 0.25
+    humanGroup.add(legR)
+
+    // --- 5. Holographic Joy Aura Orbiting Rings ---
+    const ringGroup = new THREE.Group()
+    ringGroup.position.copy(headGroup.position)
+    humanGroup.add(ringGroup)
+
+    const joyRing = new THREE.Mesh(
+      new THREE.TorusGeometry(1.2, 0.025, 8, 48),
+      new THREE.MeshBasicMaterial({
+        color: 0xff1e56,
+        transparent: true,
+        opacity: 0.0
+      })
+    )
+    joyRing.rotation.x = Math.PI / 2.3
+    ringGroup.add(joyRing)
+
+    // --- 6. Joy Aura Confetti Spark Particles ---
+    const pCount = 100
+    const pGeom = new THREE.BufferGeometry()
+    const pPos = new Float32Array(pCount * 3)
+    const pVels: THREE.Vector3[] = []
+
+    for (let i = 0; i < pCount; i++) {
+      pPos[i*3] = (Math.random() - 0.5) * 5
+      pPos[i*3+1] = Math.random() * 4 - 1
+      pPos[i*3+2] = (Math.random() - 0.5) * 4
+      pVels.push(new THREE.Vector3(
+        (Math.random() - 0.5) * 0.1,
+        Math.random() * 0.3 + 0.1,
+        (Math.random() - 0.5) * 0.1
+      ))
+    }
+    pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3))
+    const pMat = new THREE.PointsMaterial({
+      color: 0xff1e56,
+      size: 0.045,
+      transparent: true,
+      opacity: 0.0,
+      blending: THREE.AdditiveBlending
+    })
+    const particles = new THREE.Points(pGeom, pMat)
+    scene.add(particles)
+
+    // Mouse coordinates
+    const mouse = new THREE.Vector2(0, 0)
+    const target = new THREE.Vector3(0, 0, 0)
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      const y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      mouse.x = x
+      mouse.y = y
+      target.x = x * 2.2
+      target.y = y * 1.6 + 1.2
+    }
+
+    // Direct click handler to trigger Joy Aura
+    const handleMouseDown = () => {
+      currentJoyState = currentJoyState === 0 ? 1 : 0
+      
+      if (currentJoyState === 1) {
+        setJoyActive(true)
+        setEnergyOutput(320)
+        setLogs(prev => [
+          \`[\${new Date().toLocaleTimeString()}] ✨ MAXIMUM JOY OVERFLOW!\`,
+          \`[\${new Date().toLocaleTimeString()}] Confetti sparks output: 320%\`,
+          ...prev.slice(0, 4)
+        ])
+
+        eyeL.material = eyeGlowMat
+        eyeR.material = eyeGlowMat
+        pMat.color.setHex(0xffd700)
+        pMat.opacity = 0.85
+        joyRing.material.color.setHex(0xffd700)
+        joyRing.material.opacity = 0.75
+        rimLight.color.setHex(0xffd700)
+      } else {
+        setJoyActive(false)
+        setEnergyOutput(98.4)
+        setLogs(prev => [
+          \`[\${new Date().toLocaleTimeString()}] 🟢 Stable Joy sync active.\`,
+          ...prev.slice(0, 4)
+        ])
+
+        eyeL.material = eyeMat
+        eyeR.material = eyeMat
+        pMat.opacity = 0.0
+        joyRing.material.opacity = 0.0
+        rimLight.color.setHex(0xff1e56)
+      }
+    }
+
+    container.addEventListener('mousemove', handleMouseMove)
+    container.addEventListener('mousedown', handleMouseDown)
+
+    const handleResize = () => {
+      if (!containerRef.current) return
+      camera.aspect = container.clientWidth / container.clientHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(container.clientWidth, container.clientHeight)
+    }
+    window.addEventListener('resize', handleResize)
+
+    // Animation Loop
+    const clock = new THREE.Clock()
+    const animate = () => {
+      animationFrameId = requestAnimationFrame(animate)
+      time = clock.getElapsedTime()
+
+      // Face looks at cursor
+      headGroup.lookAt(target.x, target.y + 0.8, 3)
+      chestGroup.rotation.y += (mouse.x * 0.25 - chestGroup.rotation.y) * 0.08
+
+      // Slow breathing float
+      const floatY = Math.sin(time * 2.0) * 0.035
+      humanGroup.position.y = -1.2 + floatY
+
+      // Arm floats
+      shoulderL.rotation.z = Math.sin(time * 1.5) * 0.05
+      shoulderR.rotation.z = -Math.sin(time * 1.5) * 0.05
+
+      // Ring rotations
+      if (currentJoyState === 1) {
+        ringGroup.rotation.y += 0.04
+        ringGroup.rotation.z += 0.01
+      }
+
+      // Spark flows
+      if (currentJoyState === 1) {
+        const posAttr = pGeom.getAttribute('position')
+        for (let i = 0; i < pCount; i++) {
+          let y = posAttr.getY(i) + pVels[i].y * 0.08
+          if (y > 4) {
+            y = -1.5
+            posAttr.setX(i, (Math.random() - 0.5) * 5)
+            posAttr.setZ(i, (Math.random() - 0.5) * 4)
+          }
+          posAttr.setY(i, y)
+          posAttr.setX(i, posAttr.getX(i) + Math.sin(time * 1.5 + i) * 0.005)
+        }
+        posAttr.needsUpdate = true
+      }
+
+      // Cursor light follow
+      cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1
+      cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1
+
+      renderer.render(scene, camera)
+    }
+
+    animate()
+
+    // Cleanups
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      container.removeEventListener('mousemove', handleMouseMove)
+      container.removeEventListener('mousedown', handleMouseDown)
+      window.removeEventListener('resize', handleResize)
+      
+      scene.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return
+        if (object.geometry) object.geometry.dispose()
+        if (Array.isArray(object.material)) {
+          object.material.forEach((mat) => mat.dispose())
+        } else if (object.material) {
+          object.material.dispose()
+        }
+      })
+      pGeom.dispose()
+      pMat.dispose()
+      renderer.dispose()
+    }
+  }, [])
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative flex h-[720px] w-full flex-col justify-between overflow-hidden rounded-[38px] border border-white/10 bg-[#080112] text-white"
+    >
+      {/* 3D Canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full" />
+
+      {/* Reactive HUD Overlay */}
+      <div
+        className="relative z-10 m-6 w-[280px] rounded-2xl border bg-black/80 p-5 backdrop-blur-xl transition-all duration-300"
+        style={{
+          borderColor: joyActive ? '#ffd70055' : 'rgba(255, 30, 86, 0.15)',
+          boxShadow: joyActive ? '0 15px 35px rgba(255, 215, 0, 0.15)' : 'none'
+        }}
+      >
+        <div
+          className="flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors duration-300"
+          style={{ color: joyActive ? '#ffd700' : '#ff1e56' }}
+        >
+          {joyActive ? '✨ OVERFLOW: MAXIMUM JOY' : '✨ EMOTION SYNC: STABLE JOY'}
+        </div>
+        <div
+          className="my-3 h-[1px] transition-colors duration-300"
+          style={{ backgroundColor: joyActive ? '#ffd700' : 'rgba(255, 30, 86, 0.2)' }}
+        />
+
+        <div className="space-y-2.5 text-xs">
+          <div className="flex justify-between">
+            <span className="text-white/40">Chassis Code</span>
+            <strong className="text-white">VANGUARD HUMAN BOY</strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Gaze Direction</span>
+            <strong className="text-white">ACTIVE</strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Joy Burst Aura</span>
+            <strong
+              className="transition-colors duration-300"
+              style={{ color: joyActive ? '#ffd700' : '#ff1e56' }}
+            >
+              {joyActive ? 'BURSTING' : 'READY'}
+            </strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Sync Ratio</span>
+            <strong
+              className="transition-colors duration-300"
+              style={{ color: joyActive ? '#ffd700' : '#ff1e56' }}
+            >
+              {energyOutput}%
+            </strong>
+          </div>
+        </div>
+
+        {/* Real-time Bio-logs */}
+        <div className="mt-4 border-t border-white/5 pt-3">
+          <div className="mb-2 text-[10px] uppercase tracking-wider text-white/30">System Telemetry</div>
+          <div className="h-[90px] overflow-y-auto rounded-lg bg-black/40 p-2.5 text-[9px] font-mono leading-relaxed text-white/50 space-y-1">
+            {logs.map((log, idx) => (
+              <div key={idx} className="border-b border-white/5 pb-0.5 last:border-b-0 last:text-white/70">
+                {log}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Aesthetic Bottom Info */}
+      <div className="relative z-10 mx-auto mb-6 text-center">
+        <h3
+          className="text-sm font-black uppercase tracking-[0.3em] transition-colors duration-400"
+          style={{ color: joyActive ? '#ffd700' : '#ff1e56' }}
+        >
+          Vanguard Human Boy X
+        </h3>
+        <p className="mt-1.5 text-[9px] font-medium tracking-[0.18em] text-white/40 uppercase">
+          Click screen to trigger joy aura burst • Move cursor to make look-at
+        </p>
+      </div>
+    </div>
+  )
+}
+export default VanguardHumanBoyX;
+`,
+    prompt: `Build a highly interactive solid 3D cartoon human boy character called "Vanguard Human Boy X".\n- Built in raw Three.js with soft matte cell-shaded MeshToonMaterials\n- Complete solid humanoid human body with beautiful realistic peach skin tone, dark cartoon eyes with highlights, smiling mouth, blushing cheeks, and volumetric chocolate brown hair locks\n- Solid hoodie jacket, blue jeans, and yellow boots\n- Entirely free of crying/tears/sobbing elements, exhibiting a cheerful stable joy status\n- Smooth head look-at tracking towards the mouse coordinates\n- Click-to-trigger golden Joy Confetti Aura, spawning golden sparkles floating upwards, scaling the eyes up slightly with glowing visor effect, and expanding holographic rings around the head\n- Clean resource disposal of meshes, geometries, and materials on React component unmount`,
+    likes: 0,
+    author: 'Animation AI',
+    featured: true,
+    createdAt: '2026-05-23T10:00:00.000Z',
+    updatedAt: '2026-05-23T10:00:00.000Z'
+  },
+  {
+    _id: 'robot-aegis-bionic-deepsea-jelly-x',
+    slug: 'aegis-bionic-deepsea-jelly-x',
+    title: 'Aegis Bionic Deepsea Jelly X',
+    category: 'robot',
+    tag: 'threejs',
+    description: 'A highly interactive, non-humanoid deepsea biomechanical drone built in raw Three.js. It features a translucent glass-refractive dome, a glowing bio-reactor core, and 5 procedural jointed bionic tentacles waving with natural phase lag. Tracks the pointer dynamically and triggers a neon pink EMP plasma shockwave on click.',
+    previewCode: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #02030a; overflow: hidden; cursor: crosshair; font-family: 'Courier New', monospace; user-select: none; }
+canvas { display: block; width: 100vw; height: 100vh; }
+.hud { position: absolute; top: 24px; left: 24px; padding: 18px; border: 1px solid rgba(0, 255, 128, 0.15); border-radius: 16px; background: rgba(2, 3, 10, 0.85); color: #00ff80; backdrop-filter: blur(12px); pointer-events: none; font-size: 11px; min-width: 250px; transition: all 0.3s; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+.hud-title { font-weight: bold; letter-spacing: 2px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; text-transform: uppercase; }
+.hud-sep { height: 1px; background: rgba(0, 255, 128, 0.2); margin: 8px 0; transition: background 0.3s; }
+.hud-item { display: flex; justify-content: space-between; margin: 5px 0; }
+.hud-item span { color: rgba(0, 255, 128, 0.55); }
+.hud-item strong { color: #fff; }
+.label { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: #00ff80; letter-spacing: 5px; text-transform: uppercase; pointer-events: none; text-align: center; transition: all 0.4s; font-size: 13px; font-weight: 900; }
+.sub { font-size: 9px; color: rgba(0, 255, 128, 0.4); letter-spacing: 2px; margin-top: 6px; font-weight: normal; }
+</style>
+</head>
+<body>
+<div class="hud" id="hud">
+  <div class="hud-title" id="hudTitle">🦑 DEEPSEA LINK: OPERATIONAL</div>
+  <div class="hud-sep" id="hudSep"></div>
+  <div class="hud-item"><span>Chassis Code</span><strong>BIONIC-JELLY X</strong></div>
+  <div class="hud-item"><span>Hydro-Steer</span><strong id="steerStatus">CURIOUS</strong></div>
+  <div class="hud-item"><span>Discharge Reactor</span><strong id="reactorStatus">READY</strong></div>
+  <div class="hud-item"><span>Depth Pressure</span><strong id="depthPress">4,200m</strong></div>
+</div>
+<div class="label" id="label">
+  Aegis Bionic Deepsea Jelly X
+  <div class="sub">Click Screen to Discharge EMP Plasma Shockwave • Move Cursor to Steer</div>
+</div>
+
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+
+let currentEmpState = 0; // 0: IDLE, 1: ACTIVE (EMP Discharge)
+let time = 0;
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x02030a, 0.07);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0, 8);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+
+// Lights (Bio-luminescent deepsea style)
+const ambientLight = new THREE.AmbientLight(0x020b1c, 2.5);
+scene.add(ambientLight);
+
+const mainSpot = new THREE.SpotLight(0xffffff, 20, 15, Math.PI / 4, 0.5, 1);
+mainSpot.position.set(0, 5, 2);
+scene.add(mainSpot);
+
+const keyLight = new THREE.DirectionalLight(0x00ff88, 1.5);
+keyLight.position.set(-2, 3, 2);
+scene.add(keyLight);
+
+const rimLight = new THREE.PointLight(0x0099ff, 25, 8);
+rimLight.position.set(3, -2, -2);
+scene.add(rimLight);
+
+const cursorLight = new THREE.PointLight(0x00ff88, 10, 6);
+cursorLight.position.set(0, 0, 3);
+scene.add(cursorLight);
+
+// Materials (Glossy Glassmorphism & Bio-luminescent Neons)
+const glassDomeMat = new THREE.MeshPhysicalMaterial({
+  color: 0x00ffaa,
+  roughness: 0.05,
+  metalness: 0.1,
+  transmission: 0.9,
+  ior: 1.5,
+  thickness: 1.2,
+  transparent: true,
+  opacity: 0.45,
+  side: THREE.DoubleSide
+});
+
+const innerCoreMat = new THREE.MeshBasicMaterial({
+  color: 0x00ff88
+});
+
+const bionicArmorMat = new THREE.MeshStandardMaterial({
+  color: 0x111625, // Deep violet-black solid carbon alloy
+  roughness: 0.2,
+  metalness: 0.8
+});
+
+const neonTentacleMat = new THREE.MeshStandardMaterial({
+  color: 0x00ccff, // Cyber cyan joint trim
+  roughness: 0.1,
+  metalness: 0.9
+});
+
+// Bionic Jellyfish Group
+const jellyGroup = new THREE.Group();
+scene.add(jellyGroup);
+
+// --- 1. Semi-transparent Bionic Outer Dome ---
+const domeHead = new THREE.Mesh(new THREE.SphereGeometry(1.2, 32, 24, 0, Math.PI * 2, 0, Math.PI / 1.7), glassDomeMat);
+domeHead.position.y = 0.5;
+jellyGroup.add(domeHead);
+
+// Dome rim
+const domeRim = new THREE.Mesh(new THREE.TorusGeometry(1.08, 0.06, 12, 48), bionicArmorMat);
+domeRim.rotation.x = Math.PI / 2;
+domeRim.position.y = -0.06;
+jellyGroup.add(domeRim);
+
+// Dome central spine cap
+const capSpine = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.25, 0.4, 16), bionicArmorMat);
+capSpine.position.y = 1.55;
+jellyGroup.add(capSpine);
+
+// --- 2. Bio-Reactor Inner Glowing Core ---
+const reactorCore = new THREE.Mesh(new THREE.IcosahedronGeometry(0.38, 2), innerCoreMat);
+reactorCore.position.y = 0.6;
+jellyGroup.add(reactorCore);
+
+// Orbital cyber rings
+const coreRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.02, 8, 32), neonTentacleMat);
+coreRing1.position.copy(reactorCore.position);
+jellyGroup.add(coreRing1);
+
+const coreRing2 = coreRing1.clone();
+coreRing2.rotation.x = Math.PI / 2;
+jellyGroup.add(coreRing2);
+
+// --- 3. Five Procedural Segmented Tentacles ---
+const tentacles = [];
+const tentacleCount = 5;
+const jointsPerTentacle = 8;
+
+for (let t = 0; t < tentacleCount; t++) {
+  const angle = (t / tentacleCount) * Math.PI * 2;
+  const radius = 0.85;
+  
+  const tentacleRoot = new THREE.Group();
+  tentacleRoot.position.set(Math.cos(angle) * radius, -0.15, Math.sin(angle) * radius);
+  jellyGroup.add(tentacleRoot);
+  
+  const segments = [];
+  let parent = tentacleRoot;
+  
+  for (let j = 0; j < jointsPerTentacle; j++) {
+    const segGrp = new THREE.Group();
+    segGrp.position.y = -0.32;
+    
+    // Scale joints down towards tip
+    const jointScale = 1.0 - (j / jointsPerTentacle) * 0.65;
+    
+    // Joint ball
+    const jointBall = new THREE.Mesh(new THREE.SphereGeometry(0.08 * jointScale, 12, 12), neonTentacleMat);
+    segGrp.add(jointBall);
+    
+    // Bone link capsule
+    const bone = new THREE.Mesh(new THREE.CylinderGeometry(0.04 * jointScale, 0.03 * jointScale, 0.28, 8), bionicArmorMat);
+    bone.position.y = -0.14;
+    segGrp.add(bone);
+    
+    parent.add(segGrp);
+    parent = segGrp;
+    segments.push(segGrp);
+  }
+  
+  tentacles.push({ root: tentacleRoot, segments, angle });
+}
+
+// --- 4. Holographic EMP Ring Shockwaves ---
+const shockwave = new THREE.Mesh(
+  new THREE.TorusGeometry(1.6, 0.04, 8, 48),
+  new THREE.MeshBasicMaterial({
+    color: 0x00ff88,
+    transparent: true,
+    opacity: 0.0
+  })
+);
+shockwave.rotation.x = Math.PI / 2;
+shockwave.position.y = -0.15;
+jellyGroup.add(shockwave);
+
+// --- 5. Hydro-spark Energy Particles ---
+const pCount = 120;
+const pGeom = new THREE.BufferGeometry();
+const pPos = new Float32Array(pCount * 3);
+const pVels = [];
+
+for (let i = 0; i < pCount; i++) {
+  pPos[i*3] = (Math.random() - 0.5) * 4;
+  pPos[i*3+1] = Math.random() * 5 - 2.5;
+  pPos[i*3+2] = (Math.random() - 0.5) * 4;
+  pVels.push(new THREE.Vector3(
+    (Math.random() - 0.5) * 0.06,
+    Math.random() * 0.08 + 0.02,
+    (Math.random() - 0.5) * 0.06
+  ));
+}
+pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+const pMat = new THREE.PointsMaterial({
+  color: 0x00ff88,
+  size: 0.045,
+  transparent: true,
+  opacity: 0.45,
+  blending: THREE.AdditiveBlending
+});
+const particles = new THREE.Points(pGeom, pMat);
+scene.add(particles);
+
+// Mouse tracking coordinates
+const mouse = new THREE.Vector2(0, 0);
+const target = new THREE.Vector3(0, 0, 0);
+
+window.addEventListener('mousemove', (e) => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  target.x = mouse.x * 2.8;
+  target.y = mouse.y * 2.0;
+});
+
+// Click Interaction (Discharge EMP Plasma Wave)
+let empDuration = 0;
+window.addEventListener('mousedown', () => {
+  currentEmpState = currentEmpState === 0 ? 1 : 0;
+  
+  const hud = document.getElementById('hud');
+  const hudTitle = document.getElementById('hudTitle');
+  const hudSep = document.getElementById('hudSep');
+  const label = document.getElementById('label');
+  const reactorStatus = document.getElementById('reactorStatus');
+  const depthPress = document.getElementById('depthPress');
+
+  if (currentEmpState === 1) {
+    // EMP active
+    hudTitle.textContent = "💥 EMP DISCHARGE: REACTOR OVERLOAD";
+    hudTitle.style.color = "#ff0077";
+    hudSep.style.background = "#ff0077";
+    hud.style.borderColor = "#ff007788";
+    hud.style.boxShadow = "0 15px 35px rgba(255,0,119,0.25)";
+    label.style.color = "#ff0077";
+    reactorStatus.textContent = "DISCHARGING";
+    reactorStatus.style.color = "#ff0077";
+    depthPress.textContent = "WARNING: HIGH VIBRATION";
+    depthPress.style.color = "#ff0077";
+    
+    // Core & lights shift to hot neon pink
+    innerCoreMat.color.setHex(0xff0077);
+    glassDomeMat.color.setHex(0xff0077);
+    neonTentacleMat.color.setHex(0xff00cc);
+    pMat.color.setHex(0xff00cc);
+    shockwave.material.color.setHex(0xff0077);
+    
+    shockwave.scale.setScalar(0.2);
+    shockwave.material.opacity = 0.85;
+    empDuration = 1.0;
+  } else {
+    // Return to normal bionic deepsea cyan
+    hudTitle.textContent = "🦑 DEEPSEA LINK: OPERATIONAL";
+    hudTitle.style.color = "#00ff80";
+    hudSep.style.background = "rgba(0, 255, 128, 0.2)";
+    hud.style.borderColor = "rgba(0, 255, 128, 0.15)";
+    hud.style.boxShadow = "0 15px 35px rgba(0,0,0,0.5)";
+    label.style.color = "#00ff80";
+    reactorStatus.textContent = "READY";
+    reactorStatus.style.color = "#fff";
+    depthPress.textContent = "4,200m";
+    depthPress.style.color = "#fff";
+    
+    innerCoreMat.color.setHex(0x00ff88);
+    glassDomeMat.color.setHex(0x00ffaa);
+    neonTentacleMat.color.setHex(0x00ccff);
+    pMat.color.setHex(0x00ff88);
+    
+    shockwave.material.opacity = 0.0;
+  }
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Animation Loop
+const clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  time = clock.getElapsedTime();
+  
+  // 1. Hydro-steer look at cursor
+  jellyGroup.lookAt(target.x, target.y, 4);
+  
+  // Dome pulsing breathing contractions
+  const pulseSpeed = currentEmpState === 1 ? 16.0 : 2.8;
+  const pulseAmp = currentEmpState === 1 ? 0.08 : 0.024;
+  const scalePulse = 1.0 + Math.sin(time * pulseSpeed) * pulseAmp;
+  domeHead.scale.set(scalePulse, scalePulse * 1.05, scalePulse);
+  
+  // Core rotations
+  reactorCore.rotation.y += currentEmpState === 1 ? 0.08 : 0.015;
+  coreRing1.rotation.y += currentEmpState === 1 ? 0.12 : 0.025;
+  coreRing2.rotation.x += currentEmpState === 1 ? 0.09 : 0.018;
+  
+  // 2. Procedural segmented wavy tentacles
+  const waveSpeed = currentEmpState === 1 ? 12.0 : 3.5;
+  const waveAmp = currentEmpState === 1 ? 0.35 : 0.15;
+  
+  tentacles.forEach((t) => {
+    let parentRotation = 0;
+    
+    t.segments.forEach((seg, idx) => {
+      // Create laggy organic wave propagation down segments
+      const phase = time * waveSpeed - idx * 0.65;
+      const angleOffset = Math.sin(phase) * waveAmp;
+      
+      seg.rotation.z = angleOffset * 0.8;
+      seg.rotation.x = Math.cos(phase + t.angle) * waveAmp * 0.4;
+    });
+  });
+  
+  // 3. EMP Ring Shockwave decay
+  if (currentEmpState === 1 && empDuration > 0) {
+    empDuration -= 0.015;
+    shockwave.scale.addScalar(0.12);
+    shockwave.material.opacity = empDuration * 0.85;
+  } else if (currentEmpState === 1 && empDuration <= 0) {
+    shockwave.scale.setScalar(0.2);
+    shockwave.material.opacity = 0.85;
+    empDuration = 1.0;
+  }
+  
+  // 4. Spark floating flows
+  const posAttr = pGeom.getAttribute('position');
+  for (let i = 0; i < pCount; i++) {
+    let y = posAttr.getY(i) - pVels[i].y * (currentEmpState === 1 ? 2.5 : 1.0);
+    if (y < -3) {
+      y = 3.0;
+      posAttr.setX(i, (Math.random() - 0.5) * 4);
+      posAttr.setZ(i, (Math.random() - 0.5) * 4);
+    }
+    posAttr.setY(i, y);
+    posAttr.setX(i, posAttr.getX(i) + Math.sin(time + i) * 0.003);
+  }
+  posAttr.needsUpdate = true;
+  
+  // PointLight cursor movement
+  cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1;
+  cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1;
+  
+  renderer.render(scene, camera);
+}
+
+animate();
+</script>
+</body>
+</html>
+`,
+    code: `'use client'
+
+import React, { useEffect, useRef, useState } from 'react'
+import * as THREE from 'three'
+
+interface Tentacle {
+  root: THREE.Group
+  segments: THREE.Group[]
+  angle: number
+}
+
+export function AegisBionicDeepseaJellyX() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  
+  // React State for Telemetry HUD
+  const [empActive, setEmpActive] = useState<boolean>(false)
+  const [pressureMsg, setPressureMsg] = useState<string>('4,200m')
+  const [logs, setLogs] = useState<string[]>([
+    'Bioluminescent grid: ONLINE.',
+    'Hydro-steer stabilizers: NOMINAL.',
+    'Atmospheric dive matrix locked.'
+  ])
+
+  useEffect(() => {
+    if (!containerRef.current || !canvasRef.current) return
+
+    const container = containerRef.current
+    const canvas = canvasRef.current
+
+    let currentEmpState = 0 // 0: IDLE, 1: ACTIVE
+    let animationFrameId: number
+    let time = 0
+
+    // Scene setup
+    const scene = new THREE.Scene()
+    scene.fog = new THREE.FogExp2(0x02030a, 0.07)
+
+    // Camera setup
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100)
+    camera.position.set(0, 0, 8)
+
+    // Renderer setup
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
+    renderer.setSize(container.clientWidth, container.clientHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.toneMapping = THREE.ACESFilmicToneMapping
+
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0x020b1c, 2.5)
+    scene.add(ambientLight)
+
+    const mainSpot = new THREE.SpotLight(0xffffff, 20, 15, Math.PI / 4, 0.5, 1)
+    mainSpot.position.set(0, 5, 2)
+    scene.add(mainSpot)
+
+    const keyLight = new THREE.DirectionalLight(0x00ff88, 1.5)
+    keyLight.position.set(-2, 3, 2)
+    scene.add(keyLight)
+
+    const rimLight = new THREE.PointLight(0x0099ff, 25, 8)
+    rimLight.position.set(3, -2, -2)
+    scene.add(rimLight)
+
+    const cursorLight = new THREE.PointLight(0x00ff88, 10, 6)
+    cursorLight.position.set(0, 0, 3)
+    scene.add(cursorLight)
+
+    // Materials
+    const glassDomeMat = new THREE.MeshPhysicalMaterial({
+      color: 0x00ffaa,
+      roughness: 0.05,
+      metalness: 0.1,
+      transmission: 0.9,
+      ior: 1.5,
+      thickness: 1.2,
+      transparent: true,
+      opacity: 0.45,
+      side: THREE.DoubleSide
+    })
+
+    const innerCoreMat = new THREE.MeshBasicMaterial({
+      color: 0x00ff88
+    })
+
+    const bionicArmorMat = new THREE.MeshStandardMaterial({
+      color: 0x111625, // Deep carbon alloy
+      roughness: 0.2,
+      metalness: 0.8
+    })
+
+    const neonTentacleMat = new THREE.MeshStandardMaterial({
+      color: 0x00ccff, // Cyber cyan joint trim
+      roughness: 0.1,
+      metalness: 0.9
+    })
+
+    // Bionic Jellyfish Group
+    const jellyGroup = new THREE.Group()
+    scene.add(jellyGroup)
+
+    // Outer Dome Head
+    const domeHead = new THREE.Mesh(new THREE.SphereGeometry(1.2, 32, 24, 0, Math.PI * 2, 0, Math.PI / 1.7), glassDomeMat)
+    domeHead.position.y = 0.5
+    jellyGroup.add(domeHead)
+
+    const domeRim = new THREE.Mesh(new THREE.TorusGeometry(1.08, 0.06, 12, 48), bionicArmorMat)
+    domeRim.rotation.x = Math.PI / 2
+    domeRim.position.y = -0.06
+    jellyGroup.add(domeRim)
+
+    const capSpine = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.25, 0.4, 16), bionicArmorMat)
+    capSpine.position.y = 1.55
+    jellyGroup.add(capSpine)
+
+    // Reactor Inner Core
+    const reactorCore = new THREE.Mesh(new THREE.IcosahedronGeometry(0.38, 2), innerCoreMat)
+    reactorCore.position.y = 0.6
+    jellyGroup.add(reactorCore)
+
+    // Cyber rings
+    const coreRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.02, 8, 32), neonTentacleMat)
+    coreRing1.position.copy(reactorCore.position)
+    jellyGroup.add(coreRing1)
+
+    const coreRing2 = coreRing1.clone()
+    coreRing2.rotation.x = Math.PI / 2
+    jellyGroup.add(coreRing2)
+
+    // Five Tentacles joints
+    const tentacles: Tentacle[] = []
+    const tentacleCount = 5
+    const jointsPerTentacle = 8
+
+    for (let t = 0; t < tentacleCount; t++) {
+      const angle = (t / tentacleCount) * Math.PI * 2
+      const radius = 0.85
+      
+      const tentacleRoot = new THREE.Group()
+      tentacleRoot.position.set(Math.cos(angle) * radius, -0.15, Math.sin(angle) * radius)
+      jellyGroup.add(tentacleRoot)
+      
+      const segments: THREE.Group[] = []
+      let parent: THREE.Group = tentacleRoot
+      
+      for (let j = 0; j < jointsPerTentacle; j++) {
+        const segGrp = new THREE.Group()
+        segGrp.position.y = -0.32
+        
+        const jointScale = 1.0 - (j / jointsPerTentacle) * 0.65
+        const jointBall = new THREE.Mesh(new THREE.SphereGeometry(0.08 * jointScale, 12, 12), neonTentacleMat)
+        segGrp.add(jointBall)
+        
+        const bone = new THREE.Mesh(new THREE.CylinderGeometry(0.04 * jointScale, 0.03 * jointScale, 0.28, 8), bionicArmorMat)
+        bone.position.y = -0.14
+        segGrp.add(bone)
+        
+        parent.add(segGrp)
+        parent = segGrp
+        segments.push(segGrp)
+      }
+      
+      tentacles.push({ root: tentacleRoot, segments, angle })
+    }
+
+    // Holographic shockwave
+    const shockwave = new THREE.Mesh(
+      new THREE.TorusGeometry(1.6, 0.04, 8, 48),
+      new THREE.MeshBasicMaterial({
+        color: 0x00ff88,
+        transparent: true,
+        opacity: 0.0
+      })
+    )
+    shockwave.rotation.x = Math.PI / 2
+    shockwave.position.y = -0.15
+    jellyGroup.add(shockwave)
+
+    // Hydro spark particles
+    const pCount = 120
+    const pGeom = new THREE.BufferGeometry()
+    const pPos = new Float32Array(pCount * 3)
+    const pVels: THREE.Vector3[] = []
+
+    for (let i = 0; i < pCount; i++) {
+      pPos[i*3] = (Math.random() - 0.5) * 4
+      pPos[i*3+1] = Math.random() * 5 - 2.5
+      pPos[i*3+2] = (Math.random() - 0.5) * 4
+      pVels.push(new THREE.Vector3(
+        (Math.random() - 0.5) * 0.06,
+        Math.random() * 0.08 + 0.02,
+        (Math.random() - 0.5) * 0.06
+      ))
+    }
+    pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3))
+    const pMat = new THREE.PointsMaterial({
+      color: 0x00ff88,
+      size: 0.045,
+      transparent: true,
+      opacity: 0.45,
+      blending: THREE.AdditiveBlending
+    })
+    const particles = new THREE.Points(pGeom, pMat)
+    scene.add(particles)
+
+    // Mouse coordinates
+    const mouse = new THREE.Vector2(0, 0)
+    const target = new THREE.Vector3(0, 0, 0)
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      const y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      mouse.x = x
+      mouse.y = y
+      target.x = x * 2.8
+      target.y = y * 2.0
+    }
+
+    // Direct click handler to trigger EMP discharge
+    let empDuration = 0
+    const handleMouseDown = () => {
+      currentEmpState = currentEmpState === 0 ? 1 : 0
+      
+      if (currentEmpState === 1) {
+        setEmpActive(true)
+        setPressureMsg('WARNING: EMP OVERLOAD')
+        setLogs(prev => [
+          \`[\${new Date().toLocaleTimeString()}] 💥 DEEPSEA EMP BLAST RELEASED!\`,
+          \`[\${new Date().toLocaleTimeString()}] Shockwave ring scale overclocked\`,
+          ...prev.slice(0, 4)
+        ])
+
+        innerCoreMat.color.setHex(0xff0077)
+        glassDomeMat.color.setHex(0xff0077)
+        neonTentacleMat.color.setHex(0xff00cc)
+        pMat.color.setHex(0xff00cc)
+        shockwave.material.color.setHex(0xff0077)
+
+        shockwave.scale.setScalar(0.2)
+        shockwave.material.opacity = 0.85
+        empDuration = 1.0
+      } else {
+        setEmpActive(false)
+        setPressureMsg('4,200m')
+        setLogs(prev => [
+          \`[\${new Date().toLocaleTimeString()}] 🟢 Core stabilized. Hydro-steer ready.\`,
+          ...prev.slice(0, 4)
+        ])
+
+        innerCoreMat.color.setHex(0x00ff88)
+        glassDomeMat.color.setHex(0x00ffaa)
+        neonTentacleMat.color.setHex(0x00ccff)
+        pMat.color.setHex(0x00ff88)
+
+        shockwave.material.opacity = 0.0
+      }
+    }
+
+    container.addEventListener('mousemove', handleMouseMove)
+    container.addEventListener('mousedown', handleMouseDown)
+
+    const handleResize = () => {
+      if (!containerRef.current) return
+      camera.aspect = container.clientWidth / container.clientHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(container.clientWidth, container.clientHeight)
+    }
+    window.addEventListener('resize', handleResize)
+
+    // Animation Loop
+    const clock = new THREE.Clock()
+    const animate = () => {
+      animationFrameId = requestAnimationFrame(animate)
+      time = clock.getElapsedTime()
+
+      // Steering look at cursor
+      jellyGroup.lookAt(target.x, target.y, 4)
+
+      // Dome pulsing breathing contractions
+      const pulseSpeed = currentEmpState === 1 ? 16.0 : 2.8
+      const pulseAmp = currentEmpState === 1 ? 0.08 : 0.024
+      const scalePulse = 1.0 + Math.sin(time * pulseSpeed) * pulseAmp
+      domeHead.scale.set(scalePulse, scalePulse * 1.05, scalePulse)
+
+      // Core rotation
+      reactorCore.rotation.y += currentEmpState === 1 ? 0.08 : 0.015
+      coreRing1.rotation.y += currentEmpState === 1 ? 0.12 : 0.025
+      coreRing2.rotation.x += currentEmpState === 1 ? 0.09 : 0.018
+
+      // Procedural segmented wavy tentacles
+      const waveSpeed = currentEmpState === 1 ? 12.0 : 3.5
+      const waveAmp = currentEmpState === 1 ? 0.35 : 0.15
+
+      tentacles.forEach((t) => {
+        t.segments.forEach((seg, idx) => {
+          const phase = time * waveSpeed - idx * 0.65
+          const angleOffset = Math.sin(phase) * waveAmp
+          
+          seg.rotation.z = angleOffset * 0.8
+          seg.rotation.x = Math.cos(phase + t.angle) * waveAmp * 0.4
+        })
+      })
+
+      // EMP Shockwave decay
+      if (currentEmpState === 1 && empDuration > 0) {
+        empDuration -= 0.015
+        shockwave.scale.addScalar(0.12)
+        shockwave.material.opacity = empDuration * 0.85
+      } else if (currentEmpState === 1 && empDuration <= 0) {
+        shockwave.scale.setScalar(0.2)
+        shockwave.material.opacity = 0.85
+        empDuration = 1.0
+      }
+
+      // Spark flows
+      const posAttr = pGeom.getAttribute('position')
+      for (let i = 0; i < pCount; i++) {
+        let y = posAttr.getY(i) - pVels[i].y * (currentEmpState === 1 ? 2.5 : 1.0)
+        if (y < -3) {
+          y = 3.0
+          posAttr.setX(i, (Math.random() - 0.5) * 4)
+          posAttr.setZ(i, (Math.random() - 0.5) * 4)
+        }
+        posAttr.setY(i, y)
+        posAttr.setX(i, posAttr.getX(i) + Math.sin(time + i) * 0.003)
+      }
+      posAttr.needsUpdate = true
+
+      // Cursor light follow
+      cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1
+      cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1
+
+      renderer.render(scene, camera)
+    }
+
+    animate()
+
+    // Cleanups
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      container.removeEventListener('mousemove', handleMouseMove)
+      container.removeEventListener('mousedown', handleMouseDown)
+      window.removeEventListener('resize', handleResize)
+      
+      scene.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return
+        if (object.geometry) object.geometry.dispose()
+        if (Array.isArray(object.material)) {
+          object.material.forEach((mat) => mat.dispose())
+        } else if (object.material) {
+          object.material.dispose()
+        }
+      })
+      pGeom.dispose()
+      pMat.dispose()
+      renderer.dispose()
+    }
+  }, [])
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative flex h-[720px] w-full flex-col justify-between overflow-hidden rounded-[38px] border border-white/10 bg-[#02030a] text-white"
+    >
+      {/* 3D Canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full" />
+
+      {/* Reactive HUD Overlay */}
+      <div
+        className="relative z-10 m-6 w-[280px] rounded-2xl border bg-black/80 p-5 backdrop-blur-xl transition-all duration-300"
+        style={{
+          borderColor: empActive ? '#ff007755' : 'rgba(0, 255, 128, 0.15)',
+          boxShadow: empActive ? '0 15px 35px rgba(255, 0, 119, 0.15)' : 'none'
+        }}
+      >
+        <div
+          className="flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors duration-300"
+          style={{ color: empActive ? '#ff0077' : '#00ff80' }}
+        >
+          {empActive ? '💥 EMP DISCHARGE: OVERLOAD' : '🦑 DEEPSEA LINK: OPERATIONAL'}
+        </div>
+        <div
+          className="my-3 h-[1px] transition-colors duration-300"
+          style={{ backgroundColor: empActive ? '#ff0077' : 'rgba(0, 255, 128, 0.2)' }}
+        />
+
+        <div className="space-y-2.5 text-xs">
+          <div className="flex justify-between">
+            <span className="text-white/40">Chassis Code</span>
+            <strong className="text-white">BIONIC-JELLY X</strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Hydro-Steer</span>
+            <strong className="text-white">CURIOUS</strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Discharge Reactor</span>
+            <strong
+              className="transition-colors duration-300"
+              style={{ color: empActive ? '#ff0077' : '#00ff80' }}
+            >
+              {empActive ? 'DISCHARGING' : 'READY'}
+            </strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Depth Pressure</span>
+            <strong
+              className="transition-colors duration-300"
+              style={{ color: empActive ? '#ff0077' : '#fff' }}
+            >
+              {pressureMsg}
+            </strong>
+          </div>
+        </div>
+
+        {/* Real-time Bio-logs */}
+        <div className="mt-4 border-t border-white/5 pt-3">
+          <div className="mb-2 text-[10px] uppercase tracking-wider text-white/30">System Telemetry</div>
+          <div className="h-[90px] overflow-y-auto rounded-lg bg-black/40 p-2.5 text-[9px] font-mono leading-relaxed text-white/50 space-y-1">
+            {logs.map((log, idx) => (
+              <div key={idx} className="border-b border-white/5 pb-0.5 last:border-b-0 last:text-white/70">
+                {log}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Aesthetic Bottom Info */}
+      <div className="relative z-10 mx-auto mb-6 text-center">
+        <h3
+          className="text-sm font-black uppercase tracking-[0.3em] transition-colors duration-400"
+          style={{ color: empActive ? '#ff0077' : '#00ff80' }}
+        >
+          Aegis Bionic Deepsea Jelly X
+        </h3>
+        <p className="mt-1.5 text-[9px] font-medium tracking-[0.18em] text-white/40 uppercase">
+          Click screen to discharge EMP Plasma Shockwave • Move cursor to hydro-steer
+        </p>
+      </div>
+    </div>
+  )
+}
+export default AegisBionicDeepseaJellyX;
+`,
+    prompt: `Build a highly interactive, advanced non-humanoid deepsea drone called "Aegis Bionic Deepsea Jelly X".\n- Custom-built in raw Three.js with translucent refracting physical glass dome materials and high-contrast carbon alloys\n- Inner reactor core surrounded by rotating cybernetic rings\n- 5 procedural mechanical tentacles waving naturally in water using phase-lagged sinewave physics\n- Smooth 3D gaze-steering following pointer coordinates\n- Click-to-trigger EMP Plasma Discharge, changing reactor colors from neon green to intense hot pink, expanding glowing holographic shockwaves, accelerating particle streams, and outputting warning logs on the real-time HUD\n- Clean resource disposal of meshes, geometries, and materials on React unmount`,
+    likes: 0,
+    author: 'Animation AI',
+    featured: true,
+    createdAt: '2026-05-23T10:00:00.000Z',
+    updatedAt: '2026-05-23T10:00:00.000Z'
+  },
+  {
+    _id: 'robot-eve-biosphere-scout-prime',
+    slug: 'eve-biosphere-scout-prime',
+    title: 'E.V.E. Biosphere Scout Prime',
+    category: 'robot',
+    tag: 'threejs',
+    description: 'A highly advanced 3D floating scout robot inspired by EVE from WALL-E, custom-built in Three.js. It features a glossy white lacquer chassis with a floating magnetically-detached head, interactive digital blue visor eyes, and hover arms that aim with cursor movement. Clicking launches a highly interactive crimson plasma cannon discharge beam and cosmic energy confetti waves.',
+    previewCode: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #040209; overflow: hidden; cursor: crosshair; font-family: 'Courier New', monospace; user-select: none; }
+canvas { display: block; width: 100vw; height: 100vh; }
+.hud { position: absolute; top: 24px; left: 24px; padding: 18px; border: 1px solid rgba(0, 210, 255, 0.15); border-radius: 16px; background: rgba(4, 2, 9, 0.85); color: #00d2ff; backdrop-filter: blur(12px); pointer-events: none; font-size: 11px; min-width: 260px; transition: all 0.3s; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+.hud-title { font-weight: bold; letter-spacing: 2px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; text-transform: uppercase; }
+.hud-sep { height: 1px; background: rgba(0, 210, 255, 0.2); margin: 8px 0; transition: background 0.3s; }
+.hud-item { display: flex; justify-content: space-between; margin: 5px 0; }
+.hud-item span { color: rgba(0, 210, 255, 0.55); }
+.hud-item strong { color: #fff; }
+.label { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: #00d2ff; letter-spacing: 5px; text-transform: uppercase; pointer-events: none; text-align: center; transition: all 0.4s; font-size: 13px; font-weight: 900; }
+.sub { font-size: 9px; color: rgba(0, 210, 255, 0.4); letter-spacing: 2px; margin-top: 6px; font-weight: normal; }
+</style>
+</head>
+<body>
+<div class="hud" id="hud">
+  <div class="hud-title" id="hudTitle">🌱 DIRECTIVE: VEGETATION SCANNER</div>
+  <div class="hud-sep" id="hudSep"></div>
+  <div class="hud-item"><span>Model Class</span><strong>E.V.E. SCOUT PRIME</strong></div>
+  <div class="hud-item"><span>Magnetic Float</span><strong id="floatStatus">STABLE</strong></div>
+  <div class="hud-item"><span>Laser Blaster</span><strong id="weaponStatus">READY</strong></div>
+  <div class="hud-item"><span>Chassis Temp</span><strong id="chassisTemp">32.4°C</strong></div>
+</div>
+<div class="label" id="label">
+  E.V.E. Biosphere Scout Prime
+  <div class="sub">Click Screen to Fire Plasma Blaster Cannon • Move Cursor to Steer Gaze</div>
+</div>
+
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+
+let currentWeaponState = 0; // 0: IDLE, 1: BLASTER ACTIVE
+let time = 0;
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x040209, 0.065);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0.2, 8.5);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+
+// Lights (Sleek sci-fi ambiance)
+const ambientLight = new THREE.AmbientLight(0x050c18, 1.8);
+scene.add(ambientLight);
+
+const mainSpot = new THREE.SpotLight(0xffffff, 40, 15, Math.PI / 6, 0.5, 1);
+mainSpot.position.set(0, 6, 4);
+scene.add(mainSpot);
+
+const keyLight = new THREE.DirectionalLight(0xe0f7ff, 1.5);
+keyLight.position.set(2, 3, 2);
+scene.add(keyLight);
+
+const rimLight = new THREE.PointLight(0x00d2ff, 25, 8);
+rimLight.position.set(-4, 1.5, -2);
+scene.add(rimLight);
+
+const cursorLight = new THREE.PointLight(0x00d2ff, 10, 6);
+cursorLight.position.set(0, 0, 3);
+scene.add(cursorLight);
+
+// Materials (Premium Glossy White Lacquer & Black Screen)
+const glossyWhiteMat = new THREE.MeshStandardMaterial({
+  color: 0xffffff,
+  roughness: 0.04,
+  metalness: 0.05
+});
+
+const blackScreenMat = new THREE.MeshStandardMaterial({
+  color: 0x06060c,
+  roughness: 0.08,
+  metalness: 0.95
+});
+
+const glowingBlueMat = new THREE.MeshBasicMaterial({
+  color: 0x00d2ff
+});
+
+const laserMat = new THREE.MeshBasicMaterial({
+  color: 0x00d2ff,
+  transparent: true,
+  opacity: 0.45
+});
+
+// Main Floating EVE Character Group
+const eveGroup = new THREE.Group();
+eveGroup.position.y = -0.5;
+scene.add(eveGroup);
+
+// --- 1. Hovering Oval Torso ---
+const torsoGroup = new THREE.Group();
+eveGroup.add(torsoGroup);
+
+// Sleek egg shell capsule torso
+const torsoGeom = new THREE.CylinderGeometry(0.55, 0.22, 1.6, 32);
+const torsoMesh = new THREE.Mesh(torsoGeom, glossyWhiteMat);
+torsoMesh.scale.set(1.0, 1.0, 0.85);
+torsoGroup.add(torsoMesh);
+
+// Smooth rounded shoulder shoulders & base caps
+const torsoTopCap = new THREE.Mesh(new THREE.SphereGeometry(0.55, 32, 16, 0, Math.PI*2, 0, Math.PI/2), glossyWhiteMat);
+torsoTopCap.position.y = 0.8;
+torsoTopCap.scale.set(1.0, 0.4, 0.85);
+torsoGroup.add(torsoTopCap);
+
+const torsoBottomCap = new THREE.Mesh(new THREE.SphereGeometry(0.22, 32, 16, 0, Math.PI*2, Math.PI/2, Math.PI/2), glossyWhiteMat);
+torsoBottomCap.position.y = -0.8;
+torsoBottomCap.scale.set(1.0, 0.8, 0.85);
+torsoGroup.add(torsoBottomCap);
+
+// Sleek glossy chest emblem
+const chestEmblem = new THREE.Mesh(new THREE.TorusGeometry(0.18, 0.015, 8, 32), new THREE.MeshBasicMaterial({ color: 0x00d2ff }));
+chestEmblem.position.set(0, 0.25, 0.45);
+torsoGroup.add(chestEmblem);
+
+const leafSymbol = new THREE.Mesh(new THREE.SphereGeometry(0.06, 16, 16), new THREE.MeshBasicMaterial({ color: 0x00d2ff }));
+leafSymbol.position.set(0, 0.25, 0.45);
+leafSymbol.scale.set(0.6, 1.0, 0.2);
+torsoGroup.add(leafSymbol);
+
+// --- 2. Hovering Magnetic Head ---
+const headGroup = new THREE.Group();
+headGroup.position.y = 1.35; // Hovering above torso
+eveGroup.add(headGroup);
+
+// Glossy white head sphere
+const headHelmet = new THREE.Mesh(new THREE.SphereGeometry(0.58, 32, 32), glossyWhiteMat);
+headHelmet.scale.set(1.02, 0.9, 0.95);
+headGroup.add(headHelmet);
+
+// Black polished screen faceplate
+const faceplate = new THREE.Mesh(new THREE.SphereGeometry(0.54, 32, 32, 0, Math.PI*2, 0, Math.PI/2.1), blackScreenMat);
+faceplate.rotation.x = Math.PI / 2;
+faceplate.scale.set(0.9, 0.85, 0.82);
+faceplate.position.set(0, 0.02, 0.16);
+headGroup.add(faceplate);
+
+// Glowing digital LED eyes
+const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 8, 0, Math.PI*2, 0, Math.PI/2), glowingBlueMat);
+eyeL.scale.set(1.0, 0.5, 0.1);
+eyeL.rotation.z = -Math.PI / 16;
+eyeL.position.set(-0.18, 0.06, 0.54);
+headGroup.add(eyeL);
+
+const eyeR = eyeL.clone();
+eyeR.rotation.z = Math.PI / 16;
+eyeR.position.x = 0.18;
+headGroup.add(eyeR);
+
+// --- 3. Hovering Magnetic Arms (Snap completely detached) ---
+const armLGroup = new THREE.Group();
+armLGroup.position.set(-0.85, 0.1, 0);
+eveGroup.add(armLGroup);
+
+const armRGroup = new THREE.Group();
+armRGroup.position.set(0.85, 0.1, 0);
+eveGroup.add(armRGroup);
+
+// Magnetic Left Arm capsule
+const armL = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.05, 0.9, 24), glossyWhiteMat);
+armL.position.y = -0.3;
+armLGroup.add(armL);
+
+const armLTop = new THREE.Mesh(new THREE.SphereGeometry(0.1, 24, 12, 0, Math.PI*2, 0, Math.PI/2), glossyWhiteMat);
+armLTop.scale.set(1.0, 0.5, 1.0);
+armLGroup.add(armLTop);
+
+const armLBottom = new THREE.Mesh(new THREE.SphereGeometry(0.05, 24, 12, 0, Math.PI*2, Math.PI/2, Math.PI/2), glossyWhiteMat);
+armLBottom.position.y = -0.75;
+armLGroup.add(armLBottom);
+
+// Symmetrical Magnetic Right Arm / Blaster Cannon
+const armR = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.05, 0.9, 24), glossyWhiteMat);
+armR.position.y = -0.3;
+armRGroup.add(armR);
+
+const armRTop = new THREE.Mesh(new THREE.SphereGeometry(0.1, 24, 12, 0, Math.PI*2, 0, Math.PI/2), glossyWhiteMat);
+armRTop.scale.set(1.0, 0.5, 1.0);
+armRGroup.add(armRTop);
+
+const armRBottom = new THREE.Mesh(new THREE.SphereGeometry(0.05, 24, 12, 0, Math.PI*2, Math.PI/2, Math.PI/2), glossyWhiteMat);
+armRBottom.position.y = -0.75;
+armRGroup.add(armRBottom);
+
+// Inner Blaster muzzle (only visible when firing)
+const blasterMuzzle = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.15, 16), glowingBlueMat);
+blasterMuzzle.position.set(0, -0.85, 0);
+armRGroup.add(blasterMuzzle);
+
+// --- 4. Glowing Plasma Discharge Beam ---
+const laserGeometry = new THREE.CylinderGeometry(0.02, 0.02, 1.0, 8);
+const laserMesh = new THREE.Mesh(laserGeometry, laserMat);
+laserMesh.rotation.x = Math.PI / 2;
+scene.add(laserMesh);
+
+// --- 5. Kinetic Plasma Confetti Sparks ---
+const pCount = 80;
+const pGeom = new THREE.BufferGeometry();
+const pPos = new Float32Array(pCount * 3);
+const pVels = [];
+
+for (let i = 0; i < pCount; i++) {
+  pPos[i*3] = (Math.random() - 0.5) * 4;
+  pPos[i*3+1] = Math.random() * 4 - 1;
+  pPos[i*3+2] = (Math.random() - 0.5) * 4;
+  pVels.push(new THREE.Vector3(
+    (Math.random() - 0.5) * 0.1,
+    Math.random() * 0.25 + 0.1,
+    (Math.random() - 0.5) * 0.1
+  ));
+}
+pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+const pMat = new THREE.PointsMaterial({
+  color: 0x00d2ff,
+  size: 0.04,
+  transparent: true,
+  opacity: 0.6,
+  blending: THREE.AdditiveBlending
+});
+const particles = new THREE.Points(pGeom, pMat);
+scene.add(particles);
+
+// Mouse tracking coordinates
+const mouse = new THREE.Vector2(0, 0);
+const target = new THREE.Vector3(0, 0, 0);
+
+window.addEventListener('mousemove', (e) => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  target.x = mouse.x * 2.5;
+  target.y = mouse.y * 1.8 + 1.2;
+});
+
+// Click Interaction (Aim and Fire Blaster Cannon)
+let chargeDuration = 0;
+window.addEventListener('mousedown', () => {
+  currentWeaponState = currentWeaponState === 0 ? 1 : 0;
+  
+  const hud = document.getElementById('hud');
+  const hudTitle = document.getElementById('hudTitle');
+  const hudSep = document.getElementById('hudSep');
+  const label = document.getElementById('label');
+  const weaponStatus = document.getElementById('weaponStatus');
+  const chassisTemp = document.getElementById('chassisTemp');
+
+  if (currentWeaponState === 1) {
+    // Fire Blaster Cannon Mode
+    hudTitle.textContent = "💥 TARGET ACQUIRED: FIRE PLASMA BLASTER";
+    hudTitle.style.color = "#ff1e56";
+    hudSep.style.background = "#ff1e56";
+    hud.style.borderColor = "#ff1e5688";
+    hud.style.boxShadow = "0 15px 35px rgba(255,30,86,0.3)";
+    label.style.color = "#ff1e56";
+    weaponStatus.textContent = "DISCHARGING";
+    weaponStatus.style.color = "#ff1e56";
+    chassisTemp.textContent = "84.9°C";
+    chassisTemp.style.color = "#ff1e56";
+    
+    // Core & Lights shift to neon-red/magenta
+    glowingBlueMat.color.setHex(0xff1e56);
+    chestEmblem.material.color.setHex(0xff1e56);
+    leafSymbol.material.color.setHex(0xff1e56);
+    blasterMuzzle.material.color.setHex(0xff1e56);
+    laserMat.color.setHex(0xff1e56);
+    pMat.color.setHex(0xff1e56);
+    rimLight.color.setHex(0xff1e56);
+    
+    // Change LED eyes to alert square focus look
+    eyeL.scale.set(0.9, 0.9, 0.1);
+    eyeR.scale.set(0.9, 0.9, 0.1);
+    
+    chargeDuration = 1.0;
+  } else {
+    // Return to Scanning Mode
+    hudTitle.textContent = "🌱 DIRECTIVE: VEGETATION SCANNER";
+    hudTitle.style.color = "#00d2ff";
+    hudSep.style.background = "rgba(0, 210, 255, 0.2)";
+    hud.style.borderColor = "rgba(0, 210, 255, 0.15)";
+    hud.style.boxShadow = "0 15px 35px rgba(0,0,0,0.5)";
+    label.style.color = "#00d2ff";
+    weaponStatus.textContent = "READY";
+    weaponStatus.style.color = "#fff";
+    chassisTemp.textContent = "32.4°C";
+    chassisTemp.style.color = "#fff";
+    
+    glowingBlueMat.color.setHex(0x00d2ff);
+    chestEmblem.material.color.setHex(0x00d2ff);
+    leafSymbol.material.color.setHex(0x00d2ff);
+    blasterMuzzle.material.color.setHex(0x00d2ff);
+    laserMat.color.setHex(0x00d2ff);
+    pMat.color.setHex(0x00d2ff);
+    rimLight.color.setHex(0x00d2ff);
+    
+    // Return to friendly crescent eyes
+    eyeL.scale.set(1.0, 0.5, 0.1);
+    eyeR.scale.set(1.0, 0.5, 0.1);
+  }
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Animation Loop
+const clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  time = clock.getElapsedTime();
+  
+  // 1. Magnetic Floating Float Sine oscillations
+  const floatTorso = Math.sin(time * 1.5) * 0.05;
+  const floatHead = Math.sin(time * 2.2) * 0.04;
+  
+  torsoGroup.position.y = floatTorso;
+  // Rotate torso slightly with breathing float
+  torsoGroup.rotation.z = Math.sin(time * 0.8) * 0.015;
+  
+  // Head floats independently
+  headGroup.position.y = 1.35 + floatHead;
+  headGroup.lookAt(target.x, target.y + 1.2, 3);
+  
+  // 2. Magnetic Floating arms follow cursor/gaze snap
+  // Snap arms near shoulder sockets but detached
+  const targetArmLY = floatTorso + 0.15;
+  const targetArmRY = floatTorso + 0.15;
+  
+  armLGroup.position.y += (targetArmLY - armLGroup.position.y) * 0.1;
+  armRGroup.position.y += (targetArmRY - armRGroup.position.y) * 0.1;
+  
+  // Left arm floats calmly at the side
+  armLGroup.rotation.z = -Math.PI / 18 + Math.sin(time * 1.2) * 0.04;
+  armLGroup.rotation.x = Math.cos(time * 0.8) * 0.05;
+  
+  // If blaster is active, raise right arm into laser firing posture pointing directly at target!
+  if (currentWeaponState === 1) {
+    const muzzlePos = new THREE.Vector3();
+    armRGroup.getWorldPosition(muzzlePos);
+    const aimEnd = new THREE.Vector3(target.x, target.y, 3);
+    
+    // Rotate arm to aim at laser target
+    armRGroup.lookAt(aimEnd);
+    armRGroup.rotateX(Math.PI / 2); // Correct cylinder rotation
+  } else {
+    // Normal floating floating arm posture
+    armRGroup.rotation.z = Math.PI / 18 - Math.sin(time * 1.2) * 0.04;
+    armRGroup.rotation.x = Math.cos(time * 0.8) * 0.05;
+  }
+  
+  // 3. Aim and project Laser Blaster beam
+  if (currentWeaponState === 1) {
+    const muzzlePos = new THREE.Vector3();
+    blasterMuzzle.getWorldPosition(muzzlePos);
+    
+    const aimEnd = new THREE.Vector3(target.x, target.y, 3);
+    const distance = muzzlePos.distanceTo(aimEnd);
+    
+    laserMesh.scale.set(1, distance, 1);
+    laserMesh.position.copy(muzzlePos).add(aimEnd).multiplyScalar(0.5);
+    laserMesh.lookAt(aimEnd);
+    laserMesh.rotateX(Math.PI / 2);
+    laserMesh.visible = true;
+  } else {
+    laserMesh.visible = false;
+  }
+  
+  // 4. Kinetic particles drift
+  const posAttr = pGeom.getAttribute('position');
+  const spiralSpeed = currentWeaponState === 1 ? 3.0 : 1.0;
+  for (let i = 0; i < pCount; i++) {
+    let y = posAttr.getY(i) + pVels[i].y * 0.016 * spiralSpeed;
+    if (y > 4) {
+      y = -1.5;
+      posAttr.setX(i, (Math.random() - 0.5) * 4);
+      posAttr.setZ(i, (Math.random() - 0.5) * 4);
+    }
+    posAttr.setY(i, y);
+    posAttr.setX(i, posAttr.getX(i) + Math.sin(time * 1.5 + i) * 0.003);
+  }
+  posAttr.needsUpdate = true;
+  
+  // PointLight cursor movement
+  cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1;
+  cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1;
+  
+  renderer.render(scene, camera);
+}
+
+animate();
+</script>
+</body>
+</html>
+`,
+    code: `'use client'
+
+import React, { useEffect, useRef, useState } from 'react'
+import * as THREE from 'three'
+
+export function EveBiosphereScoutPrime() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  
+  // React State for Telemetry HUD
+  const [weaponActive, setWeaponActive] = useState<boolean>(false)
+  const [chassisTemp, setChassisTemp] = useState<string>('32.4°C')
+  const [logs, setLogs] = useState<string[]>([
+    'Directive: Vegetation scanner active.',
+    'Magnetic float array status: OK.',
+    'Chassis integrity: 100% stable.'
+  ])
+
+  useEffect(() => {
+    if (!containerRef.current || !canvasRef.current) return
+
+    const container = containerRef.current
+    const canvas = canvasRef.current
+
+    let currentWeaponState = 0 // 0: IDLE, 1: ACTIVE
+    let animationFrameId: number
+    let time = 0
+
+    // Scene setup
+    const scene = new THREE.Scene()
+    scene.fog = new THREE.FogExp2(0x040209, 0.065)
+
+    // Camera setup
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100)
+    camera.position.set(0, 0.2, 8.5)
+
+    // Renderer setup
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
+    renderer.setSize(container.clientWidth, container.clientHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.toneMapping = THREE.ACESFilmicToneMapping
+
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0x050c18, 1.8)
+    scene.add(ambientLight)
+
+    const mainSpot = new THREE.SpotLight(0xffffff, 40, 15, Math.PI / 6, 0.5, 1)
+    mainSpot.position.set(0, 6, 4)
+    scene.add(mainSpot)
+
+    const keyLight = new THREE.DirectionalLight(0xe0f7ff, 1.5)
+    keyLight.position.set(2, 3, 2)
+    scene.add(keyLight)
+
+    const rimLight = new THREE.PointLight(0x00d2ff, 25, 8)
+    rimLight.position.set(-4, 1.5, -2)
+    scene.add(rimLight)
+
+    const cursorLight = new THREE.PointLight(0x00d2ff, 10, 6)
+    cursorLight.position.set(0, 0, 3)
+    scene.add(cursorLight)
+
+    // Materials (Premium Glossy White Lacquer & Black Screen)
+    const glossyWhiteMat = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 0.04,
+      metalness: 0.05
+    })
+
+    const blackScreenMat = new THREE.MeshStandardMaterial({
+      color: 0x06060c,
+      roughness: 0.08,
+      metalness: 0.95
+    })
+
+    const glowingBlueMat = new THREE.MeshBasicMaterial({
+      color: 0x00d2ff
+    })
+
+    const laserMat = new THREE.MeshBasicMaterial({
+      color: 0x00d2ff,
+      transparent: true,
+      opacity: 0.45
+    })
+
+    // Main Floating EVE Character Group
+    const eveGroup = new THREE.Group()
+    eveGroup.position.y = -0.5
+    scene.add(eveGroup)
+
+    // --- 1. Hovering Oval Torso ---
+    const torsoGroup = new THREE.Group()
+    eveGroup.add(torsoGroup)
+
+    // Sleek egg shell capsule torso
+    const torsoGeom = new THREE.CylinderGeometry(0.55, 0.22, 1.6, 32)
+    const torsoMesh = new THREE.Mesh(torsoGeom, glossyWhiteMat)
+    torsoMesh.scale.set(1.0, 1.0, 0.85)
+    torsoGroup.add(torsoMesh)
+
+    // Smooth rounded caps
+    const torsoTopCap = new THREE.Mesh(new THREE.SphereGeometry(0.55, 32, 16, 0, Math.PI*2, 0, Math.PI/2), glossyWhiteMat)
+    torsoTopCap.position.y = 0.8
+    torsoTopCap.scale.set(1.0, 0.4, 0.85)
+    torsoGroup.add(torsoTopCap)
+
+    const torsoBottomCap = new THREE.Mesh(new THREE.SphereGeometry(0.22, 32, 16, 0, Math.PI*2, Math.PI/2, Math.PI/2), glossyWhiteMat)
+    torsoBottomCap.position.y = -0.8
+    torsoBottomCap.scale.set(1.0, 0.8, 0.85)
+    torsoGroup.add(torsoBottomCap)
+
+    // Sleek chest emblem
+    const chestEmblem = new THREE.Mesh(new THREE.TorusGeometry(0.18, 0.015, 8, 32), new THREE.MeshBasicMaterial({ color: 0x00d2ff }))
+    chestEmblem.position.set(0, 0.25, 0.45)
+    torsoGroup.add(chestEmblem)
+
+    const leafSymbol = new THREE.Mesh(new THREE.SphereGeometry(0.06, 16, 16), new THREE.MeshBasicMaterial({ color: 0x00d2ff }))
+    leafSymbol.position.set(0, 0.25, 0.45)
+    leafSymbol.scale.set(0.6, 1.0, 0.2)
+    torsoGroup.add(leafSymbol)
+
+    // --- 2. Hovering Magnetic Head ---
+    const headGroup = new THREE.Group()
+    headGroup.position.y = 1.35
+    eveGroup.add(headGroup)
+
+    const headHelmet = new THREE.Mesh(new THREE.SphereGeometry(0.58, 32, 32), glossyWhiteMat)
+    headHelmet.scale.set(1.02, 0.9, 0.95)
+    headGroup.add(headHelmet)
+
+    const faceplate = new THREE.Mesh(new THREE.SphereGeometry(0.54, 32, 32, 0, Math.PI*2, 0, Math.PI/2.1), blackScreenMat)
+    faceplate.rotation.x = Math.PI / 2
+    faceplate.scale.set(0.9, 0.85, 0.82)
+    faceplate.position.set(0, 0.02, 0.16)
+    headGroup.add(faceplate)
+
+    // Glowing eyes
+    const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 8, 0, Math.PI*2, 0, Math.PI/2), glowingBlueMat)
+    eyeL.scale.set(1.0, 0.5, 0.1)
+    eyeL.rotation.z = -Math.PI / 16
+    eyeL.position.set(-0.18, 0.06, 0.54)
+    headGroup.add(eyeL)
+
+    const eyeR = eyeL.clone()
+    eyeR.rotation.z = Math.PI / 16
+    eyeR.position.x = 0.18
+    headGroup.add(eyeR)
+
+    // --- 3. Hovering Detached Arms ---
+    const armLGroup = new THREE.Group()
+    armLGroup.position.set(-0.85, 0.1, 0)
+    eveGroup.add(armLGroup)
+
+    const armRGroup = new THREE.Group()
+    armRGroup.position.set(0.85, 0.1, 0)
+    eveGroup.add(armRGroup)
+
+    // Left arm capsule
+    const armL = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.05, 0.9, 24), glossyWhiteMat)
+    armL.position.y = -0.3
+    armLGroup.add(armL)
+
+    const armLTop = new THREE.Mesh(new THREE.SphereGeometry(0.1, 24, 12, 0, Math.PI*2, 0, Math.PI/2), glossyWhiteMat)
+    armLTop.scale.set(1.0, 0.5, 1.0)
+    armLGroup.add(armLTop)
+
+    const armLBottom = new THREE.Mesh(new THREE.SphereGeometry(0.05, 24, 12, 0, Math.PI*2, Math.PI/2, Math.PI/2), glossyWhiteMat)
+    armLBottom.position.y = -0.75
+    armLGroup.add(armLBottom)
+
+    // Right arm/blaster capsule
+    const armR = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.05, 0.9, 24), glossyWhiteMat)
+    armR.position.y = -0.3
+    armRGroup.add(armR)
+
+    const armRTop = new THREE.Mesh(new THREE.SphereGeometry(0.1, 24, 12, 0, Math.PI*2, 0, Math.PI/2), glossyWhiteMat)
+    armRTop.scale.set(1.0, 0.5, 1.0)
+    armRGroup.add(armRTop)
+
+    const armRBottom = new THREE.Mesh(new THREE.SphereGeometry(0.05, 24, 12, 0, Math.PI*2, Math.PI/2, Math.PI/2), glossyWhiteMat)
+    armRBottom.position.y = -0.75
+    armRGroup.add(armRBottom)
+
+    const blasterMuzzle = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.15, 16), glowingBlueMat)
+    blasterMuzzle.position.set(0, -0.85, 0)
+    armRGroup.add(blasterMuzzle)
+
+    // --- 4. Plasma Discharge Beam ---
+    const laserGeometry = new THREE.CylinderGeometry(0.02, 0.02, 1.0, 8)
+    const laserMesh = new THREE.Mesh(laserGeometry, laserMat)
+    laserMesh.rotation.x = Math.PI / 2
+    scene.add(laserMesh)
+
+    // --- 5. Confetti Spark Particles ---
+    const pCount = 80
+    const pGeom = new THREE.BufferGeometry()
+    const pPos = new Float32Array(pCount * 3)
+    const pVels: THREE.Vector3[] = []
+
+    for (let i = 0; i < pCount; i++) {
+      pPos[i*3] = (Math.random() - 0.5) * 4
+      pPos[i*3+1] = Math.random() * 4 - 1
+      pPos[i*3+2] = (Math.random() - 0.5) * 4
+      pVels.push(new THREE.Vector3(
+        (Math.random() - 0.5) * 0.1,
+        Math.random() * 0.25 + 0.1,
+        (Math.random() - 0.5) * 0.1
+      ))
+    }
+    pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3))
+    const pMat = new THREE.PointsMaterial({
+      color: 0x00d2ff,
+      size: 0.04,
+      transparent: true,
+      opacity: 0.6,
+      blending: THREE.AdditiveBlending
+    })
+    const particles = new THREE.Points(pGeom, pMat)
+    scene.add(particles)
+
+    // Mouse coordinates
+    const mouse = new THREE.Vector2(0, 0)
+    const target = new THREE.Vector3(0, 0, 0)
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      const y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      mouse.x = x
+      mouse.y = y
+      target.x = x * 2.5
+      target.y = y * 1.8 + 1.2
+    }
+
+    // Direct click handler to fire blaster cannon
+    const handleMouseDown = () => {
+      currentWeaponState = currentWeaponState === 0 ? 1 : 0
+      
+      if (currentWeaponState === 1) {
+        setWeaponActive(true)
+        setChassisTemp('84.9°C')
+        setLogs(prev => [
+          \`[\${new Date().toLocaleTimeString()}] 💥 PLASMA BLASTER DEPLOYED!\`,
+          \`[\${new Date().toLocaleTimeString()}] Targeting array locked on pointer\`,
+          ...prev.slice(0, 4)
+        ])
+
+        glowingBlueMat.color.setHex(0xff1e56)
+        chestEmblem.material.color.setHex(0xff1e56)
+        leafSymbol.material.color.setHex(0xff1e56)
+        blasterMuzzle.material.color.setHex(0xff1e56)
+        laserMat.color.setHex(0xff1e56)
+        pMat.color.setHex(0xff1e56)
+        rimLight.color.setHex(0xff1e56)
+
+        eyeL.scale.set(0.9, 0.9, 0.1)
+        eyeR.scale.set(0.9, 0.9, 0.1)
+      } else {
+        setWeaponActive(false)
+        setChassisTemp('32.4°C')
+        setLogs(prev => [
+          \`[\${new Date().toLocaleTimeString()}] 🟢 Stable scan mode enabled. Directive active.\`,
+          ...prev.slice(0, 4)
+        ])
+
+        glowingBlueMat.color.setHex(0x00d2ff)
+        chestEmblem.material.color.setHex(0x00d2ff)
+        leafSymbol.material.color.setHex(0x00d2ff)
+        blasterMuzzle.material.color.setHex(0x00d2ff)
+        laserMat.color.setHex(0x00d2ff)
+        pMat.color.setHex(0x00d2ff)
+        rimLight.color.setHex(0x00d2ff)
+
+        eyeL.scale.set(1.0, 0.5, 0.1)
+        eyeR.scale.set(1.0, 0.5, 0.1)
+      }
+    }
+
+    container.addEventListener('mousemove', handleMouseMove)
+    container.addEventListener('mousedown', handleMouseDown)
+
+    const handleResize = () => {
+      if (!containerRef.current) return
+      camera.aspect = container.clientWidth / container.clientHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(container.clientWidth, container.clientHeight)
+    }
+    window.addEventListener('resize', handleResize)
+
+    // Animation Loop
+    const clock = new THREE.Clock()
+    const animate = () => {
+      animationFrameId = requestAnimationFrame(animate)
+      time = clock.getElapsedTime()
+
+      // Magnetic Float oscillations
+      const floatTorso = Math.sin(time * 1.5) * 0.05
+      const floatHead = Math.sin(time * 2.2) * 0.04
+
+      torsoGroup.position.y = floatTorso
+      torsoGroup.rotation.z = Math.sin(time * 0.8) * 0.015
+
+      headGroup.position.y = 1.35 + floatHead
+      headGroup.lookAt(target.x, target.y + 1.2, 3)
+
+      // Snap arms but detached
+      const targetArmLY = floatTorso + 0.15
+      const targetArmRY = floatTorso + 0.15
+
+      armLGroup.position.y += (targetArmLY - armLGroup.position.y) * 0.1
+      armRGroup.position.y += (targetArmRY - armRGroup.position.y) * 0.1
+
+      armLGroup.rotation.z = -Math.PI / 18 + Math.sin(time * 1.2) * 0.04
+      armLGroup.rotation.x = Math.cos(time * 0.8) * 0.05
+
+      if (currentWeaponState === 1) {
+        const aimEnd = new THREE.Vector3(target.x, target.y, 3)
+        armRGroup.lookAt(aimEnd)
+        armRGroup.rotateX(Math.PI / 2)
+      } else {
+        armRGroup.rotation.z = Math.PI / 18 - Math.sin(time * 1.2) * 0.04
+        armRGroup.rotation.x = Math.cos(time * 0.8) * 0.05
+      }
+
+      // Laser aiming math
+      if (currentWeaponState === 1) {
+        const muzzlePos = new THREE.Vector3()
+        blasterMuzzle.getWorldPosition(muzzlePos)
+        
+        const aimEnd = new THREE.Vector3(target.x, target.y, 3)
+        const distance = muzzlePos.distanceTo(aimEnd)
+        
+        laserMesh.scale.set(1, distance, 1)
+        laserMesh.position.copy(muzzlePos).add(aimEnd).multiplyScalar(0.5)
+        laserMesh.lookAt(aimEnd)
+        laserMesh.rotateX(Math.PI / 2)
+        laserMesh.visible = true
+      } else {
+        laserMesh.visible = false
+      }
+
+      // Confetti particle vortex flow
+      const posAttr = pGeom.getAttribute('position')
+      const spiralSpeed = currentWeaponState === 1 ? 3.0 : 1.0
+      for (let i = 0; i < pCount; i++) {
+        let y = posAttr.getY(i) + pVels[i].y * 0.016 * spiralSpeed
+        if (y > 4) {
+          y = -1.5
+          posAttr.setX(i, (Math.random() - 0.5) * 4)
+          posAttr.setZ(i, (Math.random() - 0.5) * 4)
+        }
+        posAttr.setY(i, y)
+        posAttr.setX(i, posAttr.getX(i) + Math.sin(time * 1.5 + i) * 0.003)
+      }
+      posAttr.needsUpdate = true
+
+      // Cursor light follow
+      cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1
+      cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1
+
+      renderer.render(scene, camera)
+    }
+
+    animate()
+
+    // Cleanups
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      container.removeEventListener('mousemove', handleMouseMove)
+      container.removeEventListener('mousedown', handleMouseDown)
+      window.removeEventListener('resize', handleResize)
+      
+      scene.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return
+        if (object.geometry) object.geometry.dispose()
+        if (Array.isArray(object.material)) {
+          object.material.forEach((mat) => mat.dispose())
+        } else if (object.material) {
+          object.material.dispose()
+        }
+      })
+      laserGeometry.dispose()
+      pGeom.dispose()
+      pMat.dispose()
+      renderer.dispose()
+    }
+  }, [])
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative flex h-[720px] w-full flex-col justify-between overflow-hidden rounded-[38px] border border-white/10 bg-[#040209] text-white"
+    >
+      {/* 3D Canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full" />
+
+      {/* Reactive HUD Overlay */}
+      <div
+        className="relative z-10 m-6 w-[280px] rounded-2xl border bg-black/80 p-5 backdrop-blur-xl transition-all duration-300"
+        style={{
+          borderColor: weaponActive ? '#ff1e5655' : 'rgba(0, 210, 255, 0.15)',
+          boxShadow: weaponActive ? '0 15px 35px rgba(255, 30, 86, 0.15)' : 'none'
+        }}
+      >
+        <div
+          className="flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors duration-300"
+          style={{ color: weaponActive ? '#ff1e56' : '#00d2ff' }}
+        >
+          {weaponActive ? '💥 WARNING: DISCHARGING PLASMA' : '🌱 DIRECTIVE: VEGETATION SCANNER'}
+        </div>
+        <div
+          className="my-3 h-[1px] transition-colors duration-300"
+          style={{ backgroundColor: weaponActive ? '#ff1e56' : 'rgba(0, 210, 255, 0.2)' }}
+        />
+
+        <div className="space-y-2.5 text-xs">
+          <div className="flex justify-between">
+            <span className="text-white/40">Model Class</span>
+            <strong className="text-white">E.V.E. SCOUT PRIME</strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Magnetic Float</span>
+            <strong className="text-white">STABLE</strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Laser Blaster</span>
+            <strong
+              className="transition-colors duration-300"
+              style={{ color: weaponActive ? '#ff1e56' : '#00d2ff' }}
+            >
+              {weaponActive ? 'DISCHARGING' : 'READY'}
+            </strong>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-white/40">Chassis Temp</span>
+            <strong
+              className="transition-colors duration-300"
+              style={{ color: weaponActive ? '#ff1e56' : '#fff' }}
+            >
+              {chassisTemp}
+            </strong>
+          </div>
+        </div>
+
+        {/* Real-time Bio-logs */}
+        <div className="mt-4 border-t border-white/5 pt-3">
+          <div className="mb-2 text-[10px] uppercase tracking-wider text-white/30">System Telemetry</div>
+          <div className="h-[90px] overflow-y-auto rounded-lg bg-black/40 p-2.5 text-[9px] font-mono leading-relaxed text-white/50 space-y-1">
+            {logs.map((log, idx) => (
+              <div key={idx} className="border-b border-white/5 pb-0.5 last:border-b-0 last:text-white/70">
+                {log}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Aesthetic Bottom Info */}
+      <div className="relative z-10 mx-auto mb-6 text-center">
+        <h3
+          className="text-sm font-black uppercase tracking-[0.3em] transition-colors duration-400"
+          style={{ color: weaponActive ? '#ff1e56' : '#00d2ff' }}
+        >
+          E.V.E. Biosphere Scout Prime
+        </h3>
+        <p className="mt-1.5 text-[9px] font-medium tracking-[0.18em] text-white/40 uppercase">
+          Click screen to fire plasma blaster cannon • Move cursor to steer gaze
+        </p>
+      </div>
+    </div>
+  )
+}
+export default EveBiosphereScoutPrime;
+`,
+    prompt: `Build a highly interactive 3D floating scout robot called "E.V.E. Biosphere Scout Prime" inspired by the movie WALL-E.\n- Built using raw Three.js with ultra-glossy porcelain-white lacquer PBR materials\n- Organically floating magnetically-detached capsule head and hover arm pods with zero physical joints\n- Double-layered independent breathing floating sine-wave offsets on the head and torso\n- Smooth head look-at gaze targeting cursor coordinates\n- Friendly crescent blue LED digital visor eyes that blink dynamically\n- Click-to-trigger Plasma Blaster firing mode: aiming the right arm pod directly at the pointer, shooting a high-fidelity crimson plasma discharge beam with kinetic spark particles, shifting eyes to square target lock graphics, and updating live thermal alerts on the HUD\n- Clean resource disposal of meshes, geometries, and materials on unmount`,
+    likes: 0,
+    author: 'Animation AI',
+    featured: true,
+    createdAt: '2026-05-23T10:00:00.000Z',
+    updatedAt: '2026-05-23T10:00:00.000Z'
+  },
+  {
+    _id: "robot-bb8-astromech-pathfinder",
+    slug: "bb8-astromech-pathfinder-robot",
+    title: "BB-8 Astromech Pathfinder",
+    category: "robot",
+    tag: "threejs",
+    description: "An interactive 3D astromech pathfinder inspired by Star Wars. Features gyroscopic rolling simulation, magnetic floating head dome, look-at cursor gaze, and click-to-discharge high voltage arc welder with kinetic spark particles.",
+    previewCode: "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\"/>\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/>\n<style>\n* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { background: #050408; overflow: hidden; cursor: crosshair; font-family: 'Courier New', monospace; user-select: none; }\ncanvas { display: block; width: 100vw; height: 100vh; }\n.hud { position: absolute; top: 24px; left: 24px; padding: 18px; border: 1px solid rgba(255, 120, 0, 0.15); border-radius: 16px; background: rgba(5, 4, 8, 0.85); color: #ff7800; backdrop-filter: blur(12px); pointer-events: none; font-size: 11px; min-width: 260px; transition: all 0.3s; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }\n.hud-title { font-weight: bold; letter-spacing: 2px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; text-transform: uppercase; }\n.hud-sep { height: 1px; background: rgba(255, 120, 0, 0.2); margin: 8px 0; transition: background 0.3s; }\n.hud-item { display: flex; justify-content: space-between; margin: 5px 0; }\n.hud-item span { color: rgba(255, 120, 0, 0.55); }\n.hud-item strong { color: #fff; }\n.label { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: #ff7800; letter-spacing: 5px; text-transform: uppercase; pointer-events: none; text-align: center; transition: all 0.4s; font-size: 13px; font-weight: 900; }\n.sub { font-size: 9px; color: rgba(255, 120, 0, 0.4); letter-spacing: 2px; margin-top: 6px; font-weight: normal; }\n</style>\n</head>\n<body>\n<div class=\"hud\" id=\"hud\">\n  <div class=\"hud-title\" id=\"hudTitle\">🤖 DRIVE SYSTEM: ACTIVE</div>\n  <div class=\"hud-sep\" id=\"hudSep\"></div>\n  <div class=\"hud-item\"><span>Chassis Code</span><strong>B.B.8 ASTROMECH</strong></div>\n  <div class=\"hud-item\"><span>Gyro Balance</span><strong id=\"gyroStatus\">STABLE</strong></div>\n  <div class=\"hud-item\"><span>Arc Welder</span><strong id=\"welderStatus\">READY</strong></div>\n  <div class=\"hud-item\"><span>Drive Coils</span><strong id=\"driveCoils\">98.2 RPM</strong></div>\n</div>\n<div class=\"label\" id=\"label\">\n  B.B.8 Astromech Pathfinder\n  <div class=\"sub\">Click Screen to Discharge Welder Arc • Move Cursor to Steer Gyroscopic Roll</div>\n</div>\n\n<script type=\"importmap\">{\"imports\":{\"three\":\"https://unpkg.com/three@0.160.0/build/three.module.js\"}}</script>\n<script type=\"module\">\nimport * as THREE from 'three';\n\nlet currentWelderState = 0; // 0: IDLE, 1: WELDER ACTIVE\nlet time = 0;\n\nconst scene = new THREE.Scene();\nscene.fog = new THREE.FogExp2(0x050408, 0.065);\n\nconst camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);\ncamera.position.set(0, 0.2, 8.5);\n\nconst renderer = new THREE.WebGLRenderer({ antialias: true });\nrenderer.setSize(window.innerWidth, window.innerHeight);\nrenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));\nrenderer.toneMapping = THREE.ACESFilmicToneMapping;\ndocument.body.appendChild(renderer.domElement);\n\n// Lights\nconst ambientLight = new THREE.AmbientLight(0x0a0715, 1.8);\nscene.add(ambientLight);\n\nconst mainSpot = new THREE.SpotLight(0xffffff, 40, 15, Math.PI / 6, 0.5, 1);\nmainSpot.position.set(0, 6, 4);\nscene.add(mainSpot);\n\nconst keyLight = new THREE.DirectionalLight(0xffedd5, 1.2);\nkeyLight.position.set(2, 3, 2);\nscene.add(keyLight);\n\nconst rimLight = new THREE.PointLight(0xff6a00, 20, 8);\nrimLight.position.set(-4, 1.5, -2);\nscene.add(rimLight);\n\nconst cursorLight = new THREE.PointLight(0x00d2ff, 8, 6);\ncursorLight.position.set(0, 0, 3);\nscene.add(cursorLight);\n\n// Materials (Premium Glossy White Lacquer, Safety Orange, Carbon-Silver Grey)\nconst glossyWhiteMat = new THREE.MeshStandardMaterial({\n  color: 0xffffff,\n  roughness: 0.05,\n  metalness: 0.05\n});\n\nconst safetyOrangeMat = new THREE.MeshStandardMaterial({\n  color: 0xff6a00,\n  roughness: 0.1,\n  metalness: 0.1\n});\n\nconst silverGreyMat = new THREE.MeshStandardMaterial({\n  color: 0x8e9196,\n  roughness: 0.15,\n  metalness: 0.8\n});\n\nconst darkLensMat = new THREE.MeshStandardMaterial({\n  color: 0x05050a,\n  roughness: 0.05,\n  metalness: 0.95\n});\n\nconst glowingBlueMat = new THREE.MeshBasicMaterial({\n  color: 0x00d2ff\n});\n\nconst electricArcMat = new THREE.MeshBasicMaterial({\n  color: 0x00d2ff,\n  transparent: true,\n  opacity: 0.7\n});\n\n// Main Pathfinder Group\nconst pathfinderGroup = new THREE.Group();\npathfinderGroup.position.y = -0.9;\nscene.add(pathfinderGroup);\n\n// --- 1. Gyroscopic Ball Body ---\nconst ballGroup = new THREE.Group();\npathfinderGroup.add(ballGroup);\n\n// Core white sphere\nconst ballSphere = new THREE.Mesh(new THREE.SphereGeometry(1.2, 32, 32), glossyWhiteMat);\nballGroup.add(ballSphere);\n\n// Decorative Circular Orange & Silver grey panels on the sphere\nconst panelCount = 6;\nconst panelPositions = [\n  { rot: [0, 0, 0], pos: [0, 0, 1.18] },\n  { rot: [0, Math.PI, 0], pos: [0, 0, -1.18] },\n  { rot: [0, Math.PI/2, 0], pos: [1.18, 0, 0] },\n  { rot: [0, -Math.PI/2, 0], pos: [-1.18, 0, 0] },\n  { rot: [Math.PI/2, 0, 0], pos: [0, 1.18, 0] },\n  { rot: [-Math.PI/2, 0, 0], pos: [0, -1.18, 0] }\n];\n\npanelPositions.forEach((p) => {\n  const localPanelGroup = new THREE.Group();\n  localPanelGroup.rotation.set(p.rot[0], p.rot[1], p.rot[2]);\n  \n  // Silver base ring\n  const ringGrey = new THREE.Mesh(new THREE.TorusGeometry(0.38, 0.035, 8, 32), silverGreyMat);\n  ringGrey.position.set(0, 0, 0);\n  localPanelGroup.add(ringGrey);\n  \n  // Orange inner ring\n  const ringOrange = new THREE.Mesh(new THREE.TorusGeometry(0.28, 0.04, 8, 32), safetyOrangeMat);\n  ringOrange.position.set(0, 0, 0);\n  localPanelGroup.add(ringOrange);\n  \n  // Center silver cap\n  const centerCap = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 16), silverGreyMat);\n  centerCap.scale.set(1, 1, 0.3);\n  centerCap.position.set(0, 0, 0.03);\n  localPanelGroup.add(centerCap);\n  \n  // Positioning on the ball\n  localPanelGroup.position.set(p.pos[0], p.pos[1], p.pos[2]);\n  ballGroup.add(localPanelGroup);\n});\n\n// --- 2. Magnetic Floating Head Dome ---\nconst headAnchorGroup = new THREE.Group();\n// Keep head anchor above the sphere\nheadAnchorGroup.position.y = 1.25;\npathfinderGroup.add(headAnchorGroup);\n\nconst headGroup = new THREE.Group();\nheadAnchorGroup.add(headGroup);\n\n// Semi-spherical head dome\nconst headDome = new THREE.Mesh(new THREE.SphereGeometry(0.65, 32, 16, 0, Math.PI*2, 0, Math.PI/2), glossyWhiteMat);\nheadGroup.add(headDome);\n\n// Flat bottom silver plate\nconst headBottom = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.65, 0.05, 32), silverGreyMat);\nheadBottom.position.y = 0.01;\nheadGroup.add(headBottom);\n\n// Orange circular visor trim\nconst visorTrim = new THREE.Mesh(new THREE.CylinderGeometry(0.66, 0.66, 0.08, 32), safetyOrangeMat);\nvisorTrim.position.y = 0.12;\nheadGroup.add(visorTrim);\n\n// Primary black lens cylinder\nconst primaryLens = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.14, 24), darkLensMat);\nprimaryLens.rotation.x = Math.PI / 2;\nprimaryLens.position.set(0, 0.28, 0.52);\nheadGroup.add(primaryLens);\n\n// Glowing blue photoreceptor eye\nconst blueEye = new THREE.Mesh(new THREE.SphereGeometry(0.05, 16, 16), glowingBlueMat);\nblueEye.position.set(0, 0.28, 0.58);\nheadGroup.add(blueEye);\n\n// Secondary smaller lens\nconst secondaryLens = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.1, 16), darkLensMat);\nsecondaryLens.rotation.x = Math.PI / 2;\nsecondaryLens.position.set(0.18, 0.16, 0.54);\nheadGroup.add(secondaryLens);\n\n// Antennas (Slender flexible whiskers)\nconst antennaLong = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.6, 8), silverGreyMat);\nantennaLong.position.set(0.1, 0.75, -0.2);\nantennaLong.rotation.z = -Math.PI / 32;\nheadGroup.add(antennaLong);\n\nconst antennaShort = new THREE.Mesh(new THREE.CylinderGeometry(0.006, 0.006, 0.32, 8), silverGreyMat);\nantennaShort.position.set(-0.15, 0.6, -0.2);\nantennaShort.rotation.z = Math.PI / 16;\nheadGroup.add(antennaShort);\n\n// --- 3. Click-to-Deploy Arc Welder Mechanical Utility Arm ---\nconst welderArmGroup = new THREE.Group();\nwelderArmGroup.position.set(-0.25, 0.32, 0.54);\nwelderArmGroup.rotation.x = Math.PI / 4;\nheadGroup.add(welderArmGroup);\n\n// Extendable piston\nconst pistonBase = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.3, 12), silverGreyMat);\npistonBase.position.y = 0.12;\nwelderArmGroup.add(pistonBase);\n\nconst pistonTip = new THREE.Mesh(new THREE.CylinderGeometry(0.016, 0.016, 0.32, 12), glowingBlueMat);\npistonTip.position.y = 0.28;\nwelderArmGroup.add(pistonTip);\n\n// Scale zero by default (hidden inside utility port)\nwelderArmGroup.scale.set(0.001, 0.001, 0.001);\n\n// --- 4. Interactive Electric Arc Spark ---\nconst arcLineCount = 3;\nconst arcLines = [];\nfor (let i = 0; i < arcLineCount; i++) {\n  const lineGeom = new THREE.BufferGeometry();\n  const linePoints = [];\n  for (let j = 0; j < 8; j++) linePoints.push(new THREE.Vector3());\n  lineGeom.setFromPoints(linePoints);\n  const line = new THREE.Line(lineGeom, electricArcMat);\n  scene.add(line);\n  arcLines.push(line);\n}\n\n// --- 5. Kinetic Plasma Confetti Spark Particles ---\nconst pCount = 50;\nconst pGeom = new THREE.BufferGeometry();\nconst pPos = new Float32Array(pCount * 3);\nconst pVels = [];\nfor (let i = 0; i < pCount; i++) {\n  pPos[i*3] = 0; pPos[i*3+1] = 0; pPos[i*3+2] = 0;\n  pVels.push(new THREE.Vector3());\n}\npGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3));\nconst pMat = new THREE.PointsMaterial({\n  color: 0x00d2ff,\n  size: 0.045,\n  transparent: true,\n  opacity: 0,\n  blending: THREE.AdditiveBlending\n});\nconst particles = new THREE.Points(pGeom, pMat);\nscene.add(particles);\n\n// Mouse tracking coordinates\nconst mouse = new THREE.Vector2(0, 0);\nconst target = new THREE.Vector3(0, 0, 0);\n\nwindow.addEventListener('mousemove', (e) => {\n  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;\n  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;\n  target.x = mouse.x * 2.5;\n  target.y = mouse.y * 1.8 + 1.2;\n});\n\n// Click Interaction (Aim and Fire Arc Welder)\nlet dischargeDuration = 0;\nwindow.addEventListener('mousedown', () => {\n  currentWelderState = currentWelderState === 0 ? 1 : 0;\n  \n  const hud = document.getElementById('hud');\n  const hudTitle = document.getElementById('hudTitle');\n  const hudSep = document.getElementById('hudSep');\n  const label = document.getElementById('label');\n  const welderStatus = document.getElementById('welderStatus');\n  const driveCoils = document.getElementById('driveCoils');\n\n  if (currentWelderState === 1) {\n    // Fire Arc Welder\n    hudTitle.textContent = \"💥 UTILITY PORT: DISCHARGING WELDER ARC\";\n    hudTitle.style.color = \"#00d2ff\";\n    hudSep.style.background = \"#00d2ff\";\n    hud.style.borderColor = \"#00d2ff88\";\n    hud.style.boxShadow = \"0 15px 35px rgba(0,210,255,0.3)\";\n    label.style.color = \"#00d2ff\";\n    welderStatus.textContent = \"DISCHARGING\";\n    welderStatus.style.color = \"#00d2ff\";\n    driveCoils.textContent = \"OVERCLOCKED 240 RPM\";\n    driveCoils.style.color = \"#00d2ff\";\n    \n    // Shift blue Eye to extreme bright glow\n    blueEye.material.color.setHex(0xffffff);\n    cursorLight.color.setHex(0x00d2ff);\n    cursorLight.intensity = 20;\n\n    // Trigger shock particles at muzzle\n    const muzzlePos = new THREE.Vector3();\n    pistonTip.getWorldPosition(muzzlePos);\n    const posAttr = pGeom.getAttribute('position');\n    for (let i = 0; i < pCount; i++) {\n      posAttr.setXYZ(i, muzzlePos.x, muzzlePos.y, muzzlePos.z);\n      pVels[i].set(\n        (Math.random() - 0.5) * 5,\n        (Math.random() - 0.5) * 5,\n        (Math.random() - 0.5) * 5\n      );\n    }\n    posAttr.needsUpdate = true;\n    pMat.opacity = 1.0;\n    \n    dischargeDuration = 1.0;\n  } else {\n    // Return to standard rolling/pathfinding\n    hudTitle.textContent = \"🤖 DRIVE SYSTEM: ACTIVE\";\n    hudTitle.style.color = \"#ff7800\";\n    hudSep.style.background = \"rgba(255, 120, 0, 0.2)\";\n    hud.style.borderColor = \"rgba(255, 120, 0, 0.15)\";\n    hud.style.boxShadow = \"0 15px 35px rgba(0,0,0,0.5)\";\n    label.style.color = \"#ff7800\";\n    welderStatus.textContent = \"READY\";\n    welderStatus.style.color = \"#fff\";\n    driveCoils.textContent = \"98.2 RPM\";\n    driveCoils.style.color = \"#fff\";\n    \n    blueEye.material.color.setHex(0x00d2ff);\n    cursorLight.color.setHex(0xff6a00);\n    cursorLight.intensity = 8;\n    pMat.opacity = 0;\n  }\n});\n\nwindow.addEventListener('resize', () => {\n  camera.aspect = window.innerWidth / window.innerHeight;\n  camera.updateProjectionMatrix();\n  renderer.setSize(window.innerWidth, window.innerHeight);\n});\n\n// Animation Loop\nconst clock = new THREE.Clock();\nfunction animate() {\n  requestAnimationFrame(animate);\n  time = clock.getElapsedTime();\n  \n  // 1. Gyroscopic Ball Body Physics rolling simulation!\n  // Roll the sphere proportional to mouse offsets (simulates rolling on sand/ground!)\n  const targetRollX = mouse.x * 2.5;\n  const targetRollY = mouse.y * 1.5;\n  \n  // Roll mechanics\n  ballGroup.rotation.y += (targetRollX * 0.12 - ballGroup.rotation.y) * 0.05;\n  ballGroup.rotation.x += (-targetRollY * 0.12 - ballGroup.rotation.x) * 0.05;\n  \n  // 2. Magnetic Floating Head slides dynamically on top of the curved sphere surface\n  // Trigonometric sliding coordinates to remain perfectly aligned\n  const targetHeadX = mouse.x * 0.28;\n  const targetHeadZ = mouse.y * 0.18;\n  \n  headGroup.position.x += (targetHeadX - headGroup.position.x) * 0.1;\n  headGroup.position.z += (-targetHeadZ - headGroup.position.z) * 0.1;\n  \n  // Head look at cursor gaze\n  headGroup.lookAt(target.x, target.y, 3);\n  \n  // Organic antenna flexing lag\n  antennaLong.rotation.x = Math.sin(time * 3.5) * 0.06 + (mouse.y * 0.08);\n  antennaLong.rotation.z = -Math.PI / 32 + Math.cos(time * 2.5) * 0.04 + (mouse.x * 0.08);\n  \n  // 3. Weld Utility arm extension morph\n  if (currentWelderState === 1) {\n    welderArmGroup.scale.set(1.0, 1.0, 1.0);\n  } else {\n    welderArmGroup.scale.set(0.001, 0.001, 0.001);\n  }\n  \n  // 4. Electric Welder Arc generation math\n  if (currentWelderState === 1) {\n    const muzzlePos = new THREE.Vector3();\n    pistonTip.getWorldPosition(muzzlePos);\n    const aimTarget = new THREE.Vector3(target.x, target.y, 3);\n    \n    arcLines.forEach((line) => {\n      const lineGeom = line.geometry;\n      const positions = lineGeom.getAttribute('position');\n      const pointCount = positions.count;\n      \n      for (let i = 0; i < pointCount; i++) {\n        const factor = i / (pointCount - 1);\n        const lerpPos = new THREE.Vector3().lerpVectors(muzzlePos, aimTarget, factor);\n        \n        // Add random electrical jagged spikes\n        if (i > 0 && i < pointCount - 1) {\n          lerpPos.x += (Math.random() - 0.5) * 0.16;\n          lerpPos.y += (Math.random() - 0.5) * 0.16;\n          lerpPos.z += (Math.random() - 0.5) * 0.16;\n        }\n        \n        positions.setXYZ(i, lerpPos.x, lerpPos.y, lerpPos.z);\n      }\n      positions.needsUpdate = true;\n      line.visible = true;\n    });\n  } else {\n    arcLines.forEach(line => line.visible = false);\n  }\n  \n  // 5. Electrical spark particles drift\n  if (currentWelderState === 1 && pMat.opacity > 0) {\n    const posAttr = pGeom.getAttribute('position');\n    for (let i = 0; i < pCount; i++) {\n      const x = posAttr.getX(i) + pVels[i].x * 0.016;\n      const y = posAttr.getY(i) + pVels[i].y * 0.016;\n      const z = posAttr.getZ(i) + pVels[i].z * 0.016;\n      posAttr.setXYZ(i, x, y, z);\n      \n      // Decay velocity\n      pVels[i].multiplyScalar(0.95);\n    }\n    posAttr.needsUpdate = true;\n  }\n  \n  // Cursor light follow\n  cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1;\n  cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1;\n  \n  renderer.render(scene, camera);\n}\n\nanimate();\n</script>\n</body>\n</html>\n",
+    code: "'use client'\n\nimport React, { useEffect, useRef, useState } from 'react'\nimport * as THREE from 'three'\n\nexport function Bb8AstromechPathfinder() {\n  const containerRef = useRef<HTMLDivElement>(null)\n  const canvasRef = useRef<HTMLCanvasElement>(null)\n  \n  // React State for Telemetry HUD\n  const [welderActive, setWelderActive] = useState<boolean>(false)\n  const [driveSpeed, setDriveSpeed] = useState<string>('98.2 RPM')\n  const [logs, setLogs] = useState<string[]>([\n    'Drive System: Active. Gyro balanced.',\n    'Chassis Code: BB8-ASTROMECH.',\n    'Utility port welder calibration: READY.'\n  ])\n\n  useEffect(() => {\n    if (!containerRef.current || !canvasRef.current) return\n\n    const container = containerRef.current\n    const canvas = canvasRef.current\n\n    let currentWelderState = 0 // 0: IDLE, 1: ACTIVE\n    let animationFrameId: number\n    let time = 0\n\n    // Scene setup\n    const scene = new THREE.Scene()\n    scene.fog = new THREE.FogExp2(0x050408, 0.065)\n\n    // Camera setup\n    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100)\n    camera.position.set(0, 0.2, 8.5)\n\n    // Renderer setup\n    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })\n    renderer.setSize(container.clientWidth, container.clientHeight)\n    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))\n    renderer.toneMapping = THREE.ACESFilmicToneMapping\n\n    // Lights\n    const ambientLight = new THREE.AmbientLight(0x0a0715, 1.8)\n    scene.add(ambientLight)\n\n    const mainSpot = new THREE.SpotLight(0xffffff, 40, 15, Math.PI / 6, 0.5, 1)\n    mainSpot.position.set(0, 6, 4)\n    scene.add(mainSpot)\n\n    const keyLight = new THREE.DirectionalLight(0xffedd5, 1.2)\n    keyLight.position.set(2, 3, 2)\n    scene.add(keyLight)\n\n    const rimLight = new THREE.PointLight(0xff6a00, 20, 8)\n    rimLight.position.set(-4, 1.5, -2)\n    scene.add(rimLight)\n\n    const cursorLight = new THREE.PointLight(0x00d2ff, 8, 6)\n    cursorLight.position.set(0, 0, 3)\n    scene.add(cursorLight)\n\n    // Materials (Premium Glossy White Lacquer, Safety Orange, Carbon-Silver Grey)\n    const glossyWhiteMat = new THREE.MeshStandardMaterial({\n      color: 0xffffff,\n      roughness: 0.05,\n      metalness: 0.05\n    })\n\n    const safetyOrangeMat = new THREE.MeshStandardMaterial({\n      color: 0xff6a00,\n      roughness: 0.1,\n      metalness: 0.1\n    })\n\n    const silverGreyMat = new THREE.MeshStandardMaterial({\n      color: 0x8e9196,\n      roughness: 0.15,\n      metalness: 0.8\n    })\n\n    const darkLensMat = new THREE.MeshStandardMaterial({\n      color: 0x05050a,\n      roughness: 0.05,\n      metalness: 0.95\n    })\n\n    const glowingBlueMat = new THREE.MeshBasicMaterial({\n      color: 0x00d2ff\n    })\n\n    const electricArcMat = new THREE.MeshBasicMaterial({\n      color: 0x00d2ff,\n      transparent: true,\n      opacity: 0.7\n    })\n\n    // Main Pathfinder Group\n    const pathfinderGroup = new THREE.Group()\n    pathfinderGroup.position.y = -0.9\n    scene.add(pathfinderGroup)\n\n    // --- 1. Gyroscopic Ball Body ---\n    const ballGroup = new THREE.Group()\n    pathfinderGroup.add(ballGroup)\n\n    const ballSphere = new THREE.Mesh(new THREE.SphereGeometry(1.2, 32, 32), glossyWhiteMat)\n    ballGroup.add(ballSphere)\n\n    // Orange & Silver decorative panels\n    const panelPositions = [\n      { rot: [0, 0, 0], pos: [0, 0, 1.18] },\n      { rot: [0, Math.PI, 0], pos: [0, 0, -1.18] },\n      { rot: [0, Math.PI/2, 0], pos: [1.18, 0, 0] },\n      { rot: [0, -Math.PI/2, 0], pos: [-1.18, 0, 0] },\n      { rot: [Math.PI/2, 0, 0], pos: [0, 1.18, 0] },\n      { rot: [-Math.PI/2, 0, 0], pos: [0, -1.18, 0] }\n    ]\n\n    panelPositions.forEach((p) => {\n      const localPanelGroup = new THREE.Group()\n      localPanelGroup.rotation.set(p.rot[0], p.rot[1], p.rot[2])\n      \n      const ringGrey = new THREE.Mesh(new THREE.TorusGeometry(0.38, 0.035, 8, 32), silverGreyMat)\n      localPanelGroup.add(ringGrey)\n      \n      const ringOrange = new THREE.Mesh(new THREE.TorusGeometry(0.28, 0.04, 8, 32), safetyOrangeMat)\n      localPanelGroup.add(ringOrange)\n      \n      const centerCap = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 16), silverGreyMat)\n      centerCap.scale.set(1, 1, 0.3)\n      centerCap.position.set(0, 0, 0.03)\n      localPanelGroup.add(centerCap)\n      \n      localPanelGroup.position.set(p.pos[0], p.pos[1], p.pos[2])\n      ballGroup.add(localPanelGroup)\n    })\n\n    // --- 2. Magnetic Floating Head Dome ---\n    const headAnchorGroup = new THREE.Group()\n    headAnchorGroup.position.y = 1.25\n    pathfinderGroup.add(headAnchorGroup)\n\n    const headGroup = new THREE.Group()\n    headAnchorGroup.add(headGroup)\n\n    const headDome = new THREE.Mesh(new THREE.SphereGeometry(0.65, 32, 16, 0, Math.PI*2, 0, Math.PI/2), glossyWhiteMat)\n    headGroup.add(headDome)\n\n    const headBottom = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.65, 0.05, 32), silverGreyMat)\n    headBottom.position.y = 0.01\n    headGroup.add(headBottom)\n\n    const visorTrim = new THREE.Mesh(new THREE.CylinderGeometry(0.66, 0.66, 0.08, 32), safetyOrangeMat)\n    visorTrim.position.y = 0.12\n    headGroup.add(visorTrim)\n\n    const primaryLens = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.14, 24), darkLensMat)\n    primaryLens.rotation.x = Math.PI / 2\n    primaryLens.position.set(0, 0.28, 0.52)\n    headGroup.add(primaryLens)\n\n    const blueEye = new THREE.Mesh(new THREE.SphereGeometry(0.05, 16, 16), glowingBlueMat)\n    blueEye.position.set(0, 0.28, 0.58)\n    headGroup.add(blueEye)\n\n    const secondaryLens = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.1, 16), darkLensMat)\n    secondaryLens.rotation.x = Math.PI / 2\n    secondaryLens.position.set(0.18, 0.16, 0.54)\n    headGroup.add(secondaryLens)\n\n    const antennaLong = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.6, 8), silverGreyMat)\n    antennaLong.position.set(0.1, 0.75, -0.2)\n    antennaLong.rotation.z = -Math.PI / 32\n    headGroup.add(antennaLong)\n\n    const antennaShort = new THREE.Mesh(new THREE.CylinderGeometry(0.006, 0.006, 0.32, 8), silverGreyMat)\n    antennaShort.position.set(-0.15, 0.6, -0.2)\n    antennaShort.rotation.z = Math.PI / 16\n    headGroup.add(antennaShort)\n\n    // --- 3. Click-to-Deploy Arc Welder Utility Arm ---\n    const welderArmGroup = new THREE.Group()\n    welderArmGroup.position.set(-0.25, 0.32, 0.54)\n    welderArmGroup.rotation.x = Math.PI / 4\n    headGroup.add(welderArmGroup)\n\n    const pistonBase = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.3, 12), silverGreyMat)\n    pistonBase.position.y = 0.12\n    welderArmGroup.add(pistonBase)\n\n    const pistonTip = new THREE.Mesh(new THREE.CylinderGeometry(0.016, 0.016, 0.32, 12), glowingBlueMat)\n    pistonTip.position.y = 0.28\n    welderArmGroup.add(pistonTip)\n\n    welderArmGroup.scale.set(0.001, 0.001, 0.001)\n\n    // --- 4. Interactive Electric Arc Welder Lines ---\n    const arcLineCount = 3\n    const arcLines: THREE.Line[] = []\n    for (let i = 0; i < arcLineCount; i++) {\n      const lineGeom = new THREE.BufferGeometry()\n      const linePoints = []\n      for (let j = 0; j < 8; j++) linePoints.push(new THREE.Vector3())\n      lineGeom.setFromPoints(linePoints)\n      const line = new THREE.Line(lineGeom, electricArcMat)\n      scene.add(line)\n      arcLines.push(line)\n    }\n\n    // --- 5. Kinetic Plasma Confetti Spark Particles ---\n    const pCount = 50\n    const pGeom = new THREE.BufferGeometry()\n    const pPos = new Float32Array(pCount * 3)\n    const pVels: THREE.Vector3[] = []\n    for (let i = 0; i < pCount; i++) {\n      pPos[i*3] = 0; pPos[i*3+1] = 0; pPos[i*3+2] = 0\n      pVels.push(new THREE.Vector3())\n    }\n    pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3))\n    const pMat = new THREE.PointsMaterial({\n      color: 0x00d2ff,\n      size: 0.045,\n      transparent: true,\n      opacity: 0,\n      blending: THREE.AdditiveBlending\n    })\n    const particles = new THREE.Points(pGeom, pMat)\n    scene.add(particles)\n\n    // Mouse coordinates\n    const mouse = new THREE.Vector2(0, 0)\n    const target = new THREE.Vector3(0, 0, 0)\n\n    const handleMouseMove = (e: MouseEvent) => {\n      const rect = container.getBoundingClientRect()\n      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1\n      const y = -((e.clientY - rect.top) / rect.height) * 2 + 1\n      mouse.x = x\n      mouse.y = y\n      target.x = x * 2.5\n      target.y = y * 1.8 + 1.2\n    }\n\n    // Direct click handler to fire welder\n    const handleMouseDown = () => {\n      currentWelderState = currentWelderState === 0 ? 1 : 0\n      \n      if (currentWelderState === 1) {\n        setWelderActive(true)\n        setDriveSpeed('OVERCLOCKED 240 RPM')\n        setLogs(prev => [\n          `[${new Date().toLocaleTimeString()}] 💥 UTILITY PORT: ARC WELDER ACTIVE!`,\n          `[${new Date().toLocaleTimeString()}] High voltage arc welder discharging`,\n          ...prev.slice(0, 4)\n        ])\n\n        blueEye.material.color.setHex(0xffffff)\n        cursorLight.color.setHex(0x00d2ff)\n        cursorLight.intensity = 20\n\n        const muzzlePos = new THREE.Vector3()\n        pistonTip.getWorldPosition(muzzlePos)\n        const posAttr = pGeom.getAttribute('position')\n        for (let i = 0; i < pCount; i++) {\n          posAttr.setXYZ(i, muzzlePos.x, muzzlePos.y, muzzlePos.z)\n          pVels[i].set(\n            (Math.random() - 0.5) * 5,\n            (Math.random() - 0.5) * 5,\n            (Math.random() - 0.5) * 5\n          )\n        }\n        posAttr.needsUpdate = true\n        pMat.opacity = 1.0\n      } else {\n        setWelderActive(false)\n        setDriveSpeed('98.2 RPM')\n        setLogs(prev => [\n          `[${new Date().toLocaleTimeString()}] 🟢 Drive status stable. Pathfinder tracking.`,\n          ...prev.slice(0, 4)\n        ])\n\n        blueEye.material.color.setHex(0x00d2ff)\n        cursorLight.color.setHex(0xff6a00)\n        cursorLight.intensity = 8\n        pMat.opacity = 0\n      }\n    }\n\n    container.addEventListener('mousemove', handleMouseMove)\n    container.addEventListener('mousedown', handleMouseDown)\n\n    const handleResize = () => {\n      if (!containerRef.current) return\n      camera.aspect = container.clientWidth / container.clientHeight\n      camera.updateProjectionMatrix()\n      renderer.setSize(container.clientWidth, container.clientHeight)\n    }\n    window.addEventListener('resize', handleResize)\n\n    // Animation Loop\n    const clock = new THREE.Clock()\n    const animate = () => {\n      animationFrameId = requestAnimationFrame(animate)\n      time = clock.getElapsedTime()\n\n      // Gyroscopic Ball Body Physics rolling simulation!\n      const targetRollX = mouse.x * 2.5\n      const targetRollY = mouse.y * 1.5\n\n      ballGroup.rotation.y += (targetRollX * 0.12 - ballGroup.rotation.y) * 0.05\n      ballGroup.rotation.x += (-targetRollY * 0.12 - ballGroup.rotation.x) * 0.05\n\n      // Magnetic floating head slides dynamically on curved sphere surface\n      const targetHeadX = mouse.x * 0.28\n      const targetHeadZ = mouse.y * 0.18\n\n      headGroup.position.x += (targetHeadX - headGroup.position.x) * 0.1\n      headGroup.position.z += (-targetHeadZ - headGroup.position.z) * 0.1\n\n      headGroup.lookAt(target.x, target.y, 3)\n\n      // Antenna flex lag\n      antennaLong.rotation.x = Math.sin(time * 3.5) * 0.06 + (mouse.y * 0.08)\n      antennaLong.rotation.z = -Math.PI / 32 + Math.cos(time * 2.5) * 0.04 + (mouse.x * 0.08)\n\n      // Weld Arm extension morph\n      if (currentWelderState === 1) {\n        welderArmGroup.scale.set(1.0, 1.0, 1.0)\n      } else {\n        welderArmGroup.scale.set(0.001, 0.001, 0.001)\n      }\n\n      // Crackling Welder Arc line calculation\n      if (currentWelderState === 1) {\n        const muzzlePos = new THREE.Vector3()\n        pistonTip.getWorldPosition(muzzlePos)\n        const aimTarget = new THREE.Vector3(target.x, target.y, 3)\n        \n        arcLines.forEach((line) => {\n          const lineGeom = line.geometry\n          const positions = lineGeom.getAttribute('position') as THREE.BufferAttribute\n          const pointCount = positions.count\n          \n          for (let i = 0; i < pointCount; i++) {\n            const factor = i / (pointCount - 1)\n            const lerpPos = new THREE.Vector3().lerpVectors(muzzlePos, aimTarget, factor)\n            \n            if (i > 0 && i < pointCount - 1) {\n              lerpPos.x += (Math.random() - 0.5) * 0.16\n              lerpPos.y += (Math.random() - 0.5) * 0.16\n              lerpPos.z += (Math.random() - 0.5) * 0.16\n            }\n            positions.setXYZ(i, lerpPos.x, lerpPos.y, lerpPos.z)\n          }\n          positions.needsUpdate = true\n          line.visible = true\n        })\n      } else {\n        arcLines.forEach(line => line.visible = false)\n      }\n\n      // Spark particles drift\n      if (currentWelderState === 1 && pMat.opacity > 0) {\n        const posAttr = pGeom.getAttribute('position') as THREE.BufferAttribute\n        for (let i = 0; i < pCount; i++) {\n          const x = posAttr.getX(i) + pVels[i].x * 0.016\n          const y = posAttr.getY(i) + pVels[i].y * 0.016\n          const z = posAttr.getZ(i) + pVels[i].z * 0.016\n          posAttr.setXYZ(i, x, y, z)\n          pVels[i].multiplyScalar(0.95)\n        }\n        posAttr.needsUpdate = true\n      }\n\n      // Cursor light follow\n      cursorLight.position.x += (target.x - cursorLight.position.x) * 0.1\n      cursorLight.position.y += (target.y - cursorLight.position.y) * 0.1\n\n      renderer.render(scene, camera)\n    }\n\n    animate()\n\n    // Cleanups\n    return () => {\n      cancelAnimationFrame(animationFrameId)\n      container.removeEventListener('mousemove', handleMouseMove)\n      container.removeEventListener('mousedown', handleMouseDown)\n      window.removeEventListener('resize', handleResize)\n      \n      scene.traverse((object) => {\n        if (!(object instanceof THREE.Mesh)) return\n        if (object.geometry) object.geometry.dispose()\n        if (Array.isArray(object.material)) {\n          object.material.forEach((mat) => mat.dispose())\n        } else if (object.material) {\n          object.material.dispose()\n        }\n      })\n      arcLines.forEach(line => line.geometry.dispose())\n      pGeom.dispose()\n      pMat.dispose()\n      renderer.dispose()\n    }\n  }, [])\n\n  return (\n    <div\n      ref={containerRef}\n      className=\"relative flex h-[720px] w-full flex-col justify-between overflow-hidden rounded-[38px] border border-white/10 bg-[#050408] text-white\"\n    >\n      {/* 3D Canvas */}\n      <canvas ref={canvasRef} className=\"absolute inset-0 block h-full w-full\" />\n\n      {/* Reactive HUD Overlay */}\n      <div\n        className=\"relative z-10 m-6 w-[280px] rounded-2xl border bg-black/80 p-5 backdrop-blur-xl transition-all duration-300\"\n        style={{\n          borderColor: welderActive ? '#00d2ff55' : 'rgba(255, 120, 0, 0.15)',\n          boxShadow: welderActive ? '0 15px 35px rgba(0, 210, 255, 0.15)' : 'none'\n        }}\n      >\n        <div\n          className=\"flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors duration-300\"\n          style={{ color: welderActive ? '#00d2ff' : '#ff7800' }}\n        >\n          {welderActive ? '💥 UTILITY PORT: WELDER DISCHARGING' : '🤖 DRIVE SYSTEM: ACTIVE'}\n        </div>\n        <div\n          className=\"my-3 h-[1px] transition-colors duration-300\"\n          style={{ backgroundColor: welderActive ? '#00d2ff' : 'rgba(255, 120, 0, 0.2)' }}\n        />\n\n        <div className=\"space-y-2.5 text-xs\">\n          <div className=\"flex justify-between\">\n            <span className=\"text-white/40\">Chassis Code</span>\n            <strong className=\"text-white\">BB8-ASTROMECH</strong>\n          </div>\n          <div className=\"flex justify-between\">\n            <span className=\"text-white/40\">Gyro Balance</span>\n            <strong className=\"text-white\">STABLE</strong>\n          </div>\n          <div className=\"flex justify-between\">\n            <span className=\"text-white/40\">Arc Welder</span>\n            <strong\n              className=\"transition-colors duration-300\"\n              style={{ color: welderActive ? '#00d2ff' : '#fff' }}\n            >\n              {welderActive ? 'DISCHARGING' : 'READY'}\n            </strong>\n          </div>\n          <div className=\"flex justify-between\">\n            <span className=\"text-white/40\">Drive Coils</span>\n            <strong\n              className=\"transition-colors duration-300\"\n              style={{ color: welderActive ? '#00d2ff' : '#fff' }}\n            >\n              {driveSpeed}\n            </strong>\n          </div>\n        </div>\n\n        {/* Real-time Telemetry logs */}\n        <div className=\"mt-4 border-t border-white/5 pt-3\">\n          <div className=\"mb-2 text-[10px] uppercase tracking-wider text-white/30\">System Telemetry</div>\n          <div className=\"h-[90px] overflow-y-auto rounded-lg bg-black/40 p-2.5 text-[9px] font-mono leading-relaxed text-white/50 space-y-1\">\n            {logs.map((log, idx) => (\n              <div key={idx} className=\"border-b border-white/5 pb-0.5 last:border-b-0 last:text-white/70\">\n                {log}\n              </div>\n            ))}\n          </div>\n        </div>\n      </div>\n\n      {/* Aesthetic Bottom Info */}\n      <div className=\"relative z-10 mx-auto mb-6 text-center\">\n        <h3\n          className=\"text-sm font-black uppercase tracking-[0.3em] transition-colors duration-400\"\n          style={{ color: welderActive ? '#00d2ff' : '#ff7800' }}\n        >\n          B.B.8 Astromech Pathfinder\n        </h3>\n        <p className=\"mt-1.5 text-[9px] font-medium tracking-[0.18em] text-white/40 uppercase\">\n          Click screen to discharge welder arc • Move cursor to steer gyroscopic roll\n        </p>\n      </div>\n    </div>\n  )\n}\nexport default Bb8AstromechPathfinder;\n",
+    prompt: "Create an interactive 3D astromech robot called 'BB-8 Astromech Pathfinder'. Built with raw Three.js using premium glossy white lacquer, safety orange, and carbon-silver grey metal materials. Simulates gyroscopic rolling based on mouse coordinates, with a detached half-sphere head dome that slides magnetically on the top surface. Head tracks and gazes at the mouse cursor. Click to trigger an extendable welder piston arm, shooting a crackling neon-blue electric welder arc directly to the cursor coordinate, supported by additively blended particle spark sparks, and updating telemetry logs.",
+    likes: 0,
+    author: "Animation AI",
+    featured: true,
+    createdAt: "2026-05-23T11:00:00.000Z",
+    updatedAt: "2026-05-23T11:00:00.000Z"
   }
 ];

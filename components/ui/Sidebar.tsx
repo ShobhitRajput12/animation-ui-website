@@ -62,7 +62,6 @@ const CATEGORIES = [
       { name: 'Cursor', slug: 'cursor' },
       { name: 'Footer', slug: 'footers' },
       { name: 'Heroes', slug: 'heroes' },
-      { name: 'Loaders', slug: 'loaders' },
       { name: 'Navbar', slug: 'navbars' },
       { name: '3D Robot', slug: 'robot' },
       { name: 'Shaders', slug: 'shaders' },
@@ -174,26 +173,24 @@ export default function Sidebar() {
             {group.items.map(item => {
               const active = isItemActive(item.slug)
               return (
-                <button
-                  key={item.slug}
-                  onClick={() => handleSidebarClick(item.slug)}
-                  className={`w-full flex items-center justify-between
-                    px-2 py-1.5 rounded-md text-[13px] text-left
-                    transition-colors duration-150
-                    ${active
-                      ? 'bg-white/[0.08] text-white font-semibold'
-                      : 'text-white/50 hover:text-white hover:bg-white/[0.04]'
-                    }`}
-                >
-                  <span className="truncate">{item.name}</span>
-                  <span
-                    className={`text-xs ml-1 flex-shrink-0 ${
-                      active ? 'text-white/60' : 'text-white/25'
-                    }`}
+                <div key={item.slug} className="relative">
+                  {/* Left accent border */}
+                  {active && (
+                    <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded-full bg-purple-400" />
+                  )}
+                  <button
+                    onClick={() => handleSidebarClick(item.slug)}
+                    className={`w-full flex items-center justify-between
+                      pl-4 pr-2 py-1.5 rounded-md text-[13px] text-left
+                      transition-colors duration-150
+                      ${active
+                        ? 'bg-white/[0.08] text-white font-semibold'
+                        : 'text-white/50 hover:text-white hover:bg-white/[0.04]'
+                      }`}
                   >
-                    {/* Counts currently not computed from API; keep blank visually */}
-                  </span>
-                </button>
+                    <span className="truncate">{item.name}</span>
+                  </button>
+                </div>
               )
             })}
           </div>
